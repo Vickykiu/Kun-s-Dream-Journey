@@ -1,6 +1,6 @@
 # Kun's Dream Journey — Menu and Options Foundation
 
-This is an editable Godot 4.7.x project for Kiu Chun Woon's assignment. It includes:
+This is an editable Godot 4.7.x project for Chupapy Muyanyo assignment. It includes:
 
 - A polished, responsive main menu using the supplied Kunkun pixel-art background
 - Looping menu background music
