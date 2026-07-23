@@ -1,0 +1,146 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/chapter_selection.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/images/kunkun_menu_background.png" id="2_background"]
+[ext_resource type="Theme" path="res://assets/themes/dream_theme.tres" id="3_theme"]
+
+[node name="ChapterSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture_filter = 1
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Darken" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.003, 0.007, 0.016, 0.76)
+
+[node name="SafeMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 42.0
+offset_right = -48.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Center" type="CenterContainer" parent="SafeMargin"]
+layout_mode = 2
+
+[node name="ChapterCard" type="PanelContainer" parent="SafeMargin/Center"]
+custom_minimum_size = Vector2(980, 0)
+layout_mode = 2
+
+[node name="Column" type="VBoxContainer" parent="SafeMargin/Center/ChapterCard"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Eyebrow" type="Label" parent="SafeMargin/Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53, 0.73, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+text = "YOUR JOURNEY"
+horizontal_alignment = 1
+
+[node name="Heading" type="Label" parent="SafeMargin/Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.97, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "CHAPTER SELECTION"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="SafeMargin/Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.59, 0.66, 0.73, 1)
+theme_override_font_sizes/font_size = 16
+text = "Complete each chapter to unlock the next."
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="SafeMargin/Center/ChapterCard/Column"]
+layout_mode = 2
+
+[node name="ChapterGrid" type="GridContainer" parent="SafeMargin/Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 14
+columns = 2
+
+[node name="ChapterOneButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column/ChapterGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 124)
+layout_mode = 2
+focus_neighbor_right = NodePath("../ChapterTwoButton")
+focus_neighbor_bottom = NodePath("../ChapterThreeButton")
+mouse_default_cursor_shape = 2
+text = "CHAPTER 1
+ORIENTATION DAY
+
+AVAILABLE"
+
+[node name="ChapterTwoButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column/ChapterGrid"]
+custom_minimum_size = Vector2(440, 124)
+layout_mode = 2
+disabled = true
+text = "CHAPTER 2
+THE CRACK
+
+LOCKED"
+
+[node name="ChapterThreeButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column/ChapterGrid"]
+custom_minimum_size = Vector2(440, 124)
+layout_mode = 2
+disabled = true
+text = "CHAPTER 3
+THE TRAP
+
+LOCKED"
+
+[node name="ChapterFourButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column/ChapterGrid"]
+custom_minimum_size = Vector2(440, 124)
+layout_mode = 2
+disabled = true
+text = "CHAPTER 4
+CONSCIOUSNESS SEA
+
+LOCKED"
+
+[node name="BackButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "BACK"
+
+[node name="Hint" type="Label" parent="SafeMargin/Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.47, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "Press Esc to return"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterOneButton" to="." method="_on_chapter_one_pressed"]
+[connection signal="pressed" from="SafeMargin/Center/ChapterCard/Column/BackButton" to="." method="_on_back_pressed"]

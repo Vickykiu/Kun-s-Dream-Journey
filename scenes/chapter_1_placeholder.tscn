@@ -1,0 +1,133 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/chapter_1_placeholder.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/images/kunkun_menu_background.png" id="2_background"]
+[ext_resource type="Theme" path="res://assets/themes/dream_theme.tres" id="3_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleStatus"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12, 0.24, 0.24, 0.86)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.74, 0.68, 0.65)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="ChapterOnePlaceholder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture_filter = 1
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Darken" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.003, 0.007, 0.016, 0.78)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = 36.0
+offset_right = -36.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChapterCard" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(760, 0)
+layout_mode = 2
+
+[node name="Column" type="VBoxContainer" parent="Center/ChapterCard"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Status" type="Label" parent="Center/ChapterCard/Column"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.77, 1, 0.94, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleStatus")
+text = "FOUNDATION READY"
+horizontal_alignment = 1
+
+[node name="Chapter" type="Label" parent="Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53, 0.73, 0.9, 1)
+theme_override_font_sizes/font_size = 17
+text = "CHAPTER 1"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.97, 1, 1)
+theme_override_font_sizes/font_size = 44
+text = "ORIENTATION DAY"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Center/ChapterCard/Column"]
+layout_mode = 2
+
+[node name="Body" type="Label" parent="Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63, 0.69, 0.76, 1)
+theme_override_font_sizes/font_size = 18
+text = "The Chapter 1 rhythm-training scene will begin here.
+
+This placeholder confirms that Start and Chapter Selection
+both navigate correctly into the playable chapter."
+horizontal_alignment = 1
+
+[node name="Objective" type="Label" parent="Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+text = "OBJECTIVE  •  Complete rhythm training with Teacher Mei"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="Center/ChapterCard/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "RETURN TO MAIN MENU"
+
+[node name="Hint" type="Label" parent="Center/ChapterCard/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.47, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "Press Esc to return"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Center/ChapterCard/Column/MainMenuButton" to="." method="_on_main_menu_pressed"]
