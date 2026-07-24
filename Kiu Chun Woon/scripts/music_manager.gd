@@ -3,7 +3,7 @@ extends Node
 ## Persistent menu-music and volume-settings controller.
 ## It is registered as an AutoLoad, so music continues between menu screens.
 
-const MENU_MUSIC_PATH := "res://assets/audio/menu_theme.mp3"
+const MENU_MUSIC_PATH := "res://Kiu Chun Woon/assets/audio/menu_theme.mp3"
 const SETTINGS_PATH := "user://audio_settings.cfg"
 const DEFAULT_MASTER_VOLUME := 1.0
 const DEFAULT_MUSIC_VOLUME := 0.78

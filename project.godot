@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Kun's Dream Journey"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://Kiu Chun Woon/scenes/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0.006, 0.009, 0.018, 1)
-boot_splash/image="res://assets/images/kunkun_menu_background.png"
+boot_splash/image="res://Kiu Chun Woon/assets/images/kunkun_menu_background.png"
 
 [audio]
 
@@ -22,7 +22,7 @@ default_bus_layout="res://default_bus_layout.tres"
 
 [autoload]
 
-MusicManager="*res://scripts/music_manager.gd"
+MusicManager="*res://Kiu Chun Woon/scripts/music_manager.gd"
 
 [display]
 
