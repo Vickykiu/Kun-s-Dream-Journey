@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bnt6p4fmnexi7"]
+
+[ext_resource type="Script" uid="uid://do2h5yrm5ynl5" path="res://Tay Hong Fei/scripts/chapter_4_2.gd" id="1_dmnnq"]
+[ext_resource type="Texture2D" uid="uid://xj4jh3l4wom" path="res://Tay Hong Fei/asset/background/Chapter 4 Scene 2-2.png" id="2_kcai0"]
+[ext_resource type="Script" uid="uid://bu4camnm2hkm2" path="res://Tay Hong Fei/scripts/Crystal.gd" id="3_agad7"]
+[ext_resource type="Texture2D" uid="uid://iado2bv2n5sq" path="res://Tay Hong Fei/asset/background/Chapter 4 element.png" id="4_d4syc"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="5_ivdsx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmnnq"]
+radius = 18.027756
+
+[node name="Chapter4-2" type="Node2D" unique_id=22927392]
+position = Vector2(513, 82)
+script = ExtResource("1_dmnnq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=130358239]
+position = Vector2(404, 426)
+texture = ExtResource("2_kcai0")
+region_enabled = true
+region_rect = Rect2(0, 0, 861, 1024)
+
+[node name="Crystal" type="Area2D" parent="." unique_id=1301058444 node_paths=PackedStringArray("prompt_label")]
+position = Vector2(190, 343)
+script = ExtResource("3_agad7")
+prompt_label = NodePath("../Label")
+
+[node name="element" type="Sprite2D" parent="Crystal" unique_id=1368948873]
+position = Vector2(-1.9999843, 0.9999995)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_d4syc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crystal" unique_id=1276857214]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_dmnnq")
+
+[node name="Label" type="Label" parent="." unique_id=2100099280]
+visible = false
+offset_left = 238.0
+offset_top = 329.0
+offset_right = 278.0
+offset_bottom = 363.0
+theme_override_font_sizes/font_size = 24
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1715346401]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=878671766]
+polygon = PackedVector2Array(447, 898, 446, 649, 677, 565, 689, 636, 474, 730, 476, 903)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1954784217]
+polygon = PackedVector2Array(677, 566, 770, 435, 769, 299, 796, 237, 837, 380, 839, 546, 694, 640)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1751613827]
+polygon = PackedVector2Array(768, 301, 693, 185, 609, 104, 623, 10, 767, 85, 839, 256)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1737952682]
+polygon = PackedVector2Array(610, 105, 485, 66, 312, 60, 240, 84, 200, 101, 115, 177, 89, 63, 333, -82, 676, -35)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1573188855]
+polygon = PackedVector2Array(85, 54, 114, 174, 69, 230, 41, 271, 34, 388, 34, 452, -51, 504, -73, 207)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=52009274]
+polygon = PackedVector2Array(35, 452, 127, 567, 212, 621, 314, 631, 315, 648, 353, 654, 355, 898, 324, 899, 80, 747, -52, 588)
+
+[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_ivdsx")]
+position = Vector2(392, 849)
+scale = Vector2(0.5, 0.5)

@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://dkwf3sxbupyn5"]
+
+[ext_resource type="Texture2D" uid="uid://blmwyo0kiw1ab" path="res://Tay Hong Fei/asset/background/Chapter 4 scene1-1.png" id="1_pfh0e"]
+[ext_resource type="Script" uid="uid://ram16nq4imhv" path="res://Tay Hong Fei/scripts/chapter_4_1.gd" id="1_xav4v"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="3_i2b13"]
+[ext_resource type="Script" uid="uid://dn1t3yp80nwd1" path="res://Tay Hong Fei/scripts/door.gd" id="4_hbs4x"]
+[ext_resource type="PackedScene" uid="uid://bnt6p4fmnexi7" path="res://Tay Hong Fei/scene/Chapter 4-2.tscn" id="5_vp1pg"]
+[ext_resource type="Texture2D" uid="uid://dc23v2jja6k8q" path="res://Tay Hong Fei/asset/background/Chapter 4 scene 1 - 2.png" id="6_q01ba"]
+[ext_resource type="Script" uid="uid://c7qjmeke0286w" path="res://Tay Hong Fei/scripts/block.gd" id="6_vp1pg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1bej"]
+size = Vector2(169.75, 121.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbs4x"]
+size = Vector2(78.5, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vp1pg"]
+size = Vector2(95, 90)
+
+[node name="Node2D" type="Node2D" unique_id=2022096403]
+script = ExtResource("1_xav4v")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=386514833]
+position = Vector2(408, 14)
+scale = Vector2(0.9825046, 0.9825046)
+texture = ExtResource("1_pfh0e")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1102.0605, 1086)
+
+[node name="Door" type="Area2D" parent="." unique_id=1467490000 node_paths=PackedStringArray("prompt_label")]
+script = ExtResource("4_hbs4x")
+prompt_label = NodePath("../Label")
+target_scene = ExtResource("5_vp1pg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Door" unique_id=81388323]
+position = Vector2(960.00006, 196.00002)
+scale = Vector2(1.560606, 1.560606)
+texture = ExtResource("6_q01ba")
+region_enabled = true
+region_rect = Rect2(307.684, 69.67, 122.20801, 99.67799)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door" unique_id=1713657348]
+position = Vector2(960, 217.75)
+shape = SubResource("RectangleShape2D_f1bej")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1603764284]
+position = Vector2(46, 165)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=461561316]
+polygon = PackedVector2Array(1328, 125, 1405, -80, 1436, 894, 1352, 809)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2047249092]
+polygon = PackedVector2Array(440, -76, 514, 160, 513, 801, 419, 885)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1416890953]
+polygon = PackedVector2Array(520, 761, 1349, 753, 1440, 898, 414, 883, 519, 751)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1012936315]
+polygon = PackedVector2Array(436, -76, 513, 152, 510, 47, 813, 49, 814, -20, 910, -22, 1019, -18, 1017, 51, 1326, 46, 1328, 120, 1421, -112)
+
+[node name="Block" type="CharacterBody2D" parent="." unique_id=905105659 node_paths=PackedStringArray("prompt_label")]
+position = Vector2(-3, 4)
+script = ExtResource("6_vp1pg")
+prompt_label = NodePath("Label2")
+min_x = -80.0
+max_x = 140.0
+min_y = -140.0
+max_y = 230.0
+
+[node name="elements" type="Sprite2D" parent="Block" unique_id=187748211]
+position = Vector2(760, 561)
+scale = Vector2(0.41626206, 0.41626218)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1164.632, 789.85596, 206.25208, 210.33801)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block" unique_id=44193691]
+position = Vector2(760, 560)
+shape = SubResource("RectangleShape2D_hbs4x")
+
+[node name="Label2" type="Label" parent="Block" unique_id=357232131]
+offset_left = 816.0
+offset_top = 547.0
+offset_right = 856.0
+offset_bottom = 570.0
+
+[node name="DetectionArea" type="Area2D" parent="Block" unique_id=343828138]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block/DetectionArea" unique_id=1386278253]
+position = Vector2(759.5, 560)
+shape = SubResource("RectangleShape2D_vp1pg")
+
+[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("3_i2b13")]
+position = Vector2(957, 552)
+
+[node name="Label" type="Label" parent="." unique_id=1569631221]
+visible = false
+offset_left = 1113.0
+offset_top = 185.0
+offset_right = 1153.0
+offset_bottom = 208.0
