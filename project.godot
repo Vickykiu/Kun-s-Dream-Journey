@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Kun's Dream Journey"
-run/main_scene="res://scenes/main_menu.tscn"
-config/features=PackedStringArray("4.7", "GL Compatibility")
+run/main_scene="res://Kiu Chun Woon/scenes/main_menu.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.006, 0.009, 0.018, 1)
 boot_splash/image="res://assets/images/kunkun_menu_background.png"
 
@@ -34,6 +34,7 @@ window/stretch/mode="canvas_items"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.006, 0.009, 0.018, 1)

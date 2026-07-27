@@ -1,0 +1,180 @@
+[gd_scene format=3 uid="uid://7r82ha16cnay"]
+
+[ext_resource type="Script" uid="uid://qvunjoeosfic" path="res://Lew Jia Jia/scripts/safe_ui.gd" id="1_uqqp5"]
+[ext_resource type="Texture2D" uid="uid://cvh581dvcj5hs" path="res://Lew Jia Jia/assets/SafeUI_Close.png" id="2_i0wi7"]
+[ext_resource type="AudioStream" uid="uid://j720scc7ysvp" path="res://Lew Jia Jia/assets/ButtonSoundEffect.mp3" id="3_xerkm"]
+[ext_resource type="Texture2D" uid="uid://cip3vephto6m" path="res://Lew Jia Jia/assets/Safe_File.png" id="4_hwf0w"]
+[ext_resource type="Texture2D" uid="uid://cuyyo0us2ua56" path="res://Lew Jia Jia/assets/FileDetail.png" id="5_iptsq"]
+
+[sub_resource type="FontVariation" id="FontVariation_huone"]
+spacing_glyph = 29
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xerkm"]
+bg_color = Color(0.12941177, 0.09411765, 0.06666667, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uqqp5"]
+font_size = 50
+font_color = Color(0.07058824, 0.7921569, 0, 1)
+shadow_size = 15
+
+[node name="SafeUI" type="CanvasLayer" unique_id=1863927378]
+script = ExtResource("1_uqqp5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1320201294]
+offset_right = 1910.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=332981052]
+offset_left = 137.0
+offset_top = 78.0
+offset_right = 1780.0
+offset_bottom = 1013.0
+texture = ExtResource("2_i0wi7")
+
+[node name="Btn1" type="Button" parent="." unique_id=598642044]
+offset_left = 837.0
+offset_top = 486.0
+offset_right = 910.0
+offset_bottom = 548.0
+flat = true
+
+[node name="Btn2" type="Button" parent="." unique_id=148965175]
+offset_left = 931.0
+offset_top = 485.0
+offset_right = 1004.0
+offset_bottom = 547.0
+flat = true
+
+[node name="Btn3" type="Button" parent="." unique_id=330752896]
+offset_left = 1023.0
+offset_top = 485.0
+offset_right = 1096.0
+offset_bottom = 547.0
+flat = true
+
+[node name="Btn4" type="Button" parent="." unique_id=3657492]
+offset_left = 837.0
+offset_top = 562.0
+offset_right = 910.0
+offset_bottom = 624.0
+flat = true
+
+[node name="Btn5" type="Button" parent="." unique_id=206271904]
+offset_left = 929.0
+offset_top = 563.0
+offset_right = 1002.0
+offset_bottom = 625.0
+flat = true
+
+[node name="Btn6" type="Button" parent="." unique_id=228119813]
+offset_left = 1023.0
+offset_top = 563.0
+offset_right = 1096.0
+offset_bottom = 625.0
+flat = true
+
+[node name="Btn7" type="Button" parent="." unique_id=1337956732]
+offset_left = 836.0
+offset_top = 639.0
+offset_right = 909.0
+offset_bottom = 701.0
+flat = true
+
+[node name="Btn8" type="Button" parent="." unique_id=749598164]
+offset_left = 931.0
+offset_top = 639.0
+offset_right = 1004.0
+offset_bottom = 701.0
+flat = true
+
+[node name="Btn9" type="Button" parent="." unique_id=2067275262]
+offset_left = 1022.0
+offset_top = 639.0
+offset_right = 1095.0
+offset_bottom = 701.0
+flat = true
+
+[node name="Btn0" type="Button" parent="." unique_id=1526711220]
+offset_left = 930.0
+offset_top = 716.0
+offset_right = 1003.0
+offset_bottom = 778.0
+flat = true
+
+[node name="BtnClear" type="Button" parent="." unique_id=1288782580]
+offset_left = 837.0
+offset_top = 716.0
+offset_right = 910.0
+offset_bottom = 778.0
+flat = true
+
+[node name="BtnEnter" type="Button" parent="." unique_id=1898126932]
+offset_left = 1023.0
+offset_top = 716.0
+offset_right = 1096.0
+offset_bottom = 778.0
+flat = true
+
+[node name="Label" type="Label" parent="." unique_id=281540467]
+offset_left = 834.0
+offset_top = 389.0
+offset_right = 1099.0
+offset_bottom = 458.0
+theme_override_fonts/font = SubResource("FontVariation_huone")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_xerkm")
+label_settings = SubResource("LabelSettings_uqqp5")
+
+[node name="BtnExit" type="Button" parent="." unique_id=2081538683]
+offset_left = 1748.0
+offset_right = 1918.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[node name="BtnSound" type="AudioStreamPlayer2D" parent="." unique_id=841929601]
+stream = ExtResource("3_xerkm")
+
+[node name="FolderBtn" type="Button" parent="." unique_id=1808674249]
+visible = false
+offset_left = 632.0
+offset_top = 306.0
+offset_right = 1227.0
+offset_bottom = 826.0
+icon = ExtResource("4_hwf0w")
+flat = true
+
+[node name="FileDetail" type="TextureRect" parent="." unique_id=943426394]
+visible = false
+offset_left = 318.0
+offset_top = 116.0
+offset_right = 1686.0
+offset_bottom = 1051.0
+texture = ExtResource("5_iptsq")
+
+[node name="CloseFileBtn" type="Button" parent="FileDetail" unique_id=684591997]
+visible = false
+layout_mode = 0
+offset_left = 1430.0
+offset_top = -116.0
+offset_right = 1600.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="Btn1" to="." method="_on_btn_1_pressed"]
+[connection signal="pressed" from="Btn2" to="." method="_on_btn_2_pressed"]
+[connection signal="pressed" from="Btn3" to="." method="_on_btn_3_pressed"]
+[connection signal="pressed" from="Btn4" to="." method="_on_btn_4_pressed"]
+[connection signal="pressed" from="Btn5" to="." method="_on_btn_5_pressed"]
+[connection signal="pressed" from="Btn6" to="." method="_on_btn_6_pressed"]
+[connection signal="pressed" from="Btn7" to="." method="_on_btn_7_pressed"]
+[connection signal="pressed" from="Btn8" to="." method="_on_btn_8_pressed"]
+[connection signal="pressed" from="Btn9" to="." method="_on_btn_9_pressed"]
+[connection signal="pressed" from="Btn0" to="." method="_on_btn_0_pressed"]
+[connection signal="pressed" from="BtnClear" to="." method="_on_btn_clear_pressed"]
+[connection signal="pressed" from="BtnEnter" to="." method="_on_btn_enter_pressed"]
+[connection signal="pressed" from="BtnExit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="FolderBtn" to="." method="_on_folder_btn_pressed"]
+[connection signal="pressed" from="FileDetail/CloseFileBtn" to="." method="_on_btn_exit_pressed"]

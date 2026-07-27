@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://j720scc7ysvp"
+path="res://.godot/imported/ButtonSoundEffect.mp3-a9a1cd0a2a1f1036a1942f537be4fa48.mp3str"
+
+[deps]
+
+source_file="res://Lew Jia Jia/assets/ButtonSoundEffect.mp3"
+dest_files=["res://.godot/imported/ButtonSoundEffect.mp3-a9a1cd0a2a1f1036a1942f537be4fa48.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

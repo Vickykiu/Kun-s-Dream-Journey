@@ -1,0 +1,310 @@
+[gd_scene format=3 uid="uid://dgvbsieke3aip"]
+
+[ext_resource type="Script" uid="uid://ciorj2g1ocplx" path="res://Lew Jia Jia/scripts/chapter_3_room_b_13.gd" id="1_8dvhw"]
+[ext_resource type="Texture2D" uid="uid://d0k4n7vpvpakc" path="res://Lew Jia Jia/assets/RoomBackground.png" id="2_6vyrd"]
+[ext_resource type="Texture2D" uid="uid://csmncq3pinrkq" path="res://Lew Jia Jia/assets/Safe_Close.png" id="3_8dvhw"]
+[ext_resource type="Texture2D" uid="uid://ddy07efiwgjaa" path="res://Lew Jia Jia/assets/Safe_OpenEmpty.png" id="4_abvsn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dvhw"]
+size = Vector2(85.86051, 122.08992)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_abvsn"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abvsn"]
+size = Vector2(203.18024, 478.4264)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_occd4"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abvsn"]
+radius = 116.87805
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4nn1"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_occd4"]
+size = Vector2(213.41974, 239.77985)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_21pov"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4nn1"]
+size = Vector2(271.2633, 250.40125)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dvhw"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21pov"]
+size = Vector2(116.1004, 291.6258)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e34y8"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e34y8"]
+size = Vector2(196.27594, 103.23843)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1px24"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1px24"]
+size = Vector2(538.3099, 202.80254)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42n0a"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42n0a"]
+size = Vector2(284.0285, 138.3151)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kgt5n"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgt5n"]
+size = Vector2(69.59326, 145.59325)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8ywfn"]
+load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ywfn"]
+size = Vector2(227.81677, 149.0705)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvdk7"]
+size = Vector2(1881, 334)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl8g7"]
+size = Vector2(372.34598, 1188)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2i7nh"]
+size = Vector2(372.34598, 1188)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhrtj"]
+size = Vector2(372.34598, 912)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3u2u8"]
+size = Vector2(372.34598, 912)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lmcl"]
+size = Vector2(140.00003, 166.00009)
+
+[node name="Chapter3_RoomB13" type="Node2D" unique_id=1520391204]
+position = Vector2(1906, 345)
+script = ExtResource("1_8dvhw")
+
+[node name="RoomBackgrounnd" type="Sprite2D" parent="." unique_id=1290400529]
+position = Vector2(-942.99994, 236.50002)
+scale = Vector2(1.3439226, 1.0653775)
+texture = ExtResource("2_6vyrd")
+
+[node name="Safe" type="Sprite2D" parent="." unique_id=1060386628]
+position = Vector2(-1268.1962, 3.4308326)
+scale = Vector2(-2.2587473, 1.6756363)
+texture = ExtResource("3_8dvhw")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(150.04138, 29.612976, 86.308075, 119.21692)
+
+[node name="Area2D" type="Area2D" parent="Safe" unique_id=287059958]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Safe/Area2D" unique_id=1679141523]
+position = Vector2(-0.54345703, 0.5122528)
+shape = SubResource("RectangleShape2D_8dvhw")
+
+[node name="Cabinet" type="Sprite2D" parent="." unique_id=613777950]
+position = Vector2(-1536.9999, -5.0000114)
+scale = Vector2(-1.1221564, 0.84443504)
+texture = SubResource("CompressedTexture2D_abvsn")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(1235.9735, 417.91293, 283.44983, 533.23987)
+
+[node name="Area2D" type="Area2D" parent="Cabinet" unique_id=484211697]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cabinet/Area2D" unique_id=1237582638]
+position = Vector2(5.346924, -1.1842346)
+scale = Vector2(1.0000004, 1)
+shape = SubResource("RectangleShape2D_abvsn")
+
+[node name="Clock" type="Sprite2D" parent="." unique_id=1930134456]
+position = Vector2(-1014, -88.999985)
+scale = Vector2(-0.88316804, 0.63839257)
+texture = SubResource("CompressedTexture2D_occd4")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(631.589, 20.336472, 336.59662, 331.28192)
+
+[node name="Area2D" type="Area2D" parent="Clock" unique_id=1819852831]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clock/Area2D" unique_id=1121867769]
+shape = SubResource("CircleShape2D_abvsn")
+
+[node name="Calendar" type="Sprite2D" parent="." unique_id=875596179]
+position = Vector2(-758, -66.64203)
+scale = Vector2(-0.904322, 0.6547673)
+texture = SubResource("CompressedTexture2D_v4nn1")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(975.2718, 55.823166, 260.41962, 288.76447)
+
+[node name="Area2D" type="Area2D" parent="Calendar" unique_id=1286210833]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Area2D" unique_id=1294982473]
+position = Vector2(3.8702393, 0.21685791)
+shape = SubResource("RectangleShape2D_occd4")
+
+[node name="Vent" type="Sprite2D" parent="." unique_id=2084856675]
+position = Vector2(-488, -118.00001)
+scale = Vector2(-0.9216131, 0.6549489)
+texture = SubResource("CompressedTexture2D_21pov")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(34.572884, 410.1354, 347.22598, 302.93692)
+
+[node name="Area2D" type="Area2D" parent="Vent" unique_id=356417917]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vent/Area2D" unique_id=1155636326]
+position = Vector2(-6.510132, -3.0536804)
+scale = Vector2(1, 0.9999999)
+shape = SubResource("RectangleShape2D_v4nn1")
+
+[node name="ElectricBox" type="Sprite2D" parent="." unique_id=1202151050]
+position = Vector2(-277, -82.00001)
+scale = Vector2(-0.9216131, 0.6549489)
+texture = SubResource("CompressedTexture2D_8dvhw")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(1299.4677, 169.32726, 147.03955, 178.80348)
+
+[node name="Area2D" type="Area2D" parent="ElectricBox" unique_id=1916624368]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBox/Area2D" unique_id=1254544663]
+position = Vector2(5.9676514, -84.73944)
+scale = Vector2(1, 0.9999999)
+shape = SubResource("RectangleShape2D_21pov")
+
+[node name="ColourHint" type="Sprite2D" parent="." unique_id=651846953]
+position = Vector2(-1264, -168.00002)
+scale = Vector2(-0.5553409, 0.3777663)
+texture = SubResource("CompressedTexture2D_e34y8")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(390.65668, 433.16568, 237.38916, 147.03958)
+
+[node name="Area2D" type="Area2D" parent="ColourHint" unique_id=755035997]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColourHint/Area2D" unique_id=1468504835]
+position = Vector2(2.7010498, -6.617798)
+scale = Vector2(0.99999946, 0.9999998)
+shape = SubResource("RectangleShape2D_e34y8")
+
+[node name="Desk" type="Sprite2D" parent="." unique_id=945186999]
+position = Vector2(-480.99997, 176.11552)
+scale = Vector2(-0.9548404, 0.9220798)
+texture = SubResource("CompressedTexture2D_1px24")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(642.2183, 387.1051, 579.3006, 368.48474)
+
+[node name="Area2D" type="Area2D" parent="Desk" unique_id=929102553]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desk/Area2D" unique_id=691712680]
+position = Vector2(-3.1420898, -55.977386)
+scale = Vector2(1, 1.0000007)
+shape = SubResource("RectangleShape2D_1px24")
+
+[node name="SheetMusic" type="Sprite2D" parent="." unique_id=2020601167]
+position = Vector2(-534, 104.999985)
+scale = Vector2(-1.0562321, 0.97603244)
+texture = SubResource("CompressedTexture2D_42n0a")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(645.7615, 761.86426, 361.3985, 205.5011)
+
+[node name="Area2D" type="Area2D" parent="SheetMusic" unique_id=1908741800]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SheetMusic/Area2D" unique_id=1334996923]
+position = Vector2(11.361084, -2.5613403)
+shape = SubResource("RectangleShape2D_42n0a")
+
+[node name="Metronome" type="Sprite2D" parent="." unique_id=1756781823]
+position = Vector2(-301.00003, 54)
+scale = Vector2(-0.68972385, 0.714319)
+texture = SubResource("CompressedTexture2D_kgt5n")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(1092.195, 765.48456, 138.18176, 178.92767)
+
+[node name="Area2D" type="Area2D" parent="Metronome" unique_id=1513949638]
+position = Vector2(11.5988455, -9.799543)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Metronome/Area2D" unique_id=1942576010]
+position = Vector2(-8.699219, 15.399292)
+shape = SubResource("RectangleShape2D_kgt5n")
+
+[node name="Book" type="Sprite2D" parent="." unique_id=130469496]
+position = Vector2(-345.00006, 126)
+rotation = 0.951069
+scale = Vector2(-0.36176112, 0.36261964)
+texture = SubResource("CompressedTexture2D_8ywfn")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(46.97381, 751.8717, 318.88098, 191.32861)
+
+[node name="Area2D" type="Area2D" parent="Book" unique_id=1532022999]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Book/Area2D" unique_id=400787407]
+position = Vector2(0.4873047, 4.968994)
+shape = SubResource("RectangleShape2D_8ywfn")
+
+[node name="SafeOpen" type="Sprite2D" parent="." unique_id=581216548]
+visible = false
+position = Vector2(-1266.5, 6.624987)
+scale = Vector2(0.63562095, 0.60110295)
+texture = ExtResource("4_abvsn")
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1674102840]
+
+[node name="WallTop" type="CollisionShape2D" parent="Walls" unique_id=1430476076]
+position = Vector2(-930.5, -168)
+shape = SubResource("RectangleShape2D_qvdk7")
+
+[node name="WallLeft" type="CollisionShape2D" parent="Walls" unique_id=650735350]
+position = Vector2(-1830.2684, 207.28186)
+rotation = 0.2617994
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_gl8g7")
+
+[node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=24785138]
+position = Vector2(-67, 176)
+rotation = -0.2617994
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_2i7nh")
+
+[node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1119131353]
+position = Vector2(-1596, 648)
+rotation = -1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_rhrtj")
+
+[node name="WallBottom1" type="CollisionShape2D" parent="Walls" unique_id=1848536701]
+position = Vector2(-320.00012, 632)
+rotation = -1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_3u2u8")
+
+[node name="Drawer" type="CollisionShape2D" parent="Walls" unique_id=756571069]
+position = Vector2(-326, 277)
+rotation = -1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_5lmcl")
+
+[connection signal="input_event" from="Safe/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Cabinet/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Clock/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Calendar/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Vent/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="ElectricBox/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="ColourHint/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Desk/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="SheetMusic/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Metronome/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Book/Area2D" to="." method="_on_area_2d_input_event"]
