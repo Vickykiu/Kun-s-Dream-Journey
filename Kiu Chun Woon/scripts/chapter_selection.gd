@@ -2,8 +2,8 @@ extends Control
 
 ## Chapter-select foundation. Chapters 2-4 are deliberately locked placeholders.
 
-const MAIN_MENU_SCENE := "res://scenes/main_menu.tscn"
-const CHAPTER_ONE_SCENE := "res://scenes/chapter_1_placeholder.tscn"
+const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
+const CHAPTER_ONE_SCENE := "res://Kiu Chun Woon/scenes/chapter_1_placeholder.tscn"
 
 
 func _ready() -> void:

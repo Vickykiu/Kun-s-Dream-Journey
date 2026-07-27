@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/chapter_1_placeholder.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/images/kunkun_menu_background.png" id="2_background"]
-[ext_resource type="Theme" path="res://assets/themes/dream_theme.tres" id="3_theme"]
+[ext_resource type="Script" path="res://Kiu Chun Woon/scripts/chapter_1_placeholder.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/kunkun_menu_background.png" id="2_background"]
+[ext_resource type="Theme" path="res://Kiu Chun Woon/assets/themes/dream_theme.tres" id="3_theme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleStatus"]
 content_margin_left = 18.0

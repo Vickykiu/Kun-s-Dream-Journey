@@ -2,7 +2,7 @@ extends Control
 
 ## Options screen for persistent Master and Music bus volume controls.
 
-const MAIN_MENU_SCENE := "res://scenes/main_menu.tscn"
+const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
 
 @onready var options_card: PanelContainer = %OptionsCard
 @onready var master_slider: HSlider = %MasterSlider

@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://cujpuwd8rxbfc"]
+
+[ext_resource type="Texture2D" uid="uid://dvohlu040i83u" path="res://assets/image/background/corridor.png" id="1_xswuy"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://scenes/player.tscn" id="2_pucmg"]
+[ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://scripts/door.gd" id="4_door"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xswuy"]
+size = Vector2(1156.5, 274)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pucmg"]
+size = Vector2(331, 798)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mus4g"]
+size = Vector2(1156.5, 274)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w20u"]
+size = Vector2(331, 798)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pblcb"]
+size = Vector2(119.5, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8bhm"]
+size = Vector2(93.6875, 138.96875)
+
+[node name="Corridor" type="Node2D" unique_id=1601957076]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=2087182392]
+position = Vector2(575.00006, 322)
+scale = Vector2(0.68869615, 0.68331563)
+texture = ExtResource("1_xswuy")
+
+[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_pucmg")]
+position = Vector2(0, 400)
+
+[node name="Walls" type="Node2D" parent="." unique_id=449179086]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls" unique_id=1453356044]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall" unique_id=1085696400]
+position = Vector2(573, 81)
+shape = SubResource("RectangleShape2D_xswuy")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls" unique_id=632442182]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall" unique_id=493867430]
+position = Vector2(-170, 339)
+shape = SubResource("RectangleShape2D_pucmg")
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls" unique_id=973413863]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall" unique_id=159580089]
+position = Vector2(577, 588)
+shape = SubResource("RectangleShape2D_mus4g")
+
+[node name="RightWall2" type="StaticBody2D" parent="Walls" unique_id=1467885720]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall2" unique_id=562311043]
+position = Vector2(1317, 339)
+shape = SubResource("RectangleShape2D_7w20u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls" unique_id=1703491145]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D" unique_id=1912796465]
+position = Vector2(240, 175)
+shape = SubResource("RectangleShape2D_pblcb")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls" unique_id=1509227754]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2" unique_id=1394340630]
+position = Vector2(474, 175)
+shape = SubResource("RectangleShape2D_pblcb")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls" unique_id=1655865506]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3" unique_id=1796065968]
+position = Vector2(701, 176)
+shape = SubResource("RectangleShape2D_pblcb")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls" unique_id=1051964071]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4" unique_id=931451105]
+position = Vector2(933, 175)
+shape = SubResource("RectangleShape2D_pblcb")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Walls" unique_id=1916689115]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D5" unique_id=1258895921]
+position = Vector2(1158, 172)
+shape = SubResource("RectangleShape2D_pblcb")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Walls" unique_id=937143635]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D6" unique_id=1242989767]
+position = Vector2(16, 175)
+shape = SubResource("RectangleShape2D_pblcb")
+
+[node name="Door_A01" type="Area2D" parent="." unique_id=1632359889]
+script = ExtResource("4_door")
+target_scene = "res://scenes/room_a01.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A01" unique_id=2031279185]
+position = Vector2(126, 205.51563)
+shape = SubResource("RectangleShape2D_n8bhm")
+
+[node name="Door_A02" type="Area2D" parent="." unique_id=692748971]
+position = Vector2(231, 4)
+script = ExtResource("4_door")
+requires_key = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A02" unique_id=1390007619]
+position = Vector2(126, 205.51563)
+shape = SubResource("RectangleShape2D_n8bhm")
+
+[node name="Door_A03" type="Area2D" parent="." unique_id=1558001277]
+position = Vector2(459, 0)
+script = ExtResource("4_door")
+target_scene = "res://scenes/room_a03.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A03" unique_id=1214433967]
+position = Vector2(126, 205.51563)
+shape = SubResource("RectangleShape2D_n8bhm")
+
+[node name="Door_A04" type="Area2D" parent="." unique_id=1533772663]
+position = Vector2(690, 0)
+script = ExtResource("4_door")
+target_scene = "res://scenes/room_a04.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A04" unique_id=1899692544]
+position = Vector2(126, 205.51563)
+shape = SubResource("RectangleShape2D_n8bhm")
+
+[node name="Door_A05" type="Area2D" parent="." unique_id=1834789574]
+position = Vector2(918, 0)
+script = ExtResource("4_door")
+target_scene = "res://scenes/room_a05.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A05" unique_id=325248676]
+position = Vector2(126, 205.51563)
+shape = SubResource("RectangleShape2D_n8bhm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=602888154]
+
+[node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=520865212 groups=["prompt"]]
+visible = false
+offset_left = 440.0
+offset_top = 560.0
+offset_right = 712.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 24
+text = "Press E to enter"
+horizontal_alignment = 1
+vertical_alignment = 1

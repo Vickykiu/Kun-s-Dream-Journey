@@ -2,9 +2,9 @@ extends Control
 
 ## Main-menu navigation for Kiu Chun Woon's Chapter 1 foundation.
 
-const CHAPTER_ONE_SCENE := "res://scenes/chapter_1_placeholder.tscn"
-const CHAPTER_SELECTION_SCENE := "res://scenes/chapter_selection.tscn"
-const OPTIONS_SCENE := "res://scenes/options_menu.tscn"
+const CHAPTER_ONE_SCENE := "res://Kiu Chun Woon/scenes/chapter_1_placeholder.tscn"
+const CHAPTER_SELECTION_SCENE := "res://Kiu Chun Woon/scenes/chapter_selection.tscn"
+const OPTIONS_SCENE := "res://Kiu Chun Woon/scenes/options_menu.tscn"
 
 @onready var menu_card: PanelContainer = %MenuCard
 @onready var start_button: Button = %StartButton

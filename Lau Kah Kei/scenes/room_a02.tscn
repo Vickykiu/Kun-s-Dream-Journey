@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://blppkm7vg85j5"]
+
+[ext_resource type="Texture2D" uid="uid://d0cfc6chb5t28" path="res://assets/image/background/roomA02.png" id="1_vff6y"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://scenes/player.tscn" id="2_agw0v"]
+[ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://scripts/door.gd" id="3_x83ys"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64ua1"]
+size = Vector2(298, 573)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf3at"]
+size = Vector2(21.599112, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2l36"]
+size = Vector2(124.25, 135.5)
+
+[node name="RoomA02" type="Node2D" unique_id=1807766860]
+
+[node name="background" type="Sprite2D" parent="." unique_id=1159400239]
+position = Vector2(580, 326)
+scale = Vector2(0.7983425, 0.6003683)
+texture = ExtResource("1_vff6y")
+
+[node name="Walls" type="Node2D" parent="." unique_id=1968501532]
+
+[node name="left" type="StaticBody2D" parent="Walls" unique_id=658059548]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/left" unique_id=1772372075]
+position = Vector2(-19, 329.99997)
+rotation = 0.27676153
+shape = SubResource("RectangleShape2D_64ua1")
+
+[node name="right" type="StaticBody2D" parent="Walls" unique_id=642713188]
+position = Vector2(1230, 608)
+rotation = 2.9602587
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/right" unique_id=1805126421]
+position = Vector2(11.3563385, 304.03293)
+rotation = -0.14912373
+shape = SubResource("RectangleShape2D_64ua1")
+
+[node name="up" type="StaticBody2D" parent="Walls" unique_id=336726576]
+position = Vector2(570.00006, 57)
+scale = Vector2(34.4854, 11.838301)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/up" unique_id=1576145855]
+position = Vector2(0.695945, 2.7875621)
+scale = Vector2(1.2231865, 0.9630769)
+shape = SubResource("RectangleShape2D_yf3at")
+
+[node name="down" type="StaticBody2D" parent="Walls" unique_id=116155580]
+position = Vector2(934, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down" unique_id=225406614]
+position = Vector2(0.4919064, 9.771097)
+shape = SubResource("RectangleShape2D_yf3at")
+
+[node name="bed" type="StaticBody2D" parent="Walls" unique_id=498437755]
+position = Vector2(756, 236.00003)
+scale = Vector2(28.950562, 12.237919)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/bed" unique_id=1542789670]
+position = Vector2(5.630288, -0.40856844)
+scale = Vector2(0.15252098, 0.76519823)
+shape = SubResource("RectangleShape2D_yf3at")
+
+[node name="down2" type="StaticBody2D" parent="Walls" unique_id=2133201105]
+position = Vector2(208, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down2" unique_id=1285241481]
+position = Vector2(-0.105408624, 9.771096)
+shape = SubResource("RectangleShape2D_yf3at")
+
+[node name="door" type="StaticBody2D" parent="Walls" unique_id=1669108273]
+position = Vector2(534, 715)
+scale = Vector2(28.950562, 12.237919)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/door" unique_id=1241427228]
+position = Vector2(1.3338966, -0.3378868)
+scale = Vector2(0.2140333, 1)
+shape = SubResource("RectangleShape2D_yf3at")
+
+[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_agw0v")]
+position = Vector2(563, 555)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=261518708]
+
+[node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=1683939986 groups=["prompt"]]
+visible = false
+offset_left = 440.0
+offset_top = 560.0
+offset_right = 712.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 24
+text = "Press E to enter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="door" type="Area2D" parent="." unique_id=1587531985]
+script = ExtResource("3_x83ys")
+prompt_text = "Press E to leave"
+target_scene = "res://scenes/corridor.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door" unique_id=389341499]
+position = Vector2(564, 608)
+shape = SubResource("RectangleShape2D_l2l36")
