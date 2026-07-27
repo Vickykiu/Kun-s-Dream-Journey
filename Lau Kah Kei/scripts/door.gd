@@ -37,6 +37,7 @@ func _unhandled_input(event):
 		var current_path = get_tree().current_scene.scene_file_path
 		if _player:
 			GameState.spawn_points[current_path] = _player.global_position
+		GameState.play_door_open()
 		get_tree().change_scene_to_file(target_scene)
 
 # Locked doors show the locked message until the player has the key.

@@ -117,11 +117,18 @@ shape = SubResource("CapsuleShape2D_agw0v")
 
 [node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=142278629 groups=["prompt"]]
 visible = false
-offset_left = 440.0
-offset_top = 560.0
-offset_right = 712.0
-offset_bottom = 595.0
-theme_override_font_sizes/font_size = 24
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.15, 0.15, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
 text = "Press E to enter"
 horizontal_alignment = 1
 vertical_alignment = 1

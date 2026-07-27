@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dfvj3sfw0n7ej" path="res://Lau Kah Kei/assets/image/charactor/kun_left.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://eu1qievn2j7d" path="res://Lau Kah Kei/assets/image/charactor/kun_right.png" id="5_smehm"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 53.600372
 
@@ -19,7 +18,7 @@ tex_left = ExtResource("4_fjrip")
 tex_right = ExtResource("5_smehm")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1276333923]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=546158934]

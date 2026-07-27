@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dt7db0nrxmfun"]
+
+[ext_resource type="Texture2D" uid="uid://bdqs5yk3qq6cl" path="res://Lau Kah Kei/assets/icon.svg" id="1_bcsf7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6vytb"]
+radius = 53.600372
+
+[node name="Player" type="Node2D" unique_id=1611405316]
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=606938786]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_bcsf7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1730237240]
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_6vytb")
