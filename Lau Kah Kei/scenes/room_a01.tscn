@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://c5m2aobmpnfe8"]
+
+[ext_resource type="Texture2D" uid="uid://1ac2rop0nnvh" path="res://Lau Kah Kei/assets/image/background/roomA01.jpeg" id="1_w2h6d"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="2_njoc6"]
+[ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_w2h6d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjmpr"]
+size = Vector2(298, 573)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njoc6"]
+size = Vector2(21.599112, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2h6d"]
+size = Vector2(134.5, 151)
+
+[node name="RoomA01" type="Node2D" unique_id=1033833658]
+scale = Vector2(1.7929561, 1.7335105)
+
+[node name="background" type="Sprite2D" parent="." unique_id=2013520097]
+position = Vector2(576.00006, 323.5)
+scale = Vector2(0.7969613, 0.5994475)
+texture = ExtResource("1_w2h6d")
+
+[node name="Walls" type="Node2D" parent="." unique_id=1638783639]
+
+[node name="left" type="StaticBody2D" parent="Walls" unique_id=1182878773]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/left" unique_id=536153207]
+position = Vector2(3, 333.00003)
+rotation = 0.014790252
+shape = SubResource("RectangleShape2D_fjmpr")
+
+[node name="right" type="StaticBody2D" parent="Walls" unique_id=1168723995]
+position = Vector2(1230, 608)
+rotation = 2.9602587
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/right" unique_id=677176892]
+position = Vector2(14.667835, 302.60672)
+rotation = 0.16349325
+shape = SubResource("RectangleShape2D_fjmpr")
+
+[node name="up" type="StaticBody2D" parent="Walls" unique_id=1841088725]
+position = Vector2(570.00006, 57)
+scale = Vector2(34.4854, 11.838301)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/up" unique_id=358529775]
+position = Vector2(0.9279276, -3.2099197)
+scale = Vector2(1.464013, 1.1593153)
+shape = SubResource("RectangleShape2D_njoc6")
+
+[node name="down" type="StaticBody2D" parent="Walls" unique_id=2106017263]
+position = Vector2(934, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down" unique_id=1231120626]
+position = Vector2(1.159495, 5.1973906)
+shape = SubResource("RectangleShape2D_njoc6")
+
+[node name="bed" type="StaticBody2D" parent="Walls" unique_id=386914156]
+position = Vector2(756, 236.00003)
+scale = Vector2(28.950562, 12.237919)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/bed" unique_id=1129081311]
+position = Vector2(2.2452073, 0.16342425)
+scale = Vector2(0.15252098, 0.76519823)
+shape = SubResource("RectangleShape2D_njoc6")
+
+[node name="Player" parent="Walls" unique_id=1213491095 instance=ExtResource("2_njoc6")]
+position = Vector2(577, 511)
+
+[node name="down2" type="StaticBody2D" parent="Walls" unique_id=501478480]
+position = Vector2(208, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down2" unique_id=916109347]
+position = Vector2(-0.63245225, 5.093442)
+shape = SubResource("RectangleShape2D_njoc6")
+
+[node name="door" type="StaticBody2D" parent="Walls" unique_id=2090946081]
+position = Vector2(534, 715)
+scale = Vector2(28.950562, 12.237919)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/door" unique_id=1309379057]
+position = Vector2(1.4852904, 0.24513799)
+scale = Vector2(0.2140333, 1)
+shape = SubResource("RectangleShape2D_njoc6")
+
+[node name="door" type="Area2D" parent="." unique_id=1871887487]
+script = ExtResource("3_w2h6d")
+prompt_text = "Press E to leave"
+target_scene = "res://Lau Kah Kei//scenes/corridor.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door" unique_id=514801273]
+position = Vector2(580, 616)
+shape = SubResource("RectangleShape2D_w2h6d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=171508889]
+
+[node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=1358612213 groups=["prompt"]]
+visible = false
+offset_left = 440.0
+offset_top = 560.0
+offset_right = 712.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 24
+text = "Press E to enter"
+horizontal_alignment = 1
+vertical_alignment = 1

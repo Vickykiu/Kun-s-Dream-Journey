@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://dqbecepiyqi0n"]
+
+[ext_resource type="Texture2D" uid="uid://jidroh3tjvoo" path="res://Lau Kah Kei/assets/image/background/roomA05.jpeg" id="1_3cjl7"]
+[ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="2_3cjl7"]
+[ext_resource type="Script" uid="uid://4ema318um3y" path="res://Lau Kah Kei/scripts/key.gd" id="3_bs84j"]
+[ext_resource type="Texture2D" uid="uid://bhh8ecgha2fwv" path="res://Lau Kah Kei/assets/image/items/key.webp" id="4_2w7u2"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="5_e7ugs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vff6y"]
+size = Vector2(352.4073, 716.5866)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agw0v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x83ys"]
+size = Vector2(97.125, 137.75)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agw0v"]
+
+[node name="RoomA05" type="Node2D" unique_id=88108829]
+position = Vector2(180.99998, 61)
+scale = Vector2(1.4848586, 1.5208298)
+
+[node name="background2" type="Sprite2D" parent="." unique_id=527845686]
+position = Vector2(576.5, 329.5)
+scale = Vector2(0.720625, 0.7233334)
+texture = ExtResource("1_3cjl7")
+
+[node name="Walls" type="Node2D" parent="." unique_id=1348613250]
+
+[node name="left" type="StaticBody2D" parent="Walls" unique_id=701046005]
+position = Vector2(-27, -75)
+rotation = 0.07386591
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/left" unique_id=2091545037]
+position = Vector2(76.13403, 378.41327)
+rotation = 0.08280411
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_vff6y")
+
+[node name="right" type="StaticBody2D" parent="Walls" unique_id=852892265]
+position = Vector2(1239, 574.00006)
+rotation = 2.841351
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/right" unique_id=1855232600]
+position = Vector2(130.87332, 334.67776)
+rotation = -0.47047526
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_vff6y")
+
+[node name="up" type="StaticBody2D" parent="Walls" unique_id=1317175835]
+position = Vector2(377, 287)
+scale = Vector2(15.329115, 10.6890545)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/up" unique_id=624441626]
+position = Vector2(8.4153595, -14.59437)
+scale = Vector2(3.496043, 1.1274846)
+shape = SubResource("RectangleShape2D_agw0v")
+
+[node name="down" type="StaticBody2D" parent="Walls" unique_id=102596315]
+position = Vector2(934, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down" unique_id=834337254]
+position = Vector2(-2.3892655, 7.0684514)
+shape = SubResource("RectangleShape2D_agw0v")
+
+[node name="down2" type="StaticBody2D" parent="Walls" unique_id=1886122611]
+position = Vector2(208, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down2" unique_id=1608811826]
+position = Vector2(-1.7216758, 7.068451)
+shape = SubResource("RectangleShape2D_agw0v")
+
+[node name="door" type="StaticBody2D" parent="Walls" unique_id=398384225]
+position = Vector2(534, 715)
+scale = Vector2(28.950562, 12.237919)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/door" unique_id=1305004611]
+position = Vector2(-0.79445827, -2.7782488)
+scale = Vector2(0.17244878, 0.6983015)
+shape = SubResource("RectangleShape2D_agw0v")
+
+[node name="up2" type="StaticBody2D" parent="Walls" unique_id=1874599726]
+position = Vector2(377, 287)
+scale = Vector2(15.329115, 10.6890545)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/up2" unique_id=260821458]
+position = Vector2(11.220478, -14.594368)
+scale = Vector2(2.175183, 1.2011951)
+shape = SubResource("RectangleShape2D_agw0v")
+
+[node name="Door" type="Area2D" parent="." unique_id=858902321]
+script = ExtResource("2_3cjl7")
+prompt_text = "Press E to leave"
+target_scene = "res://Lau Kah Kei/scenes/corridor.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door" unique_id=61735052]
+position = Vector2(506, 593)
+shape = SubResource("RectangleShape2D_x83ys")
+
+[node name="Key" type="Area2D" parent="." unique_id=6120886]
+script = ExtResource("3_bs84j")
+
+[node name="Sprite2D" type="Sprite2D" parent="Key" unique_id=301699833]
+position = Vector2(722.0001, 470.00003)
+scale = Vector2(0.123046875, 0.119140625)
+texture = ExtResource("4_2w7u2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key" unique_id=1119784730]
+position = Vector2(720, 469.99997)
+rotation = 0.83871704
+scale = Vector2(-1.7793365, 2.2075675)
+shape = SubResource("CapsuleShape2D_agw0v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1545826573]
+
+[node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=142278629 groups=["prompt"]]
+visible = false
+offset_left = 440.0
+offset_top = 560.0
+offset_right = 712.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 24
+text = "Press E to enter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_e7ugs")]
+position = Vector2(500, 516)

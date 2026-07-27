@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://beywslfhu2r6x"]
+
+[ext_resource type="Texture2D" uid="uid://b7t58wq4rdrkx" path="res://Lau Kah Kei/assets/image/background/roomA03.png" id="1_qoqvm"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="2_4t2b5"]
+[ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_tfomb"]
+[ext_resource type="Texture2D" uid="uid://bjbji8lfuc2e5" path="res://Lau Kah Kei/assets/image/items/pictute.jpeg" id="4_ays5t"]
+[ext_resource type="Script" uid="uid://bq7c2ij3o4sq0" path="res://Lau Kah Kei/scripts/keepsake.gd" id="5_keep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tfomb"]
+size = Vector2(298, 573)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ays5t"]
+size = Vector2(21.599112, 18.31448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4v2ly"]
+size = Vector2(92.13839, 98.84445)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tn0ng"]
+size = Vector2(111, 145.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkx54"]
+size = Vector2(30.255901, 33.531868)
+
+[node name="RoomA03" type="Node2D" unique_id=348817742]
+position = Vector2(83.00001, 0)
+scale = Vector2(1.5576683, 1.6596596)
+
+[node name="background" type="Sprite2D" parent="." unique_id=367119702]
+position = Vector2(576.5, 325)
+scale = Vector2(0.6895933, 0.68862903)
+texture = ExtResource("1_qoqvm")
+
+[node name="Walls" type="Node2D" parent="." unique_id=4279953]
+
+[node name="left" type="StaticBody2D" parent="Walls" unique_id=1818276560]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/left" unique_id=424120512]
+position = Vector2(-5, 335)
+rotation = 0.16145831
+shape = SubResource("RectangleShape2D_tfomb")
+
+[node name="right" type="StaticBody2D" parent="Walls" unique_id=1550708241]
+position = Vector2(1230, 608)
+rotation = 2.9602587
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/right" unique_id=987539026]
+position = Vector2(8.6686325, 246.60666)
+rotation = -0.0095567405
+shape = SubResource("RectangleShape2D_tfomb")
+
+[node name="up" type="StaticBody2D" parent="Walls" unique_id=921667733]
+position = Vector2(570.00006, 57)
+scale = Vector2(34.4854, 11.838301)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/up" unique_id=487200435]
+position = Vector2(-0.057997078, 6.8421984)
+scale = Vector2(1.2179502, 0.97385675)
+shape = SubResource("RectangleShape2D_ays5t")
+
+[node name="down" type="StaticBody2D" parent="Walls" unique_id=1445797555]
+position = Vector2(934, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down" unique_id=166326073]
+position = Vector2(-2.3541293, 5.925026)
+shape = SubResource("RectangleShape2D_ays5t")
+
+[node name="bed" type="StaticBody2D" parent="Walls" unique_id=1258661138]
+position = Vector2(756, 236.00003)
+scale = Vector2(28.950562, 12.237919)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/bed" unique_id=1787979086]
+position = Vector2(8.911743, 15.198659)
+scale = Vector2(0.1675982, 1.8006716)
+shape = SubResource("RectangleShape2D_ays5t")
+
+[node name="down2" type="StaticBody2D" parent="Walls" unique_id=809701392]
+position = Vector2(208, 613.00006)
+scale = Vector2(28.460642, 9.620207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down2" unique_id=1983084107]
+position = Vector2(-2.5298092, 5.8210754)
+scale = Vector2(1, 0.99999994)
+shape = SubResource("RectangleShape2D_ays5t")
+
+[node name="door" type="StaticBody2D" parent="Walls" unique_id=85599671]
+position = Vector2(534, 715)
+scale = Vector2(28.950562, 12.237919)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/door" unique_id=955471686]
+position = Vector2(-1.1398745, -0.5719945)
+scale = Vector2(0.2140333, 1)
+shape = SubResource("RectangleShape2D_ays5t")
+
+[node name="bed2" type="StaticBody2D" parent="Walls" unique_id=227539951]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/bed2" unique_id=27959578]
+position = Vector2(223, 309)
+rotation = -2.985945
+scale = Vector2(1.8992777, 2.5702252)
+shape = SubResource("RectangleShape2D_4v2ly")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1973469332]
+
+[node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=835992243 groups=["prompt"]]
+visible = false
+offset_left = 440.0
+offset_top = 560.0
+offset_right = 712.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 24
+text = "Press E to enter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="door" type="Area2D" parent="." unique_id=1809706792]
+script = ExtResource("3_tfomb")
+prompt_text = "Press E to leave"
+target_scene = "res://Lau Kah Kei/scenes/corridor.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door" unique_id=1148589933]
+position = Vector2(497.5, 596.75)
+shape = SubResource("RectangleShape2D_tn0ng")
+
+[node name="picture" type="Area2D" parent="." unique_id=1090602813]
+position = Vector2(-485.99997, 44)
+rotation = -0.19397183
+script = ExtResource("5_keep")
+prompt_text = "Press E to pick up the photo"
+
+[node name="Sprite2D" type="Sprite2D" parent="picture" unique_id=1743974397]
+position = Vector2(699.50433, 458.23044)
+scale = Vector2(0.07598451, 0.08309284)
+texture = ExtResource("4_ays5t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="picture" unique_id=1234054390]
+position = Vector2(699.616, 457.68488)
+rotation = -1.5592924
+scale = Vector2(1.779336, -2.2075672)
+shape = SubResource("RectangleShape2D_nkx54")
+
+[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_4t2b5")]
+position = Vector2(496, 526)
+
+[node name="Closeup" type="CanvasLayer" parent="." unique_id=1581838967]
+
+[node name="Root" type="Control" parent="Closeup" unique_id=577081589 groups=["closeup"]]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Closeup/Root" unique_id=540974140]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.75)
+
+[node name="Photo" type="TextureRect" parent="Closeup/Root" unique_id=1262510998]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("4_ays5t")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Hint" type="Label" parent="Closeup/Root" unique_id=1779221182]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -60.0
+offset_right = 160.0
+offset_bottom = -25.0
+text = "Press E to put it away"
+horizontal_alignment = 1
