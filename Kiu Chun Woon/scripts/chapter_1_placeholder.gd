@@ -1,8 +1,6 @@
 extends Control
 
-## Temporary Chapter 1 hand-off scene.
-## Replace this scene with the rhythm-training level when Chapter 1 is implemented.
-
+## Chapter1 
 const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
 
 

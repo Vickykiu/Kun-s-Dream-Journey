@@ -1,6 +1,6 @@
 extends Control
 
-## Options screen for persistent Master and Music bus volume controls.
+## Options screen for Master and Music bus volume controls.
 
 const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
 
@@ -56,4 +56,3 @@ func _return_to_main_menu() -> void:
 func _update_percentage_labels() -> void:
 	master_value.text = "%d%%" % roundi(master_slider.value * 100.0)
 	music_value.text = "%d%%" % roundi(music_slider.value * 100.0)
-

@@ -1,7 +1,6 @@
 extends Node
 
-## Persistent menu-music and volume-settings controller.
-## It is registered as an AutoLoad, so music continues between menu screens.
+## menu-music and volume-settings controller.
 
 const MENU_MUSIC_PATH := "res://Kiu Chun Woon/assets/audio/menu_theme.mp3"
 const SETTINGS_PATH := "user://audio_settings.cfg"
@@ -18,13 +17,11 @@ func _ready() -> void:
 	_player = AudioStreamPlayer.new()
 	_player.name = "MenuMusicPlayer"
 	_player.bus = &"Music"
-	# Runtime loading avoids a first-import race when the project is opened
-	# in a fresh copy of Godot and the MP3 has not been imported yet.
+
 	var menu_music := load(MENU_MUSIC_PATH) as AudioStreamMP3
 	_player.stream = menu_music
 	add_child(_player)
 
-	# MP3 looping is set in code so the ZIP does not depend on generated import files.
 	if menu_music:
 		menu_music.loop = true
 
