@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eu1qievn2j7d"
-path="res://.godot/imported/kun_right.png-ae821ef934e6af0f45780248cdb212d9.ctex"
+uid="uid://c30i5sfx57l44"
+path="res://.godot/imported/kunkun dirty version.png-6afca94aba404829efc4a557f652568f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lau Kah Kei/assets/image/charactor/kun_right.png"
-dest_files=["res://.godot/imported/kun_right.png-ae821ef934e6af0f45780248cdb212d9.ctex"]
+source_file="res://Tay Hong Fei/character/kunkun dirty version.png"
+dest_files=["res://.godot/imported/kunkun dirty version.png-6afca94aba404829efc4a557f652568f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi8ia7jfdauiv"
-path="res://.godot/imported/kun_front.png-948657a142656d1400c581e0ea7a35c1.ctex"
+uid="uid://bvxt7wimdkxdi"
+path="res://.godot/imported/kunkun disappear 3.png-27cdfc4a0454654144aa709e75a7ab89.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lau Kah Kei/assets/image/charactor/kun_front.png"
-dest_files=["res://.godot/imported/kun_front.png-948657a142656d1400c581e0ea7a35c1.ctex"]
+source_file="res://Tay Hong Fei/character/kunkun disappear 3.png"
+dest_files=["res://.godot/imported/kunkun disappear 3.png-27cdfc4a0454654144aa709e75a7ab89.ctex"]
 
 [params]
 

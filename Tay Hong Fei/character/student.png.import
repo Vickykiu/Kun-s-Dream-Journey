@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jidroh3tjvoo"
-path="res://.godot/imported/roomA05.jpeg-4aafa5ec20d3ec2f1d9935b374c5294b.ctex"
+uid="uid://bx3uq7xn02mty"
+path="res://.godot/imported/student.png-5cb264cdfaae5effbc0c54ca9704ee3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lau Kah Kei/assets/image/background/roomA05.jpeg"
-dest_files=["res://.godot/imported/roomA05.jpeg-4aafa5ec20d3ec2f1d9935b374c5294b.ctex"]
+source_file="res://Tay Hong Fei/character/student.png"
+dest_files=["res://.godot/imported/student.png-5cb264cdfaae5effbc0c54ca9704ee3f.ctex"]
 
 [params]
 
