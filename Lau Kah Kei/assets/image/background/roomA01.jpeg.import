@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://1ac2rop0nnvh"
-path="res://.godot/imported/roomA01.jpeg-7ff7accfb4280ccb522fffce0555c2d8.ctex"
+path="res://.godot/imported/roomA01.jpeg-2341bd03e331b13c21eebc034021b5b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/image/background/roomA01.jpeg"
-dest_files=["res://.godot/imported/roomA01.jpeg-7ff7accfb4280ccb522fffce0555c2d8.ctex"]
+source_file="res://Lau Kah Kei/assets/image/background/roomA01.jpeg"
+dest_files=["res://.godot/imported/roomA01.jpeg-2341bd03e331b13c21eebc034021b5b7.ctex"]
 
 [params]
 

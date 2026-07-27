@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvohlu040i83u"
-path="res://.godot/imported/corridor.png-a00765bcb3d7defc77e37dbd1d7be8ea.ctex"
+path="res://.godot/imported/corridor.png-46d6e200c5d71148be7d8d2ee191acc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/image/background/corridor.png"
-dest_files=["res://.godot/imported/corridor.png-a00765bcb3d7defc77e37dbd1d7be8ea.ctex"]
+source_file="res://Lau Kah Kei/assets/image/background/corridor.png"
+dest_files=["res://.godot/imported/corridor.png-46d6e200c5d71148be7d8d2ee191acc2.ctex"]
 
 [params]
 

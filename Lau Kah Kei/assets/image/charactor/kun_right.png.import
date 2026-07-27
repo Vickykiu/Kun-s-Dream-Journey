@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://eu1qievn2j7d"
-path="res://.godot/imported/kun_right.png-eaf1d7fd782910bf43b515ceb07ed4ad.ctex"
+path="res://.godot/imported/kun_right.png-ae821ef934e6af0f45780248cdb212d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/image/charactor/kun_right.png"
-dest_files=["res://.godot/imported/kun_right.png-eaf1d7fd782910bf43b515ceb07ed4ad.ctex"]
+source_file="res://Lau Kah Kei/assets/image/charactor/kun_right.png"
+dest_files=["res://.godot/imported/kun_right.png-ae821ef934e6af0f45780248cdb212d9.ctex"]
 
 [params]
 

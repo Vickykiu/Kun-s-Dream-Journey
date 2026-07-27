@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhh8ecgha2fwv"
-path="res://.godot/imported/key.webp-a4c2a7fe3b3d44b4e51326a2b060cdbd.ctex"
+uid="uid://bh0ps80g8gw68"
+path="res://.godot/imported/TeacherMei.png-15502f04977ab91085460990f7f51bbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lau Kah Kei/assets/image/items/key.webp"
-dest_files=["res://.godot/imported/key.webp-a4c2a7fe3b3d44b4e51326a2b060cdbd.ctex"]
+source_file="res://Lew Jia Jia/assets/characters/TeacherMei.png"
+dest_files=["res://.godot/imported/TeacherMei.png-15502f04977ab91085460990f7f51bbf.ctex"]
 
 [params]
 

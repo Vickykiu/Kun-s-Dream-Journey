@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhh8ecgha2fwv"
-path="res://.godot/imported/key.webp-a4c2a7fe3b3d44b4e51326a2b060cdbd.ctex"
+uid="uid://u0xqalb1qvk2"
+path="res://.godot/imported/RicardoMilos.png-2d93c2927dff77d9d9d1f114d2551429.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lau Kah Kei/assets/image/items/key.webp"
-dest_files=["res://.godot/imported/key.webp-a4c2a7fe3b3d44b4e51326a2b060cdbd.ctex"]
+source_file="res://Lew Jia Jia/assets/characters/RicardoMilos.png"
+dest_files=["res://.godot/imported/RicardoMilos.png-2d93c2927dff77d9d9d1f114d2551429.ctex"]
 
 [params]
 
