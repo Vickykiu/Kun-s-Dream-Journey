@@ -5,10 +5,6 @@
 [ext_resource type="Script" uid="uid://bu4camnm2hkm2" path="res://Tay Hong Fei/scripts/Crystal.gd" id="3_agad7"]
 [ext_resource type="Texture2D" uid="uid://iado2bv2n5sq" path="res://Tay Hong Fei/asset/background/Chapter 4 element.png" id="4_d4syc"]
 [ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="5_ivdsx"]
-[ext_resource type="Texture2D" uid="uid://why2xocv6mbb" path="res://Lau Kah Kei/assets/image/charactor/kun_back.png" id="6_ivdsx"]
-[ext_resource type="Texture2D" uid="uid://bi8ia7jfdauiv" path="res://Lau Kah Kei/assets/image/charactor/kun_front.png" id="7_uqhv1"]
-[ext_resource type="Texture2D" uid="uid://dfvj3sfw0n7ej" path="res://Lau Kah Kei/assets/image/charactor/kun_left.png" id="8_2wkyv"]
-[ext_resource type="Texture2D" uid="uid://eu1qievn2j7d" path="res://Lau Kah Kei/assets/image/charactor/kun_right.png" id="9_1nxuj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmnnq"]
 radius = 18.027756
@@ -66,9 +62,6 @@ polygon = PackedVector2Array(85, 54, 114, 174, 69, 230, 41, 271, 34, 388, 34, 45
 polygon = PackedVector2Array(35, 452, 127, 567, 212, 621, 314, 631, 315, 648, 353, 654, 355, 898, 324, 899, 80, 747, -52, 588)
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_ivdsx")]
+modulate = Color(1, 1, 1, 1)
 position = Vector2(392, 849)
 scale = Vector2(0.5, 0.5)
-tex_back = ExtResource("6_ivdsx")
-tex_front = ExtResource("7_uqhv1")
-tex_left = ExtResource("8_2wkyv")
-tex_right = ExtResource("9_1nxuj")

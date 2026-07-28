@@ -74,6 +74,7 @@ scale = Vector2(0.2140333, 1)
 shape = SubResource("RectangleShape2D_yu6v0")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_i37m5")]
+modulate = Color(1, 1, 1, 1)
 position = Vector2(577, 463)
 
 [node name="door" type="Area2D" parent="." unique_id=1843859959]
@@ -89,18 +90,11 @@ shape = SubResource("RectangleShape2D_fdf3s")
 
 [node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=1486992429 groups=["prompt"]]
 visible = false
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -180.0
-offset_bottom = -80.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 0.15, 0.15, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 48
+offset_left = 440.0
+offset_top = 560.0
+offset_right = 712.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 24
 text = "Press E to enter"
 horizontal_alignment = 1
 vertical_alignment = 1

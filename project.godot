@@ -23,6 +23,7 @@ default_bus_layout="res://default_bus_layout.tres"
 
 MusicManager="*res://Kiu Chun Woon/scripts/music_manager.gd"
 GameState="*res://Lau Kah Kei/scripts/game_state.gd"
+ChapterEscape="*res://Kiu Chun Woon/scripts/chapter_escape.gd"
 
 [display]
 

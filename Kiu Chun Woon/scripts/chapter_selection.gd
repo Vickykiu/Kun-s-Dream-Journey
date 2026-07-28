@@ -1,17 +1,32 @@
 extends Control
 
-## Chapter select of 2-4. Chapters 2–4 remain locked.
-
 const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
 const CHAPTER_ONE_SCENE := "res://Kiu Chun Woon/scenes/chapter_1_placeholder.tscn"
+const CHAPTER_TWO_SCENE := "res://Lau Kah Kei/scenes/corridor.tscn"
+const CHAPTER_THREE_SCENE := "res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn"
+const CHAPTER_FOUR_SCENE := "res://Tay Hong Fei/scene/Chapter 4-1.tscn"
 
-@onready var chapter_one_button: Button = %ChapterOneButton
+@onready var chapter_one_button: Button = (
+	$SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterOneButton
+)
+@onready var chapter_two_button: Button = (
+	$SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterTwoButton
+)
+@onready var chapter_three_button: Button = (
+	$SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterThreeButton
+)
+@onready var chapter_four_button: Button = (
+	$SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterFourButton
+)
 @onready var back_button: Button = (
 	$SafeMargin/Center/ChapterCard/Column/BackButton
 )
 
 @onready var hover_buttons: Array[Button] = [
 	chapter_one_button,
+	chapter_two_button,
+	chapter_three_button,
+	chapter_four_button,
 	back_button
 ]
 
@@ -44,8 +59,27 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_chapter_one_pressed() -> void:
+	_open_chapter(CHAPTER_ONE_SCENE)
+
+
+func _on_chapter_two_pressed() -> void:
+	_open_chapter(CHAPTER_TWO_SCENE)
+
+
+func _on_chapter_three_pressed() -> void:
+	_open_chapter(CHAPTER_THREE_SCENE)
+
+
+func _on_chapter_four_pressed() -> void:
+	_open_chapter(CHAPTER_FOUR_SCENE)
+
+
+func _open_chapter(scene_path: String) -> void:
 	MusicManager.stop_music()
-	get_tree().change_scene_to_file(CHAPTER_ONE_SCENE)
+	var error := get_tree().change_scene_to_file(scene_path)
+
+	if error != OK:
+		push_error("Unable to open chapter scene: " + scene_path)
 
 
 func _on_back_pressed() -> void:

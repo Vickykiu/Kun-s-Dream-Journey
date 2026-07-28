@@ -214,7 +214,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.66, 0.61, 0.55, 1)
 theme_override_font_sizes/font_size = 16
-text = "Complete each chapter to unlock the next."
+text = "Select a chapter to open its current playable scene."
 horizontal_alignment = 1
 
 [node name="Separator" type="HSeparator" parent="SafeMargin/Center/ChapterCard/Column" unique_id=797891242]
@@ -241,33 +241,42 @@ AVAILABLE"
 [node name="ChapterTwoButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column/ChapterGrid" unique_id=1369357359]
 custom_minimum_size = Vector2(440, 124)
 layout_mode = 2
-disabled = true
+focus_neighbor_left = NodePath("../ChapterOneButton")
+focus_neighbor_bottom = NodePath("../ChapterFourButton")
+mouse_default_cursor_shape = 2
 text = "CHAPTER 2
 THE CRACK
 
-LOCKED"
+AVAILABLE"
 
 [node name="ChapterThreeButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column/ChapterGrid" unique_id=2119105791]
 custom_minimum_size = Vector2(440, 124)
 layout_mode = 2
-disabled = true
+focus_neighbor_top = NodePath("../ChapterOneButton")
+focus_neighbor_right = NodePath("../ChapterFourButton")
+focus_neighbor_bottom = NodePath("../../BackButton")
+mouse_default_cursor_shape = 2
 text = "CHAPTER 3
 THE TRAP
 
-LOCKED"
+AVAILABLE"
 
 [node name="ChapterFourButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column/ChapterGrid" unique_id=1099881667]
 custom_minimum_size = Vector2(440, 124)
 layout_mode = 2
-disabled = true
+focus_neighbor_left = NodePath("../ChapterThreeButton")
+focus_neighbor_top = NodePath("../ChapterTwoButton")
+focus_neighbor_bottom = NodePath("../../BackButton")
+mouse_default_cursor_shape = 2
 text = "CHAPTER 4
 CONSCIOUSNESS SEA
 
-LOCKED"
+AVAILABLE"
 
 [node name="BackButton" type="Button" parent="SafeMargin/Center/ChapterCard/Column" unique_id=164854592]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
+focus_neighbor_top = NodePath("../ChapterGrid/ChapterThreeButton")
 mouse_default_cursor_shape = 2
 text = "BACK"
 
@@ -279,4 +288,7 @@ text = "Press Esc to return"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterOneButton" to="." method="_on_chapter_one_pressed"]
+[connection signal="pressed" from="SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterTwoButton" to="." method="_on_chapter_two_pressed"]
+[connection signal="pressed" from="SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterThreeButton" to="." method="_on_chapter_three_pressed"]
+[connection signal="pressed" from="SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterFourButton" to="." method="_on_chapter_four_pressed"]
 [connection signal="pressed" from="SafeMargin/Center/ChapterCard/Column/BackButton" to="." method="_on_back_pressed"]

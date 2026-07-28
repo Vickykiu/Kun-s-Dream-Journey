@@ -233,7 +233,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 53
-text = "Kun's Dream
+text = "Kun's Dream 
 Journey"
 uppercase = true
 
