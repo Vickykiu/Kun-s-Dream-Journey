@@ -1,0 +1,735 @@
+[gd_scene format=3 uid="uid://db0n36osgdeyf"]
+
+[ext_resource type="Script" uid="uid://by8ctfn6v1tbp" path="res://Kiu Chun Woon/scripts/chapter_1_rhythm.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dgx6evgr4c3a" path="res://Kiu Chun Woon/assets/images/chapter_1_practice_room_background.png" id="2_background"]
+[ext_resource type="AudioStream" uid="uid://demruym2obunj" path="res://Kiu Chun Woon/assets/audio/chapter_1_rhythm_theme.mp3" id="3_music"]
+[ext_resource type="Script" uid="uid://c14hbbpkwjn87" path="res://Kiu Chun Woon/scripts/rhythm_conductor.gd" id="4_conductor"]
+[ext_resource type="Texture2D" uid="uid://hovxu34ms3fc" path="res://Kiu Chun Woon/assets/images/reactions/kunkun_perfect.png" id="5_perfect"]
+
+[sub_resource type="StyleBoxFlat" id="StyleButtonHover"]
+bg_color = Color(0.1, 0.035, 0.035, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.22, 0.17, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleButtonNormal"]
+bg_color = Color(0.035, 0.048, 0.068, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.54, 0.6, 0.65)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleButtonPressed"]
+bg_color = Color(0.22, 0.045, 0.04, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.42, 0.3, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleHud"]
+bg_color = Color(0.205, 0.19, 0.275, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.67, 0.57, 0.58)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleOverlayPanel"]
+content_margin_left = 42.0
+content_margin_top = 36.0
+content_margin_right = 42.0
+content_margin_bottom = 36.0
+bg_color = Color(0.018, 0.025, 0.04, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.25, 0.2, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleProgressBackground"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.08, 0.065, 0.105, 0.82)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.72, 0.56, 0.53, 0.48)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleProgressFill"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.86, 0.32, 0.27, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Theme" id="RhythmTheme"]
+default_font_size = 18
+Button/colors/font_color = Color(0.92, 0.9, 0.85, 1)
+Button/colors/font_focus_color = Color(1, 0.92, 0.85, 1)
+Button/colors/font_hover_color = Color(1, 0.92, 0.85, 1)
+Button/colors/font_pressed_color = Color(1, 0.92, 0.85, 1)
+Button/font_sizes/font_size = 18
+Button/styles/focus = SubResource("StyleButtonHover")
+Button/styles/hover = SubResource("StyleButtonHover")
+Button/styles/normal = SubResource("StyleButtonNormal")
+Button/styles/pressed = SubResource("StyleButtonPressed")
+Panel/styles/panel = SubResource("StyleHud")
+PanelContainer/styles/panel = SubResource("StyleOverlayPanel")
+ProgressBar/styles/background = SubResource("StyleProgressBackground")
+ProgressBar/styles/fill = SubResource("StyleProgressFill")
+
+[sub_resource type="StyleBoxFlat" id="StyleGuide"]
+content_margin_left = 20.0
+content_margin_top = 15.0
+content_margin_right = 20.0
+content_margin_bottom = 15.0
+bg_color = Color(0.19, 0.175, 0.255, 0.88)
+border_width_left = 2
+border_color = Color(0.82, 0.5, 0.47, 0.9)
+
+[sub_resource type="Shader" id="ShaderReactionCutout"]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec4 pixel = texture(TEXTURE, UV);
+    float minimum_channel = min(pixel.r, min(pixel.g, pixel.b));
+    float maximum_channel = max(pixel.r, max(pixel.g, pixel.b));
+    float neutral_color = 1.0 - smoothstep(0.025, 0.11, maximum_channel - minimum_channel);
+    float near_white = smoothstep(0.955, 0.995, minimum_channel);
+    pixel.a *= 1.0 - (near_white * neutral_color);
+    COLOR = pixel;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ReactionCutoutMaterial"]
+shader = SubResource("ShaderReactionCutout")
+
+[sub_resource type="StyleBoxFlat" id="StyleRhythmPanel"]
+bg_color = Color(0.235, 0.22, 0.315, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.86, 0.7, 0.58, 0.72)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.82)
+shadow_size = 14
+
+[node name="ChapterOneRhythm" type="Control" unique_id=1686258994]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("RhythmTheme")
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1526129281]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Conductor" type="Node" parent="." unique_id=1620973200]
+unique_name_in_owner = true
+script = ExtResource("4_conductor")
+
+[node name="Music" type="AudioStreamPlayer" parent="Conductor" unique_id=1659611616]
+unique_name_in_owner = true
+stream = ExtResource("3_music")
+bus = &"Music"
+
+[node name="Atmosphere" type="ColorRect" parent="." unique_id=1498213880]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.105, 0.075, 0.16, 0.56)
+
+[node name="EdgeShade" type="ColorRect" parent="." unique_id=694865891]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 120.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.005, 0.009, 0.02, 0.42)
+
+[node name="Header" type="Panel" parent="." unique_id=1904277669]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.04
+anchor_right = 0.285
+anchor_bottom = 0.31
+theme_override_styles/panel = SubResource("StyleHud")
+
+[node name="ChapterLabel" type="Label" parent="Header" unique_id=756903063]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = 0.04
+anchor_right = 0.96
+anchor_bottom = 0.19
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9, 0.67, 0.59, 1)
+theme_override_font_sizes/font_size = 15
+text = "CHAPTER 1  /  ORIENTATION DAY"
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Header" unique_id=1290986193]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.21
+anchor_right = 0.95
+anchor_bottom = 0.43
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.76, 1)
+theme_override_font_sizes/font_size = 34
+text = "000000"
+vertical_alignment = 1
+
+[node name="ComboLabel" type="Label" parent="Header" unique_id=1522240209]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.43
+anchor_right = 0.95
+anchor_bottom = 0.62
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.79, 0.72, 1)
+theme_override_font_sizes/font_size = 27
+text = "00 combo!"
+vertical_alignment = 1
+
+[node name="AccuracyLabel" type="Label" parent="Header" unique_id=384197557]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.64
+anchor_right = 0.95
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.82, 0.75, 0.78, 1)
+text = "ACCURACY  000.0%"
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="Header" unique_id=1458425055]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.76
+anchor_right = 0.95
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.68, 0.7, 0.74, 1)
+theme_override_font_sizes/font_size = 14
+text = "00:00 / 00:38"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SongProgress" type="Panel" parent="Header" unique_id=662170175]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.91
+anchor_right = 0.95
+anchor_bottom = 0.945
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleProgressBackground")
+
+[node name="SongProgressFill" type="Panel" parent="Header/SongProgress" unique_id=169542222]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleProgressFill")
+
+[node name="GuidePanel" type="PanelContainer" parent="." unique_id=200574462]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.35
+anchor_right = 0.285
+anchor_bottom = 0.69
+theme_override_styles/panel = SubResource("StyleGuide")
+
+[node name="GuideColumn" type="VBoxContainer" parent="GuidePanel" unique_id=568890158]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Teacher" type="Label" parent="GuidePanel/GuideColumn" unique_id=1608104574]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.36, 0.28, 1)
+theme_override_font_sizes/font_size = 15
+text = "TEACHER MEI  /  FIRST LESSON"
+
+[node name="Dialogue" type="Label" parent="GuidePanel/GuideColumn" unique_id=2130532433]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.93, 0.9, 0.85, 1)
+theme_override_font_sizes/font_size = 20
+text = "\"Follow the arrows, Kunkun.
+Every star must learn the rhythm.\""
+vertical_alignment = 1
+
+[node name="Controls" type="Label" parent="GuidePanel/GuideColumn" unique_id=1557193502]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.68, 0.76, 1)
+theme_override_font_sizes/font_size = 14
+text = "KEYS  ←  ↓  ↑  →     |     ESC  BACK"
+
+[node name="BackButton" type="Button" parent="GuidePanel/GuideColumn" unique_id=1088522002]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "BACK TO INTRODUCTION"
+
+[node name="ReactionPortrait" type="TextureRect" parent="." unique_id=2017836121]
+unique_name_in_owner = true
+visible = false
+z_index = 4
+texture_filter = 1
+material = SubResource("ReactionCutoutMaterial")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.745
+anchor_top = 0.28
+anchor_right = 0.985
+anchor_bottom = 0.985
+mouse_filter = 2
+texture = ExtResource("5_perfect")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="JudgementLabel" type="Label" parent="." unique_id=576260216]
+unique_name_in_owner = true
+z_index = 5
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.735
+anchor_top = 0.84
+anchor_right = 0.995
+anchor_bottom = 0.985
+pivot_offset = Vector2(128, 32)
+theme_override_colors/font_color = Color(1, 0.82, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.02, 0.03, 0.95)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "PERFECT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RhythmArea" type="Panel" parent="." unique_id=1279009091]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33
+anchor_top = 0.02
+anchor_right = 0.73
+anchor_bottom = 0.98
+theme_override_styles/panel = SubResource("StyleRhythmPanel")
+
+[node name="LaneTitle" type="Label" parent="RhythmArea" unique_id=838392397]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.012
+anchor_right = 0.98
+anchor_bottom = 0.065
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.52, 0.66, 0.72, 1)
+theme_override_font_sizes/font_size = 13
+text = "RHYTHM LINK  /  FOLLOW THE ARROWS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoteLayer" type="Control" parent="RhythmArea" unique_id=1555187728]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 1
+anchor_left = 0.02
+anchor_top = 0.065
+anchor_right = 0.98
+anchor_bottom = 0.985
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LaneDivider1" type="ColorRect" parent="RhythmArea" unique_id=1074789096]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.255
+anchor_right = 0.257
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.91, 0.74, 0.6, 0.64)
+
+[node name="LaneDivider2" type="ColorRect" parent="RhythmArea" unique_id=1018749710]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.499
+anchor_right = 0.501
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.91, 0.74, 0.6, 0.64)
+
+[node name="LaneDivider3" type="ColorRect" parent="RhythmArea" unique_id=649307337]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.743
+anchor_right = 0.745
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.91, 0.74, 0.6, 0.64)
+
+[node name="HitLine" type="ColorRect" parent="RhythmArea" unique_id=1981187679]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.825
+anchor_right = 0.98
+anchor_bottom = 0.835
+mouse_filter = 2
+color = Color(0.95, 0.76, 0.62, 0.78)
+
+[node name="LeftReceptor" type="Label" parent="RhythmArea" unique_id=1856477779]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.035
+anchor_top = 0.735
+anchor_right = 0.245
+anchor_bottom = 0.825
+pivot_offset = Vector2(90, 30)
+theme_override_colors/font_color = Color(0.851, 0.604, 0.639, 1)
+theme_override_font_sizes/font_size = 66
+text = "←"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DownReceptor" type="Label" parent="RhythmArea" unique_id=1829917430]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.265
+anchor_top = 0.735
+anchor_right = 0.485
+anchor_bottom = 0.825
+pivot_offset = Vector2(90, 30)
+theme_override_colors/font_color = Color(0.773, 0.643, 0.8, 1)
+theme_override_font_sizes/font_size = 66
+text = "↓"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpReceptor" type="Label" parent="RhythmArea" unique_id=851272220]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.515
+anchor_top = 0.735
+anchor_right = 0.735
+anchor_bottom = 0.825
+pivot_offset = Vector2(90, 30)
+theme_override_colors/font_color = Color(0.851, 0.627, 0.627, 1)
+theme_override_font_sizes/font_size = 66
+text = "↑"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightReceptor" type="Label" parent="RhythmArea" unique_id=800934725]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.755
+anchor_top = 0.735
+anchor_right = 0.965
+anchor_bottom = 0.825
+pivot_offset = Vector2(90, 30)
+theme_override_colors/font_color = Color(0.886, 0.757, 0.608, 1)
+theme_override_font_sizes/font_size = 66
+text = "→"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionOverlay" type="Control" parent="." unique_id=1158710518]
+unique_name_in_owner = true
+z_index = 100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="InstructionOverlay" unique_id=443979253]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.005, 0.008, 0.016, 0.68)
+
+[node name="Center" type="CenterContainer" parent="InstructionOverlay" unique_id=824993104]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="InstructionOverlay/Center" unique_id=589363258]
+custom_minimum_size = Vector2(720, 430)
+layout_mode = 2
+
+[node name="Column" type="VBoxContainer" parent="InstructionOverlay/Center/Card" unique_id=548426136]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Eyebrow" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=1520649262]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.34, 0.27, 1)
+theme_override_font_sizes/font_size = 15
+text = "STARLIGHT TRAINING CAMP  /  PRACTICE ROOM"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=1512714968]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.86, 1)
+theme_override_font_sizes/font_size = 36
+text = "RHYTHM ORIENTATION"
+horizontal_alignment = 1
+
+[node name="TeacherLine" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=351397178]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.76, 0.78, 0.8, 1)
+theme_override_font_sizes/font_size = 19
+text = "Teacher Mei smiles as the practice-room lights turn on.
+\"Match every signal. Do not lose the rhythm.\""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rules" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=17981554]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56, 0.78, 0.82, 1)
+theme_override_font_sizes/font_size = 17
+text = "Press  ←  ↓  ↑  →  when each note reaches its matching target.
+Timing earns PERFECT or GOOD. A late note becomes a MISS. Early to press will become a Too Early."
+horizontal_alignment = 1
+
+[node name="Warning" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=1762289261]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.5, 0.45, 1)
+theme_override_font_sizes/font_size = 14
+text = "There may be evidence hidden behind an unusual performance."
+horizontal_alignment = 1
+
+[node name="StartTrainingButton" type="Button" parent="InstructionOverlay/Center/Card/Column" unique_id=1480992000]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "START TRAINING"
+
+[node name="CancelButton" type="Button" parent="InstructionOverlay/Center/Card/Column" unique_id=1047470161]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "BACK TO INTRODUCTION"
+
+[node name="CountdownLabel" type="Label" parent="." unique_id=1217673083]
+unique_name_in_owner = true
+visible = false
+z_index = 105
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -85.0
+offset_right = 310.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(310, 85)
+theme_override_colors/font_color = Color(1, 0.92, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0.03, 0.025, 0.03, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 64
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultOverlay" type="Control" parent="." unique_id=1540539661]
+unique_name_in_owner = true
+visible = false
+z_index = 110
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="ResultOverlay" unique_id=223153476]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.005, 0.008, 0.016, 0.78)
+
+[node name="Center" type="CenterContainer" parent="ResultOverlay" unique_id=1306782268]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="ResultOverlay/Center" unique_id=314155983]
+custom_minimum_size = Vector2(720, 480)
+layout_mode = 2
+
+[node name="Column" type="VBoxContainer" parent="ResultOverlay/Center/Card" unique_id=1809428619]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ResultTitle" type="Label" parent="ResultOverlay/Center/Card/Column" unique_id=646722785]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.86, 0.72, 1)
+theme_override_font_sizes/font_size = 30
+text = "ORIENTATION COMPLETE  |  GRADE A"
+horizontal_alignment = 1
+
+[node name="ResultStats" type="Label" parent="ResultOverlay/Center/Card/Column" unique_id=1538045498]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.75, 0.82, 0.86, 1)
+theme_override_font_sizes/font_size = 19
+text = "SCORE  000000
+PERFECT  00     GOOD  00     MISS  00
+BEST COMBO  00     ACCURACY  000.0%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EvidenceLabel" type="Label" parent="ResultOverlay/Center/Card/Column" unique_id=173244218]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.66, 0.72, 0.78, 1)
+theme_override_font_sizes/font_size = 16
+text = "Teacher Mei: Keep following the rhythm."
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ResultOverlay/Center/Card/Column" unique_id=1896448112]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "CONTINUE TO CHAPTER 2"
+
+[node name="RetryButton" type="Button" parent="ResultOverlay/Center/Card/Column" unique_id=1074946372]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "RETRY TRAINING"
+
+[node name="ReturnMainMenuButton" type="Button" parent="ResultOverlay/Center/Card/Column" unique_id=1237485952]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "RETURN TO MAIN MENU"
+
+[connection signal="song_finished" from="Conductor" to="." method="_on_song_finished"]
+[connection signal="finished" from="Conductor/Music" to="Conductor" method="_on_music_finished"]
+[connection signal="pressed" from="GuidePanel/GuideColumn/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="InstructionOverlay/Center/Card/Column/StartTrainingButton" to="." method="_on_start_training_pressed"]
+[connection signal="pressed" from="InstructionOverlay/Center/Card/Column/CancelButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ResultOverlay/Center/Card/Column/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="ResultOverlay/Center/Card/Column/RetryButton" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="ResultOverlay/Center/Card/Column/ReturnMainMenuButton" to="." method="_on_return_main_menu_pressed"]

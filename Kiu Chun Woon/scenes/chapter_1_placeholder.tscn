@@ -155,7 +155,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[node name="ChapterOnePlaceholder" type="Control" unique_id=171305756]
+[node name="ChapterOnePlaceholder" type="Control" unique_id=1223114828]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -166,7 +166,7 @@ grow_vertical = 2
 theme = SubResource("IndustrialTheme")
 script = ExtResource("1_script")
 
-[node name="Background" type="TextureRect" parent="." unique_id=1663543473]
+[node name="Background" type="TextureRect" parent="." unique_id=1259965691]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -179,7 +179,7 @@ texture = ExtResource("2_background")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Darken" type="ColorRect" parent="." unique_id=691415604]
+[node name="Darken" type="ColorRect" parent="." unique_id=230198866]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -189,7 +189,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.003, 0.007, 0.016, 0.78)
 
-[node name="Center" type="CenterContainer" parent="." unique_id=1906660817]
+[node name="Center" type="CenterContainer" parent="." unique_id=1458889299]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,71 +201,79 @@ offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ChapterCard" type="PanelContainer" parent="Center" unique_id=1254073552]
+[node name="ChapterCard" type="PanelContainer" parent="Center" unique_id=1968797027]
 custom_minimum_size = Vector2(760, 0)
 layout_mode = 2
 
-[node name="Column" type="VBoxContainer" parent="Center/ChapterCard" unique_id=215991764]
+[node name="Column" type="VBoxContainer" parent="Center/ChapterCard" unique_id=1259045955]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="Status" type="Label" parent="Center/ChapterCard/Column" unique_id=1196827939]
+[node name="Status" type="Label" parent="Center/ChapterCard/Column" unique_id=838860613]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.95, 0.7, 0.48, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleStatus")
-text = "FOUNDATION READY"
+text = "INTRODUCTION"
 horizontal_alignment = 1
 
-[node name="Chapter" type="Label" parent="Center/ChapterCard/Column" unique_id=71493173]
+[node name="Chapter" type="Label" parent="Center/ChapterCard/Column" unique_id=1047175741]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.32, 0.24, 1)
 theme_override_font_sizes/font_size = 17
 text = "CHAPTER 1"
 horizontal_alignment = 1
 
-[node name="Title" type="Label" parent="Center/ChapterCard/Column" unique_id=1840588567]
+[node name="Title" type="Label" parent="Center/ChapterCard/Column" unique_id=186635755]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.94, 0.88, 0.79, 1)
 theme_override_font_sizes/font_size = 44
 text = "ORIENTATION DAY"
 horizontal_alignment = 1
 
-[node name="Separator" type="HSeparator" parent="Center/ChapterCard/Column" unique_id=650186341]
+[node name="Separator" type="HSeparator" parent="Center/ChapterCard/Column" unique_id=424416500]
 layout_mode = 2
 
-[node name="Body" type="Label" parent="Center/ChapterCard/Column" unique_id=1032634404]
+[node name="Body" type="Label" parent="Center/ChapterCard/Column" unique_id=190598649]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.66, 0.61, 0.55, 1)
 theme_override_font_sizes/font_size = 18
-text = "Today is Kunkun’s first day at the Starlight Training Camp.
-He arrives with one dream—to complete his training and become a shining star.
-The camp appears cheerful and welcoming, but the silent and unfamiliar faces make him feel as though something is watching him.
+text = "Today is Kunkun's first day at the Starlight Training Camp.
+He arrives with one dream: to finish his training and become a shining star.
+The camp appears cheerful and welcoming, yet its unfamiliar faces leave him uneasy.
 Teacher Mei is waiting inside the practice room.
 His first lesson is a simple rhythm-training performance.
 At least, that is what Kunkun has been told."
 horizontal_alignment = 1
 
-[node name="Objective" type="Label" parent="Center/ChapterCard/Column" unique_id=286719523]
+[node name="Objective" type="Label" parent="Center/ChapterCard/Column" unique_id=778291311]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.76, 0.64, 0.52, 1)
 theme_override_font_sizes/font_size = 16
-text = "TARGET  •  Complete rhythm training with Teacher Mei"
+text = "TARGET  |  Complete rhythm training with Teacher Mei"
 horizontal_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="Center/ChapterCard/Column" unique_id=1267008173]
+[node name="BeginButton" type="Button" parent="Center/ChapterCard/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "BEGIN ORIENTATION"
+
+[node name="MainMenuButton" type="Button" parent="Center/ChapterCard/Column" unique_id=908449653]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "RETURN TO MAIN MENU"
 
-[node name="Hint" type="Label" parent="Center/ChapterCard/Column" unique_id=1019992738]
+[node name="Hint" type="Label" parent="Center/ChapterCard/Column" unique_id=181066275]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46, 0.38, 0.33, 1)
 theme_override_font_sizes/font_size = 14
 text = "Press Esc to return"
 horizontal_alignment = 1
 
+[connection signal="pressed" from="Center/ChapterCard/Column/BeginButton" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Center/ChapterCard/Column/MainMenuButton" to="." method="_on_main_menu_pressed"]

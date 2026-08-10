@@ -1,11 +1,12 @@
 extends Control
 
-## Chapter1 
+## Chapter 1 introduction and navigation.
 const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
+const RHYTHM_SCENE := "res://Kiu Chun Woon/scenes/chapter_1_rhythm.tscn"
 
 
 func _ready() -> void:
-	%MainMenuButton.grab_focus()
+	%BeginButton.grab_focus()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -16,6 +17,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_main_menu_pressed() -> void:
 	_return_to_main_menu()
+
+
+func _on_begin_pressed() -> void:
+	get_tree().change_scene_to_file(RHYTHM_SCENE)
 
 
 func _return_to_main_menu() -> void:

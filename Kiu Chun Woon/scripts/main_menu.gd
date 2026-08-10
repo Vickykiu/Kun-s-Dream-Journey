@@ -51,7 +51,6 @@ func _configure_layout() -> void:
 
 	background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 
-	# Apply the dark overlays only behind the right-side menu.
 	_set_control_region(
 		atmosphere_tint,
 		MENU_AREA_LEFT,
