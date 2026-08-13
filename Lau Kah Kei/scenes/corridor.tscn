@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cujpuwd8rxbfc"]
 
 [ext_resource type="Texture2D" uid="uid://dvohlu040i83u" path="res://Lau Kah Kei/assets/image/background/corridor.png" id="1_xswuy"]
-[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="2_pucmg"]
+[ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="2_pucmg"]
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="4_door"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xswuy"]
@@ -63,37 +63,37 @@ shape = SubResource("RectangleShape2D_7w20u")
 [node name="StaticBody2D" type="StaticBody2D" parent="Walls" unique_id=1703491145]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D" unique_id=1912796465]
-position = Vector2(240, 175)
+position = Vector2(242.8542, 124.29669)
 shape = SubResource("RectangleShape2D_pblcb")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Walls" unique_id=1509227754]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2" unique_id=1394340630]
-position = Vector2(474, 175)
+position = Vector2(471.56754, 122.02643)
 shape = SubResource("RectangleShape2D_pblcb")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Walls" unique_id=1655865506]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3" unique_id=1796065968]
-position = Vector2(701, 176)
+position = Vector2(700.8957, 123.16155)
 shape = SubResource("RectangleShape2D_pblcb")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Walls" unique_id=1051964071]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4" unique_id=931451105]
-position = Vector2(933, 175)
+position = Vector2(931.4535, 123.16156)
 shape = SubResource("RectangleShape2D_pblcb")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="Walls" unique_id=1916689115]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D5" unique_id=1258895921]
-position = Vector2(1158, 172)
+position = Vector2(1159.552, 120.32373)
 shape = SubResource("RectangleShape2D_pblcb")
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="Walls" unique_id=937143635]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D6" unique_id=1242989767]
-position = Vector2(16, 175)
+position = Vector2(14.755699, 123.16156)
 shape = SubResource("RectangleShape2D_pblcb")
 
 [node name="Door_A01" type="Area2D" parent="." unique_id=1632359889]
@@ -101,7 +101,7 @@ script = ExtResource("4_door")
 target_scene = "res://Lau Kah Kei/scenes/room_a01.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A01" unique_id=2031279185]
-position = Vector2(126, 205.51563)
+position = Vector2(128.49754, 197.51254)
 shape = SubResource("RectangleShape2D_n8bhm")
 
 [node name="Door_A02" type="Area2D" parent="." unique_id=692748971]
@@ -110,7 +110,7 @@ script = ExtResource("4_door")
 requires_key = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A02" unique_id=1390007619]
-position = Vector2(126, 205.51563)
+position = Vector2(127.44054, 196.35036)
 shape = SubResource("RectangleShape2D_n8bhm")
 
 [node name="Door_A03" type="Area2D" parent="." unique_id=1558001277]
@@ -119,7 +119,7 @@ script = ExtResource("4_door")
 target_scene = "res://Lau Kah Kei/scenes/room_a03.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A03" unique_id=1214433967]
-position = Vector2(126, 205.51563)
+position = Vector2(125.69454, 198.64767)
 shape = SubResource("RectangleShape2D_n8bhm")
 
 [node name="Door_A04" type="Area2D" parent="." unique_id=1533772663]
@@ -128,7 +128,7 @@ script = ExtResource("4_door")
 target_scene = "res://Lau Kah Kei/scenes/room_a04.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A04" unique_id=1899692544]
-position = Vector2(126, 205.51563)
+position = Vector2(127.0968, 198.64767)
 shape = SubResource("RectangleShape2D_n8bhm")
 
 [node name="Door_A05" type="Area2D" parent="." unique_id=1834789574]
@@ -137,7 +137,7 @@ script = ExtResource("4_door")
 target_scene = "res://Lau Kah Kei/scenes/room_a05.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A05" unique_id=325248676]
-position = Vector2(126, 205.51563)
+position = Vector2(130.88426, 199.21524)
 shape = SubResource("RectangleShape2D_n8bhm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=602888154]

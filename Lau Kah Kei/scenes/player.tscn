@@ -1,17 +1,15 @@
 [gd_scene format=3 uid="uid://daa5mjdacw602"]
 
-[ext_resource type="Texture2D" uid="uid://bdqs5yk3qq6cl" path="res://Lau Kah Kei/assets/icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cd3u0tlbgt444" path="res://Lau Kah Kei/scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bi8ia7jfdauiv" path="res://Lau Kah Kei/assets/image/charactor/kun_front.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://why2xocv6mbb" path="res://Lau Kah Kei/assets/image/charactor/kun_back.png" id="2_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://dfvj3sfw0n7ej" path="res://Lau Kah Kei/assets/image/charactor/kun_left.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://eu1qievn2j7d" path="res://Lau Kah Kei/assets/image/charactor/kun_right.png" id="5_smehm"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 53.600372
 
-[node name="Player" type="CharacterBody2D" unique_id=1213491095]
+[node name="Player" type="CharacterBody2D" unique_id=1213491095 groups=["player"]]
 script = ExtResource("1_g2els")
 tex_back = ExtResource("2_tuyoq")
 tex_front = ExtResource("2_qhqgy")
@@ -19,8 +17,8 @@ tex_left = ExtResource("4_fjrip")
 tex_right = ExtResource("5_smehm")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1276333923]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_3vyb7")
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=546158934]
 shape = SubResource("CircleShape2D_g2els")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://beywslfhu2r6x"]
 
 [ext_resource type="Texture2D" uid="uid://b7t58wq4rdrkx" path="res://Lau Kah Kei/assets/image/background/roomA03.png" id="1_qoqvm"]
-[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="2_4t2b5"]
+[ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="2_4t2b5"]
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_tfomb"]
 [ext_resource type="Texture2D" uid="uid://bjbji8lfuc2e5" path="res://Lau Kah Kei/assets/image/items/pictute.jpeg" id="4_ays5t"]
 [ext_resource type="Script" uid="uid://bq7c2ij3o4sq0" path="res://Lau Kah Kei/scripts/keepsake.gd" id="5_keep"]
