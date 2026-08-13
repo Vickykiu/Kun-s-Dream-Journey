@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://y70qvo014jrr"]
+
+[ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="1_dwfhp"]
+[ext_resource type="Script" uid="uid://q6hwe1hubeot" path="res://Lew Jia Jia/scripts/cabinet_ui.gd" id="1_xuri2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwfhp"]
+atlas = ExtResource("1_dwfhp")
+region = Rect2(1226.0396, 404.34918, 309.96045, 568.417)
+
+[node name="CabinetUI" type="CanvasLayer" unique_id=1543509939]
+script = ExtResource("1_xuri2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=162742422]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="CabinetImage" type="TextureRect" parent="." unique_id=1779644320]
+offset_left = 531.0
+offset_top = 40.0
+offset_right = 1494.0
+offset_bottom = 1026.0
+texture = SubResource("AtlasTexture_dwfhp")
+
+[node name="OpenButton" type="TextureButton" parent="." unique_id=380555531]
+offset_left = 726.0
+offset_top = 270.0
+offset_right = 1268.0
+offset_bottom = 923.0
+mouse_default_cursor_shape = 2
+
+[node name="CloseButton" type="Button" parent="." unique_id=984807295]
+offset_left = 1754.0
+offset_right = 1924.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="OpenButton" to="." method="_on_open_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

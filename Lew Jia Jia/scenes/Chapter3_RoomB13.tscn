@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d0k4n7vpvpakc" path="res://Lew Jia Jia/assets/RoomBackground.png" id="2_6vyrd"]
 [ext_resource type="Texture2D" uid="uid://csmncq3pinrkq" path="res://Lew Jia Jia/assets/Safe_Close.png" id="3_8dvhw"]
 [ext_resource type="Texture2D" uid="uid://ddy07efiwgjaa" path="res://Lew Jia Jia/assets/Safe_OpenEmpty.png" id="4_abvsn"]
-[ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dvhw"]
 size = Vector2(85.86051, 122.08992)
@@ -197,6 +197,13 @@ position = Vector2(2.7010498, -6.617798)
 scale = Vector2(0.99999946, 0.9999998)
 shape = SubResource("RectangleShape2D_e34y8")
 
+[node name="Area2D" type="Area2D" parent="ColourHint/Area2D" unique_id=1357152878]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColourHint/Area2D/Area2D" unique_id=1085756980]
+position = Vector2(2.7010498, -6.617798)
+scale = Vector2(0.99999946, 0.9999998)
+shape = SubResource("RectangleShape2D_e34y8")
+
 [node name="Desk" type="Sprite2D" parent="." unique_id=945186999]
 position = Vector2(-480.99997, 176.11552)
 scale = Vector2(-0.9548404, 0.9220798)
@@ -281,13 +288,13 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_2i7nh")
 
 [node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1119131353]
-position = Vector2(-1580, 883)
+position = Vector2(-1596, 871)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rhrtj")
 
 [node name="WallBottom1" type="CollisionShape2D" parent="Walls" unique_id=1848536701]
-position = Vector2(-328, 883)
+position = Vector2(-307, 877)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_3u2u8")
@@ -298,14 +305,12 @@ rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_5lmcl")
 
-[node name="door" type="CollisionShape2D" parent="Walls" unique_id=981796259]
-position = Vector2(-921.99994, 940)
-rotation = -1.5707964
-scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("RectangleShape2D_3u2u8")
-
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_player")]
 position = Vector2(-943, 450)
 scale = Vector2(2.2, 2.2)
 
 [connection signal="input_event" from="Safe/Area2D" to="." method="_on_safe_area_2d_input_event"]
+[connection signal="input_event" from="Cabinet/Area2D" to="." method="_on_cabinet_area_2d_input_event"]
+[connection signal="input_event" from="Clock/Area2D" to="." method="_on_clock_area_2d_input_event"]
+[connection signal="input_event" from="Calendar/Area2D" to="." method="_on_calendar_area_2d_input_event"]
+[connection signal="input_event" from="ColourHint/Area2D" to="." method="_on_colour_hint_area_2d_input_event"]
