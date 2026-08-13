@@ -19,7 +19,6 @@
 radius = 53.600372
 
 [node name="Player" type="CharacterBody2D" unique_id=1213491095 groups=["player"]]
-scale = Vector2(2, 2)
 script = ExtResource("1_g2els")
 tex_back = ExtResource("2_wggcd")
 tex_front = ExtResource("2_p8k7j")

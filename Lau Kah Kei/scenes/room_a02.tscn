@@ -84,18 +84,26 @@ scale = Vector2(0.2140333, 1)
 shape = SubResource("RectangleShape2D_yf3at")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_agw0v")]
-modulate = Color(1, 1, 1, 1)
 position = Vector2(563, 555)
+scale = Vector2(1.3, 1.3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=261518708]
 
 [node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=1683939986 groups=["prompt"]]
 visible = false
-offset_left = 440.0
-offset_top = 560.0
-offset_right = 712.0
-offset_bottom = 595.0
-theme_override_font_sizes/font_size = 24
+self_modulate = Color(1, 0.11764706, 0.07058824, 0.9882353)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -174.0
+offset_right = 141.0
+offset_bottom = -111.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
 text = "Press E to enter"
 horizontal_alignment = 1
 vertical_alignment = 1

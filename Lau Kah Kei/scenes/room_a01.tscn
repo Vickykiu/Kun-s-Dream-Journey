@@ -66,8 +66,8 @@ scale = Vector2(0.15252098, 0.76519823)
 shape = SubResource("RectangleShape2D_njoc6")
 
 [node name="Player" parent="Walls" unique_id=1213491095 instance=ExtResource("2_njoc6")]
-modulate = Color(1, 1, 1, 1)
 position = Vector2(577, 511)
+scale = Vector2(1.3, 1.3)
 
 [node name="down2" type="StaticBody2D" parent="Walls" unique_id=501478480]
 position = Vector2(208, 613.00006)
@@ -99,11 +99,19 @@ shape = SubResource("RectangleShape2D_w2h6d")
 
 [node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=1358612213 groups=["prompt"]]
 visible = false
-offset_left = 440.0
-offset_top = 560.0
-offset_right = 712.0
-offset_bottom = 595.0
-theme_override_font_sizes/font_size = 24
-text = "Press E to enter"
+self_modulate = Color(1, 0.11764706, 0.07058824, 0.9882353)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -107.0
+offset_right = 219.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
+text = "Press E to leave"
 horizontal_alignment = 1
 vertical_alignment = 1

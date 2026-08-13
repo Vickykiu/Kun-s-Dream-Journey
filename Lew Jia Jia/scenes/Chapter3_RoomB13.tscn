@@ -300,6 +300,6 @@ shape = SubResource("RectangleShape2D_5lmcl")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_player")]
 position = Vector2(-943, 450)
-scale = Vector2(2, 2)
+scale = Vector2(2.2, 2.2)
 
 [connection signal="input_event" from="Safe/Area2D" to="." method="_on_safe_area_2d_input_event"]

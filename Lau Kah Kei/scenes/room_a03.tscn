@@ -104,11 +104,12 @@ shape = SubResource("RectangleShape2D_4v2ly")
 
 [node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=835992243 groups=["prompt"]]
 visible = false
-offset_left = 440.0
-offset_top = 560.0
-offset_right = 712.0
-offset_bottom = 595.0
-theme_override_font_sizes/font_size = 24
+self_modulate = Color(1, 0.11764706, 0.07058824, 0.9882353)
+offset_left = 687.0
+offset_top = 906.0
+offset_right = 1027.0
+offset_bottom = 969.0
+theme_override_font_sizes/font_size = 42
 text = "Press E to enter"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -140,8 +141,8 @@ scale = Vector2(1.779336, -2.2075672)
 shape = SubResource("RectangleShape2D_nkx54")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_4t2b5")]
-modulate = Color(1, 1, 1, 1)
 position = Vector2(496, 526)
+scale = Vector2(1.3, 1.3)
 
 [node name="Closeup" type="CanvasLayer" parent="." unique_id=1581838967]
 
