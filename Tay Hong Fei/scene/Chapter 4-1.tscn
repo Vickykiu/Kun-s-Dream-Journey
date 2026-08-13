@@ -92,8 +92,8 @@ position = Vector2(759.5, 560)
 shape = SubResource("RectangleShape2D_vp1pg")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("3_i2b13")]
-modulate = Color(1, 1, 1, 1)
 position = Vector2(957, 552)
+scale = Vector2(1.5, 1.5)
 
 [node name="Label" type="Label" parent="." unique_id=1569631221]
 visible = false

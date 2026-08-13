@@ -62,6 +62,5 @@ polygon = PackedVector2Array(85, 54, 114, 174, 69, 230, 41, 271, 34, 388, 34, 45
 polygon = PackedVector2Array(35, 452, 127, 567, 212, 621, 314, 631, 315, 648, 353, 654, 355, 898, 324, 899, 80, 747, -52, 588)
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_ivdsx")]
-modulate = Color(1, 1, 1, 1)
 position = Vector2(392, 849)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(1, 1)
