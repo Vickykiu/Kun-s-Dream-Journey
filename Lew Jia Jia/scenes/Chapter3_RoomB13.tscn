@@ -297,14 +297,4 @@ rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_5lmcl")
 
-[connection signal="input_event" from="Safe/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="Cabinet/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="Clock/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="Calendar/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="Vent/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="ElectricBox/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="ColourHint/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="Desk/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="SheetMusic/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="Metronome/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="Book/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Safe/Area2D" to="." method="_on_safe_area_2d_input_event"]

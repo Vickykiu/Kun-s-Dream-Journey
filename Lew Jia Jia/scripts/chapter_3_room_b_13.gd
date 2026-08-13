@@ -1,39 +1,48 @@
 extends Node2D
 
 const SAFE_UI_SCENE = preload("res://Lew Jia Jia/scenes/safe_ui.tscn")
-var is_safe_opened: bool = false 
 
-# --- Node References ---
-# Reference to the original closed safe sprite
-@onready var safe_closed = $Safe 
+var is_safe_opened: bool = false
+var safe_ui_instance: Node = null
 
-# Reference to the newly created open safe sprite
-# (Make sure this node in your Scene Tree is named "SafeOpen")
-@onready var safe_open = $SafeOpen 
+@onready var safe_closed = $Safe
+@onready var safe_open = $SafeOpen
 
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		
-		# If the safe is already unlocked, prevent opening the password UI again
-		if is_safe_opened:
-			print("The safe is already open.")
-			return
-		
-		# Instantiate and show the Safe UI
-		var safe_ui = SAFE_UI_SCENE.instantiate()
-		add_child(safe_ui)
-		
-		# Listen to the 'safe_opened' signal from SafeUI
-		safe_ui.safe_opened.connect(_on_safe_unlocked)
+# Only Safe > Area2D should connect to this function
+func _on_safe_area_2d_input_event(
+	_viewport: Node,
+	event: InputEvent,
+	_shape_idx: int
+) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+
+			# Do not reopen the password UI after the safe is unlocked
+			if is_safe_opened:
+				print("The safe is already open.")
+				return
+
+			# Prevent multiple Safe UIs from appearing
+			if is_instance_valid(safe_ui_instance):
+				return
+
+			safe_ui_instance = SAFE_UI_SCENE.instantiate()
+			add_child(safe_ui_instance)
+
+			safe_ui_instance.safe_opened.connect(_on_safe_unlocked)
+			safe_ui_instance.tree_exited.connect(_on_safe_ui_closed)
 
 
-# Function triggered when the correct password is entered
-func _on_safe_unlocked():
+func _on_safe_unlocked() -> void:
 	is_safe_opened = true
-	
-	# Hide the closed safe sprite and display the open safe sprite
+
 	if safe_closed:
 		safe_closed.visible = false
+
 	if safe_open:
 		safe_open.visible = true
+
+
+func _on_safe_ui_closed() -> void:
+	safe_ui_instance = null
