@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dc58ct5flut45"]
+
+[ext_resource type="Script" uid="uid://cn2unp8nweqxd" path="res://Lew Jia Jia/scripts/colour_hint_ui.gd" id="1_snonf"]
+[ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_5657u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
+atlas = ExtResource("2_5657u")
+region = Rect2(375.6963, 403.72394, 269.90503, 197.72107)
+
+[node name="ColourHintUi" type="CanvasLayer" unique_id=1767306419]
+script = ExtResource("1_snonf")
+
+[node name="Background" type="ColorRect" parent="." unique_id=754317818]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="HintImage" type="TextureRect" parent="." unique_id=451699205]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 366.0
+offset_top = 145.0
+offset_right = -276.0
+offset_bottom = -158.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ydsvy")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1512717357]
+offset_left = 1754.0
+offset_right = 1924.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

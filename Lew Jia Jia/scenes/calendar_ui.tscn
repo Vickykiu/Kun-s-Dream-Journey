@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://binii3roaioa2"]
+
+[ext_resource type="Script" uid="uid://dunbul7o64iju" path="res://Lew Jia Jia/scripts/calendar_ui.gd" id="1_tx38j"]
+[ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_ho0v0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
+atlas = ExtResource("2_ho0v0")
+region = Rect2(953.16736, 37.530655, 301.2893, 315.9784)
+
+[node name="CalendarUI" type="CanvasLayer" unique_id=1767306419]
+script = ExtResource("1_tx38j")
+
+[node name="Background" type="ColorRect" parent="." unique_id=754317818]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="CalendarImage" type="TextureRect" parent="." unique_id=451699205]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 554.0
+offset_top = 145.0
+offset_right = -467.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ydsvy")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1512717357]
+offset_left = 1754.0
+offset_right = 1924.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

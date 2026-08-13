@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bh1hy5jn3qq2e"]
+
+[ext_resource type="Script" uid="uid://bjhl4f5aqtajf" path="res://Lew Jia Jia/scripts/clock_ui.gd" id="1_1850u"]
+[ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_g6caq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
+atlas = ExtResource("2_g6caq")
+region = Rect2(642.4629, -10.548813, 329.53503, 364.05786)
+
+[node name="ClockUI" type="CanvasLayer" unique_id=1767306419]
+script = ExtResource("1_1850u")
+
+[node name="Background" type="ColorRect" parent="." unique_id=754317818]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="ClockImage" type="TextureRect" parent="." unique_id=451699205]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 500.0
+offset_top = 104.0
+offset_right = -448.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ydsvy")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1512717357]
+offset_left = 1754.0
+offset_right = 1924.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
