@@ -1,20 +1,38 @@
-[gd_scene format=3 uid="uid://daa5mjdacw602"]
+[gd_scene format=3 uid="uid://cq7v2n8xk4rb1"]
 
 [ext_resource type="Script" uid="uid://cd3u0tlbgt444" path="res://Lau Kah Kei/scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://dn5xjcf02h6br" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/front1.png" id="2_p8k7j"]
 [ext_resource type="Texture2D" uid="uid://bi8ia7jfdauiv" path="res://Lau Kah Kei/assets/image/charactor/kun_front.png" id="2_qhqgy"]
-[ext_resource type="Texture2D" uid="uid://why2xocv6mbb" path="res://Lau Kah Kei/assets/image/charactor/kun_back.png" id="2_tuyoq"]
-[ext_resource type="Texture2D" uid="uid://dfvj3sfw0n7ej" path="res://Lau Kah Kei/assets/image/charactor/kun_left.png" id="4_fjrip"]
-[ext_resource type="Texture2D" uid="uid://eu1qievn2j7d" path="res://Lau Kah Kei/assets/image/charactor/kun_right.png" id="5_smehm"]
+[ext_resource type="Texture2D" uid="uid://cpg0qv1mf6vsk" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/back1.png" id="2_wggcd"]
+[ext_resource type="Texture2D" uid="uid://cumjpv8pc8nlt" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/left2.png" id="4_arwsg"]
+[ext_resource type="Texture2D" uid="uid://64gmhq44fj4f" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/left1.png" id="4_phusc"]
+[ext_resource type="Texture2D" uid="uid://c8f31x8kca2ci" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/back2.png" id="5_8dgid"]
+[ext_resource type="Texture2D" uid="uid://buuoe8t8du82" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/right1.png" id="5_d402q"]
+[ext_resource type="Texture2D" uid="uid://dtm0surj0rmqb" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/front2.png" id="5_n00ad"]
+[ext_resource type="Texture2D" uid="uid://bg0yu8ywmc5wk" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/front3.png" id="6_8dgid"]
+[ext_resource type="Texture2D" uid="uid://cykjp7ygv2mqj" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/back3.png" id="7_wggcd"]
+[ext_resource type="Texture2D" uid="uid://blsmxpgeepgho" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/right2.png" id="8_otc5t"]
+[ext_resource type="Texture2D" uid="uid://wuq11puivqg2" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/left3.png" id="10_d402q"]
+[ext_resource type="Texture2D" uid="uid://bf8wlwwuiqpip" path="res://Lau Kah Kei/assets/image/charactor_kun_x12/right3.png" id="12_arwsg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 53.600372
 
 [node name="Player" type="CharacterBody2D" unique_id=1213491095 groups=["player"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_g2els")
-tex_back = ExtResource("2_tuyoq")
-tex_front = ExtResource("2_qhqgy")
-tex_left = ExtResource("4_fjrip")
-tex_right = ExtResource("5_smehm")
+tex_back = ExtResource("2_wggcd")
+tex_front = ExtResource("2_p8k7j")
+tex_left = ExtResource("4_phusc")
+tex_right = ExtResource("5_d402q")
+tex_back_step_1 = ExtResource("5_8dgid")
+tex_front_step_1 = ExtResource("5_n00ad")
+tex_left_step_1 = ExtResource("4_arwsg")
+tex_right_step_1 = ExtResource("8_otc5t")
+tex_back_step_2 = ExtResource("7_wggcd")
+tex_front_step_2 = ExtResource("6_8dgid")
+tex_left_step_2 = ExtResource("10_d402q")
+tex_right_step_2 = ExtResource("12_arwsg")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1276333923]
 scale = Vector2(0.35, 0.35)

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://xj4jh3l4wom" path="res://Tay Hong Fei/asset/background/Chapter 4 Scene 2-2.png" id="2_kcai0"]
 [ext_resource type="Script" uid="uid://bu4camnm2hkm2" path="res://Tay Hong Fei/scripts/Crystal.gd" id="3_agad7"]
 [ext_resource type="Texture2D" uid="uid://iado2bv2n5sq" path="res://Tay Hong Fei/asset/background/Chapter 4 element.png" id="4_d4syc"]
-[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="5_ivdsx"]
+[ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="5_ivdsx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmnnq"]
 radius = 18.027756

@@ -10,28 +10,40 @@ extends CharacterBody2D
 # They can still be turned from code with face_direction().
 @export var player_controlled := true
 
-@export_group("Facing textures")
-# The 4 basics. These are the minimum a character needs.
+# Standing still: feet together. These 4 are the minimum a character
+# needs — without any walk art they just don't animate.
 @export var tex_back: Texture2D    # W
 @export var tex_front: Texture2D   # S
 @export var tex_left: Texture2D    # A
 @export var tex_right: Texture2D   # D
-# The 4 diagonals. Optional — leave them empty and the character falls
-# back to the nearest basic direction, so nothing breaks before the art
-# is drawn.
-@export var tex_back_left: Texture2D    # W + A
-@export var tex_back_right: Texture2D   # W + D
-@export var tex_front_left: Texture2D   # S + A
-@export var tex_front_right: Texture2D  # S + D
+
+# Walking, left foot forward.
+@export var tex_back_step_1: Texture2D
+@export var tex_front_step_1: Texture2D
+@export var tex_left_step_1: Texture2D
+@export var tex_right_step_1: Texture2D
+
+# Walking, right foot forward. Leave a slot empty and that direction
+# falls back to the standing pose for that half of the cycle, so the
+# character still animates while the art is only half drawn.
+@export var tex_back_step_2: Texture2D
+@export var tex_front_step_2: Texture2D
+@export var tex_left_step_2: Texture2D
+@export var tex_right_step_2: Texture2D
+
+# How fast the two feet swap over while walking.
+@export var steps_per_second := 6.0
+
+# Small bounce on top of the footsteps. Set bob_height to 0 to turn it off.
+@export var bob_speed := 12.0    # how fast the little bounce is
+@export var bob_height := 4.0    # how many pixels it bounces
 
 @onready var sprite: Sprite2D = $Sprite
 
-# Walking bob (fake footsteps without extra art).
-@export_group("Walk bob")
-@export var bob_speed := 12.0    # how fast the little bounce is
-@export var bob_height := 4.0    # how many pixels it bounces
+var _walk_time := 0.0
 var _bob_time := 0.0
 var _sprite_base_y := 0.0
+var _facing := Vector2.DOWN   # last direction we moved in
 
 # Cutscenes / puzzles can freeze the character with set_can_move(false).
 var can_move := true
@@ -70,43 +82,55 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	face_direction(direction)
+	_update_sprite(direction, delta)
 	_update_bob(direction, delta)
 
 
-# Turn the character to face a direction. Also usable from other scripts,
-# e.g. npc.face_direction(Vector2.LEFT).
+# Turn the character to face a direction without moving it. Usable from
+# other scripts too, e.g. npc.face_direction(Vector2.LEFT).
 func face_direction(direction: Vector2) -> void:
 	if direction == Vector2.ZERO:
-		return   # not moving: keep the last facing
-	var tex = _texture_for(direction)
+		return
+	_facing = direction
+	var standing = _poses_for(direction)[0]
+	if standing:
+		sprite.texture = standing
+
+
+func _update_sprite(direction, delta):
+	var poses = _poses_for(_facing if direction == Vector2.ZERO else direction)
+
+	if direction == Vector2.ZERO:
+		# Stopped: feet together, still facing wherever we last walked.
+		_walk_time = 0.0
+		if poses[0]:
+			sprite.texture = poses[0]
+		return
+
+	_facing = direction
+	_walk_time += delta
+
+	# Alternate the two steps. The standing pose is NOT part of the walk
+	# cycle — it only fills in for a step that has no art yet.
+	var step_1 = poses[1] if poses[1] else poses[0]
+	var step_2 = poses[2] if poses[2] else poses[0]
+	var on_step_2 = int(_walk_time * steps_per_second) % 2 == 1
+	var tex = step_2 if on_step_2 else step_1
 	if tex:
 		sprite.texture = tex
 
 
-# Split the full circle into 8 slices of 45 degrees. Slice 0 is right,
-# and the angle grows clockwise on screen because +Y points down in 2D.
-func _texture_for(direction: Vector2) -> Texture2D:
-	var slice = int(round(direction.angle() / (PI / 4.0))) % 8
-	if slice < 0:
-		slice += 8
-	match slice:
-		0: return tex_right
-		1: return _or(tex_front_right, tex_right)
-		2: return tex_front
-		3: return _or(tex_front_left, tex_left)
-		4: return tex_left
-		5: return _or(tex_back_left, tex_left)
-		6: return tex_back
-		7: return _or(tex_back_right, tex_right)
-	return null
-
-
-# Use the diagonal art if it exists, otherwise the nearest basic one.
-func _or(diagonal: Texture2D, basic: Texture2D) -> Texture2D:
-	if diagonal:
-		return diagonal
-	return basic
+# The 3 poses for this direction: [standing, step 1, step 2].
+# Diagonals (W+A etc.) use the left/right art, which reads better than
+# the back/front art when walking at an angle.
+func _poses_for(direction: Vector2) -> Array:
+	if direction.x < 0:
+		return [tex_left, tex_left_step_1, tex_left_step_2]
+	if direction.x > 0:
+		return [tex_right, tex_right_step_1, tex_right_step_2]
+	if direction.y < 0:
+		return [tex_back, tex_back_step_1, tex_back_step_2]
+	return [tex_front, tex_front_step_1, tex_front_step_2]
 
 
 func _update_bob(direction, delta):

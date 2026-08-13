@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://blmwyo0kiw1ab" path="res://Tay Hong Fei/asset/background/Chapter 4 scene1-1.png" id="1_pfh0e"]
 [ext_resource type="Script" uid="uid://ram16nq4imhv" path="res://Tay Hong Fei/scripts/chapter_4_1.gd" id="1_xav4v"]
-[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Tay Hong Fei/scene/player.tscn" id="3_i2b13"]
+[ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="3_i2b13"]
 [ext_resource type="Script" uid="uid://dn1t3yp80nwd1" path="res://Tay Hong Fei/scripts/door.gd" id="4_hbs4x"]
 [ext_resource type="PackedScene" uid="uid://bnt6p4fmnexi7" path="res://Tay Hong Fei/scene/Chapter 4-2.tscn" id="5_vp1pg"]
 [ext_resource type="Texture2D" uid="uid://dc23v2jja6k8q" path="res://Tay Hong Fei/asset/background/Chapter 4 scene 1 - 2.png" id="6_q01ba"]

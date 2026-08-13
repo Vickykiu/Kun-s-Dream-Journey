@@ -26,12 +26,12 @@ size = Vector2(93.6875, 138.96875)
 scale = Vector2(1.6264902, 1.7619134)
 
 [node name="Background" type="Sprite2D" parent="." unique_id=2087182392]
+modulate = Color(1, 0.72, 0.72, 1)
 position = Vector2(575.00006, 322)
 scale = Vector2(0.68869615, 0.68331563)
 texture = ExtResource("1_xswuy")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_pucmg")]
-modulate = Color(1, 1, 1, 1)
 position = Vector2(0, 400)
 
 [node name="Walls" type="Node2D" parent="." unique_id=449179086]
@@ -144,11 +144,19 @@ shape = SubResource("RectangleShape2D_n8bhm")
 
 [node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=520865212 groups=["prompt"]]
 visible = false
-offset_left = 440.0
-offset_top = 560.0
-offset_right = 712.0
-offset_bottom = 595.0
-theme_override_font_sizes/font_size = 24
+modulate = Color(1, 0.11650002, 0.06999999, 0.9882353)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -209.0
+offset_top = -208.0
+offset_right = 211.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
 text = "Press E to enter"
 horizontal_alignment = 1
 vertical_alignment = 1
