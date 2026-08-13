@@ -281,13 +281,13 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_2i7nh")
 
 [node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1119131353]
-position = Vector2(-1596, 648)
+position = Vector2(-1580, 883)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rhrtj")
 
 [node name="WallBottom1" type="CollisionShape2D" parent="Walls" unique_id=1848536701]
-position = Vector2(-320.00012, 632)
+position = Vector2(-328, 883)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_3u2u8")
@@ -297,6 +297,12 @@ position = Vector2(-326, 277)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_5lmcl")
+
+[node name="door" type="CollisionShape2D" parent="Walls" unique_id=981796259]
+position = Vector2(-921.99994, 940)
+rotation = -1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_3u2u8")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_player")]
 position = Vector2(-943, 450)
