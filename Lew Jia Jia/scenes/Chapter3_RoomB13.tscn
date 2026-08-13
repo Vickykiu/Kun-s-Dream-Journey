@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d0k4n7vpvpakc" path="res://Lew Jia Jia/assets/RoomBackground.png" id="2_6vyrd"]
 [ext_resource type="Texture2D" uid="uid://csmncq3pinrkq" path="res://Lew Jia Jia/assets/Safe_Close.png" id="3_8dvhw"]
 [ext_resource type="Texture2D" uid="uid://ddy07efiwgjaa" path="res://Lew Jia Jia/assets/Safe_OpenEmpty.png" id="4_abvsn"]
-[ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
+[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dvhw"]
 size = Vector2(85.86051, 122.08992)
@@ -288,13 +288,13 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_2i7nh")
 
 [node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1119131353]
-position = Vector2(-1596, 648)
+position = Vector2(-1596, 871)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rhrtj")
 
 [node name="WallBottom1" type="CollisionShape2D" parent="Walls" unique_id=1848536701]
-position = Vector2(-320.00012, 632)
+position = Vector2(-307, 877)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_3u2u8")
