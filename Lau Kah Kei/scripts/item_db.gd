@@ -35,13 +35,13 @@ const ITEMS := {
 		"name": "Anomaly Log USB",
 		"description": "Pulled from a hidden port on the side of the monitor room computer. One file sits on it: \"Loop record: attempt 114. Warning: core energy insufficient.\"",
 		"evidence": true,
-		"icon": "",
+		"icon": "res://Lau Kah Kei/assets/image/items/usb.png",
 	},
 	"key_b13": {
 		"name": "B-13 Key",
 		"description": "A rusted darkroom key from the monitor room drawer. The number B-13 is scratched into the metal.",
 		"evidence": false,
-		"icon": "",
+		"icon": "res://Lau Kah Kei/assets/image/items/key_b13.png",
 	},
 }
 

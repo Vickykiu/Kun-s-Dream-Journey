@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="4_door"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="5_dline"]
 [ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="6_rintr"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="7_calm"]
-[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="8_worr"]
-[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/dialogue/kun_determined.png" id="9_detr"]
-[ext_resource type="PackedScene" path="res://Lau Kah Kei/scenes/student_npc.tscn" id="10_stud"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="7_calm"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="8_worr"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="9_detr"]
+[ext_resource type="PackedScene" uid="uid://djddc3g7wvlk5" path="res://Lau Kah Kei/scenes/student_npc.tscn" id="10_stud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xswuy"]
 size = Vector2(1156.5, 274)
@@ -168,7 +168,6 @@ shape = SubResource("RectangleShape2D_n8bhm")
 
 [node name="Student1" parent="." unique_id=974302006 instance=ExtResource("10_stud")]
 position = Vector2(215.18727, 499.457)
-tint = Color(1, 1, 1, 1)
 
 [node name="Student2" parent="." unique_id=84364272 instance=ExtResource("10_stud")]
 position = Vector2(585.3094, 521.0245)

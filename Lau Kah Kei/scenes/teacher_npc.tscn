@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Lau Kah Kei/scripts/npc_teacher.gd" id="1_teach"]
+[ext_resource type="Texture2D" uid="uid://citywogksujpl" path="res://Lau Kah Kei/assets/image/charactor/teacher_npc/teacher_front.png" id="2_front"]
+[ext_resource type="Texture2D" uid="uid://bylp2vfjpcy1i" path="res://Lau Kah Kei/assets/image/charactor/teacher_npc/teacher_back.png" id="3_back"]
+[ext_resource type="Texture2D" uid="uid://d31erwe7hdxdd" path="res://Lau Kah Kei/assets/image/charactor/teacher_npc/teacher_left.png" id="4_left"]
+[ext_resource type="Texture2D" uid="uid://bp2hg5bk43mv7" path="res://Lau Kah Kei/assets/image/charactor/teacher_npc/teacher_right.png" id="5_right"]
+[ext_resource type="Texture2D" uid="uid://cg8hl0mka0gjd" path="res://Lau Kah Kei/assets/image/charactor/teacher_npc/teacher_left1.png" id="6_left1"]
+[ext_resource type="Texture2D" uid="uid://bi23umn75myqs" path="res://Lau Kah Kei/assets/image/charactor/teacher_npc/teacher_right1.png" id="7_right1"]
+[ext_resource type="Texture2D" uid="uid://c4r0i2p06lick" path="res://Lau Kah Kei/assets/image/scene2pic/teacher_face.png" id="8_face"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_teach"]
+radius = 45.0
+
+[node name="Teacher" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_teach")
+tex_front = ExtResource("2_front")
+tex_back = ExtResource("3_back")
+tex_left = ExtResource("4_left")
+tex_right = ExtResource("5_right")
+tex_left_step = ExtResource("6_left1")
+tex_right_step = ExtResource("7_right1")
+caught_face = ExtResource("8_face")
+caught_text = "Training is mandatory."
+caught_scene = "res://Lau Kah Kei/scenes/corridor.tscn"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.42, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_teach")
+disabled = true

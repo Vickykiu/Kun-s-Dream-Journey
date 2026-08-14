@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="6_inter"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="7_dline"]
 [ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="8_rintr"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="9_calm"]
-[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="10_worr"]
-[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/dialogue/kun_determined.png" id="11_detr"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="9_calm"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="10_worr"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="11_detr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bscv6"]
 size = Vector2(183.08044, 331.39825)

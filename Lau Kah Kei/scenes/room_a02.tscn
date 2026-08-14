@@ -3,15 +3,171 @@
 [ext_resource type="Texture2D" uid="uid://d0cfc6chb5t28" path="res://Lau Kah Kei/assets/image/background/roomA02.png" id="1_vff6y"]
 [ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="2_agw0v"]
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_x83ys"]
+[ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="4_inter"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="5_dline"]
+[ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="6_rintr"]
+[ext_resource type="Script" uid="uid://csy1ohd3qpi7m" path="res://Lau Kah Kei/scripts/chapter_end.gd" id="7_cend"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="8_calm"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="9_worr"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="10_detr"]
+[ext_resource type="Texture2D" uid="uid://c1n7io7mvpp5i" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_scared.png.png" id="11_scar"]
+[ext_resource type="Texture2D" uid="uid://bai1i11eogv8s" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_sad.png" id="12_sad"]
+[ext_resource type="Script" path="res://Lau Kah Kei/scripts/video_puzzle.gd" id="13_puzz"]
+[ext_resource type="Texture2D" uid="uid://ohde74did3yw" path="res://Lau Kah Kei/assets/image/scene2pic/cctv_a.png" id="14_cctva"]
+[ext_resource type="Texture2D" uid="uid://cq3powgl1k1s2" path="res://Lau Kah Kei/assets/image/scene2pic/cctv_b.png" id="15_cctvb"]
+[ext_resource type="Texture2D" uid="uid://bb188qjl0vcjs" path="res://Lau Kah Kei/assets/image/scene2pic/cctv_c.png" id="16_cctvc"]
+[ext_resource type="Texture2D" uid="uid://dj24qwgy3pn3t" path="res://Lau Kah Kei/assets/image/scene2pic/cctv_c_zoom.png" id="17_zoom"]
+[ext_resource type="PackedScene" path="res://Lau Kah Kei/scenes/teacher_npc.tscn" id="18_teach"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_64ua1"]
-size = Vector2(298, 573)
+[sub_resource type="Resource" id="Resource_pc7"]
+resource_name = "That was Ricardo. That was last night."
+script = ExtResource("5_dline")
+text = "That was Ricardo. That was last night, three doors from where I was asleep."
+portrait = ExtResource("11_scar")
+
+[sub_resource type="Resource" id="Resource_pc9"]
+resource_name = "The side desk. That bottom drawer is the"
+script = ExtResource("5_dline")
+text = "The side desk. That bottom drawer is the only thing in here I haven't opened."
+portrait = ExtResource("10_detr")
+
+[sub_resource type="Resource" id="Resource_pc8"]
+resource_name = "...There's a drive plugged into the side"
+script = ExtResource("5_dline")
+text = "...There's a drive plugged into the side of the tower. No label on it."
+portrait = ExtResource("10_detr")
+
+[sub_resource type="Resource" id="Resource_drw1"]
+resource_name = "The bottom drawer of the side desk isn't"
+script = ExtResource("5_dline")
+text = "The bottom drawer of the side desk isn't locked."
+portrait = ExtResource("8_calm")
+
+[sub_resource type="Resource" id="Resource_drw2"]
+resource_name = "Pens, dead batteries, a roll of tape... "
+script = ExtResource("5_dline")
+text = "Pens, dead batteries, a roll of tape... and a key pushed right to the back."
+portrait = ExtResource("8_calm")
+
+[sub_resource type="Resource" id="Resource_drw3"]
+resource_name = "Heavier than a dorm key. Older. There's "
+script = ExtResource("5_dline")
+text = "Heavier than a dorm key. Older. There's a number scratched into the metal."
+portrait = ExtResource("9_worr")
+
+[sub_resource type="Resource" id="Resource_drw4"]
+resource_name = "B-13. The door they dragged him through."
+script = ExtResource("5_dline")
+text = "B-13. The door they dragged him through."
+portrait = ExtResource("10_detr")
+
+[sub_resource type="Resource" id="Resource_drw5"]
+resource_name = "Pens and dead batteries. Nothing else in"
+script = ExtResource("5_dline")
+text = "Pens and dead batteries. Nothing else in there."
+portrait = ExtResource("8_calm")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drw"]
+size = Vector2(210, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cover"]
+size = Vector2(112, 208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg3jq"]
+size = Vector2(274.4335, 626.12604)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf3at"]
-size = Vector2(21.599112, 20)
+size = Vector2(23.2467, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2l36"]
 size = Vector2(124.25, 135.5)
+
+[sub_resource type="Resource" id="Resource_pc1"]
+resource_name = "The chair is still warm. Cold coffee, a "
+script = ExtResource("5_dline")
+text = "The chair is still warm. Cold coffee, a keyboard worn smooth."
+portrait = ExtResource("8_calm")
+
+[sub_resource type="Resource" id="Resource_pc2"]
+resource_name = "Eight camera feeds. Corridor A, over and"
+script = ExtResource("5_dline")
+text = "Eight camera feeds. Corridor A, over and over, from every angle."
+portrait = ExtResource("9_worr")
+
+[sub_resource type="Resource" id="Resource_pc3"]
+resource_name = "...There's a drive plugged into the side"
+script = ExtResource("5_dline")
+text = "Three clips saved on the desktop. Someone cut last night up and shuffled it."
+portrait = ExtResource("10_detr")
+
+[sub_resource type="Resource" id="Resource_pc6"]
+resource_name = "The feeds just keep looping. Corridor A,"
+script = ExtResource("5_dline")
+text = "The feeds just keep looping. Corridor A, empty, over and over."
+portrait = ExtResource("8_calm")
+
+[sub_resource type="Resource" id="Resource_pc4"]
+resource_name = "One file on it. \"Loop record: attempt 11"
+script = ExtResource("5_dline")
+text = "One file on it. \"Loop record: attempt 114. Warning: core energy insufficient.\""
+portrait = ExtResource("9_worr")
+
+[sub_resource type="Resource" id="Resource_pc5"]
+resource_name = "Attempt one hundred and fourteen. Attemp"
+script = ExtResource("5_dline")
+text = "Attempt one hundred and fourteen. Attempt at what?"
+portrait = ExtResource("11_scar")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pc"]
+size = Vector2(320, 130)
+
+[sub_resource type="Resource" id="Resource_cab1"]
+resource_name = "A filing cabinet. One folder for every t"
+script = ExtResource("5_dline")
+text = "A filing cabinet. One folder for every trainee in the building."
+portrait = ExtResource("8_calm")
+
+[sub_resource type="Resource" id="Resource_cab2"]
+resource_name = "Every name on every tab has been blacked"
+script = ExtResource("5_dline")
+text = "Every name on every tab has been blacked out. All of them."
+portrait = ExtResource("9_worr")
+
+[sub_resource type="Resource" id="Resource_cab3"]
+resource_name = "They don't lose people here. They erase "
+script = ExtResource("5_dline")
+text = "They don't lose people here. They erase them."
+portrait = ExtResource("11_scar")
+
+[sub_resource type="Resource" id="Resource_cab4"]
+resource_name = "Drawers full of people with no names lef"
+script = ExtResource("5_dline")
+text = "Drawers full of people with no names left."
+portrait = ExtResource("12_sad")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cab"]
+size = Vector2(190, 210)
+
+[sub_resource type="Resource" id="Resource_intro1"]
+resource_name = "A-02. Eight screens, and every one of th"
+script = ExtResource("5_dline")
+text = "A-02. Eight screens, and every one of them is pointed at this floor."
+portrait = ExtResource("8_calm")
+
+[sub_resource type="Resource" id="Resource_intro3"]
+resource_name = "And somebody is still in here, walking t"
+script = ExtResource("5_dline")
+text = "And somebody is still in here, walking the floor. Stay out of his eyeline."
+portrait = ExtResource("11_scar")
+
+[sub_resource type="Resource" id="Resource_intro2"]
+resource_name = "Somebody sat in this room and watched Ri"
+script = ExtResource("5_dline")
+text = "Somebody sat in this room and watched Ricardo walk out. And did nothing."
+portrait = ExtResource("9_worr")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2icw"]
+size = Vector2(195.43817, 665.08923)
 
 [node name="RoomA02" type="Node2D" unique_id=1807766860]
 position = Vector2(75, 35)
@@ -24,29 +180,19 @@ texture = ExtResource("1_vff6y")
 
 [node name="Walls" type="Node2D" parent="." unique_id=1968501532]
 
-[node name="left" type="StaticBody2D" parent="Walls" unique_id=658059548]
+[node name="right" type="StaticBody2D" parent="Walls" unique_id=1949626130]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/left" unique_id=1772372075]
-position = Vector2(-19, 329.99997)
-rotation = 0.27676153
-shape = SubResource("RectangleShape2D_64ua1")
-
-[node name="right" type="StaticBody2D" parent="Walls" unique_id=642713188]
-position = Vector2(1230, 608)
-rotation = 2.9602587
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/right" unique_id=1805126421]
-position = Vector2(11.3563385, 304.03293)
-rotation = -0.14912373
-shape = SubResource("RectangleShape2D_64ua1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/right" unique_id=747780090]
+position = Vector2(1139.4071, 348.49628)
+shape = SubResource("RectangleShape2D_kg3jq")
 
 [node name="up" type="StaticBody2D" parent="Walls" unique_id=336726576]
 position = Vector2(570.00006, 57)
 scale = Vector2(34.4854, 11.838301)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/up" unique_id=1576145855]
-position = Vector2(0.695945, 2.7875621)
-scale = Vector2(1.2231865, 0.9630769)
+position = Vector2(-0.31170845, 2.7875624)
+scale = Vector2(1.2231864, 0.96307683)
 shape = SubResource("RectangleShape2D_yf3at")
 
 [node name="down" type="StaticBody2D" parent="Walls" unique_id=116155580]
@@ -55,15 +201,6 @@ scale = Vector2(28.460642, 9.620207)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down" unique_id=225406614]
 position = Vector2(0.4919064, 9.771097)
-shape = SubResource("RectangleShape2D_yf3at")
-
-[node name="bed" type="StaticBody2D" parent="Walls" unique_id=498437755]
-position = Vector2(756, 236.00003)
-scale = Vector2(28.950562, 12.237919)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/bed" unique_id=1542789670]
-position = Vector2(5.630288, -0.40856844)
-scale = Vector2(0.15252098, 0.76519823)
 shape = SubResource("RectangleShape2D_yf3at")
 
 [node name="down2" type="StaticBody2D" parent="Walls" unique_id=2133201105]
@@ -116,3 +253,88 @@ target_scene = "res://Lau Kah Kei/scenes/corridor.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door" unique_id=389341499]
 position = Vector2(564, 608)
 shape = SubResource("RectangleShape2D_l2l36")
+
+[node name="computer" type="Area2D" parent="." unique_id=1621140850]
+script = ExtResource("4_inter")
+prompt_text = "Press E to use the computer"
+lines = Array[ExtResource("5_dline")]([SubResource("Resource_pc1"), SubResource("Resource_pc2"), SubResource("Resource_pc3")])
+lines_after = Array[ExtResource("5_dline")]([SubResource("Resource_pc6")])
+speaker_name = "Kun"
+flag_id = "a02_computer_searched"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="computer" unique_id=1641945252]
+position = Vector2(580, 265)
+shape = SubResource("RectangleShape2D_pc")
+
+[node name="files" type="Area2D" parent="." unique_id=1426316364]
+visible = false
+script = ExtResource("4_inter")
+prompt_text = "Press E to look at the filing cabinet"
+lines = Array[ExtResource("5_dline")]([SubResource("Resource_cab1"), SubResource("Resource_cab2"), SubResource("Resource_cab3")])
+lines_after = Array[ExtResource("5_dline")]([SubResource("Resource_cab4")])
+speaker_name = "Kun"
+flag_id = "a02_files_searched"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="files" unique_id=262767832]
+position = Vector2(215, 330)
+shape = SubResource("RectangleShape2D_cab")
+
+[node name="RoomIntro" type="Node" parent="." unique_id=341871633]
+script = ExtResource("6_rintr")
+lines = Array[ExtResource("5_dline")]([SubResource("Resource_intro1"), SubResource("Resource_intro2"), SubResource("Resource_intro3")])
+flag_id = "a02_entered"
+
+[node name="drawer" type="Area2D" parent="."]
+script = ExtResource("4_inter")
+prompt_text = "Press E to open the drawer"
+lines = Array[ExtResource("5_dline")]([SubResource("Resource_drw1"), SubResource("Resource_drw2")])
+lines_after = Array[ExtResource("5_dline")]([SubResource("Resource_drw5")])
+speaker_name = "Kun"
+item_id = "key_b13"
+pickup_lines = Array[ExtResource("5_dline")]([SubResource("Resource_drw3"), SubResource("Resource_drw4")])
+requires_flag = "a02_video_solved"
+flag_id = "a02_drawer_searched"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="drawer"]
+position = Vector2(945, 480)
+shape = SubResource("RectangleShape2D_drw")
+
+[node name="VideoPuzzle" type="CanvasLayer" parent="."]
+script = ExtResource("13_puzz")
+clip_1 = ExtResource("14_cctva")
+clip_2 = ExtResource("15_cctvb")
+clip_3 = ExtResource("16_cctvc")
+freeze_frame = ExtResource("17_zoom")
+freeze_subtitle = "Don't—"
+title_text = "PLAYBACK ORDER"
+hint_text = "Drag a clip onto another to swap them, or press 1-3"
+wrong_text = "Out of order. Check the timestamps."
+found_lines = Array[ExtResource("5_dline")]([SubResource("Resource_pc7"), SubResource("Resource_pc8")])
+item_id = "anomaly_usb"
+reaction_lines = Array[ExtResource("5_dline")]([SubResource("Resource_pc4"), SubResource("Resource_pc5"), SubResource("Resource_pc9")])
+speaker_name = "Kun"
+flag_id = "a02_video_solved"
+
+[node name="ChapterEnd" type="CanvasLayer" parent="." unique_id=1057629720]
+script = ExtResource("7_cend")
+trigger_item = "key_b13"
+subtitle = "I have to see B-13."
+next_scene = "res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn"
+
+[node name="left" type="StaticBody2D" parent="." unique_id=579248272]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left" unique_id=413796418]
+position = Vector2(2.6778088, 324.74976)
+shape = SubResource("RectangleShape2D_v2icw")
+
+[node name="Cover_Cabinet" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cover_Cabinet"]
+position = Vector2(190, 320)
+shape = SubResource("RectangleShape2D_cover")
+
+[node name="Teacher" parent="." instance=ExtResource("18_teach")]
+position = Vector2(350, 470)
+patrol_distance = 400.0
+
+[connection signal="finished" from="computer" to="VideoPuzzle" method="open"]

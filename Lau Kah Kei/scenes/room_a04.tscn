@@ -6,21 +6,17 @@
 [ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="4_inter"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="5_dline"]
 [ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="6_rintr"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="7_calm"]
-[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="8_worr"]
-[ext_resource type="Texture2D" uid="uid://bai1i11eogv8s" path="res://Lau Kah Kei/assets/image/dialogue/kun_sad.png" id="9_sad"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="7_calm"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="8_worr"]
+[ext_resource type="Texture2D" uid="uid://bai1i11eogv8s" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_sad.png" id="9_sad"]
 
-[sub_resource type="Resource" id="Resource_intro1"]
-resource_name = "A-04. Stripped to the boards - no bed, n"
-script = ExtResource("5_dline")
-text = "A-04. Stripped to the boards — no bed, no locker, nothing."
-portrait = ExtResource("7_calm")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fru3a"]
+size = Vector2(298, 573)
 
-[sub_resource type="Resource" id="Resource_intro2"]
-resource_name = "Just one picture still hanging on the wa"
-script = ExtResource("5_dline")
-text = "Just one picture still hanging on the wall."
-portrait = ExtResource("8_worr")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu6v0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdf3s"]
+size = Vector2(134.5, 151)
 
 [sub_resource type="Resource" id="Resource_pic1"]
 resource_name = "A photo of a student in uniform. Smiling"
@@ -49,13 +45,17 @@ portrait = ExtResource("9_sad")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pic"]
 size = Vector2(220, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fru3a"]
-size = Vector2(298, 573)
+[sub_resource type="Resource" id="Resource_intro1"]
+resource_name = "A-04. Stripped to the boards — no bed, n"
+script = ExtResource("5_dline")
+text = "A-04. Stripped to the boards — no bed, no locker, nothing."
+portrait = ExtResource("7_calm")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu6v0"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdf3s"]
-size = Vector2(134.5, 151)
+[sub_resource type="Resource" id="Resource_intro2"]
+resource_name = "Just one picture still hanging on the wa"
+script = ExtResource("5_dline")
+text = "Just one picture still hanging on the wall."
+portrait = ExtResource("8_worr")
 
 [node name="RoomA04" type="Node2D" unique_id=1384679097]
 position = Vector2(92, 29.000004)
@@ -131,7 +131,7 @@ target_scene = "res://Lau Kah Kei/scenes/corridor.tscn"
 position = Vector2(573, 576)
 shape = SubResource("RectangleShape2D_fdf3s")
 
-[node name="wall_picture" type="Area2D" parent="."]
+[node name="wall_picture" type="Area2D" parent="." unique_id=593596321]
 script = ExtResource("4_inter")
 prompt_text = "Press E to look at the picture"
 lines = Array[ExtResource("5_dline")]([SubResource("Resource_pic1"), SubResource("Resource_pic2"), SubResource("Resource_pic3")])
@@ -139,14 +139,13 @@ lines_after = Array[ExtResource("5_dline")]([SubResource("Resource_pic4")])
 speaker_name = "Kun"
 flag_id = "a04_picture_searched"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_picture"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_picture" unique_id=784526578]
 position = Vector2(244, 270)
 shape = SubResource("RectangleShape2D_pic")
 
-[node name="RoomIntro" type="Node" parent="."]
+[node name="RoomIntro" type="Node" parent="." unique_id=301016897]
 script = ExtResource("6_rintr")
 lines = Array[ExtResource("5_dline")]([SubResource("Resource_intro1"), SubResource("Resource_intro2")])
-speaker_name = "Kun"
 flag_id = "a04_entered"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1729942443]

@@ -11,7 +11,13 @@ extends Area2D
 # If you need something extra to happen (open a puzzle, play a sound),
 # connect to the `interacted` signal instead of editing this file.
 
+# Fires the moment E is pressed, before anything is shown.
 signal interacted(node)
+
+# Fires when the whole interaction is over: lines read, item pocketed. Use
+# this for anything that must not overlap the dialogue box — a puzzle, a
+# cutscene. In the editor: Node tab -> finished -> pick the node to call.
+signal finished(node)
 
 @export var prompt_text: String = "Press E to look"
 
@@ -71,6 +77,16 @@ signal interacted(node)
 # scene change. Needed for anything that hands out an item or a key clue.
 @export var flag_id: String = ""
 
+# Optional — a flag from GameState that has to be set before this object
+# does anything at all. Use it to stop the player walking past the puzzle:
+# the drawer with the B-13 key stays shut until the tape has been watched,
+# so the evidence on that computer can't be skipped.
+@export var requires_flag: String = ""
+
+# Shown while `requires_flag` is still unset. Leave it empty and the object
+# gives nothing away at all — no prompt, as if there were nothing there.
+@export var locked_text: String = ""
+
 # Can only be looked at once. After that the prompt stops appearing.
 @export var one_shot: bool = false
 
@@ -101,7 +117,7 @@ func _on_body_entered(body):
 		return
 	_player_inside = true
 	if not _is_used_up():
-		_show_prompt(prompt_text)
+		_show_prompt(_current_prompt())
 
 
 func _on_body_exited(body):
@@ -118,7 +134,7 @@ func _unhandled_input(event):
 		return
 	if ItemView.is_active() or Dialogue.is_active() or Inventory.is_open():
 		return
-	if _is_used_up():
+	if _is_used_up() or _is_locked():
 		return
 	_interact()
 
@@ -157,6 +173,8 @@ func _interact():
 			Dialogue.show_lines(after, portrait, speaker_name)
 			await Dialogue.finished
 
+	finished.emit(self)
+
 	if hide_after:
 		hide()
 		set_deferred("monitoring", false)
@@ -164,7 +182,7 @@ func _interact():
 
 	# Still standing on it? Put the prompt back.
 	if _player_inside and not _is_used_up():
-		_show_prompt(prompt_text)
+		_show_prompt(_current_prompt())
 
 
 func _hide_item_node() -> void:
@@ -184,6 +202,18 @@ func _item_texture() -> Texture2D:
 	return null
 
 
+# Waiting on something else to happen first, e.g. a puzzle being solved.
+func _is_locked() -> bool:
+	return requires_flag != "" and not GameState.has_flag(requires_flag)
+
+
+# While it's locked it either says so or says nothing at all.
+func _current_prompt() -> String:
+	if _is_locked():
+		return locked_text
+	return prompt_text
+
+
 func _was_looked_at() -> bool:
 	if flag_id != "":
 		return GameState.has_flag(flag_id)
@@ -195,11 +225,17 @@ func _is_used_up() -> bool:
 
 
 # Same shared prompt Label as the doors — a Label in the "prompt" group.
+# Empty text hides it instead of flashing an empty bar: that's how a locked
+# object with no `locked_text` stays invisible.
 func _show_prompt(text: String) -> void:
 	var label = get_tree().get_first_node_in_group("prompt")
-	if label:
-		label.text = text
-		label.show()
+	if not label:
+		return
+	if text == "":
+		label.hide()
+		return
+	label.text = text
+	label.show()
 
 
 func _hide_prompt() -> void:
