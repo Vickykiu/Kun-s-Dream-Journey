@@ -171,7 +171,8 @@ GameState.has_item("anomaly_usb")       # 结局 3 想确认玩家拿过 U盘
 - [x] 统一拾取流程（放大看一次 → 再按 E 才进背包）— `scripts/pickup.gd` + `scripts/item_view.gd`
 - [x] GameState 加证据计数 + 旗标（记住枕头翻过了、抽屉开过了）
 - [x] 进房间自动台词（只播第一次）— `scripts/room_intro.gd`
-- [ ] 走廊呆滞学员 NPC + 重复台词
+- [x] 走廊呆滞学员 NPC + 重复台词 — `scripts/npc_student.gd` + `scripts/float_text.gd`
+      （不能对话，只会自己走来走去、头顶冒字。`player.gd` 没动过）
 - [x] A-03 床铺 → 信物证据（调查床 → 照片放大 → 翻面 → 进背包）
 - [x] A-05 乐器堆 → 生锈钥匙 + 进房间的环顾台词
 - [x] 补 Door_A02 的 target_scene
