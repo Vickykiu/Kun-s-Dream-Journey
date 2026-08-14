@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" uid="uid://bx7m2fq9lte04" path="res://Lau Kah Kei/scripts/pickup.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
+size = Vector2(80, 80)
+
+[node name="Pickup" type="Area2D"]
+script = ExtResource("1_script")
+prompt_text = "Press E to pick up"
+speaker_name = "Kun"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_area")

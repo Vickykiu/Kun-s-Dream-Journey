@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
+size = Vector2(120, 120)
+
+[node name="Interactable" type="Area2D"]
+script = ExtResource("1_script")
+prompt_text = "Press E to look"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_area")

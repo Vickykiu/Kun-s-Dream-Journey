@@ -110,12 +110,15 @@ func _update_sprite(direction, delta):
 	_facing = direction
 	_walk_time += delta
 
-	# Alternate the two steps. The standing pose is NOT part of the walk
-	# cycle — it only fills in for a step that has no art yet.
-	var step_1 = poses[1] if poses[1] else poses[0]
-	var step_2 = poses[2] if poses[2] else poses[0]
-	var on_step_2 = int(_walk_time * steps_per_second) % 2 == 1
-	var tex = step_2 if on_step_2 else step_1
+	# standing, step 1, standing, step 2 — the standing pose comes back
+	# between every stride, and that neutral frame is what reads as a
+	# footfall. Flipping straight from one step to the other (which is what
+	# this used to do) looks like rocking on the spot, not walking. Same
+	# cycle the students in the corridor walk on, see npc_student.gd.
+	var cycle := [poses[0], poses[1], poses[0], poses[2]]
+	var tex = cycle[int(_walk_time * steps_per_second) % cycle.size()]
+	if not tex:
+		tex = poses[0]     # this direction has no step art yet
 	if tex:
 		sprite.texture = tex
 

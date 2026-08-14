@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="2_njoc6"]
 [ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="2_p3xa7"]
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_w2h6d"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="5_0poud"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="5_0poud"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="7_dline"]
 [ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="8_rintr"]
-[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="9_worr"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="9_worr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjmpr"]
 size = Vector2(298, 573)
@@ -17,6 +17,18 @@ size = Vector2(17.62254, 16.617521)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2h6d"]
 size = Vector2(134.5, 151)
+
+[sub_resource type="Resource" id="Resource_intro1"]
+resource_name = "A-01. Bare walls, cracked floor, one iro"
+script = ExtResource("7_dline")
+text = "A-01. Bare walls, cracked floor, one iron bed."
+portrait = ExtResource("5_0poud")
+
+[sub_resource type="Resource" id="Resource_intro2"]
+resource_name = "No bag, no shoes, nothing anyone left be"
+script = ExtResource("7_dline")
+text = "No bag, no shoes, nothing anyone left behind. Nobody lives in here."
+portrait = ExtResource("9_worr")
 
 [sub_resource type="Resource" id="Resource_6joha"]
 resource_name = "A thin mattress and a flat pillow. No sh"
@@ -35,18 +47,6 @@ resource_name = "A mattress, and a dent in a pillow. That"
 script = ExtResource("7_dline")
 text = "A mattress, and a dent in a pillow. That's all this room has left."
 portrait = ExtResource("5_0poud")
-
-[sub_resource type="Resource" id="Resource_intro1"]
-resource_name = "A-01. Bare walls, cracked floor, one iro"
-script = ExtResource("7_dline")
-text = "A-01. Bare walls, cracked floor, one iron bed."
-portrait = ExtResource("5_0poud")
-
-[sub_resource type="Resource" id="Resource_intro2"]
-resource_name = "No bag, no shoes, nothing anyone left be"
-script = ExtResource("7_dline")
-text = "No bag, no shoes, nothing anyone left behind. Nobody lives in here."
-portrait = ExtResource("9_worr")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksn05"]
 size = Vector2(106.79706, 203.68137)
@@ -155,10 +155,9 @@ text = "Press E to leave"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RoomIntro" type="Node" parent="."]
+[node name="RoomIntro" type="Node" parent="." unique_id=1339015362]
 script = ExtResource("8_rintr")
 lines = Array[ExtResource("7_dline")]([SubResource("Resource_intro1"), SubResource("Resource_intro2")])
-speaker_name = "Kun"
 flag_id = "a01_entered"
 
 [node name="bed2_dialogue" type="Area2D" parent="." unique_id=1117759354]
