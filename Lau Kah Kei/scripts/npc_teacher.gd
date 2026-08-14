@@ -30,16 +30,30 @@ signal caught
 @export var tex_left_step: Texture2D      # optional, mid-stride
 @export var tex_right_step: Texture2D
 @export var steps_per_second := 4.0
+
+# He wears a coat down to his boots, so swapping walk frames barely shows.
+# The bob is what actually reads as walking on a figure like this — leave it
+# on even after there is real stride art.
+@export var bob_height := 5.0
+@export var bob_speed := 9.0
+
 @export var tint := Color(1, 1, 1, 1)
 
 @export_group("Patrol")
-# How far he walks before turning back, along X. He starts at the left end.
-@export var patrol_distance := 400.0
+# How far he walks before turning back, along X, in the same units you see
+# on the node in the editor. Positive means he starts where you placed him
+# and walks right; negative means he walks left first. Use the sign to keep
+# his opening sweep pointed away from wherever the player comes in.
+@export var patrol_distance := 200.0
 @export var speed := 90.0
 
 # How long he stands at each end. This is the dangerous part: he spends it
 # looking at the room instead of along it.
 @export var look_around_time := 1.8
+
+# He starts with his back to the room for this long, so walking in never
+# means walking straight into his eyeline.
+@export var start_delay := 1.5
 
 @export_group("Eyes")
 # While he is walking he is only looking where he is going: a narrow beam
@@ -70,7 +84,8 @@ signal caught
 
 @onready var _sprite: Sprite2D = $Sprite
 
-var _origin_x := 0.0
+var _lane_left := 0.0
+var _lane_right := 0.0
 var _heading := 1.0                       # +1 walking right, -1 walking left
 var _facing := Vector2.RIGHT              # where the cone points
 var _looking := false                     # standing at an end, facing the room
@@ -79,6 +94,9 @@ var _step_time := 0.0
 var _caught := false
 var _was_frozen := true                   # the room opens with a dialogue box
 var _grace := 0.0
+var _starting := false                    # back turned, hasn't set off yet
+var _bob_time := 0.0
+var _sprite_base_y := 0.0
 
 var _screen: CanvasLayer
 var _face: TextureRect
@@ -87,9 +105,22 @@ var _label: Label
 
 
 func _ready():
-	_origin_x = global_position.x
+	var here := position.x
+	if patrol_distance >= 0.0:
+		_lane_left = here
+		_lane_right = here + patrol_distance
+		_heading = 1.0
+	else:
+		_lane_right = here
+		_lane_left = here + patrol_distance
+		_heading = -1.0
+
 	_sprite.modulate = tint
-	_face_direction(Vector2.RIGHT)
+	_sprite_base_y = _sprite.position.y
+
+	_starting = start_delay > 0.0
+	_timer = start_delay
+	_face_direction(Vector2.UP if _starting else _walking_direction())
 	_build_caught_screen()
 
 
@@ -110,16 +141,25 @@ func _physics_process(delta):
 	if _grace > 0.0:
 		_grace -= delta
 
-	if _looking:
+	if _starting:
+		# Standing with his back to the room, not yet on his round.
 		_timer -= delta
+		_settle_sprite()
+		if _timer <= 0.0:
+			_starting = false
+			_face_direction(_walking_direction())
+	elif _looking:
+		_timer -= delta
+		_settle_sprite()
 		if _timer <= 0.0:
 			_looking = false
 			_heading = -_heading
-			_face_direction(Vector2.RIGHT if _heading > 0.0 else Vector2.LEFT)
+			_face_direction(_walking_direction())
 	elif _past_the_end() or is_on_wall():
 		_looking = true
 		_timer = look_around_time
 		_step_time = 0.0
+		_settle_sprite()
 		_face_direction(Vector2.DOWN)          # turns to look at the room
 	else:
 		velocity = Vector2(speed * _heading, 0.0)
@@ -131,10 +171,13 @@ func _physics_process(delta):
 
 
 func _past_the_end() -> bool:
-	var travelled := global_position.x - _origin_x
 	if _heading > 0.0:
-		return travelled >= patrol_distance
-	return travelled <= 0.0
+		return position.x >= _lane_right
+	return position.x <= _lane_left
+
+
+func _walking_direction() -> Vector2:
+	return Vector2.RIGHT if _heading > 0.0 else Vector2.LEFT
 
 
 # --- eyes ---------------------------------------------------------------
@@ -228,11 +271,22 @@ func _face_direction(dir: Vector2) -> void:
 
 func _animate(delta: float) -> void:
 	_step_time += delta
+
+	# abs(sin) gives little upward hops, one per footfall.
+	_bob_time += delta * bob_speed
+	_sprite.position.y = _sprite_base_y - abs(sin(_bob_time)) * bob_height
+
 	var standing := tex_right if _heading > 0.0 else tex_left
 	var stepping := tex_right_step if _heading > 0.0 else tex_left_step
 	var on_step := int(_step_time * steps_per_second) % 2 == 1
 	_show(stepping if (on_step and stepping) else standing)
 	queue_redraw()
+
+
+# Standing still: put him back down on the floor.
+func _settle_sprite() -> void:
+	_bob_time = 0.0
+	_sprite.position.y = _sprite_base_y
 
 
 func _show(tex: Texture2D) -> void:

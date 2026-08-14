@@ -334,7 +334,8 @@ position = Vector2(190, 320)
 shape = SubResource("RectangleShape2D_cover")
 
 [node name="Teacher" parent="." instance=ExtResource("18_teach")]
-position = Vector2(350, 470)
-patrol_distance = 400.0
+position = Vector2(250, 430)
+speed = 130.0
+patrol_distance = 670.0
 
 [connection signal="finished" from="computer" to="VideoPuzzle" method="open"]
