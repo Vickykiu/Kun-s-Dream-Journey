@@ -5,7 +5,13 @@
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_tfomb"]
 [ext_resource type="Texture2D" uid="uid://db6dxqhi2ixyw" path="res://Lau Kah Kei/assets/image/items/selfie pic.png" id="4_hj0gu"]
 [ext_resource type="Texture2D" uid="uid://m2640c4sd8nu" path="res://Lau Kah Kei/assets/image/items/pic_back.png" id="4_sx57t"]
-[ext_resource type="Script" uid="uid://bx7m2fq9lte04" path="res://Lau Kah Kei/scripts/pickup.gd" id="5_keep"]
+[ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="7_ubh14"]
+[ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="12_rintr"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/dialogue/kun_determined.png" id="13_detr"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="8_0fexx"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="9_8h70r"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="10_ua0ab"]
+[ext_resource type="Texture2D" uid="uid://bai1i11eogv8s" path="res://Lau Kah Kei/assets/image/dialogue/kun_sad.png" id="11_0fexx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfomb"]
 size = Vector2(298, 573)
@@ -21,6 +27,84 @@ size = Vector2(111, 145.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkx54"]
 size = Vector2(21.874014, 18.504856)
+
+[sub_resource type="Resource" id="Resource_1ngjn"]
+resource_name = "Ricardo's bed. The blanket is thrown bac"
+script = ExtResource("8_0fexx")
+text = "Ricardo's bed. The blanket is thrown back, trailing onto the floor."
+portrait = ExtResource("9_8h70r")
+
+[sub_resource type="Resource" id="Resource_rpp3r"]
+resource_name = "Like he got up in the middle of the nigh"
+script = ExtResource("8_0fexx")
+text = "Like he got up in the middle of the night and never came back to it."
+portrait = ExtResource("10_ua0ab")
+
+[sub_resource type="Resource" id="Resource_rrdre"]
+resource_name = "...There's something lying on the sheets"
+script = ExtResource("8_0fexx")
+text = "...There's something lying on the sheets."
+portrait = ExtResource("10_ua0ab")
+
+[sub_resource type="Resource" id="Resource_8h70r"]
+resource_name = "Just a bed with the covers thrown back."
+script = ExtResource("8_0fexx")
+text = "Just a bed with the covers thrown back."
+portrait = ExtResource("11_0fexx")
+
+[sub_resource type="Resource" id="Resource_pic1"]
+resource_name = "Both of us at the camp gate. First day."
+script = ExtResource("8_0fexx")
+text = "Both of us at the camp gate. First day."
+portrait = ExtResource("11_0fexx")
+
+[sub_resource type="Resource" id="Resource_pic2"]
+resource_name = "He left it where I'd find it. He knew so"
+script = ExtResource("8_0fexx")
+text = "He left it where I'd find it. He knew something was coming."
+portrait = ExtResource("13_detr")
+
+[sub_resource type="Resource" id="Resource_intro1"]
+resource_name = "A-03. Ricardo's room. Everything still e"
+script = ExtResource("8_0fexx")
+text = "A-03. Ricardo's room. Everything still exactly where he left it."
+portrait = ExtResource("9_8h70r")
+
+[sub_resource type="Resource" id="Resource_intro2"]
+resource_name = "His lamp is still on. Like he'll walk ba"
+script = ExtResource("8_0fexx")
+text = "His lamp is still on. Like he'll walk back in any second."
+portrait = ExtResource("10_ua0ab")
+
+[sub_resource type="Resource" id="Resource_desk1"]
+resource_name = "His desk lamp is still burning. In the m"
+script = ExtResource("8_0fexx")
+text = "His desk lamp is still burning. In the middle of the day."
+portrait = ExtResource("9_8h70r")
+
+[sub_resource type="Resource" id="Resource_desk2"]
+resource_name = "An open book. A cup of coffee gone cold."
+script = ExtResource("8_0fexx")
+text = "An open book. A cup of coffee gone cold. All of it left mid-sentence."
+portrait = ExtResource("10_ua0ab")
+
+[sub_resource type="Resource" id="Resource_desk3"]
+resource_name = "Nobody walks out of their own room like "
+script = ExtResource("8_0fexx")
+text = "Nobody walks out of their own room like this."
+portrait = ExtResource("10_ua0ab")
+
+[sub_resource type="Resource" id="Resource_desk4"]
+resource_name = "The lamp is still on. Nobody is coming t"
+script = ExtResource("8_0fexx")
+text = "The lamp is still on. Nobody is coming to switch it off."
+portrait = ExtResource("11_0fexx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_desk"]
+size = Vector2(200, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1btn7"]
+size = Vector2(163.57034, 230.94995)
 
 [node name="RoomA03" type="Node2D" unique_id=348817742]
 position = Vector2(83.00001, 0)
@@ -124,25 +208,50 @@ target_scene = "res://Lau Kah Kei/scenes/corridor.tscn"
 position = Vector2(497.5, 596.75)
 shape = SubResource("RectangleShape2D_tn0ng")
 
-[node name="picture" type="Area2D" parent="." unique_id=1090602813]
+[node name="picture" type="Node2D" parent="." unique_id=1090602813]
 position = Vector2(-485.99997, 44)
 rotation = -0.19397183
-script = ExtResource("5_keep")
-item_id = "roommate_keepsake"
-prompt_text = "Press E to pick up the photo"
-back_texture = ExtResource("4_sx57t")
 
 [node name="Sprite2D" type="Sprite2D" parent="picture" unique_id=1743974397]
 position = Vector2(699.50433, 458.23044)
 scale = Vector2(0.07598451, 0.08309284)
 texture = ExtResource("4_hj0gu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="picture" unique_id=1234054390]
-position = Vector2(699.62146, 458.56705)
-rotation = -1.5592924
-scale = Vector2(1.7793356, -2.2075672)
-shape = SubResource("RectangleShape2D_nkx54")
-
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_4t2b5")]
-position = Vector2(496, 526)
+position = Vector2(498.18054, 401.88965)
 scale = Vector2(1.3, 1.3)
+
+[node name="bed_dialogue" type="Area2D" parent="." unique_id=119968158]
+script = ExtResource("7_ubh14")
+prompt_text = "Press E to look at the bed"
+lines = Array[ExtResource("8_0fexx")]([SubResource("Resource_1ngjn"), SubResource("Resource_rpp3r"), SubResource("Resource_rrdre")])
+lines_after = Array[ExtResource("8_0fexx")]([SubResource("Resource_8h70r")])
+speaker_name = "Kun"
+item_id = "roommate_keepsake"
+back_texture = ExtResource("4_sx57t")
+item_node = NodePath("../picture")
+pickup_lines = Array[ExtResource("8_0fexx")]([SubResource("Resource_pic1"), SubResource("Resource_pic2")])
+flag_id = "a03_bed_searched"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bed_dialogue" unique_id=552735531]
+position = Vector2(227.90475, 325.97046)
+scale = Vector2(1.0000002, 1)
+shape = SubResource("RectangleShape2D_1btn7")
+
+[node name="desk_dialogue" type="Area2D" parent="."]
+script = ExtResource("7_ubh14")
+prompt_text = "Press E to look at the desk"
+lines = Array[ExtResource("8_0fexx")]([SubResource("Resource_desk1"), SubResource("Resource_desk2"), SubResource("Resource_desk3")])
+lines_after = Array[ExtResource("8_0fexx")]([SubResource("Resource_desk4")])
+speaker_name = "Kun"
+flag_id = "a03_desk_searched"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="desk_dialogue"]
+position = Vector2(715, 300)
+shape = SubResource("RectangleShape2D_desk")
+
+[node name="RoomIntro" type="Node" parent="."]
+script = ExtResource("12_rintr")
+lines = Array[ExtResource("8_0fexx")]([SubResource("Resource_intro1"), SubResource("Resource_intro2")])
+speaker_name = "Kun"
+flag_id = "a03_entered"

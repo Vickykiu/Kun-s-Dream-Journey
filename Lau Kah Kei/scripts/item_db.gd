@@ -21,7 +21,7 @@ const ITEMS := {
 	# --- Chapter 2 (Lau Kah Kei) ---
 	"rusty_key": {
 		"name": "Rusty Key",
-		"description": "An old key found in the storeroom, buried under the instruments. It's too rusty to be a dorm key — it opens something else.",
+		"description": "An old key from a corner of the storeroom, lying in the dust beside a pile of dead instruments. Too rusty to be a dorm key — it opens something else.",
 		"evidence": false,
 		"icon": "res://Lau Kah Kei/assets/image/items/key.webp",
 	},

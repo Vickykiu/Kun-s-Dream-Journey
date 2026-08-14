@@ -3,6 +3,29 @@
 [ext_resource type="Texture2D" uid="uid://dvohlu040i83u" path="res://Lau Kah Kei/assets/image/background/corridor.png" id="1_xswuy"]
 [ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="2_pucmg"]
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="4_door"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="5_dline"]
+[ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="6_rintr"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="7_calm"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="8_worr"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/dialogue/kun_determined.png" id="9_detr"]
+
+[sub_resource type="Resource" id="Resource_intro1"]
+resource_name = "Second morning at the camp. Same cold ha"
+script = ExtResource("5_dline")
+text = "Second morning at the camp. Same cold hall, same five doors, all shut."
+portrait = ExtResource("7_calm")
+
+[sub_resource type="Resource" id="Resource_intro2"]
+resource_name = "Ricardo never came back last night. Nobo"
+script = ExtResource("5_dline")
+text = "Ricardo never came back last night. Nobody out here will even look at me."
+portrait = ExtResource("8_worr")
+
+[sub_resource type="Resource" id="Resource_intro3"]
+resource_name = "Five doors on this floor. I'm going to l"
+script = ExtResource("5_dline")
+text = "Five doors on this floor. I'm going to look behind every one."
+portrait = ExtResource("9_detr")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xswuy"]
 size = Vector2(1156.5, 274)
@@ -141,6 +164,12 @@ target_scene = "res://Lau Kah Kei/scenes/room_a05.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A05" unique_id=325248676]
 position = Vector2(130.88426, 199.21524)
 shape = SubResource("RectangleShape2D_n8bhm")
+
+[node name="RoomIntro" type="Node" parent="."]
+script = ExtResource("6_rintr")
+lines = Array[ExtResource("5_dline")]([SubResource("Resource_intro1"), SubResource("Resource_intro2"), SubResource("Resource_intro3")])
+speaker_name = "Kun"
+flag_id = "corridor_entered"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=602888154]
 

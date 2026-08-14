@@ -46,6 +46,24 @@ signal interacted(node)
 # the item has no icon yet the close-up step is simply skipped.
 @export var closeup_texture: Texture2D
 
+# The other side of it, for something with writing on the back — the photo
+# on Ricardo's bed. Leave it empty and one press puts the item away instead
+# of turning it over first.
+@export var back_texture: Texture2D
+
+# Optional — the item as it sits in the room: the photo lying on the bed,
+# the key at the back of the drawer. It disappears once it has been handed
+# over, and is still gone on a later visit. Point it at the Sprite2D, or at
+# a whole branch if the thing is made of several nodes.
+@export var item_node: NodePath
+
+# What Kunkun says with the thing in his hand, i.e. after the close-up. His
+# reaction to the item belongs here, not in `lines` above — those are read
+# while he is still only looking at the drawer.
+@export var pickup_lines: Array[DialogueLine] = []:
+	set(value):
+		pickup_lines = DialogueLine.fill_blanks(value)
+
 # Adds a "(Added to inventory: ...)" page once it's pocketed. Only with item_id.
 @export var announce_pickup: bool = true
 
@@ -69,6 +87,10 @@ func _ready():
 	if Engine.is_editor_hint():
 		set_process_unhandled_input(false)
 		return
+
+	# Handed over on an earlier visit — don't lay it out in the room again.
+	if item_id != "" and GameState.has_item(item_id):
+		_hide_item_node()
 
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
@@ -123,10 +145,16 @@ func _interact():
 	# Nothing goes into the bag unseen: whatever this object was hiding is
 	# held up on screen first, and the next press of E is what pockets it.
 	if handing_over:
-		await ItemView.show_item(_item_texture())
+		await ItemView.show_item(_item_texture(), back_texture)
 		GameState.add_item(item_id)
+		_hide_item_node()
+
+		var after: Array = []
+		after.append_array(pickup_lines)
 		if announce_pickup:
-			Dialogue.show_text("(Added to inventory: %s)" % ItemDB.get_item(item_id)["name"])
+			after.append("(Added to inventory: %s)" % ItemDB.get_item(item_id)["name"])
+		if not after.is_empty():
+			Dialogue.show_lines(after, portrait, speaker_name)
 			await Dialogue.finished
 
 	if hide_after:
@@ -137,6 +165,14 @@ func _interact():
 	# Still standing on it? Put the prompt back.
 	if _player_inside and not _is_used_up():
 		_show_prompt(prompt_text)
+
+
+func _hide_item_node() -> void:
+	if item_node.is_empty():
+		return
+	var node = get_node_or_null(item_node)
+	if node is CanvasItem:
+		node.hide()
 
 
 func _item_texture() -> Texture2D:
