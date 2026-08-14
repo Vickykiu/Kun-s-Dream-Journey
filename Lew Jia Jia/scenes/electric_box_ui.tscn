@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://b3dpxcitba4c0"]
+
+[ext_resource type="Script" uid="uid://bpdt3r1l4uvve" path="res://Lew Jia Jia/scripts/electric_box_ui.gd" id="1_uat78"]
+[ext_resource type="Texture2D" uid="uid://hkll2781yhaj" path="res://Lew Jia Jia/assets/ElectricBox_Closeup_Closed.png" id="1_xt6im"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_dqmpl"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_wk0kx"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="4_dqmpl"]
+[ext_resource type="Texture2D" uid="uid://tylled2hb6id" path="res://Lew Jia Jia/assets/ElectricBox_Closeup_Open.png" id="6_wk0kx"]
+
+[sub_resource type="Resource" id="Resource_wk0kx"]
+resource_name = "Four wires... blue, red, green and yello"
+script = ExtResource("3_wk0kx")
+text = "Four wires... blue, red, green and yellow."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_gqbuc"]
+resource_name = "That note on the wall must be telling me"
+script = ExtResource("3_wk0kx")
+text = "That note on the wall must be telling me the correct order."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_q1ybq"]
+resource_name = "No... that was the wrong wire. The seque"
+script = ExtResource("3_wk0kx")
+text = "No... that was the wrong wire. The sequence has reset."
+portrait = ExtResource("4_dqmpl")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_j7cmd"]
+resource_name = "The power has been cut."
+script = ExtResource("3_wk0kx")
+text = "The power has been cut."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_e4x0j"]
+resource_name = "I heard something unlock inside the vent"
+script = ExtResource("3_wk0kx")
+text = "I heard something unlock inside the ventilation grille."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[node name="ElectricBoxUI" type="CanvasLayer" unique_id=1543509939]
+script = ExtResource("1_uat78")
+portrait = ExtResource("2_dqmpl")
+intro_lines = Array[ExtResource("3_wk0kx")]([SubResource("Resource_wk0kx"), SubResource("Resource_gqbuc")])
+wrong_lines = Array[ExtResource("3_wk0kx")]([SubResource("Resource_q1ybq")])
+solved_lines = Array[ExtResource("3_wk0kx")]([SubResource("Resource_j7cmd"), SubResource("Resource_e4x0j")])
+
+[node name="Background" type="ColorRect" parent="." unique_id=162742422]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="ClosedImage" type="TextureRect" parent="." unique_id=1779644320]
+offset_left = 531.0
+offset_right = 1494.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("1_xt6im")
+expand_mode = 1
+
+[node name="OpenImage" type="TextureRect" parent="." unique_id=1158924541]
+visible = false
+offset_left = 317.0
+offset_right = 1337.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("6_wk0kx")
+expand_mode = 1
+
+[node name="OpenButton" type="TextureButton" parent="." unique_id=380555531]
+offset_left = 726.0
+offset_top = 270.0
+offset_right = 1268.0
+offset_bottom = 823.0
+mouse_default_cursor_shape = 2
+
+[node name="BlueButton" type="TextureButton" parent="." unique_id=91523711]
+offset_left = 817.0
+offset_top = 270.0
+offset_right = 899.0
+offset_bottom = 823.0
+mouse_default_cursor_shape = 2
+
+[node name="RedButton" type="TextureButton" parent="." unique_id=1863720185]
+offset_left = 920.0
+offset_top = 270.0
+offset_right = 994.0
+offset_bottom = 789.0
+mouse_default_cursor_shape = 2
+
+[node name="GreenButton" type="TextureButton" parent="." unique_id=784279217]
+offset_left = 1023.0
+offset_top = 270.0
+offset_right = 1092.0
+offset_bottom = 823.0
+mouse_default_cursor_shape = 2
+
+[node name="YellowButton" type="TextureButton" parent="." unique_id=1717515581]
+offset_left = 1121.0
+offset_top = 270.0
+offset_right = 1197.0
+offset_bottom = 823.0
+mouse_default_cursor_shape = 2
+
+[node name="CloseButton" type="Button" parent="." unique_id=984807295]
+offset_left = 1754.0
+offset_right = 1924.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="OpenButton" to="." method="_on_open_button_pressed"]
+[connection signal="pressed" from="BlueButton" to="." method="_on_blue_button_pressed"]
+[connection signal="pressed" from="RedButton" to="." method="_on_red_button_pressed"]
+[connection signal="pressed" from="GreenButton" to="." method="_on_green_button_pressed"]
+[connection signal="pressed" from="YellowButton" to="." method="_on_yellow_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

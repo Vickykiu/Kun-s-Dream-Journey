@@ -2,6 +2,20 @@
 
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="1_dwfhp"]
 [ext_resource type="Script" uid="uid://q6hwe1hubeot" path="res://Lew Jia Jia/scripts/cabinet_ui.gd" id="1_xuri2"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_wuv85"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_558cw"]
+
+[sub_resource type="Resource" id="Resource_jfysv"]
+resource_name = "There is almost nothing inside."
+script = ExtResource("3_558cw")
+text = "There is almost nothing inside."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_eeoub"]
+resource_name = "Only some old junk. It doesn't look usef"
+script = ExtResource("3_558cw")
+text = "Only some old junk. It doesn't look useful."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwfhp"]
 atlas = ExtResource("1_dwfhp")
@@ -9,6 +23,8 @@ region = Rect2(1226.0396, 404.34918, 309.96045, 568.417)
 
 [node name="CabinetUI" type="CanvasLayer" unique_id=1543509939]
 script = ExtResource("1_xuri2")
+portrait = ExtResource("2_wuv85")
+cabinet_lines = Array[ExtResource("3_558cw")]([SubResource("Resource_jfysv"), SubResource("Resource_eeoub")])
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=162742422]
 anchors_preset = 15

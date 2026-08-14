@@ -14,43 +14,43 @@ size = Vector2(85.86051, 44.546997)
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abvsn"]
-size = Vector2(203.18024, 509.21625)
+size = Vector2(154.16745, 113.685486)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_occd4"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_abvsn"]
-radius = 137.57869
+radius = 144.01361
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4nn1"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_occd4"]
-size = Vector2(213.41974, 239.77985)
+size = Vector2(112.7917, 239.77985)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_21pov"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4nn1"]
-size = Vector2(271.2633, 250.40125)
+size = Vector2(276.68866, 676.3888)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dvhw"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21pov"]
-size = Vector2(116.1004, 291.6258)
+size = Vector2(116.1004, 876.4043)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e34y8"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e34y8"]
-size = Vector2(196.27594, 778.25916)
+size = Vector2(196.27594, 661.785)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1px24"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1px24"]
-size = Vector2(541.4525, 188.70393)
+size = Vector2(195.84396, 99.77418)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42n0a"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
@@ -86,13 +86,12 @@ size = Vector2(372.34598, 912)
 size = Vector2(271.08646, 766.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3u2u8"]
-size = Vector2(101.17291, 460)
+size = Vector2(101.17291, 470)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lmcl"]
 size = Vector2(51.000008, 118.000046)
 
-[node name="Chapter3_RoomB13" type="Node2D" unique_id=1520391204]
-position = Vector2(1906, 345)
+[node name="Chapter3_RoomB13" type="Node2D" unique_id=574331139]
 script = ExtResource("1_8dvhw")
 
 [node name="RoomBackgrounnd" type="Sprite2D" parent="." unique_id=1290400529]
@@ -102,7 +101,8 @@ texture = ExtResource("2_6vyrd")
 
 [node name="Safe" type="Sprite2D" parent="." unique_id=1060386628]
 position = Vector2(-1268.1962, 3.4308326)
-scale = Vector2(-2.2587473, 1.6756363)
+rotation = -3.1415927
+scale = Vector2(2.2587473, -1.6756363)
 texture = ExtResource("3_8dvhw")
 flip_h = true
 region_enabled = true
@@ -113,29 +113,32 @@ script = ExtResource("4_v4nn1")
 prompt_text = "Press E to inspect the safe"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Safe/Area2D" unique_id=1679141523]
-position = Vector2(-0.52957153, 124.06717)
+position = Vector2(-0.52957153, 105.37441)
 shape = SubResource("RectangleShape2D_8dvhw")
 
 [node name="Cabinet" type="Sprite2D" parent="." unique_id=613777950]
 position = Vector2(-1536.9999, -5.0000114)
-scale = Vector2(-1.1221564, 0.84443504)
+rotation = -3.1415927
+scale = Vector2(1.1221564, -0.84443504)
 texture = SubResource("CompressedTexture2D_abvsn")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(1235.9735, 417.91293, 283.44983, 533.23987)
 
 [node name="Area2D" type="Area2D" parent="Cabinet" unique_id=484211697]
+scale = Vector2(1.0000001, 1)
 script = ExtResource("4_v4nn1")
 prompt_text = "Press E to open the cabinet"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cabinet/Area2D" unique_id=1237582638]
-position = Vector2(5.346924, 14.210724)
+position = Vector2(29.853333, 220.26566)
 scale = Vector2(1.0000004, 1)
 shape = SubResource("RectangleShape2D_abvsn")
 
 [node name="Clock" type="Sprite2D" parent="." unique_id=1930134456]
 position = Vector2(-1014, -88.999985)
-scale = Vector2(-0.88316804, 0.63839257)
+rotation = -3.1415927
+scale = Vector2(0.88316804, -0.63839257)
 texture = SubResource("CompressedTexture2D_occd4")
 flip_h = true
 region_enabled = true
@@ -146,12 +149,13 @@ script = ExtResource("4_v4nn1")
 prompt_text = "Press E to look at the clock"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clock/Area2D" unique_id=1121867769]
-position = Vector2(-2.2645745, 42.293728)
+position = Vector2(4.7683716e-07, 75.18885)
 shape = SubResource("CircleShape2D_abvsn")
 
 [node name="Calendar" type="Sprite2D" parent="." unique_id=875596179]
 position = Vector2(-758, -66.64203)
-scale = Vector2(-0.904322, 0.6547673)
+rotation = -3.1415927
+scale = Vector2(0.904322, -0.6547673)
 texture = SubResource("CompressedTexture2D_v4nn1")
 flip_h = true
 region_enabled = true
@@ -162,42 +166,50 @@ script = ExtResource("4_v4nn1")
 prompt_text = "Press E to check the calendar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Area2D" unique_id=1294982473]
-position = Vector2(3.8702393, 0.21685791)
+position = Vector2(54.184265, 0.21685791)
 shape = SubResource("RectangleShape2D_occd4")
 
 [node name="Vent" type="Sprite2D" parent="." unique_id=2084856675]
 position = Vector2(-488, -118.00001)
-scale = Vector2(-0.9216131, 0.6549489)
+rotation = -3.1415927
+scale = Vector2(0.9216131, -0.6549489)
 texture = SubResource("CompressedTexture2D_21pov")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(34.572884, 410.1354, 347.22598, 302.93692)
 
 [node name="Area2D" type="Area2D" parent="Vent" unique_id=356417917]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to inspect the vent"
+speaker_name = "Kun"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vent/Area2D" unique_id=1155636326]
-position = Vector2(-6.510132, -3.0536804)
+position = Vector2(4.8828125, 234.36935)
 scale = Vector2(1, 0.9999999)
 shape = SubResource("RectangleShape2D_v4nn1")
 
 [node name="ElectricBox" type="Sprite2D" parent="." unique_id=1202151050]
 position = Vector2(-277, -82.00001)
-scale = Vector2(-0.9216131, 0.6549489)
+rotation = -3.1415927
+scale = Vector2(0.9216131, -0.6549489)
 texture = SubResource("CompressedTexture2D_8dvhw")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(1299.4677, 169.32726, 147.03955, 178.80348)
 
 [node name="Area2D" type="Area2D" parent="ElectricBox" unique_id=1916624368]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to inspect the electrical box"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBox/Area2D" unique_id=1254544663]
-position = Vector2(5.9676514, -84.73944)
+position = Vector2(5.9675293, 207.64973)
 scale = Vector2(1, 0.9999999)
 shape = SubResource("RectangleShape2D_21pov")
 
 [node name="ColourHint" type="Sprite2D" parent="." unique_id=651846953]
 position = Vector2(-1264, -168.00002)
-scale = Vector2(-0.5553409, 0.3777663)
+rotation = -3.1415927
+scale = Vector2(0.5553409, -0.3777663)
 texture = SubResource("CompressedTexture2D_e34y8")
 flip_h = true
 region_enabled = true
@@ -208,28 +220,32 @@ script = ExtResource("4_v4nn1")
 prompt_text = "Press E to read the note"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColourHint/Area2D" unique_id=1468504835]
-position = Vector2(2.7010498, 330.8924)
-scale = Vector2(0.9999989, 0.9999998)
+position = Vector2(2.7010498, 272.65533)
+scale = Vector2(0.99999887, 0.9999998)
 shape = SubResource("RectangleShape2D_e34y8")
 
 [node name="Desk" type="Sprite2D" parent="." unique_id=945186999]
 position = Vector2(-480.99997, 176.11552)
-scale = Vector2(-0.9548404, 0.9220798)
+rotation = -3.1415927
+scale = Vector2(0.9548404, -0.9220798)
 texture = SubResource("CompressedTexture2D_1px24")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(642.2183, 387.1051, 579.3006, 368.48474)
 
 [node name="Area2D" type="Area2D" parent="Desk" unique_id=929102553]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to inspect the desk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Desk/Area2D" unique_id=691712680]
-position = Vector2(-1.5712891, -63.026733)
-scale = Vector2(1, 1.0000014)
+position = Vector2(15.709491, 407.64853)
+scale = Vector2(1, 1.0000025)
 shape = SubResource("RectangleShape2D_1px24")
 
 [node name="SheetMusic" type="Sprite2D" parent="." unique_id=2020601167]
 position = Vector2(-534, 104.999985)
-scale = Vector2(-1.0562321, 0.97603244)
+rotation = -3.1415927
+scale = Vector2(1.0562321, -0.97603244)
 texture = SubResource("CompressedTexture2D_42n0a")
 flip_h = true
 region_enabled = true
@@ -243,7 +259,8 @@ shape = SubResource("RectangleShape2D_42n0a")
 
 [node name="Metronome" type="Sprite2D" parent="." unique_id=1756781823]
 position = Vector2(-301.00003, 54)
-scale = Vector2(-0.68972385, 0.714319)
+rotation = -3.1415927
+scale = Vector2(0.68972385, -0.714319)
 texture = SubResource("CompressedTexture2D_kgt5n")
 flip_h = true
 region_enabled = true
@@ -258,8 +275,8 @@ shape = SubResource("RectangleShape2D_kgt5n")
 
 [node name="Book" type="Sprite2D" parent="." unique_id=130469496]
 position = Vector2(-345.00006, 126)
-rotation = 0.951069
-scale = Vector2(-0.36176112, 0.36261964)
+rotation = -2.1905236
+scale = Vector2(0.36176112, -0.36261964)
 texture = SubResource("CompressedTexture2D_8ywfn")
 flip_h = true
 region_enabled = true
@@ -308,7 +325,7 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rcbtn")
 
 [node name="Table" type="CollisionShape2D" parent="Walls" unique_id=2093838631]
-position = Vector2(-450, 76.41354)
+position = Vector2(-455, 76.41354)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_3u2u8")
@@ -322,6 +339,9 @@ shape = SubResource("RectangleShape2D_5lmcl")
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_player")]
 position = Vector2(-943, 450)
 scale = Vector2(2.2, 2.2)
+
+[node name="Camera2D" parent="Player" index="2" unique_id=1694324081]
+enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1379747593]
 
@@ -348,4 +368,9 @@ vertical_alignment = 1
 [connection signal="interacted" from="Cabinet/Area2D" to="." method="_on_cabinet_interacted"]
 [connection signal="interacted" from="Clock/Area2D" to="." method="_on_clock_interacted"]
 [connection signal="interacted" from="Calendar/Area2D" to="." method="_on_calendar_interacted"]
+[connection signal="interacted" from="Vent/Area2D" to="." method="_on_vent_interacted"]
+[connection signal="interacted" from="ElectricBox/Area2D" to="." method="_on_electric_box_interacted"]
 [connection signal="interacted" from="ColourHint/Area2D" to="." method="_on_colour_hint_interacted"]
+[connection signal="interacted" from="Desk/Area2D" to="." method="_on_desk_interacted"]
+
+[editable path="Player"]

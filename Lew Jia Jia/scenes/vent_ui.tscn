@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bngd4btrod1c4"]
+
+[ext_resource type="Script" uid="uid://befrgr0s7wxwt" path="res://Lew Jia Jia/scripts/vent_ui.gd" id="1_nitfo"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_18ab4"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_ur8wa"]
+[ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="5_vxx8u"]
+
+[sub_resource type="Resource" id="Resource_1ljuh"]
+resource_name = "The ventilation grille is tightly locked"
+script = ExtResource("3_ur8wa")
+text = "The ventilation grille is tightly locked."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_18ab4"]
+resource_name = "It seems to be connected to the electric"
+script = ExtResource("3_ur8wa")
+text = "It seems to be connected to the electrical box beside it."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
+atlas = ExtResource("5_vxx8u")
+region = Rect2(17.74353, 371.2894, 383.89734, 368.30765)
+
+[node name="VentUI" type="CanvasLayer" unique_id=1767306419]
+script = ExtResource("1_nitfo")
+portrait = ExtResource("2_18ab4")
+vent_lines = Array[ExtResource("3_ur8wa")]([SubResource("Resource_1ljuh"), SubResource("Resource_18ab4")])
+
+[node name="Background" type="ColorRect" parent="." unique_id=754317818]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="VentImage" type="TextureRect" parent="." unique_id=451699205]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 405.0
+offset_right = -434.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ydsvy")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1512717357]
+offset_left = 1754.0
+offset_right = 1924.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

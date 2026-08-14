@@ -2,9 +2,33 @@
 
 [ext_resource type="Script" uid="uid://qvunjoeosfic" path="res://Lew Jia Jia/scripts/safe_ui.gd" id="1_uqqp5"]
 [ext_resource type="Texture2D" uid="uid://cvh581dvcj5hs" path="res://Lew Jia Jia/assets/SafeUI_Close.png" id="2_i0wi7"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_inxcu"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_ngf5n"]
 [ext_resource type="AudioStream" uid="uid://j720scc7ysvp" path="res://Lew Jia Jia/assets/ButtonSoundEffect.mp3" id="3_xerkm"]
 [ext_resource type="Texture2D" uid="uid://cip3vephto6m" path="res://Lew Jia Jia/assets/Safe_File.png" id="4_hwf0w"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="4_njwd4"]
 [ext_resource type="Texture2D" uid="uid://cuyyo0us2ua56" path="res://Lew Jia Jia/assets/FileDetail.png" id="5_iptsq"]
+[ext_resource type="Texture2D" uid="uid://c1n7io7mvpp5i" path="res://Lau Kah Kei/assets/image/dialogue/kun_scared.png.png" id="5_xs62b"]
+
+[sub_resource type="Resource" id="Resource_f76uf"]
+resource_name = "This is a list of everyone in the traini"
+script = ExtResource("3_ngf5n")
+text = "This is a list of everyone in the training camp..."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_kwjyw"]
+resource_name = "Ricardo, Teacher Mei... and even my own "
+script = ExtResource("3_ngf5n")
+text = "Ricardo, Teacher Mei... and even my own name are on it."
+portrait = ExtResource("4_njwd4")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_2w1ll"]
+resource_name = "My name is circled in red. Beside it, so"
+script = ExtResource("3_ngf5n")
+text = "My name is circled in red. Beside it, someone wrote: \"3rd time.\""
+portrait = ExtResource("5_xs62b")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="FontVariation" id="FontVariation_huone"]
 spacing_glyph = 29
@@ -19,6 +43,8 @@ shadow_size = 15
 
 [node name="SafeUI" type="CanvasLayer" unique_id=1863927378]
 script = ExtResource("1_uqqp5")
+portrait = ExtResource("2_inxcu")
+file_lines = Array[ExtResource("3_ngf5n")]([SubResource("Resource_f76uf"), SubResource("Resource_kwjyw"), SubResource("Resource_2w1ll")])
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1320201294]
 offset_right = 1910.0

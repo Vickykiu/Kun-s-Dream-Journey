@@ -2,6 +2,22 @@
 
 [ext_resource type="Script" uid="uid://bjhl4f5aqtajf" path="res://Lew Jia Jia/scripts/clock_ui.gd" id="1_1850u"]
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_g6caq"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_qj0kn"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_we2qc"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="4_qyv8s"]
+
+[sub_resource type="Resource" id="Resource_mv245"]
+resource_name = "The clock has stopped at 3:15."
+script = ExtResource("3_we2qc")
+text = "The clock has stopped at 3:15."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_opjmo"]
+resource_name = "Why would someone leave a broken clock h"
+script = ExtResource("3_we2qc")
+text = "Why would someone leave a broken clock hanging here?"
+portrait = ExtResource("4_qyv8s")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
 atlas = ExtResource("2_g6caq")
@@ -9,6 +25,8 @@ region = Rect2(642.4629, -10.548813, 329.53503, 364.05786)
 
 [node name="ClockUI" type="CanvasLayer" unique_id=1767306419]
 script = ExtResource("1_1850u")
+portrait = ExtResource("2_qj0kn")
+clock_lines = Array[ExtResource("3_we2qc")]([SubResource("Resource_mv245"), SubResource("Resource_opjmo")])
 
 [node name="Background" type="ColorRect" parent="." unique_id=754317818]
 anchors_preset = 15

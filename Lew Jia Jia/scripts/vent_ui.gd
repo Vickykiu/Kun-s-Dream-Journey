@@ -5,9 +5,9 @@ extends CanvasLayer
 @export var speaker_name: String = "Kun"
 @export var portrait: Texture2D
 
-@export var clock_lines: Array[DialogueLine] = []:
+@export var vent_lines: Array[DialogueLine] = []:
 	set(value):
-		clock_lines = DialogueLine.fill_blanks(value)
+		vent_lines = DialogueLine.fill_blanks(value)
 
 
 func _ready() -> void:
@@ -16,9 +16,9 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 
-	if not clock_lines.is_empty():
+	if not vent_lines.is_empty():
 		Dialogue.show_lines(
-			clock_lines,
+			vent_lines,
 			portrait,
 			speaker_name
 		)

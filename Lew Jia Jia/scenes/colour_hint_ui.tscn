@@ -2,6 +2,22 @@
 
 [ext_resource type="Script" uid="uid://cn2unp8nweqxd" path="res://Lew Jia Jia/scripts/colour_hint_ui.gd" id="1_snonf"]
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_5657u"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_k66eo"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_ycgcg"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/dialogue/kun_determined.png" id="4_4symk"]
+
+[sub_resource type="Resource" id="Resource_aj6o7"]
+resource_name = "Blue, red, green, yellow..."
+script = ExtResource("3_ycgcg")
+text = "Blue, red, green, yellow..."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_xoxkj"]
+resource_name = "This looks like an instruction. I should"
+script = ExtResource("3_ycgcg")
+text = "This looks like an instruction. I should remember the order."
+portrait = ExtResource("4_4symk")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
 atlas = ExtResource("2_5657u")
@@ -9,6 +25,8 @@ region = Rect2(375.6963, 403.72394, 269.90503, 197.72107)
 
 [node name="ColourHintUi" type="CanvasLayer" unique_id=1767306419]
 script = ExtResource("1_snonf")
+portrait = ExtResource("2_k66eo")
+hint_lines = Array[ExtResource("3_ycgcg")]([SubResource("Resource_aj6o7"), SubResource("Resource_xoxkj")])
 
 [node name="Background" type="ColorRect" parent="." unique_id=754317818]
 anchors_preset = 15

@@ -1,7 +1,23 @@
 [gd_scene format=3 uid="uid://binii3roaioa2"]
 
 [ext_resource type="Script" uid="uid://dunbul7o64iju" path="res://Lew Jia Jia/scripts/calendar_ui.gd" id="1_tx38j"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_63tb2"]
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_ho0v0"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_owdgf"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/dialogue/kun_determined.png" id="4_dvg48"]
+
+[sub_resource type="Resource" id="Resource_3px4c"]
+resource_name = "The 12th has been circled in red."
+script = ExtResource("3_owdgf")
+text = "The 12th has been circled in red."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_ch5g6"]
+resource_name = "Was something special supposed to happen"
+script = ExtResource("3_owdgf")
+text = "Was something special supposed to happen on that day?"
+portrait = ExtResource("4_dvg48")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
 atlas = ExtResource("2_ho0v0")
@@ -9,6 +25,8 @@ region = Rect2(953.16736, 37.530655, 301.2893, 315.9784)
 
 [node name="CalendarUI" type="CanvasLayer" unique_id=1767306419]
 script = ExtResource("1_tx38j")
+portrait = ExtResource("2_63tb2")
+calendar_lines = Array[ExtResource("3_owdgf")]([SubResource("Resource_3px4c"), SubResource("Resource_ch5g6")])
 
 [node name="Background" type="ColorRect" parent="." unique_id=754317818]
 anchors_preset = 15

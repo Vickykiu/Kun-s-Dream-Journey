@@ -2,13 +2,54 @@
 
 [ext_resource type="Texture2D" uid="uid://cpdoe6t186ali" path="res://Lew Jia Jia/assets/Desk_Closeup.png" id="1_273uo"]
 [ext_resource type="Script" uid="uid://dqhl0tbcdt06h" path="res://Lew Jia Jia/scripts/desk_ui.gd" id="1_ed3qi"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_7vy8t"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_gevtx"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="5_jte2k"]
+
+[sub_resource type="Resource" id="Resource_syvvt"]
+resource_name = "This sheet music is old and badly damage"
+script = ExtResource("3_gevtx")
+text = "This sheet music is old and badly damaged."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_vuyas"]
+resource_name = "A large treble clef is drawn on the firs"
+script = ExtResource("3_gevtx")
+text = "A large treble clef is drawn on the first page. Could it be a clue?"
+portrait = ExtResource("5_jte2k")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_14i00"]
+resource_name = "This notebook is covered in dust. Most o"
+script = ExtResource("3_gevtx")
+text = "This notebook is covered in dust. Most of its pages are blank."
+
+[sub_resource type="Resource" id="Resource_i0oj5"]
+resource_name = "A few pages have been torn out. Someone "
+script = ExtResource("3_gevtx")
+text = "A few pages have been torn out. Someone may have removed them deliberately."
+portrait = ExtResource("5_jte2k")
+
+[sub_resource type="Resource" id="Resource_gevtx"]
+resource_name = "The metronome has stopped, but its pendu"
+script = ExtResource("3_gevtx")
+text = "The metronome has stopped, but its pendulum is still warm."
+
+[sub_resource type="Resource" id="Resource_jte2k"]
+resource_name = "It feels as though someone was using it "
+script = ExtResource("3_gevtx")
+text = "It feels as though someone was using it only moments ago."
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ed3qi"]
 atlas = ExtResource("1_273uo")
 region = Rect2(0, 0, 601, 400)
 
-[node name="DeskUi" type="CanvasLayer" unique_id=1286858544]
+[node name="DeskUi" type="CanvasLayer" unique_id=1362950208]
 script = ExtResource("1_ed3qi")
+portrait = ExtResource("2_7vy8t")
+sheet_music_lines = Array[ExtResource("3_gevtx")]([SubResource("Resource_syvvt"), SubResource("Resource_vuyas")])
+book_lines = Array[ExtResource("3_gevtx")]([SubResource("Resource_14i00"), SubResource("Resource_i0oj5")])
+metronome_lines = Array[ExtResource("3_gevtx")]([SubResource("Resource_gevtx"), SubResource("Resource_jte2k")])
 
 [node name="Background" type="ColorRect" parent="." unique_id=1309438435]
 offset_right = 1924.0
