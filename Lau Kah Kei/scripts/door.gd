@@ -26,6 +26,8 @@ func _on_body_exited(body):
 		_hide_prompt()
 
 func _unhandled_input(event):
+	if Inventory.is_open():
+		return
 	if player_inside and event.is_action_pressed("interact"):
 		if requires_key and not GameState.has_key:
 			return   # still locked, do nothing

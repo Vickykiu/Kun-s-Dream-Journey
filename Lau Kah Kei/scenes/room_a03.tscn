@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://b7t58wq4rdrkx" path="res://Lau Kah Kei/assets/image/background/roomA03.png" id="1_qoqvm"]
 [ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="2_4t2b5"]
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_tfomb"]
-[ext_resource type="Texture2D" uid="uid://bjbji8lfuc2e5" path="res://Lau Kah Kei/assets/image/items/pictute.jpeg" id="4_ays5t"]
-[ext_resource type="Script" uid="uid://bq7c2ij3o4sq0" path="res://Lau Kah Kei/scripts/keepsake.gd" id="5_keep"]
+[ext_resource type="Texture2D" uid="uid://db6dxqhi2ixyw" path="res://Lau Kah Kei/assets/image/items/selfie pic.png" id="4_hj0gu"]
+[ext_resource type="Texture2D" uid="uid://m2640c4sd8nu" path="res://Lau Kah Kei/assets/image/items/pic_back.png" id="4_sx57t"]
+[ext_resource type="Script" uid="uid://bx7m2fq9lte04" path="res://Lau Kah Kei/scripts/pickup.gd" id="5_keep"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfomb"]
 size = Vector2(298, 573)
@@ -13,13 +14,13 @@ size = Vector2(298, 573)
 size = Vector2(21.599112, 18.31448)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v2ly"]
-size = Vector2(92.13839, 98.84445)
+size = Vector2(87.74816, 83.54063)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tn0ng"]
 size = Vector2(111, 145.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkx54"]
-size = Vector2(30.255901, 33.531868)
+size = Vector2(21.874014, 18.504856)
 
 [node name="RoomA03" type="Node2D" unique_id=348817742]
 position = Vector2(83.00001, 0)
@@ -95,9 +96,9 @@ shape = SubResource("RectangleShape2D_ays5t")
 [node name="bed2" type="StaticBody2D" parent="Walls" unique_id=227539951]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/bed2" unique_id=27959578]
-position = Vector2(223, 309)
+position = Vector2(206.17613, 286.45233)
 rotation = -2.985945
-scale = Vector2(1.8992777, 2.5702252)
+scale = Vector2(1.8992779, 2.570226)
 shape = SubResource("RectangleShape2D_4v2ly")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1973469332]
@@ -127,63 +128,21 @@ shape = SubResource("RectangleShape2D_tn0ng")
 position = Vector2(-485.99997, 44)
 rotation = -0.19397183
 script = ExtResource("5_keep")
+item_id = "roommate_keepsake"
 prompt_text = "Press E to pick up the photo"
+back_texture = ExtResource("4_sx57t")
 
 [node name="Sprite2D" type="Sprite2D" parent="picture" unique_id=1743974397]
 position = Vector2(699.50433, 458.23044)
 scale = Vector2(0.07598451, 0.08309284)
-texture = ExtResource("4_ays5t")
+texture = ExtResource("4_hj0gu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="picture" unique_id=1234054390]
-position = Vector2(699.616, 457.68488)
+position = Vector2(699.62146, 458.56705)
 rotation = -1.5592924
-scale = Vector2(1.779336, -2.2075672)
+scale = Vector2(1.7793356, -2.2075672)
 shape = SubResource("RectangleShape2D_nkx54")
 
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("2_4t2b5")]
 position = Vector2(496, 526)
 scale = Vector2(1.3, 1.3)
-
-[node name="Closeup" type="CanvasLayer" parent="." unique_id=1581838967]
-
-[node name="Root" type="Control" parent="Closeup" unique_id=577081589 groups=["closeup"]]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Dim" type="ColorRect" parent="Closeup/Root" unique_id=540974140]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0, 0, 0, 0.75)
-
-[node name="Photo" type="TextureRect" parent="Closeup/Root" unique_id=1262510998]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -240.0
-offset_right = 320.0
-offset_bottom = 240.0
-texture = ExtResource("4_ays5t")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Hint" type="Label" parent="Closeup/Root" unique_id=1779221182]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -60.0
-offset_right = 160.0
-offset_bottom = -25.0
-text = "Press E to put it away"
-horizontal_alignment = 1

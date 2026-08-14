@@ -108,6 +108,7 @@ shape = SubResource("RectangleShape2D_n8bhm")
 [node name="Door_A02" type="Area2D" parent="." unique_id=692748971]
 position = Vector2(231, 4)
 script = ExtResource("4_door")
+target_scene = "res://Lau Kah Kei/scenes/room_a02.tscn"
 requires_key = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A02" unique_id=1390007619]

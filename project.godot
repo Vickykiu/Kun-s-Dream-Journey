@@ -23,6 +23,9 @@ default_bus_layout="res://default_bus_layout.tres"
 
 MusicManager="*res://Kiu Chun Woon/scripts/music_manager.gd"
 GameState="*res://Lau Kah Kei/scripts/game_state.gd"
+Inventory="*res://Lau Kah Kei/scripts/inventory.gd"
+Dialogue="*res://Lau Kah Kei/scenes/dialogue.tscn"
+ItemView="*res://Lau Kah Kei/scenes/item_view.tscn"
 ChapterEscape="*res://Kiu Chun Woon/scripts/chapter_escape.gd"
 
 [display]
@@ -42,6 +45,11 @@ player=""
 interact={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+inventory={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":105,"location":0,"echo":false,"script":null)
 ]
 }
 next_scene={

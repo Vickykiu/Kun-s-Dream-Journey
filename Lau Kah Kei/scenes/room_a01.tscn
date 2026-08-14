@@ -2,18 +2,37 @@
 
 [ext_resource type="Texture2D" uid="uid://1ac2rop0nnvh" path="res://Lau Kah Kei/assets/image/background/roomA01.jpeg" id="1_w2h6d"]
 [ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="2_njoc6"]
+[ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="2_p3xa7"]
 [ext_resource type="Script" uid="uid://dohox1jwpvp54" path="res://Lau Kah Kei/scripts/door.gd" id="3_w2h6d"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="5_0poud"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="7_dline"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjmpr"]
 size = Vector2(298, 573)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njoc6"]
-size = Vector2(21.599112, 20)
+size = Vector2(17.62254, 16.617521)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2h6d"]
 size = Vector2(134.5, 151)
 
+[sub_resource type="Resource" id="Resource_6joha"]
+resource_name = "An empty bed. The sheets are pulled tigh"
+script = ExtResource("7_dline")
+text = "An empty bed. The sheets are pulled tight, the corners tucked in."
+portrait = ExtResource("5_0poud")
+
+[sub_resource type="Resource" id="Resource_mslsq"]
+resource_name = "Nobody has slept here in a long time."
+script = ExtResource("7_dline")
+text = "Nobody has slept here in a long time."
+portrait = ExtResource("5_0poud")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksn05"]
+size = Vector2(106.79706, 203.68137)
+
 [node name="RoomA01" type="Node2D" unique_id=1033833658]
+position = Vector2(-60, -21)
 scale = Vector2(1.7929561, 1.7335105)
 
 [node name="background" type="Sprite2D" parent="." unique_id=2013520097]
@@ -53,7 +72,7 @@ position = Vector2(934, 613.00006)
 scale = Vector2(28.460642, 9.620207)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down" unique_id=1231120626]
-position = Vector2(1.159495, 5.1973906)
+position = Vector2(-0.756848, 3.9790683)
 shape = SubResource("RectangleShape2D_njoc6")
 
 [node name="bed" type="StaticBody2D" parent="Walls" unique_id=386914156]
@@ -61,8 +80,8 @@ position = Vector2(756, 236.00003)
 scale = Vector2(28.950562, 12.237919)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/bed" unique_id=1129081311]
-position = Vector2(2.2452073, 0.16342425)
-scale = Vector2(0.15252098, 0.76519823)
+position = Vector2(2.3219416, -0.42935234)
+scale = Vector2(0.15252097, 0.76519823)
 shape = SubResource("RectangleShape2D_njoc6")
 
 [node name="Player" parent="Walls" unique_id=1213491095 instance=ExtResource("2_njoc6")]
@@ -74,7 +93,7 @@ position = Vector2(208, 613.00006)
 scale = Vector2(28.460642, 9.620207)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/down2" unique_id=916109347]
-position = Vector2(-0.63245225, 5.093442)
+position = Vector2(1.3926504, 4.2189307)
 shape = SubResource("RectangleShape2D_njoc6")
 
 [node name="door" type="StaticBody2D" parent="Walls" unique_id=2090946081]
@@ -105,13 +124,22 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -53.0
-offset_top = -107.0
-offset_right = 219.0
-offset_bottom = -72.0
+offset_left = -142.0
+offset_top = -131.0
+offset_right = 195.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 45
 text = "Press E to leave"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="bed2_dialogue" type="Area2D" parent="." unique_id=1117759354]
+script = ExtResource("2_p3xa7")
+prompt_text = "Press E to look at the bed"
+lines = Array[ExtResource("7_dline")]([SubResource("Resource_6joha"), SubResource("Resource_mslsq")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bed2_dialogue" unique_id=1975202155]
+position = Vector2(828.38544, 237.9323)
+shape = SubResource("RectangleShape2D_ksn05")

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dl4h60sw0ytn3"]
+
+[ext_resource type="Script" uid="uid://cvq3n8a1kd5r7" path="res://Lau Kah Kei/scripts/item_view.gd" id="1_view"]
+[ext_resource type="Texture2D" uid="uid://db6dxqhi2ixyw" path="res://Lau Kah Kei/assets/image/items/selfie pic.png" id="2_placeholder"]
+
+[node name="ItemView" type="CanvasLayer"]
+layer = 95
+script = ExtResource("1_view")
+
+[node name="Root" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="Root"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.75)
+mouse_filter = 2
+
+[node name="Item" type="TextureRect" parent="Root"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+mouse_filter = 2
+texture = ExtResource("2_placeholder")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Hint" type="Label" parent="Root"]
+self_modulate = Color(0.84, 0.17639998, 0.17639998, 0.9019608)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -273.0
+offset_top = -174.0
+offset_right = 191.0
+offset_bottom = -111.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 42
+text = "Press E to put it away"
+horizontal_alignment = 1
