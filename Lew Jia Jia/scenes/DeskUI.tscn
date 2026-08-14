@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b33w7u1hgfei1"]
+
+[ext_resource type="Texture2D" uid="uid://cpdoe6t186ali" path="res://Lew Jia Jia/assets/Desk_Closeup.png" id="1_273uo"]
+[ext_resource type="Script" uid="uid://dqhl0tbcdt06h" path="res://Lew Jia Jia/scripts/desk_ui.gd" id="1_ed3qi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ed3qi"]
+atlas = ExtResource("1_273uo")
+region = Rect2(0, 0, 601, 400)
+
+[node name="DeskUi" type="CanvasLayer" unique_id=1286858544]
+script = ExtResource("1_ed3qi")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1309438435]
+offset_right = 1924.0
+offset_bottom = 1075.0
+mouse_filter = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+metadata/_edit_group_ = true
+
+[node name="DeskImage" type="TextureRect" parent="." unique_id=790076002]
+offset_left = 269.0
+offset_top = 75.0
+offset_right = 1673.0
+offset_bottom = 1012.0
+texture = SubResource("AtlasTexture_ed3qi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SheetMusicButton" type="TextureButton" parent="." unique_id=2123713578]
+offset_left = 441.0
+offset_top = 241.0
+offset_right = 1033.0
+offset_bottom = 525.0
+mouse_default_cursor_shape = 2
+
+[node name="BookButton" type="TextureButton" parent="." unique_id=970560868]
+offset_left = 1149.0
+offset_top = 475.0
+offset_right = 1306.0
+offset_bottom = 607.0
+mouse_default_cursor_shape = 2
+
+[node name="MetronomeButton" type="TextureButton" parent="." unique_id=418827722]
+offset_left = 1306.0
+offset_top = 145.0
+offset_right = 1447.0
+offset_bottom = 432.0
+mouse_default_cursor_shape = 2
+
+[node name="CloseButton" type="Button" parent="." unique_id=829643081]
+offset_left = 1754.0
+offset_right = 1924.0
+offset_bottom = 145.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[connection signal="pressed" from="SheetMusicButton" to="." method="_on_sheet_music_button_pressed"]
+[connection signal="pressed" from="BookButton" to="." method="_on_book_button_pressed"]
+[connection signal="pressed" from="MetronomeButton" to="." method="_on_metronome_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

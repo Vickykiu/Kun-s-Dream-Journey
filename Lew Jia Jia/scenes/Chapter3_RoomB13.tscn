@@ -4,22 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://d0k4n7vpvpakc" path="res://Lew Jia Jia/assets/RoomBackground.png" id="2_6vyrd"]
 [ext_resource type="Texture2D" uid="uid://csmncq3pinrkq" path="res://Lew Jia Jia/assets/Safe_Close.png" id="3_8dvhw"]
 [ext_resource type="Texture2D" uid="uid://ddy07efiwgjaa" path="res://Lew Jia Jia/assets/Safe_OpenEmpty.png" id="4_abvsn"]
+[ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="4_v4nn1"]
 [ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dvhw"]
-size = Vector2(85.86051, 122.08992)
+size = Vector2(85.86051, 44.546997)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_abvsn"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abvsn"]
-size = Vector2(203.18024, 478.4264)
+size = Vector2(203.18024, 509.21625)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_occd4"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_abvsn"]
-radius = 116.87805
+radius = 137.57869
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4nn1"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
@@ -43,19 +44,19 @@ size = Vector2(116.1004, 291.6258)
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e34y8"]
-size = Vector2(196.27594, 103.23843)
+size = Vector2(196.27594, 778.25916)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1px24"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1px24"]
-size = Vector2(538.3099, 202.80254)
+size = Vector2(541.4525, 188.70393)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42n0a"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42n0a"]
-size = Vector2(284.0285, 138.3151)
+size = Vector2(271.72064, 138.3151)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kgt5n"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
@@ -73,19 +74,22 @@ size = Vector2(227.81677, 149.0705)
 size = Vector2(1881, 334)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gl8g7"]
-size = Vector2(372.34598, 1188)
+size = Vector2(306.5255, 1166.8784)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2i7nh"]
-size = Vector2(372.34598, 1188)
+size = Vector2(322.66455, 1188)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rhrtj"]
 size = Vector2(372.34598, 912)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcbtn"]
+size = Vector2(271.08646, 766.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3u2u8"]
-size = Vector2(372.34598, 912)
+size = Vector2(101.17291, 460)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lmcl"]
-size = Vector2(140.00003, 166.00009)
+size = Vector2(51.000008, 118.000046)
 
 [node name="Chapter3_RoomB13" type="Node2D" unique_id=1520391204]
 position = Vector2(1906, 345)
@@ -105,9 +109,11 @@ region_enabled = true
 region_rect = Rect2(150.04138, 29.612976, 86.308075, 119.21692)
 
 [node name="Area2D" type="Area2D" parent="Safe" unique_id=287059958]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to inspect the safe"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Safe/Area2D" unique_id=1679141523]
-position = Vector2(-0.54345703, 0.5122528)
+position = Vector2(-0.52957153, 124.06717)
 shape = SubResource("RectangleShape2D_8dvhw")
 
 [node name="Cabinet" type="Sprite2D" parent="." unique_id=613777950]
@@ -119,9 +125,11 @@ region_enabled = true
 region_rect = Rect2(1235.9735, 417.91293, 283.44983, 533.23987)
 
 [node name="Area2D" type="Area2D" parent="Cabinet" unique_id=484211697]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to open the cabinet"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cabinet/Area2D" unique_id=1237582638]
-position = Vector2(5.346924, -1.1842346)
+position = Vector2(5.346924, 14.210724)
 scale = Vector2(1.0000004, 1)
 shape = SubResource("RectangleShape2D_abvsn")
 
@@ -134,8 +142,11 @@ region_enabled = true
 region_rect = Rect2(631.589, 20.336472, 336.59662, 331.28192)
 
 [node name="Area2D" type="Area2D" parent="Clock" unique_id=1819852831]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to look at the clock"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clock/Area2D" unique_id=1121867769]
+position = Vector2(-2.2645745, 42.293728)
 shape = SubResource("CircleShape2D_abvsn")
 
 [node name="Calendar" type="Sprite2D" parent="." unique_id=875596179]
@@ -147,6 +158,8 @@ region_enabled = true
 region_rect = Rect2(975.2718, 55.823166, 260.41962, 288.76447)
 
 [node name="Area2D" type="Area2D" parent="Calendar" unique_id=1286210833]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to check the calendar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Area2D" unique_id=1294982473]
 position = Vector2(3.8702393, 0.21685791)
@@ -191,17 +204,12 @@ region_enabled = true
 region_rect = Rect2(390.65668, 433.16568, 237.38916, 147.03958)
 
 [node name="Area2D" type="Area2D" parent="ColourHint" unique_id=755035997]
+script = ExtResource("4_v4nn1")
+prompt_text = "Press E to read the note"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColourHint/Area2D" unique_id=1468504835]
-position = Vector2(2.7010498, -6.617798)
-scale = Vector2(0.99999946, 0.9999998)
-shape = SubResource("RectangleShape2D_e34y8")
-
-[node name="Area2D" type="Area2D" parent="ColourHint/Area2D" unique_id=1357152878]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColourHint/Area2D/Area2D" unique_id=1085756980]
-position = Vector2(2.7010498, -6.617798)
-scale = Vector2(0.99999946, 0.9999998)
+position = Vector2(2.7010498, 330.8924)
+scale = Vector2(0.9999989, 0.9999998)
 shape = SubResource("RectangleShape2D_e34y8")
 
 [node name="Desk" type="Sprite2D" parent="." unique_id=945186999]
@@ -215,8 +223,8 @@ region_rect = Rect2(642.2183, 387.1051, 579.3006, 368.48474)
 [node name="Area2D" type="Area2D" parent="Desk" unique_id=929102553]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Desk/Area2D" unique_id=691712680]
-position = Vector2(-3.1420898, -55.977386)
-scale = Vector2(1, 1.0000007)
+position = Vector2(-1.5712891, -63.026733)
+scale = Vector2(1, 1.0000014)
 shape = SubResource("RectangleShape2D_1px24")
 
 [node name="SheetMusic" type="Sprite2D" parent="." unique_id=2020601167]
@@ -230,7 +238,7 @@ region_rect = Rect2(645.7615, 761.86426, 361.3985, 205.5011)
 [node name="Area2D" type="Area2D" parent="SheetMusic" unique_id=1908741800]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SheetMusic/Area2D" unique_id=1334996923]
-position = Vector2(11.361084, -2.5613403)
+position = Vector2(5.2071533, -2.5612183)
 shape = SubResource("RectangleShape2D_42n0a")
 
 [node name="Metronome" type="Sprite2D" parent="." unique_id=1756781823]
@@ -276,15 +284,15 @@ position = Vector2(-930.5, -168)
 shape = SubResource("RectangleShape2D_qvdk7")
 
 [node name="WallLeft" type="CollisionShape2D" parent="Walls" unique_id=650735350]
-position = Vector2(-1830.2684, 207.28186)
+position = Vector2(-1888.7308, 123.44516)
 rotation = 0.2617994
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(0.99999964, 0.99999964)
 shape = SubResource("RectangleShape2D_gl8g7")
 
 [node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=24785138]
-position = Vector2(-67, 176)
-rotation = -0.2617994
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(-15.005737, 173.57074)
+rotation = -0.26179937
+scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_2i7nh")
 
 [node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1119131353]
@@ -294,13 +302,19 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rhrtj")
 
 [node name="WallBottom1" type="CollisionShape2D" parent="Walls" unique_id=1848536701]
-position = Vector2(-307, 877)
+position = Vector2(-410.25, 830.4568)
+rotation = -1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_rcbtn")
+
+[node name="Table" type="CollisionShape2D" parent="Walls" unique_id=2093838631]
+position = Vector2(-450, 76.41354)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_3u2u8")
 
 [node name="Drawer" type="CollisionShape2D" parent="Walls" unique_id=756571069]
-position = Vector2(-326, 277)
+position = Vector2(-302, 232.5)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_5lmcl")
@@ -309,8 +323,29 @@ shape = SubResource("RectangleShape2D_5lmcl")
 position = Vector2(-943, 450)
 scale = Vector2(2.2, 2.2)
 
-[connection signal="input_event" from="Safe/Area2D" to="." method="_on_safe_area_2d_input_event"]
-[connection signal="input_event" from="Cabinet/Area2D" to="." method="_on_cabinet_area_2d_input_event"]
-[connection signal="input_event" from="Clock/Area2D" to="." method="_on_clock_area_2d_input_event"]
-[connection signal="input_event" from="Calendar/Area2D" to="." method="_on_calendar_area_2d_input_event"]
-[connection signal="input_event" from="ColourHint/Area2D" to="." method="_on_colour_hint_area_2d_input_event"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1379747593]
+
+[node name="PromptLabel" type="Label" parent="CanvasLayer" unique_id=234731329 groups=["prompt"]]
+visible = false
+self_modulate = Color(1, 0.11764706, 0.07058824, 0.9882353)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -131.0
+offset_right = 195.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
+text = "Press E to leave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="interacted" from="Safe/Area2D" to="." method="_on_safe_interacted"]
+[connection signal="interacted" from="Cabinet/Area2D" to="." method="_on_cabinet_interacted"]
+[connection signal="interacted" from="Clock/Area2D" to="." method="_on_clock_interacted"]
+[connection signal="interacted" from="Calendar/Area2D" to="." method="_on_calendar_interacted"]
+[connection signal="interacted" from="ColourHint/Area2D" to="." method="_on_colour_hint_interacted"]
