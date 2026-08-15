@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="8_worr"]
 [ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="9_detr"]
 [ext_resource type="PackedScene" uid="uid://djddc3g7wvlk5" path="res://Lau Kah Kei/scenes/student_npc.tscn" id="10_stud"]
+[ext_resource type="Texture2D" uid="uid://c1n7io7mvpp5i" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_scared.png.png" id="11_scar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xswuy"]
 size = Vector2(1156.5, 274)
@@ -69,6 +70,24 @@ resource_name = "Still locked. I need that key first."
 script = ExtResource("5_dline")
 text = "Still locked. I need that key first."
 portrait = ExtResource("7_calm")
+
+[sub_resource type="Resource" id="Resource_remind"]
+resource_name = "A-02. The locked one. Let's see what the"
+script = ExtResource("5_dline")
+text = "A-02. The locked one. Let's see what they didn't want us seeing."
+portrait = ExtResource("9_detr")
+
+[sub_resource type="Resource" id="Resource_open1"]
+resource_name = "The lock gives. Quietly, like it wanted "
+script = ExtResource("5_dline")
+text = "The lock gives. Quietly, like it wanted to."
+portrait = ExtResource("7_calm")
+
+[sub_resource type="Resource" id="Resource_open2"]
+resource_name = "...Something is moving in there."
+script = ExtResource("5_dline")
+text = "...Something in there is moving."
+portrait = ExtResource("11_scar")
 
 [node name="Corridor" type="Node2D" unique_id=1601957076]
 scale = Vector2(1.6264902, 1.7619134)
@@ -162,6 +181,9 @@ locked_lines = Array[ExtResource("5_dline")]([SubResource("Resource_lock1"), Sub
 locked_lines_after = Array[ExtResource("5_dline")]([SubResource("Resource_lock4")])
 speaker_name = "Kun"
 flag_id = "a02_door_tried"
+unlock_lines = Array[ExtResource("5_dline")]([SubResource("Resource_open1"), SubResource("Resource_open2")])
+unlock_flag = "a02_door_opened"
+fade_time = 0.9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_A02" unique_id=1390007619]
 position = Vector2(127.44054, 196.35036)
@@ -212,6 +234,14 @@ patrol_distance = 0.0
 mutter_text = "...training...
 ...we become stars..."
 mutter_delay = 5.0
+
+[node name="KeyReminder" type="Node" parent="."]
+script = ExtResource("6_rintr")
+lines = Array[ExtResource("5_dline")]([SubResource("Resource_remind")])
+speaker_name = "Kun"
+flag_id = "corridor_key_reminder"
+requires_item = "rusty_key"
+delay = 0.6
 
 [node name="RoomIntro" type="Node" parent="." unique_id=1195150814]
 script = ExtResource("6_rintr")

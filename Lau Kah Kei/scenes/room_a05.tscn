@@ -64,7 +64,7 @@ portrait = ExtResource("9_calm")
 [sub_resource type="Resource" id="Resource_key2"]
 resource_name = "There's only one door in this place they"
 script = ExtResource("7_dline")
-text = "There's only one door in this place they keep locked."
+text = "There's only one door in this place they keep locked. A-02."
 portrait = ExtResource("11_detr")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_instr"]
@@ -159,6 +159,9 @@ shape = SubResource("RectangleShape2D_75k12")
 script = ExtResource("2_3cjl7")
 prompt_text = "Press E to leave"
 target_scene = "res://Lau Kah Kei/scenes/corridor.tscn"
+unlock_lines = null
+unlock_flag = null
+fade_time = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door" unique_id=61735052]
 position = Vector2(506, 593)

@@ -30,6 +30,14 @@ extends Node
 # visit — only ever right for a room the player can't come back to.
 @export var flag_id: String = ""
 
+# Optional — hold these lines back until the player is carrying an item (an
+# id from ItemDB) or a flag is set. That turns this into the second beat of a
+# room they come back to: walking into the corridor with the key already in
+# hand and working out where it goes. Until the condition is met the node
+# does nothing at all and keeps waiting for the next visit.
+@export var requires_item: String = ""
+@export var requires_flag: String = ""
+
 # A short beat before the box opens, so the room is on screen for a moment
 # first instead of being covered the instant the door shuts.
 @export var delay: float = 0.4
@@ -41,6 +49,13 @@ func _ready():
 	if lines.is_empty():
 		return
 	if flag_id != "" and GameState.has_flag(flag_id):
+		return
+
+	# Not yet — say nothing, mark nothing, and check again next time he
+	# walks in here.
+	if requires_item != "" and not GameState.has_item(requires_item):
+		return
+	if requires_flag != "" and not GameState.has_flag(requires_flag):
 		return
 
 	GameState.set_flag(flag_id)
