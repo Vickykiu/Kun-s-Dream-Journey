@@ -1,78 +1,128 @@
 extends Area2D
 
+
+# ===== Settings =====
+
 @export var interact_action: StringName = &"interact"
-@export var prompt_label: Label
-@export var image_to_show: Texture
+@export var minesweeper_scene: PackedScene
 
-var overlay: TextureRect = null
-var is_image_showing: bool = false
-var has_triggered: bool = false
 
-func _ready():
-	if prompt_label:
-		prompt_label.visible = false
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+# ===== Nodes =====
 
-func _on_body_entered(body):
-	if body.is_in_group("player") and not has_triggered:
-		if prompt_label:
-			prompt_label.text = "Press E to see memory"
-			prompt_label.visible = true
+@onready var crystal_label: Label = $CrystalLabel
 
-func _on_body_exited(body):
-	if body.is_in_group("player"):
-		if prompt_label:
-			prompt_label.visible = false
 
-func _unhandled_input(event):
-	if not event.is_action_pressed(interact_action):
+# ===== State =====
+
+var player_near: bool = false
+var is_entering: bool = false
+var current_player: Node2D = null
+
+
+# ===== Initialization =====
+
+func _ready() -> void:
+	# Remove this crystal only after its puzzle is completed.
+	if MinesweeperState.is_crystal_completed(
+		String(name)
+	):
+		queue_free()
 		return
 
-	if is_image_showing:
-		close_image()
-		get_viewport().set_input_as_handled()
+	crystal_label.visible = false
+
+	body_entered.connect(
+		_on_body_entered
+	)
+
+	body_exited.connect(
+		_on_body_exited
+	)
+
+
+# ===== Player Detection =====
+
+func _on_body_entered(body: Node2D) -> void:
+	if not body.is_in_group("player"):
 		return
 
-	if prompt_label and prompt_label.visible and not has_triggered:
-		show_image()
-		get_viewport().set_input_as_handled()
+	if is_entering:
+		return
 
-func show_image():
-	if prompt_label:
-		prompt_label.visible = false
+	player_near = true
+	current_player = body
 
-	# 隐藏所有 Sprite2D 子节点（无论名字是什么）
-	for child in get_children():
-		if child is Sprite2D:
-			child.visible = false
+	crystal_label.text = "Press E to interact"
+	crystal_label.visible = true
 
-	if overlay == null:
-		overlay = TextureRect.new()
-		overlay.size = Vector2(1920, 1080)
-		overlay.position = Vector2.ZERO
-		var bg = ColorRect.new()
-		bg.size = Vector2(1920, 1080)
-		bg.color = Color(0, 0, 0, 0.7)
-		overlay.add_child(bg)
-		var img = TextureRect.new()
-		img.texture = image_to_show
-		img.size = Vector2(800, 600)
-		img.position = Vector2(560, 240)
-		img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-		overlay.add_child(img)
-		var label = Label.new()
-		label.text = "Press E to close"
-		label.position = Vector2(860, 900)
-		overlay.add_child(label)
-		get_tree().current_scene.add_child(overlay)
 
-	overlay.visible = true
-	is_image_showing = true
-	has_triggered = true
-	monitoring = false
+func _on_body_exited(body: Node2D) -> void:
+	if not body.is_in_group("player"):
+		return
 
-func close_image():
-	if overlay:
-		overlay.visible = false
-	is_image_showing = false
+	player_near = false
+	current_player = null
+
+	crystal_label.visible = false
+
+
+# ===== Input =====
+
+func _unhandled_input(event: InputEvent) -> void:
+	if is_entering:
+		return
+
+	if not player_near:
+		return
+
+	if current_player == null:
+		return
+
+	if not event.is_action_pressed(
+		interact_action
+	):
+		return
+
+	get_viewport().set_input_as_handled()
+
+	enter_minesweeper()
+
+
+# ===== Enter Minesweeper =====
+
+func enter_minesweeper() -> void:
+	if minesweeper_scene == null:
+		print("No Minesweeper scene assigned.")
+		return
+
+	if current_player == null:
+		print("Player not found.")
+		return
+
+	var current_scene: Node = (
+		get_tree().current_scene
+	)
+
+	if current_scene == null:
+		print("Current scene not found.")
+		return
+
+	if current_scene.scene_file_path.is_empty():
+		print("Current scene has no file path.")
+		return
+
+	is_entering = true
+	player_near = false
+	crystal_label.visible = false
+
+	# Save the current scene, player position and crystal name.
+	MinesweeperState.save_entry_data(
+		current_scene.scene_file_path,
+		current_player.global_position,
+		String(name)
+	)
+
+	# Open the Minesweeper scene.
+	get_tree().change_scene_to_packed(
+		minesweeper_scene
+	)

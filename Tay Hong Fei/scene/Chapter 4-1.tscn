@@ -4,21 +4,64 @@
 [ext_resource type="Script" uid="uid://ram16nq4imhv" path="res://Tay Hong Fei/scripts/chapter_4_1.gd" id="1_xav4v"]
 [ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="3_i2b13"]
 [ext_resource type="Script" uid="uid://dn1t3yp80nwd1" path="res://Tay Hong Fei/scripts/door.gd" id="4_hbs4x"]
+[ext_resource type="Texture2D" uid="uid://b7ln5dncmwn3r" path="res://Tay Hong Fei/asset/background/Chapter 4 Scene 1 - Answer.png" id="4_q01ba"]
 [ext_resource type="PackedScene" uid="uid://bnt6p4fmnexi7" path="res://Tay Hong Fei/scene/Chapter 4-2.tscn" id="5_vp1pg"]
 [ext_resource type="Texture2D" uid="uid://dc23v2jja6k8q" path="res://Tay Hong Fei/asset/background/Chapter 4 scene 1 - 2.png" id="6_q01ba"]
 [ext_resource type="Script" uid="uid://c7qjmeke0286w" path="res://Tay Hong Fei/scripts/block.gd" id="6_vp1pg"]
+[ext_resource type="Script" uid="uid://cieji1oqjax4o" path="res://Tay Hong Fei/scripts/nearby.gd" id="9_f1bej"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="10_khxr4"]
+[ext_resource type="Texture2D" uid="uid://5w3bbs4mdv6n" path="res://Tay Hong Fei/asset/character/kunkun_dialog.png" id="11_nxo4e"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="11_p2a7j"]
+
+[sub_resource type="Resource" id="Resource_khxr4"]
+resource_name = "Where am I...?"
+script = ExtResource("10_khxr4")
+text = "Where am I...?"
+portrait = ExtResource("11_p2a7j")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_p2a7j"]
+resource_name = "This place feels different..."
+script = ExtResource("10_khxr4")
+text = "This place feels different..."
+portrait = ExtResource("11_p2a7j")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_re1ky"]
+resource_name = "I need to find a way out."
+script = ExtResource("10_khxr4")
+text = "I need to find a way out."
+portrait = ExtResource("11_nxo4e")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1bej"]
 size = Vector2(169.75, 121.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbs4x"]
-size = Vector2(78.5, 77)
+size = Vector2(47.397736, 27.302628)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp1pg"]
-size = Vector2(95, 90)
+size = Vector2(64.90164, 64.33412)
+
+[sub_resource type="Resource" id="Resource_gt04l"]
+resource_name = "It was pitch black. One wrong step and I"
+script = ExtResource("10_khxr4")
+text = "It was pitch black. One wrong step and I could fall."
+portrait = ExtResource("11_nxo4e")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7e1me"]
+size = Vector2(108, 64)
+
+[sub_resource type="Resource" id="Resource_7e1me"]
+resource_name = "There’s something on the door…"
+script = ExtResource("10_khxr4")
+text = "There’s something on the door…"
+portrait = ExtResource("11_nxo4e")
 
 [node name="Node2D" type="Node2D" unique_id=2022096403]
 script = ExtResource("1_xav4v")
+intro_lines = Array[ExtResource("10_khxr4")]([SubResource("Resource_khxr4"), SubResource("Resource_p2a7j"), SubResource("Resource_re1ky")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=386514833]
 position = Vector2(408, 14)
@@ -28,21 +71,71 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1102.0605, 1086)
 
-[node name="Door" type="Area2D" parent="." unique_id=1467490000 node_paths=PackedStringArray("prompt_label")]
+[node name="Door" type="Area2D" parent="." unique_id=1467490000 node_paths=PackedStringArray("prompt_label", "door_closed", "door_open_1", "door_open_2", "light_1", "light_2", "light_3")]
+scale = Vector2(1.0007479, 1.0007262)
 script = ExtResource("4_hbs4x")
-prompt_label = NodePath("../Label")
+prompt_label = NodePath("Label")
+clue_image = ExtResource("4_q01ba")
 target_scene = ExtResource("5_vp1pg")
+door_closed = NodePath("Door_close")
+door_open_1 = NodePath("Door_open-1")
+door_open_2 = NodePath("Door_open-2")
+light_1 = NodePath("Light-1")
+light_2 = NodePath("Light-2")
+light_3 = NodePath("Light-3")
 
-[node name="Sprite2D" type="Sprite2D" parent="Door" unique_id=81388323]
+[node name="Door_close" type="Sprite2D" parent="Door" unique_id=81388323]
 position = Vector2(960.00006, 196.00002)
 scale = Vector2(1.560606, 1.560606)
 texture = ExtResource("6_q01ba")
 region_enabled = true
-region_rect = Rect2(307.684, 69.67, 122.20801, 99.67799)
+region_rect = Rect2(313.53824, 69.405, 113.94937, 106.24266)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door" unique_id=1713657348]
 position = Vector2(960, 217.75)
 shape = SubResource("RectangleShape2D_f1bej")
+
+[node name="Light-1" type="Sprite2D" parent="Door" unique_id=2112510596]
+position = Vector2(962.2802, 82.939766)
+scale = Vector2(0.9207699, 0.92078984)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1151.2833, 14.716133, 208.74597, 115.023796)
+
+[node name="Light-2" type="Sprite2D" parent="Door" unique_id=408996018]
+position = Vector2(963.2796, 81.94049)
+scale = Vector2(0.9498837, 0.9271642)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1152.2893, 132.97375, 207.62634, 96.81287)
+
+[node name="Light-3" type="Sprite2D" parent="Door" unique_id=1951653811]
+position = Vector2(963.27954, 80.94121)
+scale = Vector2(0.9163648, 0.9163648)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1152.3016, 244.48723, 208.62805, 91.6808)
+
+[node name="Label" type="Label" parent="Door" unique_id=1569631221]
+visible = false
+offset_left = 1112.1681
+offset_top = 184.86574
+offset_right = 1152.1681
+offset_bottom = 207.86574
+
+[node name="Door_open-1" type="Sprite2D" parent="Door" unique_id=1493449221]
+position = Vector2(964.27875, 253.81567)
+scale = Vector2(1.4618362, 1.461868)
+texture = ExtResource("6_q01ba")
+region_enabled = true
+region_rect = Rect2(874.1924, 69.4902, 125.74097, 179.34882)
+
+[node name="Door_open-2" type="Sprite2D" parent="Door" unique_id=579628314]
+position = Vector2(965.27814, 249.81859)
+scale = Vector2(1.4669511, 1.4669511)
+texture = ExtResource("6_q01ba")
+region_enabled = true
+region_rect = Rect2(303.10352, 608.67554, 135.54333, 179.99341)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1603764284]
 position = Vector2(46, 165)
@@ -53,51 +146,235 @@ polygon = PackedVector2Array(1328, 125, 1405, -80, 1436, 894, 1352, 809)
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2047249092]
 polygon = PackedVector2Array(440, -76, 514, 160, 513, 801, 419, 885)
 
-[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1416890953]
-polygon = PackedVector2Array(520, 761, 1349, 753, 1440, 898, 414, 883, 519, 751)
-
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1012936315]
 polygon = PackedVector2Array(436, -76, 513, 152, 510, 47, 813, 49, 814, -20, 910, -22, 1019, -18, 1017, 51, 1326, 46, 1328, 120, 1421, -112)
 
-[node name="Block" type="CharacterBody2D" parent="." unique_id=905105659 node_paths=PackedStringArray("prompt_label")]
-position = Vector2(-3, 4)
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=753047276]
+polygon = PackedVector2Array(421, 880, 515, 752, 801, 745, 863, 790, 868, 865, 972, 865, 970, 798, 1053, 746, 1348, 747, 1445, 909)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2029631800]
+polygon = PackedVector2Array(801, -25, 804, 51, 1028, 53, 1028, -34)
+
+[node name="Block_Left-1" type="CharacterBody2D" parent="." unique_id=905105659 node_paths=PackedStringArray("prompt_label")]
+position = Vector2(-53.000004, -111)
+scale = Vector2(1.0738852, 1.0748813)
 script = ExtResource("6_vp1pg")
 prompt_label = NodePath("Label2")
-min_x = -80.0
-max_x = 140.0
-min_y = -140.0
-max_y = 230.0
+min_x = -133.0
+max_x = 93.0
+min_y = -184.0
+max_y = 184.0
+linked_blocks = Array[NodePath]([NodePath("../Block_Right-1")])
+mirror_x = true
 
-[node name="elements" type="Sprite2D" parent="Block" unique_id=187748211]
-position = Vector2(760, 561)
-scale = Vector2(0.41626206, 0.41626218)
+[node name="elements" type="Sprite2D" parent="Block_Left-1" unique_id=187748211]
+position = Vector2(759.8577, 560.0618)
+scale = Vector2(0.34972426, 0.34972435)
 texture = ExtResource("1_pfh0e")
 region_enabled = true
 region_rect = Rect2(1164.632, 789.85596, 206.25208, 210.33801)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block" unique_id=44193691]
-position = Vector2(760, 560)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Left-1" unique_id=44193691]
+position = Vector2(758.92664, 558.2012)
+scale = Vector2(1.3325545, 2.2772408)
 shape = SubResource("RectangleShape2D_hbs4x")
 
-[node name="Label2" type="Label" parent="Block" unique_id=357232131]
+[node name="Label2" type="Label" parent="Block_Left-1" unique_id=357232131]
 offset_left = 816.0
 offset_top = 547.0
 offset_right = 856.0
 offset_bottom = 570.0
 
-[node name="DetectionArea" type="Area2D" parent="Block" unique_id=343828138]
+[node name="DetectionArea" type="Area2D" parent="Block_Left-1" unique_id=343828138]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block/DetectionArea" unique_id=1386278253]
-position = Vector2(759.5, 560)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Left-1/DetectionArea" unique_id=1386278253]
+position = Vector2(759.0676, 558.5959)
 shape = SubResource("RectangleShape2D_vp1pg")
 
-[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("3_i2b13")]
-position = Vector2(957, 552)
-scale = Vector2(1.5, 1.5)
+[node name="Block_Left-2" type="CharacterBody2D" parent="." unique_id=1428598428 node_paths=PackedStringArray("prompt_label")]
+position = Vector2(-53.000004, -39)
+scale = Vector2(1.0738852, 1.0748813)
+script = ExtResource("6_vp1pg")
+prompt_label = NodePath("Label2")
+min_x = -133.0
+max_x = 93.0
+min_y = -184.0
+max_y = 184.0
+linked_blocks = Array[NodePath]([NodePath("../Block_Right-2")])
+mirror_x = true
 
-[node name="Label" type="Label" parent="." unique_id=1569631221]
-visible = false
-offset_left = 1113.0
-offset_top = 185.0
-offset_right = 1153.0
-offset_bottom = 208.0
+[node name="elements" type="Sprite2D" parent="Block_Left-2" unique_id=1513327890]
+position = Vector2(759.8577, 560.0618)
+scale = Vector2(0.34972426, 0.34972435)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1164.632, 789.85596, 206.25208, 210.33801)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Left-2" unique_id=366525146]
+position = Vector2(758.92664, 558.2012)
+scale = Vector2(1.3325545, 2.2772408)
+shape = SubResource("RectangleShape2D_hbs4x")
+
+[node name="Label2" type="Label" parent="Block_Left-2" unique_id=291992849]
+offset_left = 816.0
+offset_top = 547.0
+offset_right = 856.0
+offset_bottom = 570.0
+
+[node name="DetectionArea" type="Area2D" parent="Block_Left-2" unique_id=765993023]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Left-2/DetectionArea" unique_id=100565651]
+position = Vector2(759.0676, 558.5959)
+shape = SubResource("RectangleShape2D_vp1pg")
+
+[node name="Block_Left-3" type="CharacterBody2D" parent="." unique_id=1135230593 node_paths=PackedStringArray("prompt_label")]
+position = Vector2(-53.000004, 34)
+scale = Vector2(1.0738852, 1.0748813)
+script = ExtResource("6_vp1pg")
+prompt_label = NodePath("Label2")
+min_x = -133.0
+max_x = 93.0
+min_y = -184.0
+max_y = 184.0
+linked_blocks = Array[NodePath]([NodePath("../Block_Right-3")])
+mirror_x = true
+
+[node name="elements" type="Sprite2D" parent="Block_Left-3" unique_id=810389550]
+position = Vector2(759.8577, 560.0618)
+scale = Vector2(0.34972426, 0.34972435)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1164.632, 789.85596, 206.25208, 210.33801)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Left-3" unique_id=1209179990]
+position = Vector2(758.92664, 558.2012)
+scale = Vector2(1.3325545, 2.2772408)
+shape = SubResource("RectangleShape2D_hbs4x")
+
+[node name="Label2" type="Label" parent="Block_Left-3" unique_id=1131307571]
+offset_left = 816.0
+offset_top = 547.0
+offset_right = 856.0
+offset_bottom = 570.0
+
+[node name="DetectionArea" type="Area2D" parent="Block_Left-3" unique_id=86071]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Left-3/DetectionArea" unique_id=1969550593]
+position = Vector2(759.0676, 558.5959)
+shape = SubResource("RectangleShape2D_vp1pg")
+
+[node name="Block_Right-1" type="CharacterBody2D" parent="." unique_id=1051573580]
+position = Vector2(338, -112.000015)
+scale = Vector2(1.0738852, 1.0748813)
+script = ExtResource("6_vp1pg")
+min_x = -133.0
+max_x = 93.0
+min_y = -184.0
+max_y = 184.0
+linked_blocks = Array[NodePath]([NodePath("")])
+mirror_y = true
+
+[node name="elements" type="Sprite2D" parent="Block_Right-1" unique_id=1934226721]
+position = Vector2(759.8577, 560.0618)
+scale = Vector2(0.34972426, 0.34972435)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1172.9558, 578.35706, 189.8352, 190.80249)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Right-1" unique_id=1562073190]
+position = Vector2(758.92664, 558.2012)
+scale = Vector2(1.3325545, 2.2772408)
+shape = SubResource("RectangleShape2D_hbs4x")
+disabled = true
+
+[node name="DetectionArea" type="Area2D" parent="Block_Right-1" unique_id=1729092754]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Right-1/DetectionArea" unique_id=1948949160]
+position = Vector2(759.0676, 558.5959)
+shape = SubResource("RectangleShape2D_vp1pg")
+disabled = true
+
+[node name="Block_Right-2" type="CharacterBody2D" parent="." unique_id=1589961264]
+position = Vector2(338, -39.999996)
+scale = Vector2(1.0738852, 1.0748813)
+script = ExtResource("6_vp1pg")
+min_x = -133.0
+max_x = 93.0
+min_y = -184.0
+max_y = 184.0
+linked_blocks = Array[NodePath]([NodePath("")])
+mirror_x = true
+mirror_y = true
+
+[node name="elements" type="Sprite2D" parent="Block_Right-2" unique_id=2052631875]
+position = Vector2(759.8577, 560.0618)
+scale = Vector2(0.34972426, 0.34972435)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1172.9558, 578.35706, 189.8352, 190.80249)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Right-2" unique_id=282471287]
+position = Vector2(758.92664, 558.2012)
+scale = Vector2(1.3325545, 2.2772408)
+shape = SubResource("RectangleShape2D_hbs4x")
+disabled = true
+
+[node name="DetectionArea" type="Area2D" parent="Block_Right-2" unique_id=1860017476]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Right-2/DetectionArea" unique_id=1335135787]
+position = Vector2(759.0676, 558.5959)
+shape = SubResource("RectangleShape2D_vp1pg")
+disabled = true
+
+[node name="Block_Right-3" type="CharacterBody2D" parent="." unique_id=69351737]
+position = Vector2(338, 34)
+scale = Vector2(1.0738852, 1.0748813)
+script = ExtResource("6_vp1pg")
+min_x = -133.0
+max_x = 93.0
+min_y = -184.0
+max_y = 184.0
+linked_blocks = Array[NodePath]([NodePath("")])
+mirror_x = true
+mirror_y = true
+
+[node name="elements" type="Sprite2D" parent="Block_Right-3" unique_id=392783648]
+position = Vector2(759.8577, 560.0618)
+scale = Vector2(0.34972426, 0.34972435)
+texture = ExtResource("1_pfh0e")
+region_enabled = true
+region_rect = Rect2(1172.9558, 578.35706, 189.8352, 190.80249)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Right-3" unique_id=1682941078]
+position = Vector2(758.92664, 558.2012)
+scale = Vector2(1.3325545, 2.2772408)
+shape = SubResource("RectangleShape2D_hbs4x")
+disabled = true
+
+[node name="DetectionArea" type="Area2D" parent="Block_Right-3" unique_id=1903111227]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Right-3/DetectionArea" unique_id=462222103]
+position = Vector2(759.0676, 558.5959)
+shape = SubResource("RectangleShape2D_vp1pg")
+disabled = true
+
+[node name="Player" parent="." unique_id=1213491095 instance=ExtResource("3_i2b13")]
+position = Vector2(960, 564.00006)
+scale = Vector2(0.65409607, 0.65409607)
+
+[node name="NearBoundary" type="Area2D" parent="." unique_id=1274422926]
+script = ExtResource("9_f1bej")
+lines = Array[ExtResource("10_khxr4")]([SubResource("Resource_gt04l")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearBoundary" unique_id=914427825]
+position = Vector2(964, 999)
+shape = SubResource("RectangleShape2D_7e1me")
+
+[node name="NearDoor" type="Area2D" parent="." unique_id=898996606]
+position = Vector2(-2, -748)
+script = ExtResource("9_f1bej")
+lines = Array[ExtResource("10_khxr4")]([SubResource("Resource_7e1me")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearDoor" unique_id=47962711]
+position = Vector2(964, 999)
+shape = SubResource("RectangleShape2D_7e1me")

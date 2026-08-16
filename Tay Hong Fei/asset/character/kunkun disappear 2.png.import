@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c30i5sfx57l44"
-path="res://.godot/imported/kunkun dirty version.png-6afca94aba404829efc4a557f652568f.ctex"
+uid="uid://dpv6vudfge1k"
+path="res://.godot/imported/kunkun disappear 2.png-0170b4545b0737468e636ffd8c32010c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tay Hong Fei/character/kunkun dirty version.png"
-dest_files=["res://.godot/imported/kunkun dirty version.png-6afca94aba404829efc4a557f652568f.ctex"]
+source_file="res://Tay Hong Fei/asset/character/kunkun disappear 2.png"
+dest_files=["res://.godot/imported/kunkun disappear 2.png-0170b4545b0737468e636ffd8c32010c.ctex"]
 
 [params]
 

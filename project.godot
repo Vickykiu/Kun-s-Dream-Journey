@@ -27,6 +27,7 @@ Inventory="*res://Lau Kah Kei/scripts/inventory.gd"
 Dialogue="*res://Lau Kah Kei/scenes/dialogue.tscn"
 ItemView="*res://Lau Kah Kei/scenes/item_view.tscn"
 ChapterEscape="*res://Kiu Chun Woon/scripts/chapter_escape.gd"
+MinesweeperState="*uid://bu5pn8yfq0vql"
 
 [display]
 

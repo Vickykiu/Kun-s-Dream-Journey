@@ -1,11 +1,27 @@
 extends Node2D
 
 
-# Called when the node enters the scene tree for the first time.
+# ===== Dialogue =====
+
+@export var speaker_name: String = "Kunkun"
+@export var portrait: Texture2D
+
+@export var intro_lines: Array[DialogueLine] = []:
+	set(value):
+		intro_lines = DialogueLine.fill_blanks(value)
+
+
+# ===== Initialization =====
+
 func _ready() -> void:
-	pass # Replace with function body.
+	# Wait until the scene is ready.
+	await get_tree().process_frame
 
+	if intro_lines.is_empty():
+		return
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	Dialogue.show_lines(
+		intro_lines,
+		portrait,
+		speaker_name
+	)

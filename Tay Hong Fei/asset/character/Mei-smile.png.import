@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpv6vudfge1k"
-path="res://.godot/imported/kunkun disappear 2.png-dee294a52aac2443ffbfc0e87a461a87.ctex"
+uid="uid://8ychjqc0i56q"
+path="res://.godot/imported/Mei-smile.png-b8cc0ccfa102bcae04c3fca674ba6ef5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tay Hong Fei/character/kunkun disappear 2.png"
-dest_files=["res://.godot/imported/kunkun disappear 2.png-dee294a52aac2443ffbfc0e87a461a87.ctex"]
+source_file="res://Tay Hong Fei/asset/character/Mei-smile.png"
+dest_files=["res://.godot/imported/Mei-smile.png-b8cc0ccfa102bcae04c3fca674ba6ef5.ctex"]
 
 [params]
 

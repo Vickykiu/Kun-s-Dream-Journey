@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://toqk0o2nd7yj"]
+
+[ext_resource type="Script" uid="uid://bgumj88inee4e" path="res://Tay Hong Fei/scripts/minesweeper.gd" id="1_njp3b"]
+[ext_resource type="PackedScene" uid="uid://cqchauojextf3" path="res://Tay Hong Fei/scene/MineCell1.tscn" id="2_tqn5o"]
+[ext_resource type="Texture2D" uid="uid://c0dwr52w780dg" path="res://Tay Hong Fei/asset/background/Minesweeper1.png" id="3_2h0ih"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_8pbtj"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="4_bg2kv"]
+[ext_resource type="Texture2D" uid="uid://8ychjqc0i56q" path="res://Tay Hong Fei/asset/character/Mei-smile.png" id="5_8pbtj"]
+
+[sub_resource type="Resource" id="Resource_4c8lp"]
+resource_name = "I… I’m Kunkun?"
+script = ExtResource("3_8pbtj")
+text = "I… I’m Kunkun?"
+portrait = ExtResource("4_bg2kv")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_nhrpo"]
+resource_name = "Here is safe."
+script = ExtResource("3_8pbtj")
+text = "Here is safe."
+portrait = ExtResource("5_8pbtj")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="FontFile" id="FontFile_2h0ih"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gb35x"]
+font = SubResource("FontFile_2h0ih")
+font_size = 24
+font_color = Color(1, 0, 0, 1)
+
+[node name="Minesweeper1" type="Control" unique_id=1593132407]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_njp3b")
+cell_scene = ExtResource("2_tqn5o")
+memory_1_lines = Array[ExtResource("3_8pbtj")]([SubResource("Resource_4c8lp")])
+memory_2_speaker = "Mei"
+memory_2_lines = Array[ExtResource("3_8pbtj")]([SubResource("Resource_nhrpo")])
+
+[node name="Background" type="TextureRect" parent="." unique_id=2062911518]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0007776, 1.001472)
+texture = ExtResource("3_2h0ih")
+
+[node name="BoardCenter" type="CenterContainer" parent="." unique_id=828147405]
+layout_mode = 0
+offset_left = 483.0
+offset_top = 165.0
+offset_right = 1443.0
+offset_bottom = 965.0
+
+[node name="Grid" type="GridContainer" parent="BoardCenter" unique_id=459583557]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 9
+
+[node name="MineCounterBackground" type="ColorRect" parent="." unique_id=1753947557]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 431.0
+offset_right = 228.0
+offset_bottom = 471.0
+scale = Vector2(4.1970687, 2.0374546)
+color = Color(0.006885395, 0.0068853963, 0.006885395, 1)
+
+[node name="MineCounterLabel" type="Label" parent="MineCounterBackground" unique_id=483738442]
+layout_mode = 0
+offset_left = 1.9060922
+offset_top = 1.963234
+offset_right = 41.906094
+offset_bottom = 26.963234
+scale = Vector2(0.92790455, 1.6498392)
+text = "003"
+label_settings = SubResource("LabelSettings_gb35x")
+
+[node name="FlagCounterBackground" type="ColorRect" parent="." unique_id=848747965]
+layout_mode = 0
+offset_left = 189.00002
+offset_top = 604.0
+offset_right = 229.00002
+offset_bottom = 644.0
+scale = Vector2(4.1970687, 2.0374546)
+color = Color(0.006885395, 0.0068853963, 0.006885395, 1)
+
+[node name="FlagCounterLabel" type="Label" parent="FlagCounterBackground" unique_id=520706082]
+layout_mode = 0
+offset_left = 1.9060922
+offset_top = 1.963234
+offset_right = 41.906094
+offset_bottom = 26.963234
+scale = Vector2(0.92790455, 1.6498392)
+text = "003"
+label_settings = SubResource("LabelSettings_gb35x")
+
+[node name="ExitButton" type="Button" parent="." unique_id=1082713736]
+layout_mode = 0
+offset_left = 41.999992
+offset_top = 44.0
+offset_right = 49.999992
+offset_bottom = 52.0
+scale = Vector2(8.68318, 8.651572)
+flat = true

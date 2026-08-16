@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvxt7wimdkxdi"
-path="res://.godot/imported/kunkun disappear 3.png-27cdfc4a0454654144aa709e75a7ab89.ctex"
+uid="uid://dfw2tlktagp2y"
+path="res://.godot/imported/Milo.png-8f9070e7642cb1f95b00259b155ae439.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tay Hong Fei/character/kunkun disappear 3.png"
-dest_files=["res://.godot/imported/kunkun disappear 3.png-27cdfc4a0454654144aa709e75a7ab89.ctex"]
+source_file="res://Tay Hong Fei/asset/character/Milo.png"
+dest_files=["res://.godot/imported/Milo.png-8f9070e7642cb1f95b00259b155ae439.ctex"]
 
 [params]
 

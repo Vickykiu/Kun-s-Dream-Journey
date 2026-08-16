@@ -39,6 +39,7 @@ extends CharacterBody2D
 @export var bob_height := 4.0    # how many pixels it bounces
 
 @onready var sprite: Sprite2D = $Sprite
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 var _walk_time := 0.0
 var _bob_time := 0.0
@@ -47,6 +48,9 @@ var _facing := Vector2.DOWN   # last direction we moved in
 
 # Cutscenes / puzzles can freeze the character with set_can_move(false).
 var can_move := true
+
+var last_movement_dir := Vector2.DOWN
+var external_direction := Vector2.ZERO
 
 
 func _ready():
@@ -65,7 +69,9 @@ func _ready():
 func _physics_process(delta):
 	var direction = Vector2.ZERO
 
-	if player_controlled and can_move:
+	if external_direction != Vector2.ZERO:
+		direction = external_direction
+	elif player_controlled and can_move:
 		if Input.is_key_pressed(KEY_W):
 			direction.y -= 1
 
@@ -77,6 +83,20 @@ func _physics_process(delta):
 
 		if Input.is_key_pressed(KEY_D):
 			direction.x += 1
+
+	if direction != Vector2.ZERO:
+		var normalized_direction = direction.normalized()
+
+		if abs(normalized_direction.x) >= abs(normalized_direction.y):
+			if normalized_direction.x > 0:
+				last_movement_dir = Vector2.RIGHT
+			else:
+				last_movement_dir = Vector2.LEFT
+		else:
+			if normalized_direction.y > 0:
+				last_movement_dir = Vector2.DOWN
+			else:
+				last_movement_dir = Vector2.UP
 
 	velocity = direction.normalized() * speed
 
@@ -95,6 +115,33 @@ func face_direction(direction: Vector2) -> void:
 	var standing = _poses_for(direction)[0]
 	if standing:
 		sprite.texture = standing
+
+
+func get_foot_position() -> Vector2:
+	if collision_shape and collision_shape.shape:
+		var shape = collision_shape.shape
+
+		if shape is RectangleShape2D:
+			return global_position + Vector2(
+				0,
+				shape.size.y / 2.0
+			)
+
+		elif shape is CircleShape2D:
+			return global_position + Vector2(
+				0,
+				shape.radius
+			)
+
+	return global_position
+
+
+func get_last_movement_direction() -> Vector2:
+	return last_movement_dir
+
+
+func set_external_direction(direction: Vector2) -> void:
+	external_direction = direction
 
 
 func _update_sprite(direction, delta):

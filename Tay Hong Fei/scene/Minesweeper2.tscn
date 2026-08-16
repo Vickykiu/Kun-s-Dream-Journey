@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://d2vdpv8e8phs8"]
+
+[ext_resource type="Script" uid="uid://b5wbh04yr7sgl" path="res://Tay Hong Fei/scripts/minesweeper_2.gd" id="1_ck2l7"]
+[ext_resource type="Texture2D" uid="uid://f7ekkt66ksw8" path="res://Tay Hong Fei/asset/background/Minesweeper2.png" id="2_1av7i"]
+[ext_resource type="PackedScene" uid="uid://c8geiw3jtuv62" path="res://Tay Hong Fei/scene/MineCell2.tscn" id="2_bgj5e"]
+[ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_bgj5e"]
+[ext_resource type="Texture2D" uid="uid://b4hbtk8wah3yw" path="res://Tay Hong Fei/asset/character/Kunkun?.png" id="4_esid6"]
+[ext_resource type="Texture2D" uid="uid://yt36dda4wyyt" path="res://Tay Hong Fei/asset/character/Milo-scared.png" id="4_wrynk"]
+
+[sub_resource type="Resource" id="Resource_esid6"]
+resource_name = "Help me..."
+script = ExtResource("3_bgj5e")
+text = "Help me..."
+portrait = ExtResource("4_wrynk")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_wrynk"]
+resource_name = "This is the third time."
+script = ExtResource("3_bgj5e")
+text = "This is the third time."
+portrait = ExtResource("4_esid6")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="FontFile" id="FontFile_wrynk"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bgj5e"]
+font = SubResource("FontFile_wrynk")
+font_size = 24
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="FontFile" id="FontFile_ro53k"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_wrynk"]
+font = SubResource("FontFile_ro53k")
+font_size = 24
+font_color = Color(1, 0, 0, 1)
+
+[node name="Minesweeper2" type="Control" unique_id=1068750555]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ck2l7")
+cell_scene = ExtResource("2_bgj5e")
+memory_1_speaker = "Ricardo Milos"
+memory_1_lines = Array[ExtResource("3_bgj5e")]([SubResource("Resource_esid6")])
+memory_2_speaker = "Kunkun?"
+memory_2_lines = Array[ExtResource("3_bgj5e")]([SubResource("Resource_wrynk")])
+
+[node name="Background" type="TextureRect" parent="." unique_id=1819036961]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0007776, 1.001472)
+texture = ExtResource("2_1av7i")
+
+[node name="BoardCenter" type="CenterContainer" parent="." unique_id=341292453]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 159.0
+offset_right = 1456.0
+offset_bottom = 989.0
+
+[node name="Grid" type="GridContainer" parent="BoardCenter" unique_id=176803408]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 13
+
+[node name="MineCounterBackground" type="ColorRect" parent="." unique_id=1430260237]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 431.0
+offset_right = 228.0
+offset_bottom = 471.0
+scale = Vector2(4.1970687, 2.0374546)
+color = Color(0.006885395, 0.0068853963, 0.006885395, 1)
+
+[node name="MineCounterLabel" type="Label" parent="MineCounterBackground" unique_id=1081578628]
+layout_mode = 0
+offset_left = 1.9060922
+offset_top = 1.963234
+offset_right = 41.906094
+offset_bottom = 26.963234
+scale = Vector2(0.92790455, 1.6498392)
+text = "003"
+label_settings = SubResource("LabelSettings_bgj5e")
+
+[node name="FlagCounterBackground" type="ColorRect" parent="." unique_id=2875408]
+layout_mode = 0
+offset_left = 189.00002
+offset_top = 604.0
+offset_right = 229.00002
+offset_bottom = 644.0
+scale = Vector2(4.1970687, 2.0374546)
+color = Color(0.006885395, 0.0068853963, 0.006885395, 1)
+
+[node name="FlagCounterLabel" type="Label" parent="FlagCounterBackground" unique_id=529616192]
+layout_mode = 0
+offset_left = 1.9060922
+offset_top = 1.963234
+offset_right = 41.906094
+offset_bottom = 26.963234
+scale = Vector2(0.92790455, 1.6498392)
+text = "003"
+label_settings = SubResource("LabelSettings_wrynk")
+
+[node name="ExitButton" type="Button" parent="." unique_id=1732122554]
+layout_mode = 0
+offset_left = 41.999992
+offset_top = 44.0
+offset_right = 49.999992
+offset_bottom = 52.0
+scale = Vector2(8.68318, 8.651572)
+flat = true

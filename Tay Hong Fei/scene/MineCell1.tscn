@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cqchauojextf3"]
+
+[ext_resource type="Texture2D" uid="uid://24pghwjr17bq" path="res://Tay Hong Fei/asset/minesweeper/9.png" id="1_00han"]
+[ext_resource type="Script" uid="uid://crohfgj5xqqpp" path="res://Tay Hong Fei/scripts/mine_cell.gd" id="2_w87rg"]
+[ext_resource type="Texture2D" uid="uid://cyjil2qh3bk1q" path="res://Tay Hong Fei/asset/minesweeper/0.png" id="3_tu1r3"]
+[ext_resource type="Texture2D" uid="uid://kd5wpgd37nmx" path="res://Tay Hong Fei/asset/minesweeper/1.png" id="4_u404n"]
+[ext_resource type="Texture2D" uid="uid://cafj4t8nvuqq2" path="res://Tay Hong Fei/asset/minesweeper/2.png" id="5_1mej2"]
+[ext_resource type="Texture2D" uid="uid://ch62mkh6v5ciq" path="res://Tay Hong Fei/asset/minesweeper/3.png" id="6_kl0jp"]
+[ext_resource type="Texture2D" uid="uid://cothnwi72r7nu" path="res://Tay Hong Fei/asset/minesweeper/4.png" id="7_xgm3q"]
+[ext_resource type="Texture2D" uid="uid://du54eyit3fk15" path="res://Tay Hong Fei/asset/minesweeper/10.png" id="8_uls11"]
+[ext_resource type="Texture2D" uid="uid://66tvi14gago5" path="res://Tay Hong Fei/asset/minesweeper/11.png" id="9_bvrin"]
+[ext_resource type="Texture2D" uid="uid://0yw5ca2yndef" path="res://Tay Hong Fei/asset/minesweeper/13.png" id="10_shf8b"]
+
+[node name="MineCell1" type="TextureButton" unique_id=421004006]
+custom_minimum_size = Vector2(106.67, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1900.0
+offset_bottom = -1060.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_00han")
+script = ExtResource("2_w87rg")
+texture_covered = ExtResource("1_00han")
+texture_empty = ExtResource("3_tu1r3")
+texture_1 = ExtResource("4_u404n")
+texture_2 = ExtResource("5_1mej2")
+texture_3 = ExtResource("6_kl0jp")
+texture_4 = ExtResource("7_xgm3q")
+texture_flag = ExtResource("8_uls11")
+texture_mine = ExtResource("9_bvrin")
+texture_exploded = ExtResource("10_shf8b")
