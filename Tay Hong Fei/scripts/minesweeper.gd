@@ -160,6 +160,9 @@ func _on_reveal_requested(index: int) -> void:
 
 		mines_created = true
 
+		# Recalculate correct flags after mines exist.
+		update_counters()
+
 	reveal_cell(index)
 
 	# Save progress after revealing.
@@ -344,8 +347,19 @@ func _on_flag_requested(index: int) -> void:
 # ===== Counters =====
 
 func update_counters() -> void:
+	var correct_flags: int = 0
+
+	# Count only flags placed on real mines.
+	if mines_created:
+		for cell in cells:
+			if (
+				cell.is_flagged
+				and cell.has_mine
+			):
+				correct_flags += 1
+
 	var remaining_mines: int = (
-		mine_count - flags_placed
+		mine_count - correct_flags
 	)
 
 	remaining_mines = max(
@@ -353,12 +367,12 @@ func update_counters() -> void:
 		0
 	)
 
-	# Mine counter decreases.
+	# Mine counter decreases only for correct flags.
 	mine_counter_label.text = (
 		"%03d" % remaining_mines
 	)
 
-	# Flag counter increases.
+	# Flag counter counts all placed flags.
 	flag_counter_label.text = (
 		"%03d" % flags_placed
 	)

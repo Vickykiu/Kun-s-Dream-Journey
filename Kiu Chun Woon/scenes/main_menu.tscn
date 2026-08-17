@@ -194,7 +194,6 @@ offset_right = -180.0
 offset_bottom = -58.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
@@ -207,8 +206,8 @@ alignment = 2
 
 [node name="MenuCard" type="PanelContainer" parent="SafeMargin/Layout" unique_id=225472336]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(460, 0)
 clip_contents = true
+custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 size_flags_vertical = 4
 

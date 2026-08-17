@@ -17,6 +17,7 @@ const NOTE_TRAVEL_TIME := 1.8
 const PERFECT_WINDOW := 0.10
 const GOOD_WINDOW := 0.21
 const MISS_WINDOW := 0.28
+const PASS_ACCURACY := 50.0
 
 const LANE_TEXT := ["←", "↓", "↑", "→"]
 const LANE_COLORS := [
@@ -48,6 +49,8 @@ const NOTE_PATTERN := [
 @onready var result_title: Label = %ResultTitle
 @onready var result_stats: Label = %ResultStats
 @onready var evidence_label: Label = %EvidenceLabel
+@onready var teacher_mei_dialogue_portrait: TextureRect = %TeacherMeiDialoguePortrait
+@onready var teacher_mei_disappointed_portrait: TextureRect = %TeacherMeiDisappointedPortrait
 
 var chart: Array[Dictionary] = []
 var next_spawn_index := 0
@@ -84,6 +87,9 @@ func _process(_delta: float) -> void:
 	_spawn_ready_notes(song_time)
 	_update_notes(song_time)
 	_update_hud(song_time)
+
+	if song_time >= song_duration:
+		_on_song_finished()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -148,6 +154,8 @@ func _reset_run() -> void:
 	atmosphere.color = Color(0.015, 0.025, 0.055, 0.13)
 	judgement_label.modulate.a = 0.0
 	reaction_portrait.hide()
+	teacher_mei_dialogue_portrait.show()
+	teacher_mei_disappointed_portrait.hide()
 	countdown_label.hide()
 	result_overlay.hide()
 	_update_hud(0.0)
@@ -156,6 +164,8 @@ func _reset_run() -> void:
 func _on_start_training_pressed() -> void:
 	if countdown_active or playing:
 		return
+	teacher_mei_dialogue_portrait.hide()
+	teacher_mei_disappointed_portrait.hide()
 	instruction_overlay.hide()
 	_begin_countdown()
 
@@ -397,37 +407,90 @@ func _show_results() -> void:
 	var hits := perfect_count + good_count
 	var final_accuracy := rating_points / float(maxi(chart.size(), 1)) * 100.0
 	var grade := "D"
+
 	if final_accuracy >= 92.0:
 		grade = "S"
 	elif final_accuracy >= 82.0:
 		grade = "A"
 	elif final_accuracy >= 68.0:
 		grade = "B"
-	elif final_accuracy >= 50.0:
+	elif final_accuracy >= PASS_ACCURACY:
 		grade = "C"
 
-	result_title.text = "ORIENTATION COMPLETE  |  GRADE %s" % grade
+	var passed := final_accuracy >= PASS_ACCURACY
+
+	# Resolve optional result buttons once so both branches can use them.
+	var continue_button := get_node_or_null("%ContinueButton") as Button
+	var retry_button := get_node_or_null("%RetryButton") as Button
+	var main_menu_button := get_node_or_null("%ReturnMainMenuButton") as Button
+
+	if passed:
+		result_title.text = "ORIENTATION COMPLETE  |  GRADE %s" % grade
+	else:
+		result_title.text = "TRAINING FAILED  |  GRADE %s" % grade
+
 	result_stats.text = (
 		"SCORE  %06d\nPERFECT  %02d     GREAT  %02d     MISS  %02d\nBEST COMBO  %02d     ACCURACY  %05.1f%%"
 		% [score, perfect_count, good_count, miss_count, best_combo, final_accuracy]
 	)
-	if hits == 0:
-		_award_torn_diary_evidence()
-		evidence_label.text = "HIDDEN EVIDENCE FOUND\nTorn Diary Page"
+
+	if not passed:
+		teacher_mei_dialogue_portrait.hide()
+		teacher_mei_disappointed_portrait.show()
+		evidence_label.text = "Teacher Mei feels disappointed once she sees the result.\n\"You must reach Grade C or higher.\"\nRETRY TRAINING TO CONTINUE."
 		evidence_label.add_theme_color_override("font_color", Color("#ff7777"))
+
+		# A failed attempt does not unlock Chapter 2.
+
+		if continue_button != null:
+			continue_button.hide()
+		if retry_button != null:
+			retry_button.show()
+		if main_menu_button != null:
+			main_menu_button.hide()
+
+		_mark_chapter_one_complete(grade, final_accuracy, false)
 	else:
-		evidence_label.text = "Teacher Mei: Keep following the rhythm. The camp is watching."
-		evidence_label.add_theme_color_override("font_color", Color("#a9b8c8"))
-	_mark_chapter_one_complete(grade, final_accuracy)
+		teacher_mei_disappointed_portrait.hide()
+		teacher_mei_dialogue_portrait.show()
+		if hits == 0:
+			_award_torn_diary_evidence()
+			evidence_label.text = "HIDDEN EVIDENCE FOUND\nTorn Diary Page"
+			evidence_label.add_theme_color_override("font_color", Color("#ff7777"))
+		else:
+			evidence_label.text = "Teacher Mei: Keep following the rhythm. The camp is watching."
+			evidence_label.add_theme_color_override("font_color", Color("#a9b8c8"))
+
+
+		if continue_button != null:
+			continue_button.show()
+		if retry_button != null:
+			retry_button.show()
+		if main_menu_button != null:
+			main_menu_button.show()
+
+		_mark_chapter_one_complete(grade, final_accuracy, true)
+
 	result_overlay.show()
-	%ContinueButton.grab_focus()
+
+	if passed:
+		if continue_button != null:
+			continue_button.grab_focus()
+	else:
+		if retry_button != null:
+			retry_button.grab_focus()
 
 
-func _mark_chapter_one_complete(grade: String, final_accuracy: float) -> void:
+func _mark_chapter_one_complete(
+	grade: String,
+	final_accuracy: float,
+	passed: bool = true
+) -> void:
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state == null:
 		return
-	game_state.set_meta("chapter_1_complete", true)
+
+	game_state.set_meta("chapter_1_complete", passed)
 	game_state.set_meta("chapter_1_grade", grade)
 	game_state.set_meta("chapter_1_accuracy", final_accuracy)
 
@@ -443,8 +506,19 @@ func _award_torn_diary_evidence() -> void:
 
 func _on_retry_pressed() -> void:
 	_reset_run()
-	instruction_overlay.hide()
-	_begin_countdown()
+	result_overlay.hide()
+
+	if teacher_mei_disappointed_portrait != null:
+		teacher_mei_disappointed_portrait.hide()
+
+	if teacher_mei_dialogue_portrait != null:
+		teacher_mei_dialogue_portrait.show()
+
+	instruction_overlay.show()
+
+	var start_button := get_node_or_null("%StartTrainingButton") as Button
+	if start_button != null:
+		start_button.grab_focus()
 
 
 func _on_continue_pressed() -> void:

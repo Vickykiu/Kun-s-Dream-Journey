@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://3acjce6jrw2f" path="res://Tay Hong Fei/asset/character/kunkun disappear 1.png" id="15_t4aq6"]
 [ext_resource type="Texture2D" uid="uid://dpv6vudfge1k" path="res://Tay Hong Fei/asset/character/kunkun disappear 2.png" id="16_30gmv"]
 [ext_resource type="Texture2D" uid="uid://bvxt7wimdkxdi" path="res://Tay Hong Fei/asset/character/kunkun disappear 3.png" id="17_5h6e6"]
+[ext_resource type="PackedScene" uid="uid://bvpq02xlhkx6w" path="res://Tay Hong Fei/scene/Credits.tscn" id="18_30gmv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmnnq"]
 radius = 18.027756
@@ -46,21 +47,70 @@ metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 [sub_resource type="Resource" id="Resource_t4aq6"]
 resource_name = "I've tried so many times. Every time, I "
 script = ExtResource("11_iqage")
-text = "I've tried so many times. Every time, I thought this would finally be the time I escaped. I crawled through the vents, broke into the safe, even tried setting the place on fire... but every time, I ended up back in that room."
+text = "I've tried so many times. Every time, I thought this would finally be the time I escaped. "
+portrait = ExtResource("13_0kcjn")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_xmxbq"]
+resource_name = "I crawled through the vents, broke into "
+script = ExtResource("11_iqage")
+text = "I crawled through the vents, broke into the safe, even tried setting the place on fire... but every time, I ended up back in that room."
 portrait = ExtResource("13_0kcjn")
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="Resource" id="Resource_30gmv"]
 resource_name = "I've tried so many times. Every time, I "
 script = ExtResource("11_iqage")
-text = "I've tried so many times. Every time, I thought this would finally be the time I escaped. I crawled through the vents, broke into the safe, even tried setting the place on fire... but every time, I ended up back in that room."
+text = "I've tried so many times. Every time, I thought this would finally be the time I escaped. "
+portrait = ExtResource("13_0kcjn")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_wjynx"]
+resource_name = "I crawled through the vents, broke into "
+script = ExtResource("11_iqage")
+text = "I crawled through the vents, broke into the safe, even tried setting the place on fire... but every time, I ended up back in that room."
+portrait = ExtResource("13_0kcjn")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_4lioo"]
+resource_name = "Eventually, I realized the truth. We can"
+script = ExtResource("11_iqage")
+text = "Eventually, I realized the truth. We can't get out. This training camp isn't a real place."
+portrait = ExtResource("13_0kcjn")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_daby8"]
+resource_name = "It's a prison for souls. All of our cons"
+script = ExtResource("11_iqage")
+text = "It's a prison for souls. All of our consciousness is trapped here, repeating the same cycle again and again."
 portrait = ExtResource("13_0kcjn")
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="Resource" id="Resource_5h6e6"]
 resource_name = "But there is one way for you to leave. N"
 script = ExtResource("11_iqage")
-text = "But there is one way for you to leave. Not by escaping, but by being reborn. I can compress all the memories of this life into a seed for you to carry with you. In your next life, you won't remember exactly what happened here... but somewhere deep inside, you'll know when something feels wrong, and which places you should never enter."
+text = "But there is one way for you to leave. Not by escaping, but by being reborn. "
+portrait = ExtResource("14_0kcjn")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_w5wro"]
+resource_name = "I can compress all the memories of this "
+script = ExtResource("11_iqage")
+text = "I can compress all the memories of this life into a seed for you to carry with you. "
+portrait = ExtResource("14_0kcjn")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_e4x0m"]
+resource_name = "In your next life, you won't remember ex"
+script = ExtResource("11_iqage")
+text = "In your next life, you won't remember exactly what happened here... but somewhere deep inside. "
+portrait = ExtResource("14_0kcjn")
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_jyxnc"]
+resource_name = "You'll know when something feels wrong, "
+script = ExtResource("11_iqage")
+text = "You'll know when something feels wrong, and which places you should never enter."
 portrait = ExtResource("14_0kcjn")
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
@@ -192,9 +242,11 @@ mystery_speaker = "Kunkun?"
 mystery_intro_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fw405")])
 main_speaker = "Kunkun?"
 main_portrait = ExtResource("14_0kcjn")
-main_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_t4aq6"), SubResource("Resource_30gmv"), SubResource("Resource_5h6e6")])
+main_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_t4aq6"), SubResource("Resource_xmxbq"), SubResource("Resource_30gmv"), SubResource("Resource_wjynx"), SubResource("Resource_4lioo"), SubResource("Resource_daby8"), SubResource("Resource_5h6e6"), SubResource("Resource_w5wro"), SubResource("Resource_e4x0m"), SubResource("Resource_jyxnc")])
 reject_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fgl5u")])
 disappear_frames = Array[Texture2D]([ExtResource("15_t4aq6"), ExtResource("16_30gmv"), ExtResource("17_5h6e6")])
+ending_image = ExtResource("4_d4syc")
+credits_scene = ExtResource("18_30gmv")
 reject_scene = ExtResource("15_fy4hc")
 
 [node name="Sprite" type="Sprite2D" parent="Kunkun1" unique_id=139223958]

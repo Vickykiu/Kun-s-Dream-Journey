@@ -1,7 +1,7 @@
 extends Control
 
 const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
-const CHAPTER_ONE_SCENE := "res://Kiu Chun Woon/scenes/chapter_1_placeholder.tscn"
+const CHAPTER_ONE_SCENE := "res://Kiu Chun Woon/scenes/chapter_1_rhythm.tscn"
 const CHAPTER_TWO_SCENE := "res://Lau Kah Kei/scenes/corridor.tscn"
 const CHAPTER_THREE_SCENE := "res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn"
 const CHAPTER_FOUR_SCENE := "res://Tay Hong Fei/scene/Chapter 4-1.tscn"

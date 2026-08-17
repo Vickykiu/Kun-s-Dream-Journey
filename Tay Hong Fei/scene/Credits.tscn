@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bvpq02xlhkx6w"]
+
+[ext_resource type="Script" uid="uid://c7swussss4acs" path="res://Tay Hong Fei/scripts/credits.gd" id="1_3fakh"]
+[ext_resource type="PackedScene" uid="uid://my743dlinxh" path="res://Kiu Chun Woon/scenes/main_menu.tscn" id="2_di5ma"]
+
+[node name="Credits" type="Control" unique_id=1062153632]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3fakh")
+main_menu_scene = ExtResource("2_di5ma")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1920004040]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CreditsText" type="Label" parent="." unique_id=1963901673]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 28
+text = "KUN'S DREAM JOURNEY
+
+
+PRODUCED BY
+
+Tay Hong Fei
+Lau Kah Kei
+Lew Jia Jia
+Kiu Chun Woon
+
+
+PROGRAMMING
+
+Tay Hong Fei
+Lau Kah Kei
+Lew Jia Jia
+Kiu Chun Woon
+
+
+ART & DESIGN
+
+Chupapi Muyanyo
+
+
+SPECIAL THANKS
+
+UTAR
+
+
+Thank You For Playing"
+horizontal_alignment = 1
+autowrap_mode = 3
