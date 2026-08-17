@@ -112,6 +112,18 @@ theme_override_font_sizes/font_size = 20
 text = "[E] Next"
 horizontal_alignment = 2
 
+[node name="Choices" type="HBoxContainer" parent="Root/Panel/Rows" unique_id=1000371549]
+visible = false
+layout_mode = 2
+
+[node name="AcceptButton" type="Button" parent="Root/Panel/Rows/Choices" unique_id=1898682747]
+layout_mode = 2
+text = "Yes"
+
+[node name="RejectButton" type="Button" parent="Root/Panel/Rows/Choices" unique_id=1761256066]
+layout_mode = 2
+text = "No"
+
 [node name="Portrait" type="TextureRect" parent="Root" unique_id=1409215929]
 texture_filter = 1
 layout_mode = 1

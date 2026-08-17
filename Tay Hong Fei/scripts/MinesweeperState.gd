@@ -13,6 +13,9 @@ var has_return_position: bool = false
 var active_crystal_id: String = ""
 var completed_crystals: Dictionary = {}
 
+var mystery_intro_played: bool = false
+var reject_hint_pending: bool = false
+
 
 # ===== Puzzle Progress =====
 

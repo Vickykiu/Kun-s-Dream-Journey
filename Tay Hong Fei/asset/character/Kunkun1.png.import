@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4hbtk8wah3yw"
-path="res://.godot/imported/Kunkun?.png-73b7f151e3be4815ba7adf831dd2804f.ctex"
+uid="uid://cd6ndr5cq17p"
+path="res://.godot/imported/Kunkun1.png-f8483f8a3e286f1b3c6d0851b70e2e28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tay Hong Fei/asset/character/Kunkun?.png"
-dest_files=["res://.godot/imported/Kunkun?.png-73b7f151e3be4815ba7adf831dd2804f.ctex"]
+source_file="res://Tay Hong Fei/asset/character/Kunkun1.png"
+dest_files=["res://.godot/imported/Kunkun1.png-f8483f8a3e286f1b3c6d0851b70e2e28.ctex"]
 
 [params]
 

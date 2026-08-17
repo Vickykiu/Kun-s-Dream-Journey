@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://csmncq3pinrkq" path="res://Lew Jia Jia/assets/Safe_Close.png" id="3_8dvhw"]
 [ext_resource type="Texture2D" uid="uid://ddy07efiwgjaa" path="res://Lew Jia Jia/assets/Safe_OpenEmpty.png" id="4_abvsn"]
 [ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="4_v4nn1"]
-[ext_resource type="PackedScene" uid="uid://daa5mjdacw602" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
+[ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dvhw"]
 size = Vector2(85.86051, 44.546997)
@@ -363,6 +363,18 @@ theme_override_font_sizes/font_size = 45
 text = "Press E to leave"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RejectHintLayer" type="CanvasLayer" parent="." unique_id=592771264]
+layer = 50
+
+[node name="RejectHintLabel" type="Label" parent="RejectHintLayer" unique_id=557501494]
+offset_left = -1880.0
+offset_top = 886.00006
+offset_right = -1394.0
+offset_bottom = 935.00006
+scale = Vector2(1.5826125, 1.5826125)
+text = "...By the way, I tried breaking through the ventilation shaft too.
+I never made it to the end of that path."
 
 [connection signal="interacted" from="Safe/Area2D" to="." method="_on_safe_interacted"]
 [connection signal="interacted" from="Cabinet/Area2D" to="." method="_on_cabinet_interacted"]

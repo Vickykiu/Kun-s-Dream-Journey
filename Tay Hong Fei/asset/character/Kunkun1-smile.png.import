@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmsvgmsqm47ha"
-path="res://.godot/imported/Kunkun?-smile.png-b728108e2a789914b1e8045f45162bdf.ctex"
+uid="uid://b3rjxh2u1r0ce"
+path="res://.godot/imported/Kunkun1-smile.png-6a5f4fc10522fe77ff5efff60089d547.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tay Hong Fei/asset/character/Kunkun?-smile.png"
-dest_files=["res://.godot/imported/Kunkun?-smile.png-b728108e2a789914b1e8045f45162bdf.ctex"]
+source_file="res://Tay Hong Fei/asset/character/Kunkun1-smile.png"
+dest_files=["res://.godot/imported/Kunkun1-smile.png-6a5f4fc10522fe77ff5efff60089d547.ctex"]
 
 [params]
 
