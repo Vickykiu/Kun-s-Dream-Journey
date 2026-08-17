@@ -238,7 +238,7 @@ script = ExtResource("4_v4nn1")
 prompt_text = "Press E to inspect the desk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Desk/Area2D" unique_id=691712680]
-position = Vector2(15.709491, 407.64853)
+position = Vector2(104.72959, 391.38095)
 scale = Vector2(1, 1.0000025)
 shape = SubResource("RectangleShape2D_1px24")
 
