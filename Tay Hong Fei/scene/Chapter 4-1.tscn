@@ -21,9 +21,9 @@ portrait = ExtResource("11_p2a7j")
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="Resource" id="Resource_p2a7j"]
-resource_name = "This place feels different..."
+resource_name = "This place feels strange..."
 script = ExtResource("10_khxr4")
-text = "This place feels different..."
+text = "This place feels strange..."
 portrait = ExtResource("11_p2a7j")
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
