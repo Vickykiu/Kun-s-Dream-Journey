@@ -12,7 +12,7 @@ const REACTION_TEXTURES := {
 }
 
 const FALLBACK_SONG_DURATION := 38.0
-const NOTE_COUNT := 72
+const NOTE_COUNT := 72  # Normal mode only; Hard Mode fills the full song length instead.
 const NOTE_TRAVEL_TIME := 1.8
 const PERFECT_WINDOW := 0.10
 const GOOD_WINDOW := 0.21
@@ -33,6 +33,26 @@ const NOTE_PATTERN := [
 	1, 2, 0, 3, 1, 3, 0, 2,
 ]
 
+const HARD_NOTE_PATTERN := [
+	0, 3, 1, 2, 3, 0, 2, 1,
+	3, 1, 0, 2, 1, 3, 2, 0,
+	2, 0, 3, 1, 2, 1, 0, 3,
+	1, 2, 3, 0, 2, 3, 1, 0,
+]
+const HARD_OFFBEAT_PATTERN := [
+	2, 0, 3, 1, 0, 2, 1, 3,
+	1, 3, 2, 0, 3, 1, 0, 2,
+	0, 1, 2, 3, 1, 0, 3, 2,
+	3, 0, 1, 2, 0, 1, 2, 3,
+]
+const HARD_NOTE_TRAVEL_TIME := 0.95
+const HARD_PERFECT_WINDOW := 0.07
+const HARD_GOOD_WINDOW := 0.15
+const HARD_MISS_WINDOW := 0.2
+const HARD_PASS_ACCURACY := 65.0
+
+@export var hard_mode_music: AudioStream
+
 @onready var conductor: RhythmConductor = %Conductor
 @onready var atmosphere: ColorRect = $Atmosphere
 @onready var note_layer: Control = %NoteLayer
@@ -51,6 +71,10 @@ const NOTE_PATTERN := [
 @onready var evidence_label: Label = %EvidenceLabel
 @onready var teacher_mei_dialogue_portrait: TextureRect = %TeacherMeiDialoguePortrait
 @onready var teacher_mei_disappointed_portrait: TextureRect = %TeacherMeiDisappointedPortrait
+@onready var hard_mode_prompt_overlay: Control = %HardModePromptOverlay
+@onready var chapter_label: Label = %ChapterLabel
+@onready var instruction_title: Label = %InstructionTitle
+@onready var instruction_warning: Label = %InstructionWarning
 
 var chart: Array[Dictionary] = []
 var next_spawn_index := 0
@@ -67,6 +91,13 @@ var rating_points := 0.0
 var judgement_tween: Tween
 var atmosphere_tween: Tween
 var song_duration := FALLBACK_SONG_DURATION
+var hard_mode := false
+var active_pattern: Array = NOTE_PATTERN
+var note_travel_time := NOTE_TRAVEL_TIME
+var perfect_window := PERFECT_WINDOW
+var good_window := GOOD_WINDOW
+var miss_window := MISS_WINDOW
+var pass_accuracy := PASS_ACCURACY
 
 
 func _ready() -> void:
@@ -75,6 +106,7 @@ func _ready() -> void:
 		menu_music.stop_music()
 
 	song_duration = maxf(conductor.get_song_length(), FALLBACK_SONG_DURATION)
+	_apply_difficulty()
 	_build_chart()
 	_reset_run()
 
@@ -118,16 +150,73 @@ func _unhandled_input(event: InputEvent) -> void:
 		_judge_lane(lane)
 
 
+func _get_active_note_count() -> int:
+	if not hard_mode:
+		return NOTE_COUNT
+
+	# Hard Mode's song can run much longer than the base chart's ~35s
+	# (72 notes at 128 BPM), so keep generating beats until they fill the
+	# whole track, leaving enough room at the end for the final note to be
+	# fully playable and judged before the song finishes.
+	var cutoff := song_duration - (note_travel_time + miss_window)
+	var count := 0
+	while conductor.time_for_beat(count) < cutoff:
+		count += 1
+	return maxi(count, 1)
+
+
 func _build_chart() -> void:
 	chart.clear()
-	for index in range(NOTE_COUNT):
+	var base_times: Array[float] = []
+	var note_count := _get_active_note_count()
+	for index in range(note_count):
+		var beat_time := float(conductor.time_for_beat(index))
+		base_times.append(beat_time)
 		chart.append({
-			"time": conductor.time_for_beat(index),
-			"lane": NOTE_PATTERN[index % NOTE_PATTERN.size()],
+			"time": beat_time,
+			"lane": active_pattern[index % active_pattern.size()],
 			"visual": null,
 			"judged": false,
 			"beat_pulsed": false,
 		})
+
+	if hard_mode:
+		for index in range(base_times.size() - 1):
+			var midpoint := lerpf(base_times[index], base_times[index + 1], 0.5)
+			chart.append({
+				"time": midpoint,
+				"lane": HARD_OFFBEAT_PATTERN[index % HARD_OFFBEAT_PATTERN.size()],
+				"visual": null,
+				"judged": false,
+				"beat_pulsed": false,
+			})
+		chart.sort_custom(func(a, b): return float(a["time"]) < float(b["time"]))
+
+
+func _apply_difficulty() -> void:
+	if hard_mode:
+		active_pattern = HARD_NOTE_PATTERN
+		note_travel_time = HARD_NOTE_TRAVEL_TIME
+		perfect_window = HARD_PERFECT_WINDOW
+		good_window = HARD_GOOD_WINDOW
+		miss_window = HARD_MISS_WINDOW
+		pass_accuracy = HARD_PASS_ACCURACY
+		chapter_label.text = "CHAPTER 1  /  ORIENTATION DAY  —  HARD MODE"
+		instruction_title.text = "RHYTHM ORIENTATION  —  HARD MODE"
+		instruction_warning.text = "HARD MODE: more notes, faster falling, tighter timing. %d%% accuracy required to pass." % int(HARD_PASS_ACCURACY)
+		if hard_mode_music != null and conductor.music.stream != hard_mode_music:
+			conductor.set_song(hard_mode_music)
+			song_duration = maxf(conductor.get_song_length(), FALLBACK_SONG_DURATION)
+	else:
+		active_pattern = NOTE_PATTERN
+		note_travel_time = NOTE_TRAVEL_TIME
+		perfect_window = PERFECT_WINDOW
+		good_window = GOOD_WINDOW
+		miss_window = MISS_WINDOW
+		pass_accuracy = PASS_ACCURACY
+		chapter_label.text = "CHAPTER 1  /  ORIENTATION DAY"
+		instruction_title.text = "RHYTHM ORIENTATION"
+		instruction_warning.text = "There may be evidence hidden behind an unusual performance."
 
 
 func _reset_run() -> void:
@@ -158,6 +247,7 @@ func _reset_run() -> void:
 	teacher_mei_disappointed_portrait.hide()
 	countdown_label.hide()
 	result_overlay.hide()
+	hard_mode_prompt_overlay.hide()
 	_update_hud(0.0)
 
 
@@ -197,7 +287,7 @@ func _start_song() -> void:
 func _spawn_ready_notes(song_time: float) -> void:
 	while next_spawn_index < chart.size():
 		var note := chart[next_spawn_index]
-		if float(note["time"]) - song_time > NOTE_TRAVEL_TIME:
+		if float(note["time"]) - song_time > note_travel_time:
 			break
 		_spawn_note(note)
 		next_spawn_index += 1
@@ -246,7 +336,7 @@ func _update_notes(song_time: float) -> void:
 		if is_instance_valid(visual):
 			_position_note(note, song_time)
 
-		if song_time - float(note["time"]) > MISS_WINDOW:
+		if song_time - float(note["time"]) > miss_window:
 			_register_miss(note)
 
 
@@ -259,7 +349,7 @@ func _position_note(note: Dictionary, song_time: float) -> void:
 	var note_size := Vector2(maxf(lane_width - 28.0, 76.0), 84.0)
 	var hit_y := note_layer.size.y * 0.73
 	var spawn_y := -note_size.y
-	var progress := 1.0 - ((float(note["time"]) - song_time) / NOTE_TRAVEL_TIME)
+	var progress := 1.0 - ((float(note["time"]) - song_time) / note_travel_time)
 	var note_y := lerpf(spawn_y, hit_y, clampf(progress, 0.0, 1.18))
 	visual.size = note_size
 	visual.position = Vector2(float(note["lane"]) * lane_width + 14.0, note_y)
@@ -268,7 +358,7 @@ func _position_note(note: Dictionary, song_time: float) -> void:
 func _judge_lane(lane: int) -> void:
 	var song_time := conductor.get_song_position()
 	var best_note: Dictionary = {}
-	var smallest_difference := GOOD_WINDOW + 1.0
+	var smallest_difference := good_window + 1.0
 
 	for note in chart:
 		if bool(note["judged"]) or int(note["lane"]) != lane:
@@ -277,7 +367,7 @@ func _judge_lane(lane: int) -> void:
 		if not is_instance_valid(visual):
 			continue
 		var difference := absf(song_time - float(note["time"]))
-		if difference <= GOOD_WINDOW and difference < smallest_difference:
+		if difference <= good_window and difference < smallest_difference:
 			smallest_difference = difference
 			best_note = note
 
@@ -297,7 +387,7 @@ func _judge_lane(lane: int) -> void:
 	judged_count += 1
 	combo += 1
 	best_combo = maxi(best_combo, combo)
-	if smallest_difference <= PERFECT_WINDOW:
+	if smallest_difference <= perfect_window:
 		perfect_count += 1
 		rating_points += 1.0
 		score += 1000 + combo * 12
@@ -414,18 +504,20 @@ func _show_results() -> void:
 		grade = "A"
 	elif final_accuracy >= 68.0:
 		grade = "B"
-	elif final_accuracy >= PASS_ACCURACY:
+	elif final_accuracy >= pass_accuracy:
 		grade = "C"
 
-	var passed := final_accuracy >= PASS_ACCURACY
+	var passed := final_accuracy >= pass_accuracy
 
-	# Resolve optional result buttons once so both branches can use them.
 	var continue_button := get_node_or_null("%ContinueButton") as Button
 	var retry_button := get_node_or_null("%RetryButton") as Button
 	var main_menu_button := get_node_or_null("%ReturnMainMenuButton") as Button
 
 	if passed:
-		result_title.text = "ORIENTATION COMPLETE  |  GRADE %s" % grade
+		if hard_mode:
+			result_title.text = "HARD MODE CLEARED  |  GRADE %s" % grade
+		else:
+			result_title.text = "ORIENTATION COMPLETE  |  GRADE %s" % grade
 	else:
 		result_title.text = "TRAINING FAILED  |  GRADE %s" % grade
 
@@ -453,7 +545,10 @@ func _show_results() -> void:
 	else:
 		teacher_mei_disappointed_portrait.hide()
 		teacher_mei_dialogue_portrait.show()
-		if hits == 0:
+		if hard_mode:
+			evidence_label.text = "CONGRATULATIONS, KUNKUN!\nTeacher Mei is stunned — you conquered Hard Mode."
+			evidence_label.add_theme_color_override("font_color", Color("#ffd166"))
+		elif hits == 0:
 			_award_torn_diary_evidence()
 			evidence_label.text = "HIDDEN EVIDENCE FOUND\nTorn Diary Page"
 			evidence_label.add_theme_color_override("font_color", Color("#ff7777"))
@@ -493,6 +588,7 @@ func _mark_chapter_one_complete(
 	game_state.set_meta("chapter_1_complete", passed)
 	game_state.set_meta("chapter_1_grade", grade)
 	game_state.set_meta("chapter_1_accuracy", final_accuracy)
+	game_state.set_meta("chapter_1_hard_mode", hard_mode)
 
 
 func _award_torn_diary_evidence() -> void:
@@ -522,6 +618,41 @@ func _on_retry_pressed() -> void:
 
 
 func _on_continue_pressed() -> void:
+	result_overlay.hide()
+
+	if hard_mode:
+		_proceed_to_chapter_two()
+		return
+
+	hard_mode_prompt_overlay.show()
+
+	var yes_button := get_node_or_null("%HardModeYesButton") as Button
+	if yes_button != null:
+		yes_button.grab_focus()
+
+
+func _on_hard_mode_yes_pressed() -> void:
+	hard_mode_prompt_overlay.hide()
+	hard_mode = true
+	_apply_difficulty()
+	_build_chart()
+	_reset_run()
+
+	teacher_mei_dialogue_portrait.show()
+	teacher_mei_disappointed_portrait.hide()
+	instruction_overlay.show()
+
+	var start_button := get_node_or_null("%StartTrainingButton") as Button
+	if start_button != null:
+		start_button.grab_focus()
+
+
+func _on_hard_mode_no_pressed() -> void:
+	hard_mode_prompt_overlay.hide()
+	_proceed_to_chapter_two()
+
+
+func _proceed_to_chapter_two() -> void:
 	conductor.stop_song()
 	var error := get_tree().change_scene_to_file(CHAPTER_TWO_SCENE)
 	if error != OK:

@@ -3,9 +3,12 @@
 [ext_resource type="Script" path="res://Kiu Chun Woon/scripts/chapter_1_rhythm.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://dgx6evgr4c3a" path="res://Kiu Chun Woon/assets/images/chapter_1_practice_room_background.png" id="2_background"]
 [ext_resource type="AudioStream" uid="uid://demruym2obunj" path="res://Kiu Chun Woon/assets/audio/chapter_1_rhythm_theme.mp3" id="3_music"]
+[ext_resource type="AudioStream" path="res://Kiu Chun Woon/assets/audio/Harder Mode.mp3" id="9_hard_music"]
 [ext_resource type="Script" uid="uid://c14hbbpkwjn87" path="res://Kiu Chun Woon/scripts/rhythm_conductor.gd" id="4_conductor"]
 [ext_resource type="Texture2D" uid="uid://hovxu34ms3fc" path="res://Kiu Chun Woon/assets/images/reactions/kunkun_perfect.png" id="5_perfect"]
 [ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/reactions/Teacher_Mei_Normal.png" id="6_mei_normal"]
+[ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/reactions/hard_mode_prompt.png" id="7_hard_mode"]
+[ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/reactions/Teacher_Mei_Disapp.png" id="8_mei_disappointed"]
 
 [sub_resource type="StyleBoxFlat" id="StyleButtonHover"]
 bg_color = Color(0.1, 0.035, 0.035, 0.98)
@@ -170,6 +173,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("RhythmTheme")
 script = ExtResource("1_script")
+hard_mode_music = ExtResource("9_hard_music")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1526129281]
 texture_filter = 1
@@ -222,6 +226,7 @@ anchor_bottom = 0.31
 theme_override_styles/panel = SubResource("StyleHud")
 
 [node name="ChapterLabel" type="Label" parent="Header" unique_id=756903063]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.018
@@ -385,6 +390,7 @@ anchor_top = 0.20
 anchor_right = 0.995
 anchor_bottom = 0.95
 mouse_filter = 2
+texture = ExtResource("8_mei_disappointed")
 expand_mode = 1
 stretch_mode = 6
 clip_contents = true
@@ -604,7 +610,8 @@ theme_override_font_sizes/font_size = 15
 text = "STARLIGHT TRAINING CAMP  /  PRACTICE ROOM"
 horizontal_alignment = 1
 
-[node name="Title" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=1512714968]
+[node name="InstructionTitle" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=1512714968]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.92, 0.86, 1)
 theme_override_font_sizes/font_size = 36
@@ -629,7 +636,8 @@ text = "Press  ←  ↓  ↑  →  when each note reaches its matching target.
 Timing earns PERFECT or GOOD. A late note becomes a MISS. Early to press will become a Too Early."
 horizontal_alignment = 1
 
-[node name="Warning" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=1762289261]
+[node name="InstructionWarning" type="Label" parent="InstructionOverlay/Center/Card/Column" unique_id=1762289261]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.5, 0.45, 1)
 theme_override_font_sizes/font_size = 14
@@ -637,6 +645,7 @@ text = "There may be evidence hidden behind an unusual performance."
 horizontal_alignment = 1
 
 [node name="StartTrainingButton" type="Button" parent="InstructionOverlay/Center/Card/Column" unique_id=1480992000]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -761,6 +770,84 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "RETURN TO MAIN MENU"
 
+[node name="HardModePromptOverlay" type="Control" parent="." unique_id=1953277402]
+unique_name_in_owner = true
+visible = false
+z_index = 120
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="HardModePromptOverlay" unique_id=1953277403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.005, 0.008, 0.016, 0.82)
+
+[node name="Center" type="CenterContainer" parent="HardModePromptOverlay" unique_id=1953277404]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="HardModePromptOverlay/Center" unique_id=1953277405]
+custom_minimum_size = Vector2(640, 600)
+layout_mode = 2
+
+[node name="Column" type="VBoxContainer" parent="HardModePromptOverlay/Center/Card" unique_id=1953277406]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PromptImage" type="TextureRect" parent="HardModePromptOverlay/Center/Card/Column" unique_id=1953277407]
+custom_minimum_size = Vector2(0, 300)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_hard_mode")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="HardModePromptOverlay/Center/Card/Column" unique_id=1953277408]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.86, 0.72, 1)
+theme_override_font_sizes/font_size = 28
+text = "READY FOR A HARDER RHYTHM?"
+horizontal_alignment = 1
+
+[node name="Line" type="Label" parent="HardModePromptOverlay/Center/Card/Column" unique_id=1953277409]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.82, 0.86, 1)
+theme_override_font_sizes/font_size = 17
+text = "Teacher Mei raises an eyebrow.
+\"Faster notes. Tighter timing. Do you want to try Hard Mode, Kunkun?\""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HardModeYesButton" type="Button" parent="HardModePromptOverlay/Center/Card/Column" unique_id=1953277410]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "YES — TRY HARD MODE"
+
+[node name="HardModeNoButton" type="Button" parent="HardModePromptOverlay/Center/Card/Column" unique_id=1953277411]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "NO — CONTINUE TO CHAPTER 2"
+
 [connection signal="song_finished" from="Conductor" to="." method="_on_song_finished"]
 [connection signal="finished" from="Conductor/Music" to="Conductor" method="_on_music_finished"]
 [connection signal="pressed" from="GuidePanel/GuideColumn/BackButton" to="." method="_on_back_pressed"]
@@ -769,3 +856,5 @@ text = "RETURN TO MAIN MENU"
 [connection signal="pressed" from="ResultOverlay/Center/Card/Column/ContinueButton" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="ResultOverlay/Center/Card/Column/RetryButton" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="ResultOverlay/Center/Card/Column/ReturnMainMenuButton" to="." method="_on_return_main_menu_pressed"]
+[connection signal="pressed" from="HardModePromptOverlay/Center/Card/Column/HardModeYesButton" to="." method="_on_hard_mode_yes_pressed"]
+[connection signal="pressed" from="HardModePromptOverlay/Center/Card/Column/HardModeNoButton" to="." method="_on_hard_mode_no_pressed"]

@@ -12,6 +12,10 @@ signal song_finished
 var _last_song_position := 0.0
 
 
+func set_song(stream: AudioStream) -> void:
+	music.stream = stream
+
+
 func play_song() -> void:
 	_last_song_position = 0.0
 	music.play(0.0)

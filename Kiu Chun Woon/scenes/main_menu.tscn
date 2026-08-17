@@ -206,8 +206,8 @@ alignment = 2
 
 [node name="MenuCard" type="PanelContainer" parent="SafeMargin/Layout" unique_id=225472336]
 unique_name_in_owner = true
-clip_contents = true
 custom_minimum_size = Vector2(460, 0)
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
 
