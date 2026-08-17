@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ctjfs3ntysx4d"]
+
+[ext_resource type="Script" uid="uid://bb7ae1j8hg1l7" path="res://Lew Jia Jia/scripts/vent_escape.gd" id="1_dtinm"]
+[ext_resource type="Texture2D" uid="uid://du4p1l18nsy4r" path="res://Lew Jia Jia/assets/VentEscapeBackground_v2.png" id="2_fhm6w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fhm6w"]
+font_size = 28
+
+[node name="VentEscape" type="CanvasLayer" unique_id=1524688334]
+script = ExtResource("1_dtinm")
+
+[node name="BlackBackground" type="ColorRect" parent="." unique_id=35460968]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EscapeBackground" type="TextureRect" parent="." unique_id=1787803698]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_fhm6w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StoryLabel" type="Label" parent="." unique_id=1093458155]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_fhm6w")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SkipButton" type="Button" parent="." unique_id=747805997]
+offset_left = 846.0
+offset_top = 920.0
+offset_right = 1118.0
+offset_bottom = 1011.0
+theme_override_font_sizes/font_size = 60
+text = "Continue"
+
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

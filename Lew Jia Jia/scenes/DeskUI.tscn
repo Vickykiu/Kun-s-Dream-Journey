@@ -2,9 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://cpdoe6t186ali" path="res://Lew Jia Jia/assets/Desk_Closeup.png" id="1_273uo"]
 [ext_resource type="Script" uid="uid://dqhl0tbcdt06h" path="res://Lew Jia Jia/scripts/desk_ui.gd" id="1_ed3qi"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_7vy8t"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="2_7vy8t"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_gevtx"]
-[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="5_jte2k"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="5_jte2k"]
+[ext_resource type="Texture2D" uid="uid://dbvv0n5wpqtnd" path="res://Lew Jia Jia/assets/WireCutters.png" id="5_syvvt"]
+[ext_resource type="Texture2D" uid="uid://doiba8jokt2bh" path="res://Lew Jia Jia/assets/Drawer_Open_With_Pliers.png" id="6_gevtx"]
 
 [sub_resource type="Resource" id="Resource_syvvt"]
 resource_name = "This sheet music is old and badly damage"
@@ -40,6 +42,18 @@ resource_name = "It feels as though someone was using it "
 script = ExtResource("3_gevtx")
 text = "It feels as though someone was using it only moments ago."
 
+[sub_resource type="Resource" id="Resource_ybadx"]
+resource_name = "A pair of wire cutters..."
+script = ExtResource("3_gevtx")
+text = "A pair of wire cutters..."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_k6n6e"]
+resource_name = "These might help me open the ventilation"
+script = ExtResource("3_gevtx")
+text = "These might help me open the ventilation grille."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ed3qi"]
 atlas = ExtResource("1_273uo")
 region = Rect2(0, 0, 601, 400)
@@ -50,6 +64,8 @@ portrait = ExtResource("2_7vy8t")
 sheet_music_lines = Array[ExtResource("3_gevtx")]([SubResource("Resource_syvvt"), SubResource("Resource_vuyas")])
 book_lines = Array[ExtResource("3_gevtx")]([SubResource("Resource_14i00"), SubResource("Resource_i0oj5")])
 metronome_lines = Array[ExtResource("3_gevtx")]([SubResource("Resource_gevtx"), SubResource("Resource_jte2k")])
+pliers_pickup_lines = Array[ExtResource("3_gevtx")]([SubResource("Resource_ybadx"), SubResource("Resource_k6n6e")])
+pliers_closeup_texture = ExtResource("5_syvvt")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1309438435]
 offset_right = 1924.0
@@ -88,6 +104,35 @@ offset_right = 1447.0
 offset_bottom = 432.0
 mouse_default_cursor_shape = 2
 
+[node name="DrawerButton" type="TextureButton" parent="." unique_id=1843780183]
+offset_left = 1149.0
+offset_top = 699.0
+offset_right = 1599.0
+offset_bottom = 1075.0
+
+[node name="DrawerBackground" type="ColorRect" parent="." unique_id=1987243507]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.003921569, 1)
+
+[node name="OpenDrawerImage" type="TextureRect" parent="." unique_id=623129421]
+offset_left = 330.0
+offset_top = 145.0
+offset_right = 1553.0
+offset_bottom = 1012.0
+texture = ExtResource("6_gevtx")
+expand_mode = 1
+
+[node name="PliersButton" type="TextureButton" parent="." unique_id=11458945]
+offset_left = 657.0
+offset_top = 384.0
+offset_right = 1248.0
+offset_bottom = 607.0
+
 [node name="CloseButton" type="Button" parent="." unique_id=829643081]
 offset_left = 1754.0
 offset_right = 1924.0
@@ -99,4 +144,6 @@ text = "X"
 [connection signal="pressed" from="SheetMusicButton" to="." method="_on_sheet_music_button_pressed"]
 [connection signal="pressed" from="BookButton" to="." method="_on_book_button_pressed"]
 [connection signal="pressed" from="MetronomeButton" to="." method="_on_metronome_button_pressed"]
+[connection signal="pressed" from="DrawerButton" to="." method="_on_drawer_button_pressed"]
+[connection signal="pressed" from="PliersButton" to="." method="_on_pliers_button_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

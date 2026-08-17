@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bpdt3r1l4uvve" path="res://Lew Jia Jia/scripts/electric_box_ui.gd" id="1_uat78"]
 [ext_resource type="Texture2D" uid="uid://hkll2781yhaj" path="res://Lew Jia Jia/assets/ElectricBox_Closeup_Closed.png" id="1_xt6im"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_dqmpl"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="2_dqmpl"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_wk0kx"]
-[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="4_dqmpl"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="4_dqmpl"]
 [ext_resource type="Texture2D" uid="uid://tylled2hb6id" path="res://Lew Jia Jia/assets/ElectricBox_Closeup_Open.png" id="6_wk0kx"]
+[ext_resource type="Texture2D" uid="uid://cf6uxr718dqq2" path="res://Lew Jia Jia/assets/ElectricBox_WiresCut.png" id="7_gqbuc"]
 
 [sub_resource type="Resource" id="Resource_wk0kx"]
 resource_name = "Four wires... blue, red, green and yello"
@@ -38,12 +39,25 @@ script = ExtResource("3_wk0kx")
 text = "I heard something unlock inside the ventilation grille."
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
+[sub_resource type="Resource" id="Resource_okfph"]
+resource_name = "I can't cut these wires with my bare han"
+script = ExtResource("3_wk0kx")
+text = "I can't cut these wires with my bare hands."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
+[sub_resource type="Resource" id="Resource_ynunb"]
+resource_name = "I need to find a suitable tool first."
+script = ExtResource("3_wk0kx")
+text = "I need to find a suitable tool first."
+metadata/_custom_type_script = "uid://dvad75d3p1x2b"
+
 [node name="ElectricBoxUI" type="CanvasLayer" unique_id=1543509939]
 script = ExtResource("1_uat78")
 portrait = ExtResource("2_dqmpl")
 intro_lines = Array[ExtResource("3_wk0kx")]([SubResource("Resource_wk0kx"), SubResource("Resource_gqbuc")])
 wrong_lines = Array[ExtResource("3_wk0kx")]([SubResource("Resource_q1ybq")])
 solved_lines = Array[ExtResource("3_wk0kx")]([SubResource("Resource_j7cmd"), SubResource("Resource_e4x0j")])
+need_tool_lines = Array[ExtResource("3_wk0kx")]([SubResource("Resource_okfph"), SubResource("Resource_ynunb")])
 
 [node name="Background" type="ColorRect" parent="." unique_id=162742422]
 anchors_preset = 15
@@ -111,6 +125,13 @@ offset_right = 1924.0
 offset_bottom = 145.0
 theme_override_font_sizes/font_size = 100
 text = "X"
+
+[node name="SolvedImage" type="TextureRect" parent="." unique_id=1406912123]
+visible = false
+offset_left = 317.0
+offset_right = 1625.0
+offset_bottom = 990.0
+texture = ExtResource("7_gqbuc")
 
 [connection signal="pressed" from="OpenButton" to="." method="_on_open_button_pressed"]
 [connection signal="pressed" from="BlueButton" to="." method="_on_blue_button_pressed"]

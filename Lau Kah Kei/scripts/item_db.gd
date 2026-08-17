@@ -43,6 +43,18 @@ const ITEMS := {
 		"evidence": false,
 		"icon": "res://Lau Kah Kei/assets/image/items/key_b13.png",
 	},
+	"wire_cutters": {
+	"name": "Wire Cutters",
+	"description": "An old pair of wire cutters. It should be strong enough to cut electrical wires.",
+	"icon": "res://Lew Jia Jia/assets/WireCutters.png",
+	"evidence": false
+	},
+	"death_list": {
+	"name": "Death List",
+	"description": "A list containing the names of everyone at the training camp. Kun's name is circled in red and marked: 3rd time.",
+	"icon": "res://Lew Jia Jia/assets/Safe_File.png",
+	"evidence": true
+	},
 }
 
 

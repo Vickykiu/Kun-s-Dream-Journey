@@ -32,13 +32,13 @@ size = Vector2(112.7917, 239.77985)
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4nn1"]
-size = Vector2(276.68866, 676.3888)
+size = Vector2(235.4567, 774.1064)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dvhw"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21pov"]
-size = Vector2(116.1004, 876.4043)
+size = Vector2(173.60814, 914.5753)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e34y8"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
@@ -50,7 +50,7 @@ size = Vector2(196.27594, 661.785)
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1px24"]
-size = Vector2(195.84396, 99.77418)
+size = Vector2(240.35422, 117.126335)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42n0a"]
 load_path = "res://.godot/imported/RoomSpritesheet.png-e373a57d59ce4c316aec0ff4ca14a77b.ctex"
@@ -83,7 +83,7 @@ size = Vector2(322.66455, 1188)
 size = Vector2(372.34598, 912)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcbtn"]
-size = Vector2(271.08646, 766.5)
+size = Vector2(271.08646, 1161)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3u2u8"]
 size = Vector2(101.17291, 470)
@@ -184,7 +184,7 @@ prompt_text = "Press E to inspect the vent"
 speaker_name = "Kun"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vent/Area2D" unique_id=1155636326]
-position = Vector2(4.8828125, 234.36935)
+position = Vector2(25.49884, 283.2281)
 scale = Vector2(1, 0.9999999)
 shape = SubResource("RectangleShape2D_v4nn1")
 
@@ -202,7 +202,7 @@ script = ExtResource("4_v4nn1")
 prompt_text = "Press E to inspect the electrical box"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBox/Area2D" unique_id=1254544663]
-position = Vector2(5.9675293, 207.64973)
+position = Vector2(-22.786469, 226.7352)
 scale = Vector2(1, 0.9999999)
 shape = SubResource("RectangleShape2D_21pov")
 
@@ -238,8 +238,8 @@ script = ExtResource("4_v4nn1")
 prompt_text = "Press E to inspect the desk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Desk/Area2D" unique_id=691712680]
-position = Vector2(104.72959, 391.38095)
-scale = Vector2(1, 1.0000025)
+position = Vector2(82.47452, 382.70502)
+scale = Vector2(1, 1.0000031)
 shape = SubResource("RectangleShape2D_1px24")
 
 [node name="SheetMusic" type="Sprite2D" parent="." unique_id=2020601167]
@@ -319,7 +319,7 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rhrtj")
 
 [node name="WallBottom1" type="CollisionShape2D" parent="Walls" unique_id=1848536701]
-position = Vector2(-410.25, 830.4568)
+position = Vector2(-607.5, 830.4568)
 rotation = -1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rcbtn")

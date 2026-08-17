@@ -2,6 +2,9 @@
 extends CanvasLayer
 
 
+signal vent_entered
+
+
 @export var speaker_name: String = "Kun"
 @export var portrait: Texture2D
 
@@ -23,9 +26,20 @@ func _ready() -> void:
 			speaker_name
 		)
 
+		await Dialogue.finished
+
 
 func _on_close_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
+
+	queue_free()
+
+
+func _on_enter_vent_button_pressed() -> void:
+	if Dialogue.is_active():
+		return
+
+	vent_entered.emit()
 
 	queue_free()

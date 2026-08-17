@@ -23,12 +23,16 @@ signal puzzle_solved
 	set(value):
 		solved_lines = DialogueLine.fill_blanks(value)
 
+@export var need_tool_lines: Array[DialogueLine] = []:
+	set(value):
+		need_tool_lines = DialogueLine.fill_blanks(value)
 
 # =========================
 # Node references
 # =========================
 @onready var closed_image: TextureRect = $ClosedImage
 @onready var open_image: TextureRect = $OpenImage
+@onready var solved_image: TextureRect = $SolvedImage
 
 @onready var open_button: TextureButton = $OpenButton
 @onready var blue_button: TextureButton = $BlueButton
@@ -62,7 +66,8 @@ func _ready() -> void:
 	# Initially display the closed electrical box
 	closed_image.visible = true
 	open_image.visible = false
-
+	solved_image.visible = false
+	
 	open_button.visible = true
 	open_button.disabled = false
 
@@ -74,6 +79,7 @@ func _ready() -> void:
 	_enable_wire_button(red_button)
 	_enable_wire_button(green_button)
 	_enable_wire_button(yellow_button)
+	
 
 
 # =========================
@@ -90,18 +96,29 @@ func _on_open_button_pressed() -> void:
 
 	closed_image.visible = false
 	open_image.visible = true
+	solved_image.visible = false
 
 	open_button.visible = false
 	open_button.disabled = true
 
-	_set_wire_buttons_visible(true)
+	if GameState.has_item("wire_cutters"):
+		_set_wire_buttons_visible(true)
 
-	if not intro_lines.is_empty():
-		Dialogue.show_lines(
-			intro_lines,
-			portrait,
-			speaker_name
-		)
+		if not intro_lines.is_empty():
+			Dialogue.show_lines(
+				intro_lines,
+				portrait,
+				speaker_name
+			)
+	else:
+		_set_wire_buttons_visible(false)
+
+		if not need_tool_lines.is_empty():
+			Dialogue.show_lines(
+				need_tool_lines,
+				portrait,
+				speaker_name
+			)
 
 
 # =========================
@@ -149,6 +166,15 @@ func _try_cut_wire(
 		return
 
 	if Dialogue.is_active():
+		return
+
+	if not GameState.has_item("wire_cutters"):
+		if not need_tool_lines.is_empty():
+			Dialogue.show_lines(
+				need_tool_lines,
+				portrait,
+				speaker_name
+			)
 		return
 
 	var expected_colour: String = CORRECT_ORDER[current_step]
@@ -214,6 +240,11 @@ func _complete_puzzle() -> void:
 	is_solved = true
 
 	_disable_all_wire_buttons()
+	_set_wire_buttons_visible(false)
+
+	# Display all wires in their cut state
+	open_image.visible = false
+	solved_image.visible = true
 
 	if not solved_lines.is_empty():
 		Dialogue.show_lines(
@@ -221,7 +252,6 @@ func _complete_puzzle() -> void:
 			portrait,
 			speaker_name
 		)
-
 		await Dialogue.finished
 
 	puzzle_solved.emit()

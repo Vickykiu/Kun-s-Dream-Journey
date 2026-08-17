@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cvpuv5hh02g1x"]
+
+[ext_resource type="Script" uid="uid://c8ngp1wmw1j7g" path="res://Lew Jia Jia/scripts/ending_3.gd" id="1_q7544"]
+[ext_resource type="Texture2D" uid="uid://laxj8kiajhlu" path="res://Lew Jia Jia/assets/HospitalBackground.png" id="1_rw46e"]
+
+[node name="Ending3" type="CanvasLayer" unique_id=532177550]
+script = ExtResource("1_q7544")
+
+[node name="Background" type="TextureRect" parent="." unique_id=28625803]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rw46e")
+
+[node name="DarkOverlay" type="ColorRect" parent="." unique_id=1721780185]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0.003921569, 0.3137255)
+
+[node name="EndingTitle" type="Label" parent="." unique_id=82515923]
+offset_left = 832.0
+offset_top = 320.0
+offset_right = 1077.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 52
+text = "ENDING 3"
+horizontal_alignment = 1
+
+[node name="EndingDescription" type="Label" parent="." unique_id=150883041]
+offset_left = 583.0
+offset_top = -783.0
+offset_right = 1314.0
+offset_bottom = 1811.0
+theme_override_font_sizes/font_size = 28
+text = "SURVIVOR
+Kun escaped from the Starlight Training Camp.
+He survived, but the memories of those who were lost
+would remain with him forever."
+horizontal_alignment = 1
+vertical_alignment = 1

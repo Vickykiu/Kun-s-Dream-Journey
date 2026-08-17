@@ -254,7 +254,7 @@ theme_override_font_sizes/font_size = 16
 text = "TARGET  |  Complete rhythm training with Teacher Mei"
 horizontal_alignment = 1
 
-[node name="BeginButton" type="Button" parent="Center/ChapterCard/Column"]
+[node name="BeginButton" type="Button" parent="Center/ChapterCard/Column" unique_id=150100827]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2

@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://bngd4btrod1c4"]
 
 [ext_resource type="Script" uid="uid://befrgr0s7wxwt" path="res://Lew Jia Jia/scripts/vent_ui.gd" id="1_nitfo"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_18ab4"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="2_18ab4"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_ur8wa"]
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="5_vxx8u"]
 
 [sub_resource type="Resource" id="Resource_1ljuh"]
-resource_name = "The ventilation grille is tightly locked"
+resource_name = "The ventilation grille is unlocked now."
 script = ExtResource("3_ur8wa")
-text = "The ventilation grille is tightly locked."
+text = "The ventilation grille is unlocked now."
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="Resource" id="Resource_18ab4"]
-resource_name = "It seems to be connected to the electric"
+resource_name = "This passage might be the only way out."
 script = ExtResource("3_ur8wa")
-text = "It seems to be connected to the electrical box beside it."
+text = "This passage might be the only way out."
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydsvy"]
@@ -45,6 +45,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_ydsvy")
 
+[node name="EnterVentButton" type="Button" parent="." unique_id=258230049]
+offset_left = 799.0
+offset_top = 813.0
+offset_right = 1112.0
+offset_bottom = 904.0
+theme_override_font_sizes/font_size = 60
+text = "Enter Vent"
+
 [node name="CloseButton" type="Button" parent="." unique_id=1512717357]
 offset_left = 1754.0
 offset_right = 1924.0
@@ -52,4 +60,5 @@ offset_bottom = 145.0
 theme_override_font_sizes/font_size = 100
 text = "X"
 
+[connection signal="pressed" from="EnterVentButton" to="." method="_on_enter_vent_button_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

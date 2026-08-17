@@ -1,7 +1,9 @@
 extends Node2D
 
 
-# ===== UI Scenes =====
+# ==================================================
+# UI Scenes
+# ==================================================
 
 const SAFE_UI_SCENE = preload(
 	"res://Lew Jia Jia/scenes/safe_ui.tscn"
@@ -35,10 +37,17 @@ const ELECTRIC_BOX_UI_SCENE = preload(
 	"res://Lew Jia Jia/scenes/electric_box_ui.tscn"
 )
 
+const VENT_ESCAPE_SCENE = preload(
+	"res://Lew Jia Jia/scenes/ventEscape.tscn"
+)
 
-# ===== State =====
+
+# ==================================================
+# State
+# ==================================================
 
 var is_safe_opened: bool = false
+var is_vent_unlocked: bool = false
 
 var safe_ui_instance: Node = null
 var cabinet_ui_instance: Node = null
@@ -49,35 +58,47 @@ var desk_ui_instance: Node = null
 var vent_ui_instance: Node = null
 var electric_box_ui_instance: Node = null
 
-var is_wire_puzzle_solved: bool = false
 
-
-# ===== Safe Nodes =====
+# ==================================================
+# Safe Nodes
+# ==================================================
 
 @onready var safe_closed = $Safe
 @onready var safe_open = $SafeOpen
 
 
-# ===== Reject Hint =====
+# ==================================================
+# Reject Hint
+# ==================================================
 
 var reject_hint_layer: CanvasLayer = null
 var reject_hint_root: Control = null
 var reject_hint_label: Label = null
 
 
-# ===== Initialization =====
+# ==================================================
+# Initialization
+# ==================================================
 
 func _ready() -> void:
+	# Load the Vent unlock state.
+	is_vent_unlocked = GameState.has_flag(
+		"chapter3_vent_unlocked"
+	)
+
 	create_reject_hint_ui()
 
-	reject_hint_label.visible = false
+	if reject_hint_label:
+		reject_hint_label.visible = false
 
 	call_deferred(
 		"check_reject_return"
 	)
 
 
-# ===== Create Reject Hint UI =====
+# ==================================================
+# Create Reject Hint UI
+# ==================================================
 
 func create_reject_hint_ui() -> void:
 	var existing_layer = get_node_or_null(
@@ -88,7 +109,6 @@ func create_reject_hint_ui() -> void:
 		reject_hint_layer = (
 			existing_layer as CanvasLayer
 		)
-
 	else:
 		reject_hint_layer = CanvasLayer.new()
 		reject_hint_layer.name = "RejectHintLayer"
@@ -106,7 +126,6 @@ func create_reject_hint_ui() -> void:
 		reject_hint_root = (
 			existing_root as Control
 		)
-
 	else:
 		reject_hint_root = Control.new()
 		reject_hint_root.name = "HintRoot"
@@ -131,7 +150,6 @@ func create_reject_hint_ui() -> void:
 		reject_hint_label = (
 			existing_label as Label
 		)
-
 	else:
 		reject_hint_label = Label.new()
 		reject_hint_label.name = "RejectHintLabel"
@@ -143,7 +161,9 @@ func create_reject_hint_ui() -> void:
 		setup_reject_hint_label()
 
 
-# ===== Hint Layout =====
+# ==================================================
+# Reject Hint Layout
+# ==================================================
 
 func setup_reject_hint_label() -> void:
 	reject_hint_label.anchor_left = 0.0
@@ -170,7 +190,9 @@ func setup_reject_hint_label() -> void:
 	)
 
 
-# ===== UI Check =====
+# ==================================================
+# Interaction UI Check
+# ==================================================
 
 func _is_interaction_ui_open() -> bool:
 	return (
@@ -185,7 +207,9 @@ func _is_interaction_ui_open() -> bool:
 	)
 
 
-# ===== Cabinet Interaction =====
+# ==================================================
+# Cabinet Interaction
+# ==================================================
 
 func _on_cabinet_interacted(
 	_node: Variant
@@ -210,7 +234,9 @@ func _on_cabinet_ui_closed() -> void:
 	cabinet_ui_instance = null
 
 
-# ===== Safe Interaction =====
+# ==================================================
+# Safe Interaction
+# ==================================================
 
 func _on_safe_interacted(
 	_node: Variant
@@ -255,7 +281,9 @@ func _on_safe_ui_closed() -> void:
 	safe_ui_instance = null
 
 
-# ===== Colour Hint Interaction =====
+# ==================================================
+# Colour Hint Interaction
+# ==================================================
 
 func _on_colour_hint_interacted(
 	_node: Variant
@@ -280,7 +308,9 @@ func _on_colour_hint_ui_closed() -> void:
 	colour_hint_ui_instance = null
 
 
-# ===== Clock Interaction =====
+# ==================================================
+# Clock Interaction
+# ==================================================
 
 func _on_clock_interacted(
 	_node: Variant
@@ -305,7 +335,9 @@ func _on_clock_ui_closed() -> void:
 	clock_ui_instance = null
 
 
-# ===== Calendar Interaction =====
+# ==================================================
+# Calendar Interaction
+# ==================================================
 
 func _on_calendar_interacted(
 	_node: Variant
@@ -330,7 +362,9 @@ func _on_calendar_ui_closed() -> void:
 	calendar_ui_instance = null
 
 
-# ===== Desk Interaction =====
+# ==================================================
+# Desk Interaction
+# ==================================================
 
 func _on_desk_interacted(
 	_node: Variant
@@ -355,7 +389,9 @@ func _on_desk_ui_closed() -> void:
 	desk_ui_instance = null
 
 
-# ===== Vent Interaction =====
+# ==================================================
+# Vent Interaction
+# ==================================================
 
 func _on_vent_interacted(
 	_node: Variant
@@ -363,6 +399,15 @@ func _on_vent_interacted(
 	if _is_interaction_ui_open():
 		return
 
+	# Vent remains locked before solving the wire puzzle.
+	if not is_vent_unlocked:
+		Dialogue.show_text(
+			"The ventilation cover is still locked.\n"
+			+ "Something seems to be controlling it."
+		)
+		return
+
+	# Open the Vent UI after unlocking it.
 	vent_ui_instance = (
 		VENT_UI_SCENE.instantiate()
 	)
@@ -371,8 +416,23 @@ func _on_vent_interacted(
 		vent_ui_instance
 	)
 
+	# Receive the Enter Vent result from VentUI.
+	vent_ui_instance.vent_entered.connect(
+		_on_vent_entered
+	)
+
 	vent_ui_instance.tree_exited.connect(
 		_on_vent_ui_closed
+	)
+
+
+func _on_vent_entered() -> void:
+	print(
+		"Player entered the ventilation shaft."
+	)
+
+	get_tree().change_scene_to_packed(
+		VENT_ESCAPE_SCENE
 	)
 
 
@@ -380,7 +440,9 @@ func _on_vent_ui_closed() -> void:
 	vent_ui_instance = null
 
 
-# ===== Electric Box Interaction =====
+# ==================================================
+# Electric Box Interaction
+# ==================================================
 
 func _on_electric_box_interacted(
 	_node: Variant
@@ -406,7 +468,11 @@ func _on_electric_box_interacted(
 
 
 func _on_wire_puzzle_solved() -> void:
-	is_wire_puzzle_solved = true
+	is_vent_unlocked = true
+
+	GameState.set_flag(
+		"chapter3_vent_unlocked"
+	)
 
 	print(
 		"Wire puzzle solved! Vent unlocked."
@@ -417,7 +483,9 @@ func _on_electric_box_ui_closed() -> void:
 	electric_box_ui_instance = null
 
 
-# ===== Reject Return =====
+# ==================================================
+# Reject Return
+# ==================================================
 
 func check_reject_return() -> void:
 	print(
@@ -445,7 +513,9 @@ func check_reject_return() -> void:
 	await show_reject_hint()
 
 
-# ===== Reject Transition =====
+# ==================================================
+# Reject Transition
+# ==================================================
 
 func fade_reject_transition() -> void:
 	var transition_layer = get_node_or_null(
@@ -475,9 +545,7 @@ func fade_reject_transition() -> void:
 		"Fading reject black screen."
 	)
 
-	var fade_out: Tween = (
-		create_tween()
-	)
+	var fade_out: Tween = create_tween()
 
 	fade_out.tween_property(
 		black_screen,
@@ -491,7 +559,9 @@ func fade_reject_transition() -> void:
 	transition_layer.queue_free()
 
 
-# ===== Reject Hint =====
+# ==================================================
+# Reject Hint
+# ==================================================
 
 func show_reject_hint() -> void:
 	if reject_hint_label == null:
@@ -520,9 +590,7 @@ func show_reject_hint() -> void:
 	reject_hint_label.visible = true
 
 	# Fade in.
-	var fade_in: Tween = (
-		create_tween()
-	)
+	var fade_in: Tween = create_tween()
 
 	fade_in.tween_property(
 		reject_hint_label,
@@ -539,9 +607,7 @@ func show_reject_hint() -> void:
 	).timeout
 
 	# Fade out.
-	var fade_out: Tween = (
-		create_tween()
-	)
+	var fade_out: Tween = create_tween()
 
 	fade_out.tween_property(
 		reject_hint_label,

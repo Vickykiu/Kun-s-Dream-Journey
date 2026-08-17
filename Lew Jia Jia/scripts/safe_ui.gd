@@ -29,6 +29,7 @@ const CORRECT_PASS: String = "31512"
 var current_input: String = ""
 var is_unlocked: bool = false
 var has_read_file: bool = false
+var death_list_taken: bool = false
 
 
 func _ready() -> void:
@@ -39,6 +40,11 @@ func _ready() -> void:
 	folder_btn.visible = false
 	file_detail.visible = false
 
+	death_list_taken = GameState.has_item(
+		"death_list"
+	)
+
+	has_read_file = death_list_taken
 
 # =========================
 # Keypad input
@@ -150,9 +156,21 @@ func _on_folder_btn_pressed() -> void:
 			portrait,
 			speaker_name
 		)
+
 		await Dialogue.finished
 
-	file_taken.emit()
+	# Add the Death List as evidence
+	if not GameState.has_item("death_list"):
+		GameState.add_item(
+			"death_list"
+		)
+
+		death_list_taken = true
+		file_taken.emit()
+
+		Dialogue.show_text(
+			"(Added to inventory: Death List)"
+		)
 
 
 func _on_close_file_btn_pressed() -> void:
