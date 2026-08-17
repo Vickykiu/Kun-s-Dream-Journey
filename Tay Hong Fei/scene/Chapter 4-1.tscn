@@ -374,6 +374,7 @@ shape = SubResource("RectangleShape2D_7e1me")
 position = Vector2(-2, -748)
 script = ExtResource("9_f1bej")
 lines = Array[ExtResource("10_khxr4")]([SubResource("Resource_7e1me")])
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearDoor" unique_id=47962711]
 position = Vector2(964, 999)

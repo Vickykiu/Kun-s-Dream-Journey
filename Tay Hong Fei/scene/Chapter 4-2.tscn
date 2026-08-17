@@ -9,25 +9,25 @@
 [ext_resource type="Script" uid="uid://dxwtu8f8dsvvy" path="res://Tay Hong Fei/scripts/return_position_restorer.gd" id="7_agad7"]
 [ext_resource type="PackedScene" uid="uid://d2vdpv8e8phs8" path="res://Tay Hong Fei/scene/Minesweeper2.tscn" id="7_d4syc"]
 [ext_resource type="PackedScene" uid="uid://erlmv1ixfxbv" path="res://Tay Hong Fei/scene/Minesweeper3.tscn" id="8_ivdsx"]
-[ext_resource type="Script" uid="uid://dk4tejotccp0d" path="res://Tay Hong Fei/scripts/character_body_2d.gd" id="10_uqhv1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmnnq"]
 radius = 18.027756
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2wkyv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqhv1"]
+size = Vector2(147, 41)
 
 [node name="Chapter4-2" type="Node2D" unique_id=22927392]
-position = Vector2(513, 82)
+position = Vector2(564, -315)
 script = ExtResource("1_dmnnq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=130358239]
-position = Vector2(404, 426)
+position = Vector2(413, 860)
 texture = ExtResource("2_kcai0")
 region_enabled = true
 region_rect = Rect2(0, 0, 861, 1024)
 
 [node name="Crystal1" type="Area2D" parent="." unique_id=1301058444]
-position = Vector2(254, 481)
+position = Vector2(242, 899)
 script = ExtResource("3_agad7")
 minesweeper_scene = ExtResource("4_kcai0")
 
@@ -49,6 +49,7 @@ scale = Vector2(0.6, 0.6)
 theme_override_font_sizes/font_size = 24
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1715346401]
+position = Vector2(4, 428)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=878671766]
 polygon = PackedVector2Array(447, 898, 446, 649, 677, 565, 689, 636, 474, 730, 476, 903)
@@ -68,12 +69,16 @@ polygon = PackedVector2Array(85, 54, 114, 174, 69, 230, 41, 271, 34, 388, 34, 45
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=52009274]
 polygon = PackedVector2Array(35, 452, 127, 567, 212, 621, 314, 631, 315, 648, 353, 654, 355, 898, 324, 899, 80, 747, -52, 588)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1278634639]
+position = Vector2(404.5, 911.5)
+shape = SubResource("RectangleShape2D_uqhv1")
+
 [node name="Player" parent="." unique_id=1213491095 instance=ExtResource("5_ivdsx")]
-position = Vector2(399, 856)
+position = Vector2(408, 1284)
 scale = Vector2(0.45739293, 0.45739293)
 
 [node name="Crystal2" type="Area2D" parent="." unique_id=1424090051]
-position = Vector2(587, 375)
+position = Vector2(607, 787)
 script = ExtResource("3_agad7")
 minesweeper_scene = ExtResource("7_d4syc")
 
@@ -95,7 +100,7 @@ scale = Vector2(0.6, 0.6)
 theme_override_font_sizes/font_size = 24
 
 [node name="Crystal3" type="Area2D" parent="." unique_id=1392217897]
-position = Vector2(336, 171)
+position = Vector2(401, 606)
 script = ExtResource("3_agad7")
 minesweeper_scene = ExtResource("8_ivdsx")
 
@@ -118,11 +123,3 @@ theme_override_font_sizes/font_size = 24
 
 [node name="ReturnPositionRestorer" type="Node" parent="." unique_id=1048759177]
 script = ExtResource("7_agad7")
-
-[node name="Kunkun?" type="CharacterBody2D" parent="." unique_id=1512849904]
-position = Vector2(399, 355)
-scale = Vector2(2.2796216, 2.2796216)
-script = ExtResource("10_uqhv1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Kunkun?" unique_id=1827315744]
-shape = SubResource("CircleShape2D_2wkyv")
