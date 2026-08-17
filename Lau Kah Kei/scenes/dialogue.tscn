@@ -112,7 +112,7 @@ theme_override_font_sizes/font_size = 20
 text = "[E] Next"
 horizontal_alignment = 2
 
-[node name="Choices" type="HBoxContainer" parent="Root/Panel/Rows" unique_id=1000371549]
+[node name="Choices" type="VBoxContainer" parent="Root/Panel/Rows" unique_id=1902069626]
 visible = false
 layout_mode = 2
 

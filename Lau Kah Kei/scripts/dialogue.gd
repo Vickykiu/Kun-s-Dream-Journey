@@ -33,7 +33,7 @@ signal choice_selected(choice: String)
 @onready var _hint: Label = $Root/Panel/Rows/Hint
 @onready var _portrait: TextureRect = $Root/Portrait
 
-@onready var _choices: HBoxContainer = (
+@onready var _choices: VBoxContainer = (
 	$Root/Panel/Rows/Choices
 )
 
@@ -54,10 +54,18 @@ var _choice_active := false
 # Where the text block was left in the editor, i.e. clear of the portrait.
 var _rows_left := 0.0
 
+var _normal_rows_separation: int = 0
+
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS      # keeps working if the game is paused
 	_rows_left = _rows.offset_left
+
+	_normal_rows_separation = (
+		_rows.get_theme_constant(
+			"separation"
+		)
+	)
 
 	_choices.hide()
 
@@ -68,6 +76,8 @@ func _ready():
 	_reject_button.pressed.connect(
 		_on_reject_pressed
 	)
+
+	_match_choice_text_style()
 
 	_root.hide()
 
@@ -92,6 +102,12 @@ func show_lines(
 	_choice_active = false
 
 	_choices.hide()
+
+	# Restore normal dialogue spacing.
+	_rows.add_theme_constant_override(
+		"separation",
+		_normal_rows_separation
+	)
 
 	# Whether there's a face at all is decided once, for the whole
 	# conversation, because the text is indented around it — deciding it
@@ -150,6 +166,12 @@ func show_choice(
 	_accept_button.text = accept_text
 	_reject_button.text = reject_text
 
+	# Remove space between question and buttons.
+	_rows.add_theme_constant_override(
+		"separation",
+		0
+	)
+
 	_choices.show()
 
 	_hint.text = ""
@@ -167,6 +189,90 @@ func is_active() -> bool:
 	return _active
 
 
+# ===== Choice Style =====
+
+func _match_choice_text_style() -> void:
+	var text_font: Font = (
+		_label.get_theme_font(
+			"font"
+		)
+	)
+
+	var text_font_size: int = (
+		_label.get_theme_font_size(
+			"font_size"
+		)
+	)
+
+	var text_color: Color = (
+		_label.get_theme_color(
+			"font_color"
+		)
+	)
+
+	# Accept button.
+	_accept_button.add_theme_font_override(
+		"font",
+		text_font
+	)
+
+	_accept_button.add_theme_font_size_override(
+		"font_size",
+		text_font_size-2
+	)
+
+	_accept_button.add_theme_color_override(
+		"font_color",
+		text_color
+	)
+
+	_accept_button.add_theme_color_override(
+		"font_hover_color",
+		text_color
+	)
+
+	_accept_button.add_theme_color_override(
+		"font_pressed_color",
+		text_color
+	)
+
+	_accept_button.add_theme_color_override(
+		"font_focus_color",
+		text_color
+	)
+
+	# Reject button.
+	_reject_button.add_theme_font_override(
+		"font",
+		text_font
+	)
+
+	_reject_button.add_theme_font_size_override(
+		"font_size",
+		text_font_size-2
+	)
+
+	_reject_button.add_theme_color_override(
+		"font_color",
+		text_color
+	)
+
+	_reject_button.add_theme_color_override(
+		"font_hover_color",
+		text_color
+	)
+
+	_reject_button.add_theme_color_override(
+		"font_pressed_color",
+		text_color
+	)
+
+	_reject_button.add_theme_color_override(
+		"font_focus_color",
+		text_color
+	)
+
+
 # --- input --------------------------------------------------------------
 
 # _input runs before _unhandled_input, so eating the key here stops the
@@ -176,10 +282,10 @@ func _input(event):
 		return
 
 	if _choice_active:
-		if event.is_action_pressed("ui_left"):
+		if event.is_action_pressed("ui_up"):
 			_accept_button.grab_focus()
 
-		elif event.is_action_pressed("ui_right"):
+		elif event.is_action_pressed("ui_down"):
 			_reject_button.grab_focus()
 
 		elif (
@@ -318,6 +424,12 @@ func _finish_choice(
 	_default_portrait = null
 
 	_choices.hide()
+
+	_rows.add_theme_constant_override(
+		"separation",
+		_normal_rows_separation
+	)
+
 	_root.hide()
 
 	_accept_button.release_focus()
@@ -339,6 +451,12 @@ func _close():
 	_default_portrait = null
 
 	_choices.hide()
+
+	_rows.add_theme_constant_override(
+		"separation",
+		_normal_rows_separation
+	)
+
 	_root.hide()
 
 	_accept_button.release_focus()
