@@ -50,6 +50,13 @@ signal solved
 # Remembered in GameState so the puzzle stays solved after a scene change.
 @export var flag_id: String = "a02_video_solved"
 
+# Optional — the hiss of the tape, looped for as long as the footage is on
+# screen and cut the moment it stops. It has its own player rather than going
+# through Audio.play() because it has to be stopped again on cue.
+@export var tape_sound: AudioStream
+
+@export_range(-40.0, 24.0) var tape_volume_db := 0.0
+
 const SLOT_SIZE := Vector2(420, 236)     # 16:9
 const SLOT_GAP := 60.0
 const SLOT_Y := 470.0
@@ -66,6 +73,7 @@ var _playing := false                    # the tape is rolling; no more dragging
 var _dragging := -1                      # clip index being carried, -1 for none
 var _grab_offset := Vector2.ZERO
 var _picked := -1                        # slot picked with the number keys
+var _tape: AudioStreamPlayer
 
 
 func _ready():
@@ -73,6 +81,16 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build_ui()
 	_root.hide()
+
+	if tape_sound:
+		if tape_sound is AudioStreamMP3 or tape_sound is AudioStreamOggVorbis:
+			tape_sound.loop = true
+		_tape = AudioStreamPlayer.new()
+		_tape.stream = tape_sound
+		_tape.bus = &"SFX"
+		_tape.volume_db = tape_volume_db
+		_tape.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(_tape)
 
 
 # --- public API ---------------------------------------------------------
@@ -243,7 +261,9 @@ func _check() -> void:
 	for clip in 3:
 		if _slot_of[clip] != clip:
 			_status.text = wrong_text
+			Audio.play("puzzle_wrong")
 			return
+	Audio.play("puzzle_right")
 	_play_tape()
 
 
@@ -266,6 +286,9 @@ func _play_tape() -> void:
 	_status.text = ""
 	solved.emit()
 
+	if _tape:
+		_tape.play()
+
 	for tex in [clip_1, clip_2, clip_3]:
 		_show_film(tex)
 		await get_tree().create_timer(1.4).timeout
@@ -273,10 +296,14 @@ func _play_tape() -> void:
 	# The frame it stops on. Held until the player presses something, so
 	# nobody misses it.
 	_show_film(freeze_frame if freeze_frame else clip_3)
+	Audio.play("boom")
 	if freeze_subtitle != "":
 		_subtitle.text = freeze_subtitle
 		_subtitle.show()
 	await get_tree().create_timer(2.6).timeout
+
+	if _tape:
+		_tape.stop()
 
 	close()
 	await _hand_over()

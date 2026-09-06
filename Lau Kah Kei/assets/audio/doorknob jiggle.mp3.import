@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://defjpy0kq8wqm"
+path="res://.godot/imported/doorknob jiggle.mp3-a2f5fe973d962fdccba8ade0ef78e623.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/doorknob jiggle.mp3"
+dest_files=["res://.godot/imported/doorknob jiggle.mp3-a2f5fe973d962fdccba8ade0ef78e623.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -18,6 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://bb188qjl0vcjs" path="res://Lau Kah Kei/assets/image/scene2pic/cctv_c.png" id="16_cctvc"]
 [ext_resource type="Texture2D" uid="uid://dj24qwgy3pn3t" path="res://Lau Kah Kei/assets/image/scene2pic/cctv_c_zoom.png" id="17_zoom"]
 [ext_resource type="PackedScene" path="res://Lau Kah Kei/scenes/teacher_npc.tscn" id="18_teach"]
+[ext_resource type="Script" path="res://Lau Kah Kei/scripts/ambience.gd" id="90_ambsc"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/Horror Ambience.mp3" id="91_ambtr"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/open drawer.mp3" id="92_sfxa"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/key pick up.mp3" id="93_sfxb"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/heart beat loop.mp3" id="95_heart"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/cctv.mp3" id="96_cctv"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/teacher movement.mp3" id="97_tstep"]
 
 [sub_resource type="Resource" id="Resource_pc7"]
 resource_name = "That was Ricardo. That was last night."
@@ -286,6 +293,8 @@ flag_id = "a02_entered"
 
 [node name="drawer" type="Area2D" parent="."]
 script = ExtResource("4_inter")
+sound = ExtResource("92_sfxa")
+item_sound = ExtResource("93_sfxb")
 prompt_text = "Press E to open the drawer"
 lines = Array[ExtResource("5_dline")]([SubResource("Resource_drw1"), SubResource("Resource_drw2")])
 lines_after = Array[ExtResource("5_dline")]([SubResource("Resource_drw5")])
@@ -301,6 +310,7 @@ shape = SubResource("RectangleShape2D_drw")
 
 [node name="VideoPuzzle" type="CanvasLayer" parent="."]
 script = ExtResource("13_puzz")
+tape_sound = ExtResource("96_cctv")
 clip_1 = ExtResource("14_cctva")
 clip_2 = ExtResource("15_cctvb")
 clip_3 = ExtResource("16_cctvc")
@@ -334,8 +344,15 @@ position = Vector2(190, 320)
 shape = SubResource("RectangleShape2D_cover")
 
 [node name="Teacher" parent="." instance=ExtResource("18_teach")]
+walk_sound = ExtResource("97_tstep")
 position = Vector2(250, 430)
 speed = 130.0
 patrol_distance = 670.0
+
+[node name="Ambience" type="Node" parent="."]
+script = ExtResource("90_ambsc")
+track = ExtResource("91_ambtr")
+layer = ExtResource("95_heart")
+layer_volume_db = 10.9
 
 [connection signal="finished" from="computer" to="VideoPuzzle" method="open"]

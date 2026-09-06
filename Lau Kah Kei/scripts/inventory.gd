@@ -34,6 +34,7 @@ func open() -> void:
 	_open = true
 	_refresh()
 	_root.show()
+	Audio.play("inventory")
 	_freeze_player(true)
 	_block_menu_overlay(true)
 
@@ -43,6 +44,7 @@ func close() -> void:
 		return
 	_open = false
 	_root.hide()
+	Audio.play("inventory")
 	_freeze_player(false)
 	_block_menu_overlay(false)
 

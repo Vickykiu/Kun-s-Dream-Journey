@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://brh66yfuy3onr"
+path="res://.godot/imported/correct notification.mp3-478d1c4609ad1bd93ad50ca89bef6e44.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/correct notification.mp3"
+dest_files=["res://.godot/imported/correct notification.mp3-478d1c4609ad1bd93ad50ca89bef6e44.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

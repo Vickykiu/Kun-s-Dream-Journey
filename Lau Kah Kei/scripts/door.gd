@@ -86,6 +86,7 @@ func _unhandled_input(event):
 func _go_through() -> void:
 	_opening = true
 	_hide_prompt()
+	Audio.play("door_open")
 
 	# Remember where the player stood in THIS scene, so returning here puts
 	# them back at this door instead of the default spawn.
@@ -136,6 +137,7 @@ func _freeze_player(frozen: bool) -> void:
 # He tries it, it doesn't open, and he says so. Silence here is what makes
 # players think the button is broken rather than the door.
 func _rattle_the_handle() -> void:
+	Audio.play("door_locked")
 	var first := flag_id == "" or not GameState.has_flag(flag_id)
 	if flag_id != "":
 		GameState.set_flag(flag_id)

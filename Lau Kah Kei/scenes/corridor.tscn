@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="9_detr"]
 [ext_resource type="PackedScene" uid="uid://djddc3g7wvlk5" path="res://Lau Kah Kei/scenes/student_npc.tscn" id="10_stud"]
 [ext_resource type="Texture2D" uid="uid://c1n7io7mvpp5i" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_scared.png.png" id="11_scar"]
+[ext_resource type="Script" path="res://Lau Kah Kei/scripts/ambience.gd" id="90_ambsc"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/Horror Ambience.mp3" id="91_ambtr"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/muffled murmur.mp3" id="99_murmur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xswuy"]
 size = Vector2(1156.5, 274)
@@ -268,3 +271,8 @@ theme_override_font_sizes/font_size = 45
 text = "Press E to enter"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Ambience" type="Node" parent="."]
+script = ExtResource("90_ambsc")
+track = ExtResource("91_ambtr")
+layer = ExtResource("99_murmur")

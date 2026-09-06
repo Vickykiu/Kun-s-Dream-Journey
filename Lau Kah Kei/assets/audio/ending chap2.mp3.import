@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5btnrrjuodgo"
+path="res://.godot/imported/ending chap2.mp3-3cbb146cdbe1e53206993e7796a6a20e.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/ending chap2.mp3"
+dest_files=["res://.godot/imported/ending chap2.mp3-3cbb146cdbe1e53206993e7796a6a20e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

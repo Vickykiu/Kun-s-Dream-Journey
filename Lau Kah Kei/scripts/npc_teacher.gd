@@ -77,6 +77,13 @@ signal caught
 @export var grace_after_freeze := 1.2
 
 @export_group("Caught")
+# Optional — his footsteps, looped while he is walking and paused the moment
+# he stops. Worth having: it's the only way to know where he is while the
+# player is tucked behind a cabinet and can't see him.
+@export var walk_sound: AudioStream
+
+@export_range(-40.0, 24.0) var walk_volume_db := 0.0
+
 @export var caught_face: Texture2D
 @export_multiline var caught_text: String = ""
 @export_file("*.tscn") var caught_scene: String = ""
@@ -92,6 +99,9 @@ var _looking := false                     # standing at an end, facing the room
 var _timer := 0.0
 var _step_time := 0.0
 var _caught := false
+
+var _steps: AudioStreamPlayer
+var _stepping := false
 var _was_frozen := true                   # the room opens with a dialogue box
 var _grace := 0.0
 var _starting := false                    # back turned, hasn't set off yet
@@ -122,16 +132,45 @@ func _ready():
 	_timer = start_delay
 	_face_direction(Vector2.UP if _starting else _walking_direction())
 	_build_caught_screen()
+	_build_steps()
+
+
+func _build_steps() -> void:
+	if walk_sound == null:
+		return
+	if walk_sound is AudioStreamMP3 or walk_sound is AudioStreamOggVorbis:
+		walk_sound.loop = true
+	_steps = AudioStreamPlayer.new()
+	_steps.stream = walk_sound
+	_steps.bus = &"SFX"
+	_steps.volume_db = walk_volume_db
+	add_child(_steps)
+
+
+# Paused rather than stopped, so his stride carries on from where it left off
+# instead of restarting on the same footfall every time he turns around.
+func _set_stepping(walking: bool) -> void:
+	if _steps == null or walking == _stepping:
+		return
+	_stepping = walking
+	if not walking:
+		_steps.stream_paused = true
+	elif _steps.stream_paused:
+		_steps.stream_paused = false
+	else:
+		_steps.play()
 
 
 func _physics_process(delta):
 	if _caught:
+		_set_stepping(false)
 		return
 
 	# The game is busy with a box, a close-up or the puzzle: he waits too.
 	var player = _player()
 	if player == null or not player.can_move:
 		_was_frozen = true
+		_set_stepping(false)
 		return
 
 	# Just handed back control — give them a moment before he looks.
@@ -140,6 +179,10 @@ func _physics_process(delta):
 		_grace = grace_after_freeze
 	if _grace > 0.0:
 		_grace -= delta
+
+	# He is only walking in the last branch below; every other one is him
+	# standing still, either waiting to start or turned round looking.
+	_set_stepping(not (_starting or _looking or _past_the_end() or is_on_wall()))
 
 	if _starting:
 		# Standing with his back to the room, not yet on his round.
@@ -217,6 +260,7 @@ func _player():
 func _catch() -> void:
 	_caught = true
 	velocity = Vector2.ZERO
+	Audio.play("caught")
 	caught.emit()
 
 	var player = _player()

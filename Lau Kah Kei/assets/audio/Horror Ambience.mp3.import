@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bgsqnmlhr31d1"
+path="res://.godot/imported/Horror Ambience.mp3-54121f5374324e502333c13e3be5dbb2.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/Horror Ambience.mp3"
+dest_files=["res://.godot/imported/Horror Ambience.mp3-54121f5374324e502333c13e3be5dbb2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -38,6 +38,27 @@ extends CharacterBody2D
 @export var bob_speed := 12.0    # how fast the little bounce is
 @export var bob_height := 4.0    # how many pixels it bounces
 
+# Optional — footsteps. This wants one continuous recording of someone
+# walking, not a single step: it runs on a loop while there is input and
+# pauses the moment there isn't, so it never has to line up with the walk
+# frames. Leave it empty and the character walks in silence.
+@export var walk_sound: AudioStream
+
+# Footsteps play under everything else for as long as the player is moving,
+# which is most of the chapter — this is the one to pull back if the walking
+# starts wearing on you.
+@export_range(-40.0, 0.0) var walk_volume_db := 0.0
+
+# The part of `walk_sound` that actually sounds like walking. Everything
+# before `walk_start` and after `walk_end` is skipped, and the sound runs
+# round this window for as long as the character is moving — so a recording
+# that wanders off, changes surface or fades out at the end can still be used
+# by picking the good stretch out of the middle of it.
+#
+# walk_end = 0 means "play to the end of the file".
+@export var walk_start := 1.5
+@export var walk_end := 10.0
+
 @onready var sprite: Sprite2D = $Sprite
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
@@ -45,6 +66,9 @@ var _walk_time := 0.0
 var _bob_time := 0.0
 var _sprite_base_y := 0.0
 var _facing := Vector2.DOWN   # last direction we moved in
+
+var _steps: AudioStreamPlayer
+var _stepping := false        # whether the footsteps are running right now
 
 # Cutscenes / puzzles can freeze the character with set_can_move(false).
 var can_move := true
@@ -64,6 +88,25 @@ func _ready():
 		sprite.texture = tex_front
 
 	_sprite_base_y = sprite.position.y
+	_build_steps()
+
+
+# Built in code so no scene has to wire it up: dropping a sound into
+# `walk_sound` in the Inspector is the whole setup.
+func _build_steps() -> void:
+	if walk_sound == null:
+		return
+	# Godot doesn't loop an imported mp3 unless the stream is told to.
+	# loop_offset is where it comes back to, so the dead air at the front is
+	# skipped on the way round as well as on the first play.
+	if walk_sound is AudioStreamMP3 or walk_sound is AudioStreamOggVorbis:
+		walk_sound.loop = true
+		walk_sound.loop_offset = walk_start
+	_steps = AudioStreamPlayer.new()
+	_steps.stream = walk_sound
+	_steps.bus = &"SFX"
+	_steps.volume_db = walk_volume_db
+	add_child(_steps)
 
 
 func _physics_process(delta):
@@ -104,6 +147,7 @@ func _physics_process(delta):
 
 	_update_sprite(direction, delta)
 	_update_bob(direction, delta)
+	_update_steps(direction)
 
 
 # Turn the character to face a direction without moving it. Usable from
@@ -181,6 +225,34 @@ func _poses_for(direction: Vector2) -> Array:
 	if direction.y < 0:
 		return [tex_back, tex_back_step_1, tex_back_step_2]
 	return [tex_front, tex_front_step_1, tex_front_step_2]
+
+
+# Paused rather than stopped, so the recording carries on from where it left
+# off. Restarting it every time would replay the same first footfall over and
+# over, which is what makes tapping a key sound like a stutter rather than
+# someone walking. Freezing the player for a dialogue box zeroes `direction`,
+# so the feet go quiet on their own while someone is talking.
+func _update_steps(direction: Vector2) -> void:
+	if _steps == null:
+		return
+
+	# An imported mp3 has a loop start but no loop end, so the jump back at
+	# walk_end is done by hand, every frame the feet are actually moving.
+	if walk_end > walk_start and _steps.playing and not _steps.stream_paused:
+		if _steps.get_playback_position() >= walk_end:
+			_steps.seek(walk_start)
+
+	var walking := direction != Vector2.ZERO
+	if walking == _stepping:
+		return
+	_stepping = walking
+
+	if not walking:
+		_steps.stream_paused = true
+	elif _steps.stream_paused:
+		_steps.stream_paused = false
+	else:
+		_steps.play(walk_start)
 
 
 func _update_bob(direction, delta):

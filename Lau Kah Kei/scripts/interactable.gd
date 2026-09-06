@@ -93,8 +93,21 @@ signal finished(node)
 # Disappear after the first look, e.g. an item lying on the floor.
 @export var hide_after: bool = false
 
+# Optional — the sound of the thing itself being handled: a drawer rolling
+# open, a cabinet door. Plays the moment E is pressed, under the first line.
+@export var sound: AudioStream
+
+# Optional — the sound of the item going into the bag, played once it is
+# actually pocketed. Different objects hand over different things, so this
+# lives on the object rather than being one sound for the whole game.
+@export var item_sound: AudioStream
+
 var _player_inside := false
 var _looked_at := false   # fallback when flag_id is empty
+
+# An interaction is running. It only marks itself searched once it's over now,
+# so without this a second E during the gap could start it a second time.
+var _busy := false
 
 
 func _ready():
@@ -128,7 +141,7 @@ func _on_body_exited(body):
 
 
 func _unhandled_input(event):
-	if not _player_inside:
+	if not _player_inside or _busy:
 		return
 	if not event.is_action_pressed("interact"):
 		return
@@ -142,15 +155,24 @@ func _unhandled_input(event):
 func _interact():
 	var first_time := not _was_looked_at()
 
+	_busy = true
 	_hide_prompt()
-	_looked_at = true
-	if flag_id != "":
-		GameState.set_flag(flag_id)
+	Audio.play_stream(sound)
 
 	var pages: Array = []
 	pages.append_array(lines if first_time or lines_after.is_empty() else lines_after)
 
 	var handing_over := first_time and item_id != ""
+
+	# Anything that only talks marks itself searched straight away. Anything
+	# handing an item over waits until that item is actually in the bag —
+	# marking it up front means an interruption (the player is sent back to
+	# another scene, the game is closed) leaves the object "already searched"
+	# with the item never given, and it can't be picked up on a later visit.
+	# On the A-02 drawer that loses the B-13 key for good and the chapter can
+	# never end.
+	if not handing_over:
+		_mark_searched()
 
 	interacted.emit(self)
 
@@ -163,6 +185,8 @@ func _interact():
 	if handing_over:
 		await ItemView.show_item(_item_texture(), back_texture)
 		GameState.add_item(item_id)
+		Audio.play_stream(item_sound)
+		_mark_searched()
 		_hide_item_node()
 
 		var after: Array = []
@@ -174,6 +198,7 @@ func _interact():
 			await Dialogue.finished
 
 	finished.emit(self)
+	_busy = false
 
 	if hide_after:
 		hide()
@@ -212,6 +237,14 @@ func _current_prompt() -> String:
 	if _is_locked():
 		return locked_text
 	return prompt_text
+
+
+# "This has been dealt with." Kept in GameState when there's a flag_id, so it
+# survives a scene change; a plain local otherwise.
+func _mark_searched() -> void:
+	_looked_at = true
+	if flag_id != "":
+		GameState.set_flag(flag_id)
 
 
 func _was_looked_at() -> bool:

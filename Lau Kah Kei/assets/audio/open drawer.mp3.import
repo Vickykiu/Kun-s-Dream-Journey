@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d33eb0rkae0wx"
+path="res://.godot/imported/open drawer.mp3-212288638008a4ef7fee60ac52882da2.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/open drawer.mp3"
+dest_files=["res://.godot/imported/open drawer.mp3-212288638008a4ef7fee60ac52882da2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cpbd2w68hj5tt"
+path="res://.godot/imported/teacher movement.mp3-801b31a2e01e68de7af8e80cf139941f.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/teacher movement.mp3"
+dest_files=["res://.godot/imported/teacher movement.mp3-801b31a2e01e68de7af8e80cf139941f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

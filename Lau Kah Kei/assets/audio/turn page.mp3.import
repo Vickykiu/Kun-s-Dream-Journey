@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://djrherht0dpb6"
+path="res://.godot/imported/turn page.mp3-b124215eaa6dfdb62c744553cd665b66.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/turn page.mp3"
+dest_files=["res://.godot/imported/turn page.mp3-b124215eaa6dfdb62c744553cd665b66.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

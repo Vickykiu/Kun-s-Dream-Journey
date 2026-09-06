@@ -349,6 +349,8 @@ func _draw_current_line():
 		else str(page)
 	)
 
+	Audio.play("dialogue_page")
+
 	# Only assign when this page actually has a face, so a page with no
 	# expression and no default leaves the previous one up rather than
 	# flashing an empty gap.

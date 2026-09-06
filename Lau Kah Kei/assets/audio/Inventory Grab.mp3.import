@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://baquy138jst6d"
+path="res://.godot/imported/Inventory Grab.mp3-edf30aabcf6fca93d29dbbd0ac2e4076.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/Inventory Grab.mp3"
+dest_files=["res://.godot/imported/Inventory Grab.mp3-edf30aabcf6fca93d29dbbd0ac2e4076.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

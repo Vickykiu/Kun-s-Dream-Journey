@@ -52,6 +52,13 @@ func _start() -> void:
 	_freeze_player(true)
 	_block_menu_overlay(true)
 
+	# The room goes quiet as the picture does: the ambience and anything over
+	# it fade on the same clock as the screen, leaving the closing sound on
+	# its own rather than competing with the room the player is leaving.
+	Audio.stop_music(fade_time)
+	Audio.stop_layer(fade_time)
+	Audio.play("chapter_end")
+
 	var tween := create_tween()
 	tween.tween_property(_black, "modulate:a", 1.0, fade_time)
 	if subtitle != "":

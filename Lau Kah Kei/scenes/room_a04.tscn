@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="7_calm"]
 [ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="8_worr"]
 [ext_resource type="Texture2D" uid="uid://bai1i11eogv8s" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_sad.png" id="9_sad"]
+[ext_resource type="Script" path="res://Lau Kah Kei/scripts/ambience.gd" id="90_ambsc"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/Horror Ambience.mp3" id="91_ambtr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fru3a"]
 size = Vector2(298, 573)
@@ -161,3 +163,7 @@ theme_override_font_sizes/font_size = 45
 text = "Press E to enter"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Ambience" type="Node" parent="."]
+script = ExtResource("90_ambsc")
+track = ExtResource("91_ambtr")

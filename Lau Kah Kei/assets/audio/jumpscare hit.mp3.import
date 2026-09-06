@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://drg7fi2bqkfve"
+path="res://.godot/imported/jumpscare hit.mp3-fcf84ed023c9b5ed3be539211f84547d.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/jumpscare hit.mp3"
+dest_files=["res://.godot/imported/jumpscare hit.mp3-fcf84ed023c9b5ed3be539211f84547d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

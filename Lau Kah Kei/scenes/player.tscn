@@ -13,12 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://blsmxpgeepgho" path="res://Lau Kah Kei/assets/image/charactor/kun_x12/right2.png" id="8_otc5t"]
 [ext_resource type="Texture2D" uid="uid://wuq11puivqg2" path="res://Lau Kah Kei/assets/image/charactor/kun_x12/left3.png" id="10_d402q"]
 [ext_resource type="Texture2D" uid="uid://bf8wlwwuiqpip" path="res://Lau Kah Kei/assets/image/charactor/kun_x12/right3.png" id="12_arwsg"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/charactor walking.mp3" id="94_walk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 53.600372
 
 [node name="Player" type="CharacterBody2D" unique_id=1213491095 groups=["player"]]
 script = ExtResource("1_g2els")
+walk_sound = ExtResource("94_walk")
 tex_back = ExtResource("2_wggcd")
 tex_front = ExtResource("2_p8k7j")
 tex_left = ExtResource("4_phusc")

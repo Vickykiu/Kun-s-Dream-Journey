@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="9_calm"]
 [ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="10_worr"]
 [ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="11_detr"]
+[ext_resource type="Script" path="res://Lau Kah Kei/scripts/ambience.gd" id="90_ambsc"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/Horror Ambience.mp3" id="91_ambtr"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/key pick up.mp3" id="92_sfxa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bscv6"]
 size = Vector2(183.08044, 331.39825)
@@ -202,6 +205,7 @@ scale = Vector2(1.3, 1.3)
 
 [node name="instruments" type="Area2D" parent="." unique_id=222097648]
 script = ExtResource("6_inter")
+item_sound = ExtResource("92_sfxa")
 prompt_text = "Press E to look at the instruments"
 lines = Array[ExtResource("7_dline")]([SubResource("Resource_instr1"), SubResource("Resource_instr2"), SubResource("Resource_instr3"), SubResource("Resource_instr4")])
 lines_after = Array[ExtResource("7_dline")]([SubResource("Resource_instr5")])
@@ -219,3 +223,7 @@ shape = SubResource("RectangleShape2D_instr")
 script = ExtResource("8_rintr")
 lines = Array[ExtResource("7_dline")]([SubResource("Resource_intro1"), SubResource("Resource_intro2"), SubResource("Resource_intro3")])
 flag_id = "a05_entered"
+
+[node name="Ambience" type="Node" parent="."]
+script = ExtResource("90_ambsc")
+track = ExtResource("91_ambtr")

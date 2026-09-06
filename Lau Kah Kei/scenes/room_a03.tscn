@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bai1i11eogv8s" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_sad.png" id="11_0fexx"]
 [ext_resource type="Script" uid="uid://cyhqejd02cmkk" path="res://Lau Kah Kei/scripts/room_intro.gd" id="12_rintr"]
 [ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="13_detr"]
+[ext_resource type="Script" path="res://Lau Kah Kei/scripts/ambience.gd" id="90_ambsc"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/Horror Ambience.mp3" id="91_ambtr"]
+[ext_resource type="AudioStreamMP3" path="res://Lau Kah Kei/assets/audio/paper pickup.mp3" id="92_sfxa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfomb"]
 size = Vector2(298, 573)
@@ -220,6 +223,7 @@ scale = Vector2(1.3, 1.3)
 
 [node name="bed_dialogue" type="Area2D" parent="." unique_id=119968158]
 script = ExtResource("7_ubh14")
+item_sound = ExtResource("92_sfxa")
 prompt_text = "Press E to look at the bed"
 lines = Array[ExtResource("8_0fexx")]([SubResource("Resource_1ngjn"), SubResource("Resource_rpp3r"), SubResource("Resource_rrdre")])
 lines_after = Array[ExtResource("8_0fexx")]([SubResource("Resource_8h70r")])
@@ -251,3 +255,7 @@ shape = SubResource("RectangleShape2D_desk")
 script = ExtResource("12_rintr")
 lines = Array[ExtResource("8_0fexx")]([SubResource("Resource_intro1"), SubResource("Resource_intro2")])
 flag_id = "a03_entered"
+
+[node name="Ambience" type="Node" parent="."]
+script = ExtResource("90_ambsc")
+track = ExtResource("91_ambtr")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wo2hugxuh2ia"
+path="res://.godot/imported/key pick up.mp3-44517a3614a66aa34c3d6c557242270a.mp3str"
+
+[deps]
+
+source_file="res://Lau Kah Kei/assets/audio/key pick up.mp3"
+dest_files=["res://.godot/imported/key pick up.mp3-44517a3614a66aa34c3d6c557242270a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

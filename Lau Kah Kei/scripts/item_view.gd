@@ -58,6 +58,7 @@ func show_item(front: Texture2D, back: Texture2D = null) -> void:
 	_image.texture = front
 	_hint.text = HINT_FLIP if _back else HINT_CLOSE
 	_root.show()
+	Audio.play("item_show")
 	_freeze_player(true)
 	_block_menu_overlay(true)
 
@@ -87,6 +88,7 @@ func _input(event):
 
 func _turn_over():
 	_showing_back = true
+	Audio.play("item_flip")
 	_image.texture = _back
 	_hint.text = HINT_CLOSE
 

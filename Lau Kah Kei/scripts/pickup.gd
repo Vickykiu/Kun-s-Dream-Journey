@@ -50,6 +50,10 @@ signal collected(node)
 # Adds a "(Added to inventory: ...)" page after `lines`. Only with item_id.
 @export var announce_pickup: bool = true
 
+# Optional — the sound of this item going into the bag: paper, keys, plastic.
+# Left empty the pickup is silent, which is fine for something small.
+@export var item_sound: AudioStream
+
 var _player_inside := false
 var _taken := false
 
@@ -109,6 +113,7 @@ func _pick_up():
 	await ItemView.show_item(_front_texture(), back_texture)
 
 	GameState.add_item(item_id)
+	Audio.play_stream(item_sound)
 	hide()                             # the object is gone from the room
 	set_deferred("monitoring", false)  # and stops detecting the player
 	collected.emit(self)
