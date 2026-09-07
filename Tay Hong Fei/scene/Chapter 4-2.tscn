@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="12_8bxu5"]
 [ext_resource type="Texture2D" uid="uid://cd6ndr5cq17p" path="res://Tay Hong Fei/asset/character/Kunkun1.png" id="13_0kcjn"]
 [ext_resource type="Texture2D" uid="uid://b3rjxh2u1r0ce" path="res://Tay Hong Fei/asset/character/Kunkun1-smile.png" id="14_0kcjn"]
-[ext_resource type="PackedScene" uid="uid://dgvbsieke3aip" path="res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn" id="15_fy4hc"]
 [ext_resource type="Texture2D" uid="uid://3acjce6jrw2f" path="res://Tay Hong Fei/asset/character/kunkun disappear 1.png" id="15_t4aq6"]
 [ext_resource type="Texture2D" uid="uid://dpv6vudfge1k" path="res://Tay Hong Fei/asset/character/kunkun disappear 2.png" id="16_30gmv"]
 [ext_resource type="Texture2D" uid="uid://bvxt7wimdkxdi" path="res://Tay Hong Fei/asset/character/kunkun disappear 3.png" id="17_5h6e6"]
@@ -38,14 +37,11 @@ text = "Who are you...?"
 portrait = ExtResource("12_8bxu5")
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_efdcj"]
-load_path = "res://.godot/imported/Kunkun?.png-73b7f151e3be4815ba7adf831dd2804f.ctex"
-
 [sub_resource type="Resource" id="Resource_fw405"]
 resource_name = "..."
 script = ExtResource("11_iqage")
 text = "..."
-portrait = SubResource("CompressedTexture2D_efdcj")
+portrait = ExtResource("13_0kcjn")
 metadata/_custom_type_script = "uid://dvad75d3p1x2b"
 
 [sub_resource type="Resource" id="Resource_t4aq6"]
@@ -133,7 +129,6 @@ size = Vector2(12.734695, 12.122452)
 [node name="Chapter4-2" type="Node2D" unique_id=22927392]
 position = Vector2(564, -315)
 script = ExtResource("1_dmnnq")
-bgm_volume_db = -5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=130358239]
 position = Vector2(413, 860)
@@ -243,7 +238,7 @@ script = ExtResource("7_agad7")
 position = Vector2(408, 788)
 script = ExtResource("10_2wkyv")
 appear_audio = ExtResource("11_xmxbq")
-appear_audio_volume_db = 0.0
+appear_audio_volume_db = -5.0
 kunkun_intro_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fy4hc")])
 mystery_speaker = "Kunkun?"
 mystery_intro_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fw405")])
@@ -255,7 +250,6 @@ disappear_frames = Array[Texture2D]([ExtResource("15_t4aq6"), ExtResource("16_30
 ending_image = ExtResource("18_fgl5u")
 ending_audio = ExtResource("19_xmxbq")
 credits_scene = ExtResource("18_30gmv")
-reject_scene = ExtResource("15_fy4hc")
 
 [node name="Sprite" type="Sprite2D" parent="Kunkun1" unique_id=139223958]
 scale = Vector2(0.047623858, 0.047623858)

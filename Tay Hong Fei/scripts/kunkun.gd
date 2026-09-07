@@ -110,7 +110,9 @@ extends CharacterBody2D
 
 # ===== Reject Ending =====
 
-@export var reject_scene: PackedScene
+@export_file("*.tscn") var reject_scene_path: String = (
+	"res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn"
+)
 
 @export var reject_black_duration: float = 1.0
 
@@ -1093,9 +1095,9 @@ func play_reject_ending() -> void:
 	# Chapter 3 will use this flag.
 	MinesweeperState.reject_hint_pending = true
 
-	if reject_scene == null:
+	if reject_scene_path.is_empty():
 		print(
-			"Reject scene is not assigned."
+			"Reject scene path is not assigned."
 		)
 
 		black_layer.queue_free()
@@ -1103,20 +1105,16 @@ func play_reject_ending() -> void:
 		return
 
 	# Remove saved Chapter 3 position.
-	var reject_path: String = (
-		reject_scene.resource_path
-	)
-
 	if GameState.spawn_points.has(
-		reject_path
+		reject_scene_path
 	):
 		GameState.spawn_points.erase(
-			reject_path
+			reject_scene_path
 		)
 
 	# Return to Chapter 3.
-	get_tree().change_scene_to_packed(
-		reject_scene
+	get_tree().change_scene_to_file(
+		reject_scene_path
 	)
 
 

@@ -178,6 +178,7 @@ stream = ExtResource("9_c4rnh")
 
 [node name="FlagAudio" type="AudioStreamPlayer" parent="." unique_id=1161951169]
 stream = ExtResource("10_yceau")
+volume_db = -5.0
 
 [node name="MineAudio" type="AudioStreamPlayer" parent="." unique_id=202663960]
 stream = ExtResource("11_no736")

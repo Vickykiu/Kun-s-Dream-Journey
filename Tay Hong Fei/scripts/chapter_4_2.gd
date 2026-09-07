@@ -3,7 +3,7 @@ extends Node2D
 
 # ===== BGM =====
 
-@export var bgm_volume_db: float = -14.0
+@export var bgm_volume_db: float = -5.0
 
 
 # ===== Nodes =====
