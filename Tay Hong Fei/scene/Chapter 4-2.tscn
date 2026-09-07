@@ -278,4 +278,4 @@ text = "Press E to talk"
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1335049765]
 stream = ExtResource("24_4lioo")
-volume_db = -14.0
+volume_db = -5.0
