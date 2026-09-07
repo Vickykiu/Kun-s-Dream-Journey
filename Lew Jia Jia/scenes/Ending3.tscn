@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c8ngp1wmw1j7g" path="res://Lew Jia Jia/scripts/ending_3.gd" id="1_q7544"]
 [ext_resource type="Texture2D" uid="uid://laxj8kiajhlu" path="res://Lew Jia Jia/assets/HospitalBackground.png" id="1_rw46e"]
+[ext_resource type="AudioStream" uid="uid://b647wg05c4umn" path="res://Lew Jia Jia/assets/audio/EscapeMusic.mp3" id="3_hpvhj"]
+[ext_resource type="AudioStream" uid="uid://brh66yfuy3onr" path="res://Lau Kah Kei/assets/audio/correct notification.mp3" id="4_4e2bn"]
 
 [node name="Ending3" type="CanvasLayer" unique_id=532177550]
 script = ExtResource("1_q7544")
@@ -44,3 +46,11 @@ He survived, but the memories of those who were lost
 would remain with him forever."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=316668498]
+stream = ExtResource("3_hpvhj")
+volume_db = -15.0
+autoplay = true
+
+[node name="AchievementSound" type="AudioStreamPlayer" parent="." unique_id=1321281161]
+stream = ExtResource("4_4e2bn")

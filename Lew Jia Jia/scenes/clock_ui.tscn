@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bjhl4f5aqtajf" path="res://Lew Jia Jia/scripts/clock_ui.gd" id="1_1850u"]
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_g6caq"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_qj0kn"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="2_qj0kn"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_we2qc"]
-[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/dialogue/kun_worried.png" id="4_qyv8s"]
+[ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="4_qyv8s"]
+[ext_resource type="AudioStream" uid="uid://cxwrn02dnkxgc" path="res://Lau Kah Kei/assets/audio/dialog click.mp3" id="6_we2qc"]
 
 [sub_resource type="Resource" id="Resource_mv245"]
 resource_name = "The clock has stopped at 3:15."
@@ -54,5 +55,8 @@ offset_right = 1924.0
 offset_bottom = 145.0
 theme_override_font_sizes/font_size = 100
 text = "X"
+
+[node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=1976712492]
+stream = ExtResource("6_we2qc")
 
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

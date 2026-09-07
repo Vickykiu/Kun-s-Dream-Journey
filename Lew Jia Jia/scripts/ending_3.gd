@@ -1,10 +1,21 @@
 extends CanvasLayer
 
 
+# ==================================================
+# Node references
+# ==================================================
+
 @onready var ending_title: Label = $EndingTitle
 @onready var ending_description: Label = $EndingDescription
 @onready var dark_overlay: ColorRect = $DarkOverlay
 
+@onready var background_music: AudioStreamPlayer = $BackgroundMusic
+@onready var achievement_sound: AudioStreamPlayer = $AchievementSound
+
+
+# ==================================================
+# Ending sequence
+# ==================================================
 
 func _ready() -> void:
 	GameState.set_flag(
@@ -15,8 +26,22 @@ func _ready() -> void:
 	ending_description.modulate.a = 0.0
 	dark_overlay.color.a = 1.0
 
+	# Start Ending background music.
+	if background_music.stream:
+		background_music.volume_db = -15.0
+		background_music.play()
+
+	# Play achievement sound once.
+	if achievement_sound.stream:
+		achievement_sound.volume_db = 0.0
+		achievement_sound.play()
+
 	await fade_in_ending()
 
+
+# ==================================================
+# Fade in Ending
+# ==================================================
 
 func fade_in_ending() -> void:
 	var background_tween := create_tween()

@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://dgvbsieke3aip"]
 
 [ext_resource type="Script" uid="uid://ciorj2g1ocplx" path="res://Lew Jia Jia/scripts/chapter_3_room_b_13.gd" id="1_8dvhw"]
+[ext_resource type="PackedScene" uid="uid://dhobhrewqeuw0" path="res://Lew Jia Jia/scenes/Ending1Loop.tscn" id="2_1px24"]
 [ext_resource type="Texture2D" uid="uid://d0k4n7vpvpakc" path="res://Lew Jia Jia/assets/RoomBackground.png" id="2_6vyrd"]
+[ext_resource type="PackedScene" uid="uid://b4bmrsi17ddx1" path="res://Lew Jia Jia/scenes/Chapter4Transition.tscn" id="3_1px24"]
 [ext_resource type="Texture2D" uid="uid://csmncq3pinrkq" path="res://Lew Jia Jia/assets/Safe_Close.png" id="3_8dvhw"]
 [ext_resource type="Texture2D" uid="uid://ddy07efiwgjaa" path="res://Lew Jia Jia/assets/Safe_OpenEmpty.png" id="4_abvsn"]
 [ext_resource type="Script" uid="uid://bkp7mycs7ohir" path="res://Lau Kah Kei/scripts/interactable.gd" id="4_v4nn1"]
 [ext_resource type="PackedScene" uid="uid://cq7v2n8xk4rb1" path="res://Lau Kah Kei/scenes/player.tscn" id="5_player"]
+[ext_resource type="AudioStream" uid="uid://bgsqnmlhr31d1" path="res://Lau Kah Kei/assets/audio/Horror Ambience.mp3" id="7_21pov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dvhw"]
 size = Vector2(85.86051, 44.546997)
@@ -93,6 +96,8 @@ size = Vector2(51.000008, 118.000046)
 
 [node name="Chapter3_RoomB13" type="Node2D" unique_id=574331139]
 script = ExtResource("1_8dvhw")
+ending_1_scene = ExtResource("2_1px24")
+chapter_4_scene = ExtResource("3_1px24")
 
 [node name="RoomBackgrounnd" type="Sprite2D" parent="." unique_id=1290400529]
 position = Vector2(-942.99994, 236.50002)
@@ -375,6 +380,12 @@ offset_bottom = 935.00006
 scale = Vector2(1.5826125, 1.5826125)
 text = "...By the way, I tried breaking through the ventilation shaft too.
 I never made it to the end of that path."
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1512272734]
+stream = ExtResource("7_21pov")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="interacted" from="Safe/Area2D" to="." method="_on_safe_interacted"]
 [connection signal="interacted" from="Cabinet/Area2D" to="." method="_on_cabinet_interacted"]

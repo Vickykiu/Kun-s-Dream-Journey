@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://binii3roaioa2"]
 
 [ext_resource type="Script" uid="uid://dunbul7o64iju" path="res://Lew Jia Jia/scripts/calendar_ui.gd" id="1_tx38j"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_63tb2"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="2_63tb2"]
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="2_ho0v0"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_owdgf"]
-[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/dialogue/kun_determined.png" id="4_dvg48"]
+[ext_resource type="Texture2D" uid="uid://bypdm8rdkr66e" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_determined.png" id="4_dvg48"]
+[ext_resource type="AudioStream" uid="uid://cxwrn02dnkxgc" path="res://Lau Kah Kei/assets/audio/dialog click.mp3" id="6_owdgf"]
 
 [sub_resource type="Resource" id="Resource_3px4c"]
 resource_name = "The 12th has been circled in red."
@@ -54,5 +55,8 @@ offset_right = 1924.0
 offset_bottom = 145.0
 theme_override_font_sizes/font_size = 100
 text = "X"
+
+[node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=49136630]
+stream = ExtResource("6_owdgf")
 
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

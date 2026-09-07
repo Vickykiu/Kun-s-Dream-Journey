@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dhobhrewqeuw0"]
+
+[ext_resource type="Script" uid="uid://dr2y0mltnmv5a" path="res://Lew Jia Jia/scripts/ending_1_loop.gd" id="1_si11d"]
+[ext_resource type="PackedScene" uid="uid://db0n36osgdeyf" path="res://Kiu Chun Woon/scenes/chapter_1_rhythm.tscn" id="2_pr5hf"]
+[ext_resource type="AudioStream" uid="uid://b647wg05c4umn" path="res://Lew Jia Jia/assets/audio/EscapeMusic.mp3" id="3_ogmnj"]
+
+[node name="Ending1Loop" type="CanvasLayer" unique_id=526904760]
+script = ExtResource("1_si11d")
+chapter_1_scene = ExtResource("2_pr5hf")
+
+[node name="Background" type="ColorRect" parent="." unique_id=327515597]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EndingTitle" type="Label" parent="." unique_id=184540950]
+offset_left = 782.0
+offset_top = 251.0
+offset_right = 1065.0
+offset_bottom = 334.0
+theme_override_font_sizes/font_size = 60
+text = "ENDING 1"
+horizontal_alignment = 1
+
+[node name="EndingDescription" type="Label" parent="." unique_id=753683527]
+offset_left = 458.0
+offset_top = 399.0
+offset_right = 1382.0
+offset_bottom = 664.0
+theme_override_font_sizes/font_size = 46
+text = "LOOP
+Kun opens his eyes once again.
+Everything has returned to the beginning."
+horizontal_alignment = 1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=2017411417]
+stream = ExtResource("3_ogmnj")
+volume_db = -15.0
+autoplay = true

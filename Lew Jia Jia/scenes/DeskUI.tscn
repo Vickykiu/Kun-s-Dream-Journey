@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="5_jte2k"]
 [ext_resource type="Texture2D" uid="uid://dbvv0n5wpqtnd" path="res://Lew Jia Jia/assets/WireCutters.png" id="5_syvvt"]
 [ext_resource type="Texture2D" uid="uid://doiba8jokt2bh" path="res://Lew Jia Jia/assets/Drawer_Open_With_Pliers.png" id="6_gevtx"]
+[ext_resource type="AudioStream" uid="uid://cxwrn02dnkxgc" path="res://Lau Kah Kei/assets/audio/dialog click.mp3" id="8_syvvt"]
+[ext_resource type="AudioStream" uid="uid://j720scc7ysvp" path="res://Lew Jia Jia/assets/audio/ButtonSoundEffect.mp3" id="9_vuyas"]
 
 [sub_resource type="Resource" id="Resource_syvvt"]
 resource_name = "This sheet music is old and badly damage"
@@ -140,6 +142,12 @@ offset_bottom = 145.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 100
 text = "X"
+
+[node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=1365546388]
+stream = ExtResource("8_syvvt")
+
+[node name="DrawerOpenSound" type="AudioStreamPlayer" parent="." unique_id=724991564]
+stream = ExtResource("9_vuyas")
 
 [connection signal="pressed" from="SheetMusicButton" to="." method="_on_sheet_music_button_pressed"]
 [connection signal="pressed" from="BookButton" to="." method="_on_book_button_pressed"]

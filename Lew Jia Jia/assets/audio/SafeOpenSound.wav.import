@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cqnikykbpeahv"
+path="res://.godot/imported/SafeOpenSound.wav-57808fed73d9673817148797ddae62a3.sample"
+
+[deps]
+
+source_file="res://Lew Jia Jia/assets/audio/SafeOpenSound.wav"
+dest_files=["res://.godot/imported/SafeOpenSound.wav-57808fed73d9673817148797ddae62a3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

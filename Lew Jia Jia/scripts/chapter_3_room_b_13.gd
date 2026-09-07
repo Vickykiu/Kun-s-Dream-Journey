@@ -41,6 +41,12 @@ const VENT_ESCAPE_SCENE = preload(
 	"res://Lew Jia Jia/scenes/ventEscape.tscn"
 )
 
+# ==================================================
+# Ending routes
+# ==================================================
+
+@export var ending_1_scene: PackedScene
+@export var chapter_4_scene: PackedScene
 
 # ==================================================
 # State
@@ -57,6 +63,7 @@ var calendar_ui_instance: Node = null
 var desk_ui_instance: Node = null
 var vent_ui_instance: Node = null
 var electric_box_ui_instance: Node = null
+var is_changing_route: bool = false
 
 
 # ==================================================
@@ -261,6 +268,10 @@ func _on_safe_interacted(
 	safe_ui_instance.safe_opened.connect(
 		_on_safe_unlocked
 	)
+	
+	safe_ui_instance.file_taken.connect(
+	_on_death_list_taken
+)
 
 	safe_ui_instance.tree_exited.connect(
 		_on_safe_ui_closed
@@ -276,6 +287,57 @@ func _on_safe_unlocked() -> void:
 	if safe_open:
 		safe_open.visible = true
 
+func _on_death_list_taken() -> void:
+	if is_changing_route:
+		return
+
+	is_changing_route = true
+
+	var evidence_total: int = GameState.evidence_count()
+
+	print(
+		"Death List collected. Evidence count: ",
+		evidence_total,
+		" / ",
+		ItemDB.total_evidence()
+	)
+
+	# Allow the inventory notification to finish.
+	await get_tree().create_timer(
+		1.5
+	).timeout
+
+	if evidence_total < 2:
+		print(
+			"Safe route result: Ending 1 - Loop"
+		)
+
+		if ending_1_scene:
+			get_tree().change_scene_to_packed(
+				ending_1_scene
+			)
+		else:
+			push_error(
+				"Ending 1 Scene has not been assigned."
+			)
+
+			is_changing_route = false
+
+	else:
+		print(
+			"Safe route result: Continue to Chapter 4"
+		)
+
+		if chapter_4_scene:
+			get_tree().change_scene_to_packed(
+				chapter_4_scene
+			)
+		else:
+			push_error(
+				"Chapter 4 Scene has not been assigned."
+			)
+
+			is_changing_route = false
 
 func _on_safe_ui_closed() -> void:
 	safe_ui_instance = null

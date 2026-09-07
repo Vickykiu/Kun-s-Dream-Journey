@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bmrp6t7nc480l"
+path="res://.godot/imported/PoliceSirenSound.mp3-b7ac68684c24f73a45b3c478fe2c1f32.mp3str"
+
+[deps]
+
+source_file="res://Lew Jia Jia/assets/audio/PoliceSirenSound.mp3"
+dest_files=["res://.godot/imported/PoliceSirenSound.mp3-b7ac68684c24f73a45b3c478fe2c1f32.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -17,8 +17,12 @@ const CABINET_OPEN_TEXTURE = preload(
 
 @onready var cabinet_image: TextureRect = $CabinetImage
 @onready var open_button: TextureButton = $OpenButton
+@onready var close_button: BaseButton = $CloseButton
+@onready var close_sound: AudioStreamPlayer = $CloseSound
+
 
 var is_open: bool = false
+var is_closing: bool = false
 
 
 func _on_open_button_pressed() -> void:
@@ -43,5 +47,15 @@ func _on_open_button_pressed() -> void:
 func _on_close_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
+
+	if is_closing:
+		return
+
+	is_closing = true
+	close_button.disabled = true
+
+	if close_sound.stream:
+		close_sound.play()
+		await close_sound.finished
 
 	queue_free()

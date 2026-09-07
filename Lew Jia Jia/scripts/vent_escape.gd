@@ -6,18 +6,47 @@ const HOSPITAL_SCENE = preload(
 )
 
 
+# ==================================================
+# Node references
+# ==================================================
+
 @onready var story_label: Label = $StoryLabel
 @onready var skip_button: Button = $SkipButton
 
+@onready var continue_sound: AudioStreamPlayer = $ContinueSound
+@onready var background_music: AudioStreamPlayer = $BackgroundMusic
+@onready var police_siren_sound: AudioStreamPlayer = $PoliceSirenSound
+
+
+# ==================================================
+# State
+# ==================================================
 
 var cutscene_skipped: bool = false
 var story_finished: bool = false
-var active_tween: Tween = null
 
+var active_tween: Tween = null
+var siren_tween: Tween = null
+
+
+# ==================================================
+# Initial state
+# ==================================================
 
 func _ready() -> void:
 	skip_button.visible = false
+	skip_button.disabled = true
 	story_label.modulate.a = 0.0
+
+	# Start background music.
+	if background_music.stream:
+		background_music.volume_db = -15.0
+		background_music.play()
+
+	# Start police siren at a very low volume.
+	if police_siren_sound.stream:
+		police_siren_sound.volume_db = -40.0
+		police_siren_sound.play()
 
 	play_vent_story()
 
@@ -31,9 +60,12 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventKey:
-		if event.keycode == KEY_SPACE and event.pressed:
+		if (
+			event.keycode == KEY_SPACE
+			and event.pressed
+			and not event.echo
+		):
 			get_viewport().set_input_as_handled()
-
 			skip_vent_story()
 
 
@@ -62,6 +94,9 @@ func play_vent_story() -> void:
 
 	if cutscene_skipped:
 		return
+
+	# Police sirens gradually become louder.
+	increase_police_siren()
 
 	await show_story_line(
 		"From somewhere outside, the sound of police sirens grows louder."
@@ -97,7 +132,7 @@ func show_story_line(text: String) -> void:
 
 
 # ==================================================
-# Fade In
+# Fade Label In
 # ==================================================
 
 func fade_label_in() -> void:
@@ -117,7 +152,7 @@ func fade_label_in() -> void:
 
 
 # ==================================================
-# Fade Out
+# Fade Label Out
 # ==================================================
 
 func fade_label_out() -> void:
@@ -137,6 +172,31 @@ func fade_label_out() -> void:
 
 
 # ==================================================
+# Police Siren
+# ==================================================
+
+func increase_police_siren() -> void:
+	if not police_siren_sound.stream:
+		return
+
+	if not police_siren_sound.playing:
+		police_siren_sound.volume_db = -40.0
+		police_siren_sound.play()
+
+	if siren_tween:
+		siren_tween.kill()
+
+	siren_tween = create_tween()
+
+	siren_tween.tween_property(
+		police_siren_sound,
+		"volume_db",
+		-22.0,
+		3.0
+	)
+
+
+# ==================================================
 # Skip Story
 # ==================================================
 
@@ -147,6 +207,9 @@ func skip_vent_story() -> void:
 		active_tween.kill()
 		active_tween = null
 
+	# Make the siren audible when the story is skipped.
+	increase_police_siren()
+
 	show_final_message()
 
 
@@ -155,6 +218,9 @@ func skip_vent_story() -> void:
 # ==================================================
 
 func show_final_message() -> void:
+	if story_finished:
+		return
+
 	story_finished = true
 
 	story_label.text = (
@@ -163,7 +229,9 @@ func show_final_message() -> void:
 	)
 
 	story_label.modulate.a = 1.0
+
 	skip_button.visible = true
+	skip_button.disabled = false
 
 
 # ==================================================
@@ -174,7 +242,22 @@ func _on_skip_button_pressed() -> void:
 	if not story_finished:
 		return
 
+	if skip_button.disabled:
+		return
+
 	skip_button.disabled = true
+
+	# Lower the background sounds so the button sound is clear.
+	if background_music.playing:
+		background_music.volume_db = -30.0
+
+	if police_siren_sound.playing:
+		police_siren_sound.volume_db = -30.0
+
+	# Play Continue button sound.
+	if continue_sound.stream:
+		continue_sound.play()
+		await continue_sound.finished
 
 	get_tree().change_scene_to_packed(
 		HOSPITAL_SCENE

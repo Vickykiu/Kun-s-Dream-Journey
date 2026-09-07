@@ -2,8 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://b0mx3e5ehe5ei" path="res://Lew Jia Jia/assets/RoomSpritesheet.png" id="1_dwfhp"]
 [ext_resource type="Script" uid="uid://q6hwe1hubeot" path="res://Lew Jia Jia/scripts/cabinet_ui.gd" id="1_xuri2"]
-[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/dialogue/kun_calm.png.png" id="2_wuv85"]
+[ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="2_wuv85"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_558cw"]
+[ext_resource type="AudioStream" uid="uid://cxwrn02dnkxgc" path="res://Lau Kah Kei/assets/audio/dialog click.mp3" id="5_558cw"]
 
 [sub_resource type="Resource" id="Resource_jfysv"]
 resource_name = "There is almost nothing inside."
@@ -54,6 +55,9 @@ offset_right = 1924.0
 offset_bottom = 145.0
 theme_override_font_sizes/font_size = 100
 text = "X"
+
+[node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=2074894977]
+stream = ExtResource("5_558cw")
 
 [connection signal="pressed" from="OpenButton" to="." method="_on_open_button_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

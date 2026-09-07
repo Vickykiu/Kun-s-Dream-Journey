@@ -16,7 +16,7 @@ extends CanvasLayer
 @export var metronome_lines: Array[DialogueLine] = []:
 	set(value):
 		metronome_lines = DialogueLine.fill_blanks(value)
-		
+
 @export var pliers_pickup_lines: Array[DialogueLine] = []:
 	set(value):
 		pliers_pickup_lines = DialogueLine.fill_blanks(value)
@@ -25,34 +25,44 @@ extends CanvasLayer
 
 
 # =========================
-# Drawer references
+# Node references
 # =========================
+
 @onready var drawer_button: TextureButton = $DrawerButton
 @onready var open_drawer_image: TextureRect = $OpenDrawerImage
 @onready var pliers_button: TextureButton = $PliersButton
 @onready var drawer_background: ColorRect = $DrawerBackground
 
+@onready var close_button: BaseButton = $CloseButton
+@onready var close_sound: AudioStreamPlayer = $CloseSound
+@onready var drawer_open_sound: AudioStreamPlayer = $DrawerOpenSound
+
+
 var drawer_opened: bool = false
 var pliers_taken: bool = false
+var is_closing: bool = false
 
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	pliers_taken = GameState.has_item("wire_cutters")
+	pliers_taken = GameState.has_item(
+		"wire_cutters"
+	)
 
 	open_drawer_image.visible = false
 	pliers_button.visible = false
 	drawer_background.visible = false
 
-	# Already collected: drawer can no longer be opened
+	# Already collected: drawer can no longer be opened.
 	drawer_button.visible = not pliers_taken
 
 
 # =========================
 # Sheet music
 # =========================
+
 func _on_sheet_music_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
@@ -70,6 +80,7 @@ func _on_sheet_music_button_pressed() -> void:
 # =========================
 # Book
 # =========================
+
 func _on_book_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
@@ -87,6 +98,7 @@ func _on_book_button_pressed() -> void:
 # =========================
 # Metronome
 # =========================
+
 func _on_metronome_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
@@ -104,6 +116,7 @@ func _on_metronome_button_pressed() -> void:
 # =========================
 # Open drawer
 # =========================
+
 func _on_drawer_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
@@ -113,6 +126,10 @@ func _on_drawer_button_pressed() -> void:
 
 	drawer_opened = true
 
+	# Play drawer opening sound.
+	if drawer_open_sound.stream:
+		drawer_open_sound.play()
+
 	drawer_background.visible = true
 	open_drawer_image.visible = true
 	pliers_button.visible = true
@@ -120,8 +137,9 @@ func _on_drawer_button_pressed() -> void:
 
 
 # =========================
-# Pliers — implement next
+# Pick up pliers
 # =========================
+
 func _on_pliers_button_pressed() -> void:
 	if Dialogue.is_active() or ItemView.is_active():
 		return
@@ -135,37 +153,49 @@ func _on_pliers_button_pressed() -> void:
 	pliers_taken = true
 	pliers_button.visible = false
 
-	# Show enlarged pliers image
+	# Show enlarged pliers image.
 	if pliers_closeup_texture:
-		await ItemView.show_item(pliers_closeup_texture)
+		await ItemView.show_item(
+			pliers_closeup_texture
+		)
 
-	# Hide the drawer before showing dialogue
+	# Hide drawer overlay.
 	drawer_background.visible = false
 	open_drawer_image.visible = false
 	pliers_button.visible = false
 	drawer_button.visible = false
 
-	# Add the tool to inventory
-	GameState.add_item("wire_cutters")
+	# Add tool to inventory.
+	GameState.add_item(
+		"wire_cutters"
+	)
 
-	# Dialogue now appears over the normal DeskUI
 	if not pliers_pickup_lines.is_empty():
 		Dialogue.show_lines(
 			pliers_pickup_lines,
 			portrait,
 			speaker_name
 		)
+
 		await Dialogue.finished
 
 
 # =========================
 # Close Desk UI
 # =========================
+
 func _on_close_button_pressed() -> void:
-	if Dialogue.is_active():
+	if Dialogue.is_active() or ItemView.is_active():
 		return
 
-	queue_free()
+	if is_closing:
+		return
 
-	
-	
+	is_closing = true
+	close_button.disabled = true
+
+	if close_sound.stream:
+		close_sound.play()
+		await close_sound.finished
+
+	queue_free()

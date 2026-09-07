@@ -10,6 +10,13 @@ extends CanvasLayer
 		calendar_lines = DialogueLine.fill_blanks(value)
 
 
+@onready var close_button: Button = $CloseButton
+@onready var close_sound: AudioStreamPlayer = $CloseSound
+
+
+var is_closing: bool = false
+
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -27,5 +34,15 @@ func _ready() -> void:
 func _on_close_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
+
+	if is_closing:
+		return
+
+	is_closing = true
+	close_button.disabled = true
+
+	if close_sound.stream:
+		close_sound.play()
+		await close_sound.finished
 
 	queue_free()

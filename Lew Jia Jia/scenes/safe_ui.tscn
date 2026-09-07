@@ -4,11 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://cvh581dvcj5hs" path="res://Lew Jia Jia/assets/SafeUI_Close.png" id="2_i0wi7"]
 [ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="2_inxcu"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_ngf5n"]
-[ext_resource type="AudioStream" uid="uid://j720scc7ysvp" path="res://Lew Jia Jia/assets/ButtonSoundEffect.mp3" id="3_xerkm"]
+[ext_resource type="AudioStream" uid="uid://j720scc7ysvp" path="res://Lew Jia Jia/assets/audio/ButtonSoundEffect.mp3" id="3_xerkm"]
 [ext_resource type="Texture2D" uid="uid://cip3vephto6m" path="res://Lew Jia Jia/assets/Safe_File.png" id="4_hwf0w"]
 [ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="4_njwd4"]
 [ext_resource type="Texture2D" uid="uid://cuyyo0us2ua56" path="res://Lew Jia Jia/assets/FileDetail.png" id="5_iptsq"]
 [ext_resource type="Texture2D" uid="uid://c1n7io7mvpp5i" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_scared.png.png" id="5_xs62b"]
+[ext_resource type="AudioStream" uid="uid://cqnikykbpeahv" path="res://Lew Jia Jia/assets/audio/SafeOpenSound.wav" id="10_ngf5n"]
+[ext_resource type="AudioStream" uid="uid://cxwrn02dnkxgc" path="res://Lau Kah Kei/assets/audio/dialog click.mp3" id="11_njwd4"]
 
 [sub_resource type="Resource" id="Resource_f76uf"]
 resource_name = "This is a list of everyone in the traini"
@@ -172,7 +174,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 100
 text = "X"
 
-[node name="BtnSound" type="AudioStreamPlayer2D" parent="." unique_id=841929601]
+[node name="BtnSound" type="AudioStreamPlayer" parent="." unique_id=1110132961]
 stream = ExtResource("3_xerkm")
 
 [node name="FolderBtn" type="Button" parent="." unique_id=1808674249]
@@ -203,6 +205,12 @@ offset_bottom = 29.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 100
 text = "X"
+
+[node name="SafeOpenSound" type="AudioStreamPlayer" parent="." unique_id=459173174]
+stream = ExtResource("10_ngf5n")
+
+[node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=2081785306]
+stream = ExtResource("11_njwd4")
 
 [connection signal="pressed" from="Btn1" to="." method="_on_btn_1_pressed"]
 [connection signal="pressed" from="Btn2" to="." method="_on_btn_2_pressed"]

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://doq00thny0wua" path="res://Lew Jia Jia/assets/characters/PolicePortrait.png" id="3_st603"]
 [ext_resource type="Texture2D" uid="uid://ctrvxrpufbpuq" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_worried.png" id="4_5e0il"]
 [ext_resource type="Texture2D" uid="uid://laxj8kiajhlu" path="res://Lew Jia Jia/assets/HospitalBackground.png" id="5_5e0il"]
+[ext_resource type="AudioStream" uid="uid://b647wg05c4umn" path="res://Lew Jia Jia/assets/audio/EscapeMusic.mp3" id="7_st603"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sigdi"]
 atlas = ExtResource("3_st603")
@@ -88,3 +89,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1443586208]
+stream = ExtResource("7_st603")
+volume_db = -15.0
+autoplay = true

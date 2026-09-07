@@ -8,6 +8,7 @@ signal puzzle_solved
 # =========================
 # Dialogue settings
 # =========================
+
 @export var speaker_name: String = "Kun"
 @export var portrait: Texture2D
 
@@ -27,9 +28,11 @@ signal puzzle_solved
 	set(value):
 		need_tool_lines = DialogueLine.fill_blanks(value)
 
+
 # =========================
 # Node references
 # =========================
+
 @onready var closed_image: TextureRect = $ClosedImage
 @onready var open_image: TextureRect = $OpenImage
 @onready var solved_image: TextureRect = $SolvedImage
@@ -40,10 +43,15 @@ signal puzzle_solved
 @onready var green_button: TextureButton = $GreenButton
 @onready var yellow_button: TextureButton = $YellowButton
 
+@onready var close_button: BaseButton = $CloseButton
+@onready var close_sound: AudioStreamPlayer = $CloseSound
+@onready var wire_cut_sound: AudioStreamPlayer = $WireCutSound
+
 
 # =========================
 # Puzzle settings
 # =========================
+
 const CORRECT_ORDER: Array[String] = [
 	"blue",
 	"red",
@@ -54,37 +62,38 @@ const CORRECT_ORDER: Array[String] = [
 var current_step: int = 0
 var is_box_open: bool = false
 var is_solved: bool = false
+var is_closing: bool = false
 
 
 # =========================
 # Initial state
 # =========================
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	# Initially display the closed electrical box
 	closed_image.visible = true
 	open_image.visible = false
 	solved_image.visible = false
-	
+
 	open_button.visible = true
 	open_button.disabled = false
 
-	# Wire buttons only appear after opening the box
+	# Wire buttons only appear after opening the box.
 	_set_wire_buttons_visible(false)
 
-	# Ensure all buttons start enabled
+	# Ensure all wire buttons start enabled.
 	_enable_wire_button(blue_button)
 	_enable_wire_button(red_button)
 	_enable_wire_button(green_button)
 	_enable_wire_button(yellow_button)
-	
 
 
 # =========================
 # Open electrical box
 # =========================
+
 func _on_open_button_pressed() -> void:
 	if is_box_open:
 		return
@@ -124,6 +133,7 @@ func _on_open_button_pressed() -> void:
 # =========================
 # Wire button signals
 # =========================
+
 func _on_blue_button_pressed() -> void:
 	_try_cut_wire(
 		"blue",
@@ -155,6 +165,7 @@ func _on_yellow_button_pressed() -> void:
 # =========================
 # Check selected wire
 # =========================
+
 func _try_cut_wire(
 	wire_colour: String,
 	wire_button: TextureButton
@@ -176,6 +187,10 @@ func _try_cut_wire(
 				speaker_name
 			)
 		return
+
+	# Play once whenever the player attempts to cut a wire.
+	if wire_cut_sound.stream:
+		wire_cut_sound.play()
 
 	var expected_colour: String = CORRECT_ORDER[current_step]
 
@@ -210,6 +225,7 @@ func _try_cut_wire(
 # =========================
 # Wrong wire selected
 # =========================
+
 func _reset_puzzle() -> void:
 	current_step = 0
 
@@ -236,13 +252,13 @@ func _enable_wire_button(
 # =========================
 # Puzzle completed
 # =========================
+
 func _complete_puzzle() -> void:
 	is_solved = true
 
 	_disable_all_wire_buttons()
 	_set_wire_buttons_visible(false)
 
-	# Display all wires in their cut state
 	open_image.visible = false
 	solved_image.visible = true
 
@@ -252,6 +268,7 @@ func _complete_puzzle() -> void:
 			portrait,
 			speaker_name
 		)
+
 		await Dialogue.finished
 
 	puzzle_solved.emit()
@@ -272,6 +289,7 @@ func _disable_all_wire_buttons() -> void:
 # =========================
 # Show or hide wire buttons
 # =========================
+
 func _set_wire_buttons_visible(
 	value: bool
 ) -> void:
@@ -284,8 +302,19 @@ func _set_wire_buttons_visible(
 # =========================
 # Close ElectricBox UI
 # =========================
+
 func _on_close_button_pressed() -> void:
 	if Dialogue.is_active():
 		return
+
+	if is_closing:
+		return
+
+	is_closing = true
+	close_button.disabled = true
+
+	if close_sound.stream:
+		close_sound.play()
+		await close_sound.finished
 
 	queue_free()

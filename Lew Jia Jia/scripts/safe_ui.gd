@@ -17,11 +17,13 @@ signal file_taken
 
 
 # Node references
-@onready var display = $Label
-@onready var sfx_button = $BtnSound
-@onready var safe_bg = $TextureRect
-@onready var folder_btn = $FolderBtn
-@onready var file_detail = $FileDetail
+@onready var display: Label = $Label
+@onready var sfx_button: AudioStreamPlayer = $BtnSound
+@onready var safe_bg: TextureRect = $TextureRect
+@onready var folder_btn: Button = $FolderBtn
+@onready var file_detail: Control = $FileDetail
+@onready var safe_open_sound: AudioStreamPlayer = $SafeOpenSound
+@onready var close_sound: AudioStreamPlayer = $CloseSound
 
 
 const CORRECT_PASS: String = "31512"
@@ -46,9 +48,11 @@ func _ready() -> void:
 
 	has_read_file = death_list_taken
 
+
 # =========================
 # Keypad input
 # =========================
+
 func add_digit(digit: String) -> void:
 	if is_unlocked:
 		return
@@ -112,34 +116,63 @@ func _on_btn_clear_pressed() -> void:
 # =========================
 # Enter password
 # =========================
+
 func _on_btn_enter_pressed() -> void:
 	if is_unlocked:
 		return
 
 	if current_input == CORRECT_PASS:
-		print("Password correct! Safe opened!")
+		await unlock_safe()
+	else:
+		show_password_error()
 
-		is_unlocked = true
-		current_input = ""
-		display.text = ""
 
-		safe_bg.texture = preload(
-			"res://Lew Jia Jia/assets/Safe_OpenEmpty.png"
+func unlock_safe() -> void:
+	print("Password correct! Safe opened!")
+
+	is_unlocked = true
+	current_input = ""
+	display.text = ""
+
+	safe_bg.texture = preload(
+		"res://Lew Jia Jia/assets/Safe_OpenEmpty.png"
+	)
+
+	folder_btn.visible = true
+
+	if safe_open_sound.stream == null:
+		print("ERROR: SafeOpenSound has no audio file!")
+	else:
+		print(
+			"Playing safe sound: ",
+			safe_open_sound.stream
 		)
 
-		folder_btn.visible = true
-		safe_opened.emit()
+		safe_open_sound.play()
 
-	else:
-		print("Incorrect password!")
+		await get_tree().process_frame
 
-		display.text = "ERROR"
-		current_input = ""
+		print(
+			"Safe sound playing: ",
+			safe_open_sound.playing
+		)
+
+		await safe_open_sound.finished
+
+	safe_opened.emit()
+
+
+func show_password_error() -> void:
+	print("Incorrect password!")
+
+	display.text = "ERROR"
+	current_input = ""
 
 
 # =========================
 # Death-list file
 # =========================
+
 func _on_folder_btn_pressed() -> void:
 	file_detail.visible = true
 
@@ -159,7 +192,7 @@ func _on_folder_btn_pressed() -> void:
 
 		await Dialogue.finished
 
-	# Add the Death List as evidence
+	# Add the Death List as evidence.
 	if not GameState.has_item("death_list"):
 		GameState.add_item(
 			"death_list"
@@ -183,8 +216,15 @@ func _on_close_file_btn_pressed() -> void:
 # =========================
 # Exit Safe UI
 # =========================
+
 func _on_btn_exit_pressed() -> void:
 	if Dialogue.is_active():
 		return
+
+	$BtnExit.disabled = true
+
+	if close_sound.stream:
+		close_sound.play()
+		await close_sound.finished
 
 	queue_free()
