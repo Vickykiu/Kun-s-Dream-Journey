@@ -11,6 +11,16 @@ const REACTION_TEXTURES := {
 	"MISS": preload("res://Kiu Chun Woon/assets/images/reactions/kunkun_miss.png"),
 }
 
+const REACTION_EMOTIONS := {
+	"PERFECT": ["happy", "CONFIDENT"],
+	"GREAT": ["calm", "FOCUSED"],
+	"TOO EARLY": ["worried", "TOO SOON"],
+	"MISS": ["sad", "DISAPPOINTED"],
+}
+const REACTION_SOUNDS := {
+	"PERFECT": &"perfect", "GREAT": &"great", "TOO EARLY": &"early", "MISS": &"miss",
+}
+
 const FALLBACK_SONG_DURATION := 38.0
 const NOTE_COUNT := 72  # Normal mode only; Hard Mode fills the full song length instead.
 const NOTE_TRAVEL_TIME := 1.8
@@ -63,6 +73,9 @@ const HARD_PASS_ACCURACY := 65.0
 @onready var time_label: Label = %TimeLabel
 @onready var song_progress_fill: Panel = %SongProgressFill
 @onready var reaction_portrait: TextureRect = %ReactionPortrait
+@onready var reaction_emoji: Control = %ReactionEmoji
+@onready var reaction_mood: Label = %ReactionMood
+@onready var chapter_dialogue = %ChapterDialogue
 @onready var instruction_overlay: Control = %InstructionOverlay
 @onready var countdown_label: Label = %CountdownLabel
 @onready var result_overlay: Control = %ResultOverlay
@@ -98,9 +111,11 @@ var perfect_window := PERFECT_WINDOW
 var good_window := GOOD_WINDOW
 var miss_window := MISS_WINDOW
 var pass_accuracy := PASS_ACCURACY
+var reaction_tween: Tween
 
 
 func _ready() -> void:
+	chapter_dialogue.finished.connect(_on_result_dialogue_finished)
 	var menu_music := get_node_or_null("/root/MusicManager")
 	if menu_music != null and menu_music.has_method("stop_music"):
 		menu_music.stop_music()
@@ -125,6 +140,8 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if chapter_dialogue.active:
+		return
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		_return_to_intro()
@@ -243,6 +260,8 @@ func _reset_run() -> void:
 	atmosphere.color = Color(0.015, 0.025, 0.055, 0.13)
 	judgement_label.modulate.a = 0.0
 	reaction_portrait.hide()
+	reaction_emoji.hide()
+	reaction_mood.hide()
 	teacher_mei_dialogue_portrait.show()
 	teacher_mei_disappointed_portrait.hide()
 	countdown_label.hide()
@@ -264,6 +283,7 @@ func _begin_countdown() -> void:
 	countdown_active = true
 	countdown_label.show()
 	for message in ["3", "2", "1", "FOLLOW THE BEAT"]:
+		MusicManager.play_sfx(&"countdown")
 		countdown_label.text = message
 		countdown_label.modulate = Color.WHITE
 		countdown_label.scale = Vector2(1.15, 1.15)
@@ -363,8 +383,8 @@ func _judge_lane(lane: int) -> void:
 	for note in chart:
 		if bool(note["judged"]) or int(note["lane"]) != lane:
 			continue
-		var visual: Label = note["visual"]
-		if not is_instance_valid(visual):
+		var candidate_visual: Label = note["visual"]
+		if not is_instance_valid(candidate_visual):
 			continue
 		var difference := absf(song_time - float(note["time"]))
 		if difference <= good_window and difference < smallest_difference:
@@ -379,10 +399,10 @@ func _judge_lane(lane: int) -> void:
 		return
 
 	best_note["judged"] = true
-	var visual: Label = best_note["visual"]
-	if is_instance_valid(visual):
-		visual.hide()
-		visual.queue_free()
+	var judged_visual: Label = best_note["visual"]
+	if is_instance_valid(judged_visual):
+		judged_visual.hide()
+		judged_visual.queue_free()
 
 	judged_count += 1
 	combo += 1
@@ -438,6 +458,8 @@ func _pulse_background() -> void:
 
 
 func _show_judgement(message: String, color: Color) -> void:
+	if REACTION_SOUNDS.has(message):
+		MusicManager.play_sfx(REACTION_SOUNDS[message])
 	_show_reaction(message)
 	if judgement_tween != null and judgement_tween.is_valid():
 		judgement_tween.kill()
@@ -454,13 +476,22 @@ func _show_judgement(message: String, color: Color) -> void:
 func _show_reaction(message: String) -> void:
 	if not REACTION_TEXTURES.has(message):
 		reaction_portrait.hide()
+		reaction_emoji.hide()
+		reaction_mood.hide()
 		return
+	# Emoji + mood text make each portrait's reaction unambiguous.
+	reaction_emoji.set("emotion", REACTION_EMOTIONS[message][0])
+	reaction_mood.text = "KUNKUN  /  " + str(REACTION_EMOTIONS[message][1])
+	reaction_emoji.show()
+	reaction_mood.show()
 	reaction_portrait.texture = REACTION_TEXTURES[message]
 	reaction_portrait.modulate = Color(1, 1, 1, 0)
 	reaction_portrait.show()
-	var fade_in := create_tween()
-	fade_in.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	fade_in.tween_property(reaction_portrait, "modulate:a", 1.0, 0.16)
+	if reaction_tween != null and reaction_tween.is_valid():
+		reaction_tween.kill()
+	reaction_tween = create_tween()
+	reaction_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	reaction_tween.tween_property(reaction_portrait, "modulate:a", 1.0, 0.16)
 
 
 func _update_hud(song_time: float) -> void:
@@ -567,6 +598,9 @@ func _show_results() -> void:
 		_mark_chapter_one_complete(grade, final_accuracy, true)
 
 	result_overlay.show()
+	reaction_emoji.hide()
+	reaction_mood.hide()
+	MusicManager.play_sfx(&"success" if passed else &"fail")
 
 	if passed:
 		if continue_button != null:
@@ -574,6 +608,33 @@ func _show_results() -> void:
 	else:
 		if retry_button != null:
 			retry_button.grab_focus()
+	_show_result_dialogue(passed)
+
+
+func _show_result_dialogue(passed: bool) -> void:
+	var mei_portrait: Texture2D = teacher_mei_dialogue_portrait.texture if passed else teacher_mei_disappointed_portrait.texture
+	var message := "You passed, Kunkun. You may continue, or accept a harder lesson. The choice is yours."
+	if not passed:
+		message = "Listen to the beat and watch the target line. You need %d%% accuracy. Take a breath, then try again." % int(pass_accuracy)
+	elif hard_mode:
+		message = "You cleared the harder lesson. Impressive, Kunkun. It is time to return to the dormitory."
+	chapter_dialogue.start([
+		{"speaker": "Teacher Mei", "portrait": mei_portrait,
+			"emotion": "happy" if passed else "sad",
+			"mood": "Impressed" if passed else "Disappointed", "text": message},
+		{"speaker": "Kunkun", "portrait": REACTION_TEXTURES["GREAT" if passed else "TOO EARLY"],
+			"emotion": "calm" if passed else "worried",
+			"mood": "Relieved" if passed else "Determined",
+			"text": "I did it. But something about this camp still feels strange." if passed else "I understand. I will wait until the notes reach the targets this time."},
+	])
+
+
+func _on_result_dialogue_finished() -> void:
+	# Restore the correct result action after the modal releases input.
+	if %ContinueButton.visible:
+		%ContinueButton.grab_focus()
+	else:
+		%RetryButton.grab_focus()
 
 
 func _mark_chapter_one_complete(

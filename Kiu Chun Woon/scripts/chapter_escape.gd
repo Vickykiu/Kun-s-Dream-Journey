@@ -31,6 +31,10 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# Chapter 1 dialogue owns Esc until its Next / Skip interaction finishes.
+	for dialogue in get_tree().get_nodes_in_group("chapter_dialogue"):
+		if dialogue.get("active"):
+			return
 	if _changing_scene or not _is_chapter_scene(_current_scene_path()):
 		return
 	if event is InputEventKey and event.echo:

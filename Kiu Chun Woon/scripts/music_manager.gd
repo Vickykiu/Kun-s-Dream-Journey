@@ -1,18 +1,24 @@
 extends Node
 
-## menu-music and volume-settings controller.
+## Persistent music, SFX and volume settings. Music and SFX both feed Master.
 
 const MENU_MUSIC_PATH := "res://Kiu Chun Woon/assets/audio/menu_theme.mp3"
 const SETTINGS_PATH := "user://audio_settings.cfg"
 const DEFAULT_MASTER_VOLUME := 1.0
 const DEFAULT_MUSIC_VOLUME := 0.78
+const DEFAULT_SFX_VOLUME := 0.70
 
 var _player: AudioStreamPlayer
 var _fade_tween: Tween
+var _sfx_streams: Dictionary = {}
+var _sfx_players: Array[AudioStreamPlayer] = []
+var _last_cue_at: Dictionary = {}
+var _next_sfx_player := 0
 
 
 func _ready() -> void:
 	_ensure_music_bus_exists()
+	_ensure_sfx_bus_exists()
 
 	_player = AudioStreamPlayer.new()
 	_player.name = "MenuMusicPlayer"
@@ -26,6 +32,111 @@ func _ready() -> void:
 		menu_music.loop = true
 
 	load_settings()
+	_prepare_sfx()
+	# Connect only controls belonging to this member's scenes.
+	get_tree().node_added.connect(_on_ui_node_added)
+
+
+func set_sfx_volume(linear_value: float) -> void:
+	_set_bus_volume(&"SFX", linear_value)
+
+
+func get_sfx_volume() -> float:
+	return _get_bus_volume(&"SFX")
+
+
+func play_sfx(cue: StringName) -> void:
+	if not _sfx_streams.has(cue) or _sfx_players.is_empty():
+		return
+	# Avoid a loud pile-up from rapid missed notes or dragging a slider.
+	var now := Time.get_ticks_msec()
+	var minimum_gap := 80 if cue != &"ui_confirm" else 140
+	if now - int(_last_cue_at.get(cue, -10000)) < minimum_gap:
+		return
+	_last_cue_at[cue] = now
+	var player := _sfx_players[_next_sfx_player]
+	_next_sfx_player = (_next_sfx_player + 1) % _sfx_players.size()
+	player.stream = _sfx_streams[cue]
+	player.play()
+
+
+func _prepare_sfx() -> void:
+	# Original synthesized cues: no third-party audio/licence dependency.
+	var tones := {
+		&"ui_hover": [480.0, 580.0, 0.055],
+		&"ui_confirm": [600.0, 900.0, 0.12],
+		&"dialogue": [320.0, 400.0, 0.065],
+		&"perfect": [880.0, 1320.0, 0.105],
+		&"great": [660.0, 880.0, 0.09],
+		&"miss": [160.0, 90.0, 0.13],
+		&"early": [290.0, 220.0, 0.07],
+		&"countdown": [700.0, 700.0, 0.08],
+		&"success": [520.0, 1040.0, 0.35],
+		&"fail": [260.0, 130.0, 0.28],
+	}
+	for cue in tones:
+		var tone: Array = tones[cue]
+		_sfx_streams[cue] = _make_tone(tone[0], tone[1], tone[2])
+	for index in range(6):
+		var player := AudioStreamPlayer.new()
+		player.name = "SFXPlayer%d" % index
+		player.bus = &"SFX"
+		player.volume_db = -10.0
+		add_child(player)
+		_sfx_players.append(player)
+
+
+func _make_tone(start_hz: float, end_hz: float, duration: float) -> AudioStreamWAV:
+	const SAMPLE_RATE := 22050
+	var sample_count := int(duration * SAMPLE_RATE)
+	var data := PackedByteArray()
+	data.resize(sample_count * 2)
+	var phase := 0.0
+	for index in range(sample_count):
+		var progress := float(index) / float(sample_count)
+		phase += TAU * lerpf(start_hz, end_hz, progress) / SAMPLE_RATE
+		var envelope := minf(progress * 20.0, 1.0) * pow(1.0 - progress, 1.8)
+		var sample := (sin(phase) + 0.18 * sin(phase * 2.0)) * envelope * 0.5
+		data.encode_s16(index * 2, int(clampf(sample, -1.0, 1.0) * 32767.0))
+	var stream := AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = SAMPLE_RATE
+	stream.data = data
+	return stream
+
+
+func _on_ui_node_added(node: Node) -> void:
+	if node is Button:
+		_wire_ui_button.call_deferred(node)
+
+
+func _wire_ui_button(button: Button) -> void:
+	if not is_instance_valid(button) or button.get_meta("sfx_wired", false):
+		return
+	if button.get_meta("sfx_silent", false):
+		return
+	var ancestor: Node = button
+	while ancestor != null:
+		if ancestor.scene_file_path.begins_with("res://Kiu Chun Woon/"):
+			button.set_meta("sfx_wired", true)
+			button.mouse_entered.connect(_on_button_hover.bind(button))
+			button.focus_entered.connect(_on_button_focus.bind(button))
+			button.pressed.connect(play_sfx.bind(&"ui_confirm"))
+			return
+		ancestor = ancestor.get_parent()
+
+
+func _on_button_hover(button: Button) -> void:
+	if button.is_visible_in_tree() and not button.disabled:
+		play_sfx(&"ui_hover")
+
+
+func _on_button_focus(button: Button) -> void:
+	# Screen-entry grab_focus() is silent; user navigation gets feedback.
+	if (Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down")
+		or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
+		or Input.is_physical_key_pressed(KEY_TAB)):
+		_on_button_hover(button)
 
 
 func play_menu_music(fade_duration: float = 0.8) -> void:
@@ -78,6 +189,7 @@ func save_settings() -> void:
 	var config := ConfigFile.new()
 	config.set_value("audio", "master_volume", get_master_volume())
 	config.set_value("audio", "music_volume", get_music_volume())
+	config.set_value("audio", "sfx_volume", get_sfx_volume())
 	var error := config.save(SETTINGS_PATH)
 	if error != OK:
 		push_warning("Could not save audio settings: error %s" % error)
@@ -94,9 +206,12 @@ func load_settings() -> void:
 		set_music_volume(
 			float(config.get_value("audio", "music_volume", DEFAULT_MUSIC_VOLUME))
 		)
+		# Older settings files do not have this key yet.
+		set_sfx_volume(float(config.get_value("audio", "sfx_volume", DEFAULT_SFX_VOLUME)))
 	else:
 		set_master_volume(DEFAULT_MASTER_VOLUME)
 		set_music_volume(DEFAULT_MUSIC_VOLUME)
+		set_sfx_volume(DEFAULT_SFX_VOLUME)
 
 
 func _set_bus_volume(bus_name: StringName, linear_value: float) -> void:
@@ -121,3 +236,11 @@ func _ensure_music_bus_exists() -> void:
 		return
 	AudioServer.add_bus()
 	AudioServer.set_bus_name(AudioServer.bus_count - 1, &"Music")
+	AudioServer.set_bus_send(AudioServer.bus_count - 1, &"Master")
+
+
+func _ensure_sfx_bus_exists() -> void:
+	if AudioServer.get_bus_index(&"SFX") == -1:
+		AudioServer.add_bus()
+		AudioServer.set_bus_name(AudioServer.bus_count - 1, &"SFX")
+	AudioServer.set_bus_send(AudioServer.get_bus_index(&"SFX"), &"Master")
