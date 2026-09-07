@@ -285,11 +285,51 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 focus_neighbor_top = NodePath("../MasterSlider")
-focus_neighbor_bottom = NodePath("../BackButton")
+focus_neighbor_bottom = NodePath("../SFXSlider")
 mouse_default_cursor_shape = 2
 max_value = 1.0
 step = 0.01
 value = 0.78
+
+[node name="SFXLabelRow" type="HBoxContainer" parent="SafeMargin/Center/OptionsCard/Column"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SafeMargin/Center/OptionsCard/Column/SFXLabelRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 19
+text = "SFX VOLUME"
+
+[node name="SFXValue" type="Label" parent="SafeMargin/Center/OptionsCard/Column/SFXLabelRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.66, 0.5, 1)
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleValueBadge")
+text = "70%"
+horizontal_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="SafeMargin/Center/OptionsCard/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_bottom = NodePath("../TestSFXButton")
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+value = 0.7
+
+[node name="TestSFXButton" type="Button" parent="SafeMargin/Center/OptionsCard/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+focus_neighbor_top = NodePath("../SFXSlider")
+focus_neighbor_bottom = NodePath("../BackButton")
+mouse_default_cursor_shape = 2
+text = "TEST SOUND EFFECT"
+metadata/sfx_silent = true
 
 [node name="ButtonSpacer" type="Control" parent="SafeMargin/Center/OptionsCard/Column"]
 custom_minimum_size = Vector2(0, 8)
@@ -299,7 +339,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
-focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_top = NodePath("../TestSFXButton")
 mouse_default_cursor_shape = 2
 text = "BACK"
 
@@ -307,7 +347,7 @@ text = "BACK"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46, 0.38, 0.33, 1)
 theme_override_font_sizes/font_size = 14
-text = "Press Esc to return"
+text = "SFX: buttons, dialogue and rhythm feedback. Master affects all audio.\nPress Esc to save and return"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="SafeMargin/Center/OptionsCard/Column/BackButton" to="." method="_on_back_pressed"]

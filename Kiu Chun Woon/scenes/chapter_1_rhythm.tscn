@@ -5,10 +5,12 @@
 [ext_resource type="AudioStream" uid="uid://demruym2obunj" path="res://Kiu Chun Woon/assets/audio/chapter_1_rhythm_theme.mp3" id="3_music"]
 [ext_resource type="AudioStream" path="res://Kiu Chun Woon/assets/audio/Harder Mode.mp3" id="9_hard_music"]
 [ext_resource type="Script" uid="uid://c14hbbpkwjn87" path="res://Kiu Chun Woon/scripts/rhythm_conductor.gd" id="4_conductor"]
-[ext_resource type="Texture2D" uid="uid://hovxu34ms3fc" path="res://Kiu Chun Woon/assets/images/reactions/kunkun_perfect.png" id="5_perfect"]
+[ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/reactions/kunkun_perfect.png" id="5_perfect"]
 [ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/reactions/Teacher_Mei_Normal.png" id="6_mei_normal"]
 [ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/reactions/hard_mode_prompt.png" id="7_hard_mode"]
 [ext_resource type="Texture2D" path="res://Kiu Chun Woon/assets/images/reactions/Teacher_Mei_Disapp.png" id="8_mei_disappointed"]
+[ext_resource type="Script" path="res://Kiu Chun Woon/scripts/emotion_badge.gd" id="10_emoji"]
+[ext_resource type="PackedScene" path="res://Kiu Chun Woon/scenes/chapter_dialogue.tscn" id="11_dialogue"]
 
 [sub_resource type="StyleBoxFlat" id="StyleButtonHover"]
 bg_color = Color(0.1, 0.035, 0.035, 0.98)
@@ -412,6 +414,36 @@ mouse_filter = 2
 texture = ExtResource("5_perfect")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="ReactionEmoji" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 6
+layout_mode = 1
+anchor_left = 0.915
+anchor_top = 0.205
+anchor_right = 0.975
+anchor_bottom = 0.31
+mouse_filter = 2
+script = ExtResource("10_emoji")
+
+[node name="ReactionMood" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 6
+layout_mode = 1
+anchor_left = 0.745
+anchor_top = 0.15
+anchor_right = 0.99
+anchor_bottom = 0.21
+mouse_filter = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.98, 0.88, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.03, 0.04, 1)
+theme_override_constants/outline_size = 5
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "KUNKUN / FOCUSED"
 
 [node name="JudgementLabel" type="Label" parent="." unique_id=576260216]
 unique_name_in_owner = true
@@ -847,6 +879,9 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "NO — CONTINUE TO CHAPTER 2"
+
+[node name="ChapterDialogue" parent="." instance=ExtResource("11_dialogue")]
+unique_name_in_owner = true
 
 [connection signal="song_finished" from="Conductor" to="." method="_on_song_finished"]
 [connection signal="finished" from="Conductor/Music" to="Conductor" method="_on_music_finished"]

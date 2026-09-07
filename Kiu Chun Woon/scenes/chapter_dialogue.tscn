@@ -1,0 +1,182 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Kiu Chun Woon/scripts/chapter_dialogue.gd" id="1_dialogue"]
+[ext_resource type="Script" path="res://Kiu Chun Woon/scripts/emotion_badge.gd" id="2_emoji"]
+[ext_resource type="AudioStream" path="res://Kiu Chun Woon/assets/audio/dialogue_theme.mp3" id="3_music"]
+
+[sub_resource type="Shader" id="CutoutShader"]
+code = "shader_type canvas_item;
+void fragment() {
+    vec4 pixel = texture(TEXTURE, UV);
+    float minimum_channel = min(pixel.r, min(pixel.g, pixel.b));
+    float maximum_channel = max(pixel.r, max(pixel.g, pixel.b));
+    float neutral_color = 1.0 - smoothstep(0.025, 0.11, maximum_channel - minimum_channel);
+    float near_white = smoothstep(0.955, 0.995, minimum_channel);
+    pixel.a *= 1.0 - (near_white * neutral_color);
+    COLOR = pixel;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="CutoutMaterial"]
+shader = SubResource("CutoutShader")
+
+[sub_resource type="StyleBoxFlat" id="PanelStyle"]
+bg_color = Color(0.045, 0.039, 0.052, 0.99)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.67, 0.37, 0.27, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+content_margin_left = 32.0
+content_margin_right = 32.0
+content_margin_top = 28.0
+content_margin_bottom = 28.0
+
+[sub_resource type="StyleBoxFlat" id="ButtonStyle"]
+bg_color = Color(0.22, 0.11, 0.12, 1)
+border_width_bottom = 2
+border_color = Color(0.84, 0.57, 0.38, 1)
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+
+[node name="ChapterDialogue" type="CanvasLayer"]
+layer = 110
+script = ExtResource("1_dialogue")
+kunkun_cutout = SubResource("CutoutMaterial")
+
+[node name="DialogueMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_music")
+bus = &"Music"
+
+[node name="Overlay" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.008, 0.005, 0.012, 0.84)
+
+[node name="Panel" type="PanelContainer" parent="Overlay"]
+layout_mode = 1
+anchor_left = 0.12
+anchor_top = 0.19
+anchor_right = 0.88
+anchor_bottom = 0.81
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="Row" type="HBoxContainer" parent="Overlay/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="DialoguePortrait" type="TextureRect" parent="Overlay/Panel/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.65
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Column" type="VBoxContainer" parent="Overlay/Panel/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.6
+theme_override_constants/separation = 16
+
+[node name="Eyebrow" type="Label" parent="Overlay/Panel/Row/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.58, 0.42, 1)
+theme_override_font_sizes/font_size = 16
+text = "STARLIGHT TRAINING CAMP  /  DIALOGUE"
+
+[node name="NameRow" type="HBoxContainer" parent="Overlay/Panel/Row/Column"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="DialogueEmoji" type="Control" parent="Overlay/Panel/Row/Column/NameRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_emoji")
+
+[node name="Names" type="VBoxContainer" parent="Overlay/Panel/Row/Column/NameRow"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DialogueSpeaker" type="Label" parent="Overlay/Panel/Row/Column/NameRow/Names"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.89, 0.75, 1)
+theme_override_font_sizes/font_size = 32
+text = "Teacher Mei"
+
+[node name="DialogueEmotion" type="Label" parent="Overlay/Panel/Row/Column/NameRow/Names"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.73, 0.66, 0.64, 1)
+theme_override_font_sizes/font_size = 17
+text = "Welcoming"
+
+[node name="DialogueText" type="RichTextLabel" parent="Overlay/Panel/Row/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 145)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.92, 0.87, 0.83, 1)
+theme_override_font_sizes/normal_font_size = 25
+text = "Welcome to the Starlight Training Camp."
+scroll_active = true
+
+[node name="Footer" type="HBoxContainer" parent="Overlay/Panel/Row/Column"]
+layout_mode = 2
+
+[node name="Hint" type="Label" parent="Overlay/Panel/Row/Column/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.63, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 15
+text = "E / SPACE / ENTER  Next   |   ESC  Skip"
+
+[node name="DialoguePage" type="Label" parent="Overlay/Panel/Row/Column/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "01 / 04"
+
+[node name="Buttons" type="HBoxContainer" parent="Overlay/Panel/Row/Column"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="DialogueSkip" type="Button" parent="Overlay/Panel/Row/Column/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("ButtonStyle")
+text = "SKIP DIALOGUE"
+
+[node name="DialogueNext" type="Button" parent="Overlay/Panel/Row/Column/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("ButtonStyle")
+text = "NEXT"
