@@ -3,9 +3,11 @@ extends Control
 
 # ===== Settings =====
 
-@export var credits_duration: float = 10.0
-@export var start_delay: float = 1.0
-@export var end_delay: float = 1.0
+@export var scroll_speed: float = 80.0
+
+@export var start_delay: float = 0.5
+
+@export var end_delay: float = 0.2
 
 @export var main_menu_scene: PackedScene
 
@@ -27,17 +29,15 @@ func _ready() -> void:
 
 	setup_credits()
 
+	# Short delay before credits.
 	await get_tree().create_timer(
 		start_delay
 	).timeout
 
-	play_credits()
+	# Wait until credits finish.
+	await play_credits()
 
-	# Credits lasts 10 seconds.
-	await get_tree().create_timer(
-		credits_duration
-	).timeout
-
+	# Very short black screen.
 	await get_tree().create_timer(
 		end_delay
 	).timeout
@@ -52,20 +52,23 @@ func setup_credits() -> void:
 		get_viewport_rect().size
 	)
 
-	# Use the full screen width.
+	# Remove empty space at the end.
+	credits_text.text = (
+		credits_text.text.strip_edges()
+	)
+
+	# Use full screen width.
 	credits_text.position.x = 0.0
 
 	credits_text.size.x = (
 		screen_size.x
 	)
 
-	credits_text.reset_size()
-
-	credits_text.size.x = (
-		screen_size.x
+	credits_text.vertical_alignment = (
+		VERTICAL_ALIGNMENT_TOP
 	)
 
-	# Start below the screen.
+	# Start below screen.
 	credits_text.position.y = (
 		screen_size.y
 	)
@@ -74,13 +77,36 @@ func setup_credits() -> void:
 # ===== Play Credits =====
 
 func play_credits() -> void:
-	var text_height: float = (
-		credits_text.size.y
+	var screen_size: Vector2 = (
+		get_viewport_rect().size
 	)
 
-	# Move all credits above the screen.
+	var line_count: int = (
+		credits_text.get_line_count()
+	)
+
+	var line_height: int = (
+		credits_text.get_line_height()
+	)
+
+	var text_height: float = (
+		float(line_count)
+		* float(line_height)
+	)
+
+	# Stop when last line leaves screen.
 	var target_y: float = (
 		-text_height
+	)
+
+	var distance: float = (
+		screen_size.y
+		+ text_height
+	)
+
+	var duration: float = (
+		distance
+		/ scroll_speed
 	)
 
 	var tween: Tween = (
@@ -95,14 +121,34 @@ func play_credits() -> void:
 		credits_text,
 		"position:y",
 		target_y,
-		credits_duration
+		duration
 	)
+
+	await tween.finished
+
+
+# ===== Ending BGM =====
+
+func stop_ending_bgm() -> void:
+	var ending_bgm: Node = (
+		get_tree().root.get_node_or_null(
+			"EndingBGM"
+		)
+	)
+
+	if ending_bgm == null:
+		return
+
+	ending_bgm.queue_free()
 
 
 # ===== Main Menu =====
 
 func return_to_main_menu() -> void:
 	get_tree().paused = false
+
+	# Stop ending BGM only after credits.
+	stop_ending_bgm()
 
 	if main_menu_scene == null:
 		print(

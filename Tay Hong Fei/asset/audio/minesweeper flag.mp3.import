@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwainssc2v8h"
+path="res://.godot/imported/minesweeper flag.mp3-c8db176fe4c30e7737785103ee775790.mp3str"
+
+[deps]
+
+source_file="res://Tay Hong Fei/asset/audio/minesweeper flag.mp3"
+dest_files=["res://.godot/imported/minesweeper flag.mp3-c8db176fe4c30e7737785103ee775790.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

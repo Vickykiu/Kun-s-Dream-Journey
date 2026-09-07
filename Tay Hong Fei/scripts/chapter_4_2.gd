@@ -1,11 +1,42 @@
 extends Node2D
 
 
-# Called when the node enters the scene tree for the first time.
+# ===== BGM =====
+
+@export var bgm_volume_db: float = -14.0
+
+
+# ===== Nodes =====
+
+@onready var bgm: AudioStreamPlayer = (
+	$BGM
+)
+
+
+# ===== Initialization =====
+
 func _ready() -> void:
-	pass # Replace with function body.
+	# Set BGM volume.
+	bgm.volume_db = bgm_volume_db
+
+	# Enable MP3 loop.
+	if bgm.stream is AudioStreamMP3:
+		bgm.stream.loop = true
+		bgm.stream.loop_offset = 0.0
+
+	# Start BGM.
+	if not bgm.playing:
+		bgm.play()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+# ===== Stop BGM =====
+
+func stop_bgm() -> void:
+	if bgm.playing:
+		bgm.stop()
+
+
+# ===== Process =====
+
+func _process(_delta: float) -> void:
 	pass

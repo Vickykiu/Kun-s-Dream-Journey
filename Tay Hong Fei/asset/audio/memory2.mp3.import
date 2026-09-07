@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bf80gvtrqin11"
+path="res://.godot/imported/memory2.mp3-dfc4b8ab20375d88742d30aafe80d9a2.mp3str"
+
+[deps]
+
+source_file="res://Tay Hong Fei/asset/audio/memory2.mp3"
+dest_files=["res://.godot/imported/memory2.mp3-dfc4b8ab20375d88742d30aafe80d9a2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

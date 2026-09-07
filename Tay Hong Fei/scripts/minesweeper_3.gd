@@ -5,19 +5,15 @@ extends Control
 
 @export var rows: int = 14
 @export var columns: int = 17
-@export var mine_count: int = 18
+@export var mine_count: int = 3
 @export var cell_scene: PackedScene
 
 @export var restart_delay: float = 0.8
 @export var memory_start_delay: float = 0.8
 
-
-# ===== Memory Settings =====
-
-@export var memory_image_size: Vector2 = Vector2(
-	900,
-	650
-)
+# Force each memory image to stay
+# before dialogue appears.
+@export var memory_hold_delay: float = 1.0
 
 
 # ===== Memory 1 =====
@@ -57,6 +53,33 @@ extends Control
 )
 
 @onready var exit_button: Button = $ExitButton
+
+
+# ===== Audio =====
+
+@onready var reveal_audio: AudioStreamPlayer = (
+	$RevealAudio
+)
+
+@onready var flag_audio: AudioStreamPlayer = (
+	$FlagAudio
+)
+
+@onready var mine_audio: AudioStreamPlayer = (
+	$MineAudio
+)
+
+@onready var complete_audio: AudioStreamPlayer = (
+	$CompleteAudio
+)
+
+@onready var memory_1_audio: AudioStreamPlayer = (
+	$Memory1Audio
+)
+
+@onready var memory_2_audio: AudioStreamPlayer = (
+	$Memory2Audio
+)
 
 
 # ===== Game State =====
@@ -153,6 +176,9 @@ func _on_reveal_requested(index: int) -> void:
 	if cell.is_flagged:
 		return
 
+	if cell.is_revealed:
+		return
+
 	# Create mines after the first click.
 	if not mines_created:
 		create_mines(index)
@@ -162,6 +188,10 @@ func _on_reveal_requested(index: int) -> void:
 
 		# Recalculate correct flags after mines exist.
 		update_counters()
+
+	# Play reveal sound only for safe cells.
+	if not cell.has_mine:
+		reveal_audio.play()
 
 	reveal_cell(index)
 
@@ -263,6 +293,8 @@ func reveal_cell(index: int) -> void:
 
 	# Mine clicked.
 	if cell.has_mine:
+		mine_audio.play()
+
 		cell.show_mine(true)
 
 		restart_after_mine()
@@ -337,6 +369,9 @@ func _on_flag_requested(index: int) -> void:
 
 	flags_placed += 1
 
+	# Play flag sound.
+	flag_audio.play()
+
 	update_counters()
 	save_puzzle_progress()
 
@@ -408,6 +443,9 @@ func complete_puzzle() -> void:
 		return
 
 	game_over = true
+
+	# Play crystal break sound.
+	complete_audio.play()
 
 	# Change correct flags into mines.
 	show_flagged_mines()
@@ -650,27 +688,62 @@ func start_memory_sequence() -> void:
 
 	create_memory_overlay()
 
-	# Memory 1.
+
+	# ===== Memory 1 =====
+
 	show_memory_image(
 		memory_image_1
 	)
 
+	# Play Memory 1 audio.
+	memory_1_audio.play()
+
+	# Force player to view Memory 1.
+	await get_tree().create_timer(
+		memory_hold_delay
+	).timeout
+
+	# Dialogue becomes available
+	# only after the delay.
 	await play_memory_dialogue(
 		memory_1_lines,
 		memory_1_portrait,
 		memory_1_speaker
 	)
 
-	# Memory 2.
+
+	# ===== Memory 2 =====
+
+	# Stop Memory 1 audio.
+	if memory_1_audio.playing:
+		memory_1_audio.stop()
+
 	show_memory_image(
 		memory_image_2
 	)
 
+	# Play Memory 2 audio.
+	memory_2_audio.play()
+
+	# Force player to view Memory 2.
+	await get_tree().create_timer(
+		memory_hold_delay
+	).timeout
+
+	# Dialogue becomes available
+	# only after the delay.
 	await play_memory_dialogue(
 		memory_2_lines,
 		memory_2_portrait,
 		memory_2_speaker
 	)
+
+
+	# ===== Complete Memory =====
+
+	# Stop Memory 2 audio.
+	if memory_2_audio.playing:
+		memory_2_audio.stop()
 
 	# Complete crystal only after both memories.
 	MinesweeperState.clear_puzzle_progress(
@@ -697,68 +770,82 @@ func create_memory_overlay() -> void:
 		memory_layer
 	)
 
-	# Dark background.
-	memory_background = ColorRect.new()
-
-	memory_background.set_anchors_and_offsets_preset(
-		Control.PRESET_FULL_RECT
+	var screen_size: Vector2 = (
+		get_viewport_rect().size
 	)
 
-	memory_background.color = Color(
-		0,
-		0,
-		0,
-		0.85
+	# Full-screen root.
+	var memory_root: Control = (
+		Control.new()
+	)
+
+	memory_layer.add_child(
+		memory_root
+	)
+
+	memory_root.position = Vector2.ZERO
+
+	memory_root.size = (
+		screen_size
+	)
+
+	memory_root.mouse_filter = (
+		Control.MOUSE_FILTER_IGNORE
+	)
+
+	# Black background.
+	memory_background = (
+		ColorRect.new()
+	)
+
+	memory_root.add_child(
+		memory_background
+	)
+
+	memory_background.position = (
+		Vector2.ZERO
+	)
+
+	memory_background.size = (
+		screen_size
+	)
+
+	memory_background.color = (
+		Color.BLACK
 	)
 
 	memory_background.mouse_filter = (
 		Control.MOUSE_FILTER_IGNORE
 	)
 
-	memory_layer.add_child(
-		memory_background
-	)
-
-	# Center container.
-	var center: CenterContainer = (
-		CenterContainer.new()
-	)
-
-	center.set_anchors_and_offsets_preset(
-		Control.PRESET_FULL_RECT
-	)
-
-	center.mouse_filter = (
-		Control.MOUSE_FILTER_IGNORE
-	)
-
-	memory_layer.add_child(
-		center
-	)
-
-	# Memory image.
+	# Full-screen memory image.
 	memory_texture_rect = (
 		TextureRect.new()
 	)
 
-	memory_texture_rect.custom_minimum_size = (
-		memory_image_size
+	memory_root.add_child(
+		memory_texture_rect
+	)
+
+	memory_texture_rect.position = (
+		Vector2.ZERO
+	)
+
+	memory_texture_rect.size = (
+		screen_size
 	)
 
 	memory_texture_rect.expand_mode = (
 		TextureRect.EXPAND_IGNORE_SIZE
 	)
 
+	# Keep image ratio and do not crop.
 	memory_texture_rect.stretch_mode = (
 		TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	)
 
 	memory_texture_rect.mouse_filter = (
 		Control.MOUSE_FILTER_IGNORE
-	)
-
-	center.add_child(
-		memory_texture_rect
 	)
 
 

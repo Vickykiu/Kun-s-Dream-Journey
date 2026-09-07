@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dfurvvf1j5sqd"
+path="res://.godot/imported/bgm.mp3-c7bb12d45867db3ebced4cb7d4d050fb.mp3str"
+
+[deps]
+
+source_file="res://Tay Hong Fei/asset/audio/bgm.mp3"
+dest_files=["res://.godot/imported/bgm.mp3-c7bb12d45867db3ebced4cb7d4d050fb.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

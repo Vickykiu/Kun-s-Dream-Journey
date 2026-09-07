@@ -10,8 +10,11 @@
 [ext_resource type="Script" uid="uid://c7qjmeke0286w" path="res://Tay Hong Fei/scripts/block.gd" id="6_vp1pg"]
 [ext_resource type="Script" uid="uid://cieji1oqjax4o" path="res://Tay Hong Fei/scripts/nearby.gd" id="9_f1bej"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="10_khxr4"]
+[ext_resource type="AudioStream" uid="uid://bgx5msfvc36jb" path="res://Tay Hong Fei/asset/audio/door.mp3" id="10_re1ky"]
 [ext_resource type="Texture2D" uid="uid://5w3bbs4mdv6n" path="res://Tay Hong Fei/asset/character/kunkun_dialog.png" id="11_nxo4e"]
 [ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="11_p2a7j"]
+[ext_resource type="AudioStream" uid="uid://dihump70jbxuy" path="res://Tay Hong Fei/asset/audio/block.mp3" id="13_p2a7j"]
+[ext_resource type="AudioStream" uid="uid://dfurvvf1j5sqd" path="res://Tay Hong Fei/asset/audio/bgm.mp3" id="15_7e1me"]
 
 [sub_resource type="Resource" id="Resource_khxr4"]
 resource_name = "Where am I...?"
@@ -137,6 +140,9 @@ texture = ExtResource("6_q01ba")
 region_enabled = true
 region_rect = Rect2(303.10352, 608.67554, 135.54333, 179.99341)
 
+[node name="DoorOpenAudio" type="AudioStreamPlayer" parent="Door" unique_id=238704418]
+stream = ExtResource("10_re1ky")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1603764284]
 position = Vector2(46, 165)
 
@@ -191,6 +197,9 @@ offset_bottom = 570.0
 position = Vector2(759.0676, 558.5959)
 shape = SubResource("RectangleShape2D_vp1pg")
 
+[node name="SnapAudio" type="AudioStreamPlayer" parent="Block_Left-1" unique_id=384002106]
+stream = ExtResource("13_p2a7j")
+
 [node name="Block_Left-2" type="CharacterBody2D" parent="." unique_id=1428598428 node_paths=PackedStringArray("prompt_label")]
 position = Vector2(-53.000004, -39)
 scale = Vector2(1.0738852, 1.0748813)
@@ -227,6 +236,9 @@ offset_bottom = 570.0
 position = Vector2(759.0676, 558.5959)
 shape = SubResource("RectangleShape2D_vp1pg")
 
+[node name="SnapAudio" type="AudioStreamPlayer" parent="Block_Left-2" unique_id=1059503353]
+stream = ExtResource("13_p2a7j")
+
 [node name="Block_Left-3" type="CharacterBody2D" parent="." unique_id=1135230593 node_paths=PackedStringArray("prompt_label")]
 position = Vector2(-53.000004, 34)
 scale = Vector2(1.0738852, 1.0748813)
@@ -262,6 +274,9 @@ offset_bottom = 570.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block_Left-3/DetectionArea" unique_id=1969550593]
 position = Vector2(759.0676, 558.5959)
 shape = SubResource("RectangleShape2D_vp1pg")
+
+[node name="SnapAudio" type="AudioStreamPlayer" parent="Block_Left-3" unique_id=2026872973]
+stream = ExtResource("13_p2a7j")
 
 [node name="Block_Right-1" type="CharacterBody2D" parent="." unique_id=1051573580]
 position = Vector2(338, -112.000015)
@@ -379,3 +394,7 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearDoor" unique_id=47962711]
 position = Vector2(964, 999)
 shape = SubResource("RectangleShape2D_7e1me")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1034478968]
+stream = ExtResource("15_7e1me")
+volume_db = -5.0

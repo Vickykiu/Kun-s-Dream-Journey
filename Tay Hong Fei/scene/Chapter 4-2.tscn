@@ -12,13 +12,18 @@
 [ext_resource type="Script" uid="uid://b6cuo15rxevyr" path="res://Tay Hong Fei/scripts/kunkun.gd" id="10_2wkyv"]
 [ext_resource type="Texture2D" uid="uid://c30i5sfx57l44" path="res://Tay Hong Fei/asset/character/kunkun dirty version.png" id="10_uqhv1"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="11_iqage"]
+[ext_resource type="AudioStream" uid="uid://bhqs7wavntdsx" path="res://Tay Hong Fei/asset/audio/apear.mp3" id="11_xmxbq"]
 [ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="12_8bxu5"]
 [ext_resource type="Texture2D" uid="uid://cd6ndr5cq17p" path="res://Tay Hong Fei/asset/character/Kunkun1.png" id="13_0kcjn"]
 [ext_resource type="Texture2D" uid="uid://b3rjxh2u1r0ce" path="res://Tay Hong Fei/asset/character/Kunkun1-smile.png" id="14_0kcjn"]
+[ext_resource type="PackedScene" uid="uid://dgvbsieke3aip" path="res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn" id="15_fy4hc"]
 [ext_resource type="Texture2D" uid="uid://3acjce6jrw2f" path="res://Tay Hong Fei/asset/character/kunkun disappear 1.png" id="15_t4aq6"]
 [ext_resource type="Texture2D" uid="uid://dpv6vudfge1k" path="res://Tay Hong Fei/asset/character/kunkun disappear 2.png" id="16_30gmv"]
 [ext_resource type="Texture2D" uid="uid://bvxt7wimdkxdi" path="res://Tay Hong Fei/asset/character/kunkun disappear 3.png" id="17_5h6e6"]
 [ext_resource type="PackedScene" uid="uid://bvpq02xlhkx6w" path="res://Tay Hong Fei/scene/Credits.tscn" id="18_30gmv"]
+[ext_resource type="Texture2D" uid="uid://cwaq31h2yxuju" path="res://Tay Hong Fei/asset/background/ending.png" id="18_fgl5u"]
+[ext_resource type="AudioStream" uid="uid://5r4tc0c7xwu0" path="res://Tay Hong Fei/asset/audio/ending.mp3" id="19_xmxbq"]
+[ext_resource type="AudioStream" uid="uid://dfurvvf1j5sqd" path="res://Tay Hong Fei/asset/audio/bgm.mp3" id="24_4lioo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmnnq"]
 radius = 18.027756
@@ -128,6 +133,7 @@ size = Vector2(12.734695, 12.122452)
 [node name="Chapter4-2" type="Node2D" unique_id=22927392]
 position = Vector2(564, -315)
 script = ExtResource("1_dmnnq")
+bgm_volume_db = -5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=130358239]
 position = Vector2(413, 860)
@@ -236,6 +242,8 @@ script = ExtResource("7_agad7")
 [node name="Kunkun1" type="CharacterBody2D" parent="." unique_id=1742513630]
 position = Vector2(408, 788)
 script = ExtResource("10_2wkyv")
+appear_audio = ExtResource("11_xmxbq")
+appear_audio_volume_db = 0.0
 kunkun_intro_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fy4hc")])
 mystery_speaker = "Kunkun?"
 mystery_intro_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fw405")])
@@ -244,9 +252,10 @@ main_portrait = ExtResource("14_0kcjn")
 main_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_t4aq6"), SubResource("Resource_xmxbq"), SubResource("Resource_30gmv"), SubResource("Resource_wjynx"), SubResource("Resource_4lioo"), SubResource("Resource_daby8"), SubResource("Resource_5h6e6"), SubResource("Resource_w5wro"), SubResource("Resource_e4x0m"), SubResource("Resource_jyxnc")])
 reject_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fgl5u")])
 disappear_frames = Array[Texture2D]([ExtResource("15_t4aq6"), ExtResource("16_30gmv"), ExtResource("17_5h6e6")])
-ending_image = ExtResource("4_d4syc")
+ending_image = ExtResource("18_fgl5u")
+ending_audio = ExtResource("19_xmxbq")
 credits_scene = ExtResource("18_30gmv")
-reject_scene_path = "res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn"
+reject_scene = ExtResource("15_fy4hc")
 
 [node name="Sprite" type="Sprite2D" parent="Kunkun1" unique_id=139223958]
 scale = Vector2(0.047623858, 0.047623858)
@@ -272,3 +281,7 @@ offset_right = 138.0
 offset_bottom = 13.0
 scale = Vector2(0.7975525, 0.7975525)
 text = "Press E to talk"
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1335049765]
+stream = ExtResource("24_4lioo")
+volume_db = -14.0

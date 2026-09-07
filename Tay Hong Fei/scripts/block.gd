@@ -107,6 +107,11 @@ static var _attached_block: CharacterBody2D = null
 static var _input_lock: bool = false
 
 
+# ===== Audio =====
+
+@onready var snap_audio: AudioStreamPlayer = $SnapAudio
+
+
 # ===== Initialization =====
 
 func _ready() -> void:
@@ -253,7 +258,6 @@ func get_block_visual_position() -> Vector2:
 			.origin
 		)
 
-
 	# Use detection collision centre.
 	if detection_area != null:
 
@@ -271,7 +275,6 @@ func get_block_visual_position() -> Vector2:
 				.origin
 			)
 
-
 	# Use main collision.
 	var main_collision: Node2D = (
 		get_node_or_null(
@@ -287,7 +290,6 @@ func get_block_visual_position() -> Vector2:
 			.origin
 		)
 
-
 	# Use sprite position.
 	var sprite_node: Node2D = (
 		get_node_or_null(
@@ -302,7 +304,6 @@ func get_block_visual_position() -> Vector2:
 			.get_global_transform_with_canvas()
 			.origin
 		)
-
 
 	return (
 		get_global_transform_with_canvas()
@@ -331,7 +332,6 @@ func get_player_side_direction() -> Vector2:
 	if diff.length() < 0.001:
 		return Vector2.ZERO
 
-
 	# Player is on left or right side.
 	if abs(diff.x) > abs(diff.y):
 
@@ -341,7 +341,6 @@ func get_player_side_direction() -> Vector2:
 
 		# Player is right of the block.
 		return Vector2.LEFT
-
 
 	# Player is above or below the block.
 	else:
@@ -393,7 +392,6 @@ func is_closest_facing_block() -> bool:
 		player_pos.distance_to(my_pos)
 	)
 
-
 	for block in get_tree().get_nodes_in_group(
 		"pushable_blocks"
 	):
@@ -408,7 +406,6 @@ func is_closest_facing_block() -> bool:
 			block as Node2D
 		)
 
-
 		var other_locked = (
 			other_block.get("is_locked")
 		)
@@ -419,14 +416,12 @@ func is_closest_facing_block() -> bool:
 		):
 			continue
 
-
 		var other_player = (
 			other_block.get("player")
 		)
 
 		if other_player != player:
 			continue
-
 
 		var other_interactable = (
 			other_block.get("interactable")
@@ -438,18 +433,15 @@ func is_closest_facing_block() -> bool:
 		if not bool(other_interactable):
 			continue
 
-
 		if not other_block.has_method(
 			"is_player_facing_this_block"
 		):
 			continue
 
-
 		if not other_block.has_method(
 			"get_block_visual_position"
 		):
 			continue
-
 
 		var other_facing = (
 			other_block.call(
@@ -460,7 +452,6 @@ func is_closest_facing_block() -> bool:
 		if not bool(other_facing):
 			continue
 
-
 		var other_position_result = (
 			other_block.call(
 				"get_block_visual_position"
@@ -469,7 +460,6 @@ func is_closest_facing_block() -> bool:
 
 		if not other_position_result is Vector2:
 			continue
-
 
 		var other_position: Vector2 = (
 			other_position_result
@@ -481,10 +471,8 @@ func is_closest_facing_block() -> bool:
 			)
 		)
 
-
 		if other_distance < my_distance:
 			return false
-
 
 	return true
 
@@ -506,7 +494,6 @@ func _unhandled_input(
 	if _input_lock:
 		return
 
-
 	# Press E again to release the current block.
 	if _attached_block != null:
 
@@ -527,7 +514,6 @@ func _unhandled_input(
 
 		return
 
-
 	if player == null:
 		return
 
@@ -536,7 +522,6 @@ func _unhandled_input(
 
 	if not is_closest_facing_block():
 		return
-
 
 	_input_lock = true
 
@@ -562,20 +547,17 @@ func attach() -> void:
 	if player == null:
 		return
 
-
 	if (
 		_attached_block != null
 		and _attached_block != self
 	):
 		return
 
-
 	if not is_player_facing_this_block():
 		return
 
 	if not is_closest_facing_block():
 		return
-
 
 	# Set push direction from player position.
 	push_direction = (
@@ -585,16 +567,13 @@ func attach() -> void:
 	if push_direction == Vector2.ZERO:
 		return
 
-
 	is_attached = true
 	_attached_block = self
-
 
 	offset_from_player = (
 		global_position
 		- player.global_position
 	)
-
 
 	# Hide prompts from other blocks.
 	for block in get_tree().get_nodes_in_group(
@@ -607,7 +586,6 @@ func attach() -> void:
 		if block.has_method("hide_prompt"):
 			block.call("hide_prompt")
 
-
 	# Stop normal player movement.
 	if player.has_method("set_can_move"):
 
@@ -616,9 +594,7 @@ func attach() -> void:
 			false
 		)
 
-
 	velocity = Vector2.ZERO
-
 
 	if prompt_label:
 
@@ -637,7 +613,6 @@ func detach() -> void:
 
 	is_attached = false
 
-
 	if player != null:
 
 		if player.has_method(
@@ -649,7 +624,6 @@ func detach() -> void:
 				Vector2.ZERO
 			)
 
-
 		if player.has_method(
 			"set_can_move"
 		):
@@ -659,13 +633,10 @@ func detach() -> void:
 				true
 			)
 
-
 	push_direction = Vector2.ZERO
 	offset_from_player = Vector2.ZERO
 
-
 	hide_prompt()
-
 
 	call_deferred(
 		"refresh_all_prompts"
@@ -678,10 +649,8 @@ func find_nearby_snap_target() -> int:
 	if not snap_enabled:
 		return -1
 
-
 	var closest_index: int = -1
 	var closest_distance: float = INF
-
 
 	for i: int in range(
 		MAIN_SNAP_TARGETS.size()
@@ -691,18 +660,15 @@ func find_nearby_snap_target() -> int:
 		if snapped_slots[i]:
 			continue
 
-
 		var target: Vector2 = (
 			MAIN_SNAP_TARGETS[i]
 		)
-
 
 		var distance: float = (
 			position.distance_to(
 				target
 			)
 		)
-
 
 		if (
 			distance <= snap_distance
@@ -711,7 +677,6 @@ func find_nearby_snap_target() -> int:
 
 			closest_distance = distance
 			closest_index = i
-
 
 	return closest_index
 
@@ -723,20 +688,16 @@ func check_snap_target() -> bool:
 	if not snap_enabled:
 		return false
 
-
 	# Only main blocks use snap targets.
 	if linked_blocks.is_empty():
 		return false
-
 
 	var snap_index: int = (
 		find_nearby_snap_target()
 	)
 
-
 	if snap_index == -1:
 		return false
-
 
 	var main_target: Vector2 = (
 		MAIN_SNAP_TARGETS[
@@ -744,25 +705,23 @@ func check_snap_target() -> bool:
 		]
 	)
 
-
 	var linked_target: Vector2 = (
 		LINKED_SNAP_TARGETS[
 			snap_index
 		]
 	)
 
-
 	# Release player before snapping.
 	release_player_for_lock()
-
 
 	# Snap the main block.
 	position = main_target
 
+	# Play snap sound.
+	snap_audio.play()
 
 	# Lock the main block.
 	lock_block()
-
 
 	# Snap the linked block.
 	for path: NodePath in linked_blocks:
@@ -771,18 +730,14 @@ func check_snap_target() -> bool:
 			get_node_or_null(path)
 		)
 
-
 		if linked_node == null:
 			continue
-
 
 		if linked_node == self:
 			continue
 
-
 		if not linked_node is CharacterBody2D:
 			continue
-
 
 		if linked_node.has_method(
 			"force_snap_and_lock"
@@ -793,7 +748,6 @@ func check_snap_target() -> bool:
 				linked_target
 			)
 
-
 	# Record this completed target.
 	if not snapped_slots[snap_index]:
 
@@ -801,13 +755,11 @@ func check_snap_target() -> bool:
 
 		snapped_pair_count += 1
 
-
 		print(
 			"Snapped blocks: ",
 			snapped_pair_count,
 			"/3"
 		)
-
 
 	return true
 
@@ -821,12 +773,9 @@ func force_snap_and_lock(
 	if is_locked:
 		return
 
-
 	release_player_for_lock()
 
-
 	position = target
-
 
 	lock_block()
 
@@ -837,9 +786,7 @@ func release_player_for_lock() -> void:
 	if _attached_block == self:
 		_attached_block = null
 
-
 	is_attached = false
-
 
 	if player != null:
 
@@ -852,7 +799,6 @@ func release_player_for_lock() -> void:
 				Vector2.ZERO
 			)
 
-
 		if player.has_method(
 			"set_can_move"
 		):
@@ -862,10 +808,8 @@ func release_player_for_lock() -> void:
 				true
 			)
 
-
 	push_direction = Vector2.ZERO
 	offset_from_player = Vector2.ZERO
-
 
 	hide_prompt()
 
@@ -879,7 +823,6 @@ func lock_block() -> void:
 	push_direction = Vector2.ZERO
 	offset_from_player = Vector2.ZERO
 
-
 	# Disable interaction after snapping.
 	if detection_area != null:
 
@@ -887,7 +830,6 @@ func lock_block() -> void:
 			"monitoring",
 			false
 		)
-
 
 	hide_prompt()
 
@@ -917,7 +859,6 @@ func show_prompt() -> void:
 	if prompt_label == null:
 		return
 
-
 	if is_attached:
 
 		prompt_label.text = (
@@ -929,7 +870,6 @@ func show_prompt() -> void:
 		prompt_label.text = (
 			"Press E to push block"
 		)
-
 
 	prompt_label.visible = true
 
@@ -944,7 +884,6 @@ func refresh_prompt() -> void:
 
 		hide_prompt()
 		return
-
 
 	# Only attached block shows a prompt while pushing.
 	if _attached_block != null:
@@ -966,15 +905,12 @@ func refresh_prompt() -> void:
 
 			hide_prompt()
 
-
 		return
-
 
 	if player == null:
 
 		hide_prompt()
 		return
-
 
 	# Player must face the block.
 	if not is_player_facing_this_block():
@@ -982,12 +918,10 @@ func refresh_prompt() -> void:
 		hide_prompt()
 		return
 
-
 	if not is_closest_facing_block():
 
 		hide_prompt()
 		return
-
 
 	show_prompt()
 
@@ -1018,7 +952,6 @@ func _physics_process(
 		hide_prompt()
 		return
 
-
 	# Check if the player is still inside the area.
 	if (
 		interactable
@@ -1028,14 +961,12 @@ func _physics_process(
 
 		var still_inside: bool = false
 
-
 		if detection_area != null:
 
 			var bodies = (
 				detection_area
 				.get_overlapping_bodies()
 			)
-
 
 			for body in bodies:
 
@@ -1044,17 +975,14 @@ func _physics_process(
 					still_inside = true
 					break
 
-
 		if not still_inside:
 
 			player = null
 			hide_prompt()
 
-
 	if not is_attached:
 
 		refresh_prompt()
-
 
 	# Only the attached block can move.
 	if not (
@@ -1066,9 +994,7 @@ func _physics_process(
 
 		return
 
-
 	var input_dir: Vector2 = Vector2.ZERO
-
 
 	if Input.is_key_pressed(KEY_A):
 		input_dir.x -= 1.0
@@ -1082,14 +1008,12 @@ func _physics_process(
 	if Input.is_key_pressed(KEY_S):
 		input_dir.y += 1.0
 
-
 	# Only allow forward pushing.
 	var projection: float = (
 		input_dir.dot(
 			push_direction
 		)
 	)
-
 
 	input_dir = (
 		push_direction
@@ -1098,7 +1022,6 @@ func _physics_process(
 			projection
 		)
 	)
-
 
 	if input_dir == Vector2.ZERO:
 
@@ -1113,16 +1036,13 @@ func _physics_process(
 
 		return
 
-
 	var effective_speed: float = (
 		move_speed
 	)
 
-
 	var player_speed = (
 		player.get("speed")
 	)
-
 
 	if player_speed != null:
 
@@ -1138,19 +1058,16 @@ func _physics_process(
 				player_speed
 			)
 
-
 	var movement: Vector2 = (
 		input_dir.normalized()
 		* effective_speed
 		* delta
 	)
 
-
 	var new_pos: Vector2 = (
 		global_position
 		+ movement
 	)
-
 
 	new_pos.x = clamp(
 		new_pos.x,
@@ -1158,19 +1075,16 @@ func _physics_process(
 		max_x
 	)
 
-
 	new_pos.y = clamp(
 		new_pos.y,
 		min_y,
 		max_y
 	)
 
-
 	var desired_movement: Vector2 = (
 		new_pos
 		- global_position
 	)
-
 
 	if desired_movement == Vector2.ZERO:
 
@@ -1185,7 +1099,6 @@ func _physics_process(
 
 		return
 
-
 	# Update player push animation.
 	if player.has_method(
 		"set_external_direction"
@@ -1196,22 +1109,18 @@ func _physics_process(
 			push_direction
 		)
 
-
 	var old_position: Vector2 = (
 		global_position
 	)
-
 
 	move_and_collide(
 		desired_movement
 	)
 
-
 	var actual_movement: Vector2 = (
 		global_position
 		- old_position
 	)
-
 
 	# Keep player beside the block.
 	if actual_movement != Vector2.ZERO:
@@ -1232,11 +1141,9 @@ func _physics_process(
 				Vector2.ZERO
 			)
 
-
 	# Check the three snap targets.
 	if check_snap_target():
 		return
-
 
 	# Move the linked block.
 	if (
@@ -1258,20 +1165,15 @@ func sync_linked_blocks(
 	if _is_syncing:
 		return
 
-
 	_is_syncing = true
 
-
 	var mirrored: Vector2 = movement
-
 
 	if mirror_x:
 		mirrored.x = -mirrored.x
 
-
 	if mirror_y:
 		mirrored.y = -mirrored.y
-
 
 	for path: NodePath in linked_blocks:
 
@@ -1279,18 +1181,14 @@ func sync_linked_blocks(
 			get_node_or_null(path)
 		)
 
-
 		if node == null:
 			continue
-
 
 		if node == self:
 			continue
 
-
 		if not node is CharacterBody2D:
 			continue
-
 
 		if node.has_method(
 			"apply_external_movement"
@@ -1300,7 +1198,6 @@ func sync_linked_blocks(
 				"apply_external_movement",
 				mirrored
 			)
-
 
 	_is_syncing = false
 
@@ -1312,17 +1209,13 @@ func apply_external_movement(
 	if is_locked:
 		return
 
-
 	if _is_applying_external:
 		return
 
-
 	_is_applying_external = true
-
 
 	move_and_collide(
 		movement
 	)
-
 
 	_is_applying_external = false

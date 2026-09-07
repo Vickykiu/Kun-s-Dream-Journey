@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cdtyy6cjuop8k"
+path="res://.godot/imported/memory3.mp3-b3c262d9bcd97cedc82599a7c0d252c0.mp3str"
+
+[deps]
+
+source_file="res://Tay Hong Fei/asset/audio/memory3.mp3"
+dest_files=["res://.godot/imported/memory3.mp3-b3c262d9bcd97cedc82599a7c0d252c0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,9 +3,17 @@
 [ext_resource type="Script" uid="uid://dahaatusj655l" path="res://Tay Hong Fei/scripts/minesweeper_3.gd" id="1_8ehnp"]
 [ext_resource type="Texture2D" uid="uid://dnev1x8m8x3rb" path="res://Tay Hong Fei/asset/background/Minesweeper3.png" id="2_hl8rb"]
 [ext_resource type="PackedScene" uid="uid://b7aobcjnrlel2" path="res://Tay Hong Fei/scene/MineCell3.tscn" id="2_k6yc4"]
+[ext_resource type="Texture2D" uid="uid://cb6p0xde4uhqs" path="res://Tay Hong Fei/asset/background/memory 5.png" id="3_1x011"]
 [ext_resource type="Script" uid="uid://dvad75d3p1x2b" path="res://Lau Kah Kei/scripts/dialogue_line.gd" id="3_t0a8s"]
 [ext_resource type="Texture2D" uid="uid://s26cfrdx6e0v" path="res://Tay Hong Fei/asset/character/Mei.png" id="4_dihpt"]
 [ext_resource type="Texture2D" uid="uid://ckh3kidh3mnx4" path="res://Tay Hong Fei/asset/character/Kunkun-smile.png" id="5_t0a8s"]
+[ext_resource type="Texture2D" uid="uid://c5ypcvkoe6iul" path="res://Tay Hong Fei/asset/background/memory 6.png" id="6_uhlwj"]
+[ext_resource type="AudioStream" uid="uid://hlckroho0xbe" path="res://Tay Hong Fei/asset/audio/minesweeper open.mp3" id="9_nt01e"]
+[ext_resource type="AudioStream" uid="uid://dwainssc2v8h" path="res://Tay Hong Fei/asset/audio/minesweeper flag.mp3" id="10_d1jbf"]
+[ext_resource type="AudioStream" uid="uid://bacwe75tn1b4u" path="res://Tay Hong Fei/asset/audio/minesweeper boom.mp3" id="11_rjs3h"]
+[ext_resource type="AudioStream" uid="uid://o6ixped353o" path="res://Tay Hong Fei/asset/audio/crystal.mp3" id="12_jcene"]
+[ext_resource type="AudioStream" uid="uid://bwtrdnrf0fl7l" path="res://Tay Hong Fei/asset/audio/memory5.mp3" id="13_rjs3h"]
+[ext_resource type="AudioStream" uid="uid://chngqinn1r7v4" path="res://Tay Hong Fei/asset/audio/memory6.mp3" id="14_jcene"]
 
 [sub_resource type="Resource" id="Resource_uhlwj"]
 resource_name = "You’re actually already dead."
@@ -88,9 +96,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8ehnp")
 cell_scene = ExtResource("2_k6yc4")
+memory_image_1 = ExtResource("3_1x011")
 memory_1_speaker = "Mei"
 memory_1_lines = Array[ExtResource("3_t0a8s")]([SubResource("Resource_uhlwj")])
-memory_2_speaker = "Kunkun?"
+memory_image_2 = ExtResource("6_uhlwj")
 memory_2_lines = Array[ExtResource("3_t0a8s")]([SubResource("Resource_4phmh")])
 
 [node name="Background" type="TextureRect" parent="." unique_id=1842189962]
@@ -162,3 +171,21 @@ offset_right = 49.999992
 offset_bottom = 52.0
 scale = Vector2(8.68318, 8.651572)
 flat = true
+
+[node name="RevealAudio" type="AudioStreamPlayer" parent="." unique_id=525837637]
+stream = ExtResource("9_nt01e")
+
+[node name="FlagAudio" type="AudioStreamPlayer" parent="." unique_id=984426664]
+stream = ExtResource("10_d1jbf")
+
+[node name="MineAudio" type="AudioStreamPlayer" parent="." unique_id=1683820461]
+stream = ExtResource("11_rjs3h")
+
+[node name="CompleteAudio" type="AudioStreamPlayer" parent="." unique_id=489846291]
+stream = ExtResource("12_jcene")
+
+[node name="Memory1Audio" type="AudioStreamPlayer" parent="." unique_id=487230883]
+stream = ExtResource("13_rjs3h")
+
+[node name="Memory2Audio" type="AudioStreamPlayer" parent="." unique_id=736644037]
+stream = ExtResource("14_jcene")

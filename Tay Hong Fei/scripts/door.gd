@@ -29,7 +29,17 @@ extends Area2D
 
 # ===== Clue Image =====
 
-@export var clue_image_size: Vector2 = Vector2(900, 650)
+@export var clue_image_size: Vector2 = Vector2(
+	900,
+	650
+)
+
+
+# ===== Audio =====
+
+@onready var door_open_audio: AudioStreamPlayer = (
+	$DoorOpenAudio
+)
 
 
 # ===== State =====
@@ -72,8 +82,13 @@ func _ready() -> void:
 	if light_3:
 		light_3.visible = false
 
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+	body_entered.connect(
+		_on_body_entered
+	)
+
+	body_exited.connect(
+		_on_body_exited
+	)
 
 	update_door_progress()
 
@@ -81,14 +96,18 @@ func _ready() -> void:
 # ===== Door Progress =====
 
 func _process(_delta: float) -> void:
-	var current_count: int = PushableBlock.get_snapped_count()
+	var current_count: int = (
+		PushableBlock.get_snapped_count()
+	)
 
 	if current_count != last_block_count:
 		update_door_progress()
 
 
 func update_door_progress() -> void:
-	var count: int = PushableBlock.get_snapped_count()
+	var count: int = (
+		PushableBlock.get_snapped_count()
+	)
 
 	last_block_count = count
 
@@ -125,6 +144,10 @@ func open_door() -> void:
 		open_start_delay
 	).timeout
 
+	# Play door opening sound.
+	if door_open_audio:
+		door_open_audio.play()
+
 	# First opening image.
 	if door_closed:
 		door_closed.visible = false
@@ -151,8 +174,12 @@ func open_door() -> void:
 
 # ===== Player Detection =====
 
-func _on_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
+func _on_body_entered(
+	body: Node2D
+) -> void:
+	if not body.is_in_group(
+		"player"
+	):
 		return
 
 	is_player_near = true
@@ -163,8 +190,12 @@ func _on_body_entered(body: Node2D) -> void:
 	update_prompt()
 
 
-func _on_body_exited(body: Node2D) -> void:
-	if not body.is_in_group("player"):
+func _on_body_exited(
+	body: Node2D
+) -> void:
+	if not body.is_in_group(
+		"player"
+	):
 		return
 
 	is_player_near = false
@@ -196,19 +227,26 @@ func update_prompt() -> void:
 
 	# Enter after the door is opened.
 	if door_opened:
-		prompt_label.text = "Press E to enter"
+		prompt_label.text = (
+			"Press E to enter"
+		)
 
 	else:
-
-		prompt_label.text = "Press E to view"
+		prompt_label.text = (
+			"Press E to view"
+		)
 
 	prompt_label.visible = true
 
 
 # ===== Input =====
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not event.is_action_pressed(interact_action):
+func _unhandled_input(
+	event: InputEvent
+) -> void:
+	if not event.is_action_pressed(
+		interact_action
+	):
 		return
 
 	# Close the clue image.
@@ -245,13 +283,17 @@ func show_image() -> void:
 
 	# Stop player movement.
 	if player != null:
-		if player.has_method("set_external_direction"):
+		if player.has_method(
+			"set_external_direction"
+		):
 			player.call(
 				"set_external_direction",
 				Vector2.ZERO
 			)
 
-		if player.has_method("set_can_move"):
+		if player.has_method(
+			"set_can_move"
+		):
 			player.call(
 				"set_can_move",
 				false
@@ -278,12 +320,19 @@ func create_image_overlay() -> void:
 
 	root.anchor_right = 1.0
 	root.anchor_bottom = 1.0
-	root.mouse_filter = Control.MOUSE_FILTER_STOP
 
-	overlay_layer.add_child(root)
+	root.mouse_filter = (
+		Control.MOUSE_FILTER_STOP
+	)
+
+	overlay_layer.add_child(
+		root
+	)
 
 	# Dark background.
-	var background: ColorRect = ColorRect.new()
+	var background: ColorRect = (
+		ColorRect.new()
+	)
 
 	background.anchor_right = 1.0
 	background.anchor_bottom = 1.0
@@ -295,37 +344,61 @@ func create_image_overlay() -> void:
 		0.75
 	)
 
-	root.add_child(background)
+	root.add_child(
+		background
+	)
 
 	# Centre container.
-	var center: CenterContainer = CenterContainer.new()
+	var center: CenterContainer = (
+		CenterContainer.new()
+	)
 
 	center.anchor_right = 1.0
 	center.anchor_bottom = 1.0
-	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	root.add_child(center)
+	center.mouse_filter = (
+		Control.MOUSE_FILTER_IGNORE
+	)
+
+	root.add_child(
+		center
+	)
 
 	# Clue image.
-	var image: TextureRect = TextureRect.new()
+	var image: TextureRect = (
+		TextureRect.new()
+	)
 
 	image.texture = clue_image
-	image.custom_minimum_size = clue_image_size
 
-	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	image.custom_minimum_size = (
+		clue_image_size
+	)
+
+	image.expand_mode = (
+		TextureRect.EXPAND_IGNORE_SIZE
+	)
 
 	image.stretch_mode = (
 		TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	)
 
-	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	image.mouse_filter = (
+		Control.MOUSE_FILTER_IGNORE
+	)
 
-	center.add_child(image)
+	center.add_child(
+		image
+	)
 
 	# Close instruction.
-	var close_label: Label = Label.new()
+	var close_label: Label = (
+		Label.new()
+	)
 
-	close_label.text = "Press E to close"
+	close_label.text = (
+		"Press E to close"
+	)
 
 	close_label.horizontal_alignment = (
 		HORIZONTAL_ALIGNMENT_CENTER
@@ -333,11 +406,13 @@ func create_image_overlay() -> void:
 
 	close_label.anchor_left = 0.5
 	close_label.anchor_right = 0.5
+
 	close_label.anchor_top = 1.0
 	close_label.anchor_bottom = 1.0
 
 	close_label.offset_left = -200.0
 	close_label.offset_right = 200.0
+
 	close_label.offset_top = -80.0
 	close_label.offset_bottom = -30.0
 
@@ -345,7 +420,9 @@ func create_image_overlay() -> void:
 		Control.MOUSE_FILTER_IGNORE
 	)
 
-	root.add_child(close_label)
+	root.add_child(
+		close_label
+	)
 
 
 # ===== Close Clue =====
@@ -358,13 +435,17 @@ func close_image() -> void:
 
 	# Restore player movement.
 	if player != null:
-		if player.has_method("set_external_direction"):
+		if player.has_method(
+			"set_external_direction"
+		):
 			player.call(
 				"set_external_direction",
 				Vector2.ZERO
 			)
 
-		if player.has_method("set_can_move"):
+		if player.has_method(
+			"set_can_move"
+		):
 			player.call(
 				"set_can_move",
 				true
@@ -388,4 +469,6 @@ func go_to_next_scene() -> void:
 		)
 
 	else:
-		print("No target scene assigned.")
+		print(
+			"No target scene assigned."
+		)

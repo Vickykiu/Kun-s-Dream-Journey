@@ -11,9 +11,27 @@ extends Node2D
 		intro_lines = DialogueLine.fill_blanks(value)
 
 
+# ===== BGM =====
+
+@export var bgm_volume_db: float = -14.0
+
+
+# ===== Nodes =====
+
+@onready var bgm: AudioStreamPlayer = (
+	$BGM
+)
+
+
 # ===== Initialization =====
 
 func _ready() -> void:
+	# Start scene BGM.
+	bgm.volume_db = bgm_volume_db
+
+	if not bgm.playing:
+		bgm.play()
+
 	# Wait until the scene is ready.
 	await get_tree().process_frame
 

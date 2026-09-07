@@ -5,6 +5,10 @@ extends CharacterBody2D
 
 @export var appear_duration: float = 2.0
 
+@export var appear_audio: AudioStream
+
+@export var appear_audio_volume_db: float = -8.0
+
 
 # ===== Interaction Settings =====
 
@@ -79,16 +83,34 @@ extends CharacterBody2D
 
 @export var ending_image: Texture2D
 
-@export var ending_image_duration: float = 5.0
+@export var ending_audio: AudioStream
+
+@export var ending_audio_volume_db: float = -10.0
+
+@export var ending_image_duration: float = 7.0
 
 @export var credits_scene: PackedScene
 
 
+# ===== Ending Text =====
+
+@export var ending_title_text: String = "ENDING 2"
+
+@export_multiline var ending_description_text: String = (
+	"REINCARNATION\n"
+	+ "Kunkun was reborn into a new life.\n"
+	+ "He remembered nothing of his previous life,\n"
+	+ "but a strange melody still remained within him."
+)
+
+@export var ending_title_font_size: int = 52
+
+@export var ending_description_font_size: int = 28
+
+
 # ===== Reject Ending =====
 
-@export_file("*.tscn") var reject_scene_path: String = (
-	"res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn"
-)
+@export var reject_scene: PackedScene
 
 @export var reject_black_duration: float = 1.0
 
@@ -200,6 +222,9 @@ func check_crystals() -> void:
 	visible = true
 	modulate.a = 0.0
 
+	# Play appearance sound.
+	play_appear_audio()
+
 	# Slowly show the mystery person.
 	var appear_tween: Tween = (
 		create_tween()
@@ -229,6 +254,33 @@ func check_crystals() -> void:
 
 	else:
 		set_player_movement(true)
+
+
+# ===== Appearance Audio =====
+
+func play_appear_audio() -> void:
+	if appear_audio == null:
+		return
+
+	var audio_player: AudioStreamPlayer = (
+		AudioStreamPlayer.new()
+	)
+
+	audio_player.stream = appear_audio
+
+	audio_player.volume_db = (
+		appear_audio_volume_db
+	)
+
+	add_child(
+		audio_player
+	)
+
+	audio_player.finished.connect(
+		audio_player.queue_free
+	)
+
+	audio_player.play()
 
 
 # ===== Intro Dialogue =====
@@ -511,7 +563,10 @@ func play_accept_ending() -> void:
 	# Play mystery person disappear frames.
 	await play_disappear_animation()
 
-	# Show ending image.
+	# Stop Chapter 4 BGM before ending.
+	stop_scene_bgm()
+
+	# Show baby ending image and audio.
 	await show_ending_image()
 
 	# Go to credits.
@@ -587,6 +642,24 @@ func play_disappear_animation() -> void:
 	visible = false
 
 
+# ===== Scene BGM =====
+
+func stop_scene_bgm() -> void:
+	var current_scene: Node = (
+		get_tree().current_scene
+	)
+
+	if current_scene == null:
+		return
+
+	if current_scene.has_method(
+		"stop_bgm"
+	):
+		current_scene.call(
+			"stop_bgm"
+		)
+
+
 # ===== Ending Image =====
 
 func show_ending_image() -> void:
@@ -602,7 +675,7 @@ func show_ending_image() -> void:
 
 	ending_layer.layer = 300
 
-	# Remove with Chapter 4 when Credits loads.
+	# Remove with Chapter 4.
 	get_tree().current_scene.add_child(
 		ending_layer
 	)
@@ -623,7 +696,9 @@ func show_ending_image() -> void:
 		Control.MOUSE_FILTER_STOP
 	)
 
-	# Black background.
+
+	# ===== Black Background =====
+
 	var black_background: ColorRect = (
 		ColorRect.new()
 	)
@@ -638,7 +713,13 @@ func show_ending_image() -> void:
 
 	black_background.color = Color.BLACK
 
-	# Ending image.
+	black_background.mouse_filter = (
+		Control.MOUSE_FILTER_STOP
+	)
+
+
+	# ===== Baby Ending Image =====
+
 	var ending_texture: TextureRect = (
 		TextureRect.new()
 	)
@@ -651,12 +732,14 @@ func show_ending_image() -> void:
 		Control.PRESET_FULL_RECT
 	)
 
+	# The baby photo is the ending screen.
 	ending_texture.texture = ending_image
 
 	ending_texture.expand_mode = (
 		TextureRect.EXPAND_IGNORE_SIZE
 	)
 
+	# Keep ratio and do not crop.
 	ending_texture.stretch_mode = (
 		TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	)
@@ -665,9 +748,251 @@ func show_ending_image() -> void:
 		Control.MOUSE_FILTER_STOP
 	)
 
-	await get_tree().create_timer(
+
+	# ===== Dark Overlay =====
+
+	var dark_overlay: ColorRect = (
+		ColorRect.new()
+	)
+
+	ending_root.add_child(
+		dark_overlay
+	)
+
+	dark_overlay.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+
+	# Start completely dark.
+	dark_overlay.color = Color(
+		0.0,
+		0.0,
+		0.0,
+		1.0
+	)
+
+	dark_overlay.mouse_filter = (
+		Control.MOUSE_FILTER_IGNORE
+	)
+
+
+	# ===== Ending Title =====
+
+	var ending_title: Label = (
+		Label.new()
+	)
+
+	ending_root.add_child(
+		ending_title
+	)
+
+	ending_title.anchor_left = 0.0
+	ending_title.anchor_right = 1.0
+
+	ending_title.anchor_top = 0.28
+	ending_title.anchor_bottom = 0.38
+
+	ending_title.offset_left = 0.0
+	ending_title.offset_right = 0.0
+	ending_title.offset_top = 0.0
+	ending_title.offset_bottom = 0.0
+
+	ending_title.text = ending_title_text
+
+	ending_title.horizontal_alignment = (
+		HORIZONTAL_ALIGNMENT_CENTER
+	)
+
+	ending_title.vertical_alignment = (
+		VERTICAL_ALIGNMENT_CENTER
+	)
+
+	ending_title.add_theme_font_size_override(
+		"font_size",
+		ending_title_font_size
+	)
+
+	ending_title.add_theme_color_override(
+		"font_color",
+		Color.WHITE
+	)
+
+	ending_title.modulate.a = 0.0
+
+	ending_title.mouse_filter = (
+		Control.MOUSE_FILTER_IGNORE
+	)
+
+
+	# ===== Ending Description =====
+
+	var ending_description: Label = (
+		Label.new()
+	)
+
+	ending_root.add_child(
+		ending_description
+	)
+
+	ending_description.anchor_left = 0.15
+	ending_description.anchor_right = 0.85
+
+	ending_description.anchor_top = 0.40
+	ending_description.anchor_bottom = 0.75
+
+	ending_description.offset_left = 0.0
+	ending_description.offset_right = 0.0
+	ending_description.offset_top = 0.0
+	ending_description.offset_bottom = 0.0
+
+	ending_description.text = (
+		ending_description_text
+	)
+
+	ending_description.horizontal_alignment = (
+		HORIZONTAL_ALIGNMENT_CENTER
+	)
+
+	ending_description.vertical_alignment = (
+		VERTICAL_ALIGNMENT_CENTER
+	)
+
+	ending_description.autowrap_mode = (
+		TextServer.AUTOWRAP_WORD_SMART
+	)
+
+	ending_description.add_theme_font_size_override(
+		"font_size",
+		ending_description_font_size
+	)
+
+	ending_description.add_theme_color_override(
+		"font_color",
+		Color.WHITE
+	)
+
+	ending_description.modulate.a = 0.0
+
+	ending_description.mouse_filter = (
+		Control.MOUSE_FILTER_IGNORE
+	)
+
+
+	# ===== Ending Audio =====
+
+	start_ending_bgm()
+
+
+	# ===== Fade Baby Image =====
+
+	# Same background reveal style
+	# as Chapter 3.
+	var background_tween: Tween = (
+		create_tween()
+	)
+
+	background_tween.tween_property(
+		dark_overlay,
+		"color:a",
+		0.65,
+		2.0
+	)
+
+	await background_tween.finished
+
+
+	# ===== Fade Title =====
+
+	var title_tween: Tween = (
+		create_tween()
+	)
+
+	title_tween.tween_property(
+		ending_title,
+		"modulate:a",
+		1.0,
+		1.0
+	)
+
+	await title_tween.finished
+
+
+	# ===== Fade Description =====
+
+	var description_tween: Tween = (
+		create_tween()
+	)
+
+	description_tween.tween_property(
+		ending_description,
+		"modulate:a",
+		1.0,
+		1.0
+	)
+
+	await description_tween.finished
+
+
+	# ===== Remaining Time =====
+
+	# 2 sec image
+	# + 1 sec title
+	# + 1 sec description.
+	var used_time: float = 4.0
+
+	var remaining_time: float = (
 		ending_image_duration
-	).timeout
+		- used_time
+	)
+
+	# Keep full description visible.
+	if remaining_time > 0.0:
+		await get_tree().create_timer(
+			remaining_time
+		).timeout
+
+
+# ===== Ending BGM =====
+
+func start_ending_bgm() -> void:
+	if ending_audio == null:
+		return
+
+	# Remove old ending BGM if it exists.
+	var old_bgm: Node = (
+		get_tree().root.get_node_or_null(
+			"EndingBGM"
+		)
+	)
+
+	if old_bgm != null:
+		old_bgm.queue_free()
+
+		await get_tree().process_frame
+
+	# Loop MP3 through ending and credits.
+	if ending_audio is AudioStreamMP3:
+		ending_audio.loop = true
+		ending_audio.loop_offset = 0.0
+
+	var audio_player: AudioStreamPlayer = (
+		AudioStreamPlayer.new()
+	)
+
+	audio_player.name = "EndingBGM"
+
+	audio_player.stream = ending_audio
+
+	audio_player.volume_db = (
+		ending_audio_volume_db
+	)
+
+	# Add to root so it survives scene changes.
+	get_tree().root.add_child(
+		audio_player
+	)
+
+	audio_player.play()
 
 
 # ===== Reject Ending =====
@@ -768,26 +1093,30 @@ func play_reject_ending() -> void:
 	# Chapter 3 will use this flag.
 	MinesweeperState.reject_hint_pending = true
 
-	if reject_scene_path.is_empty():
+	if reject_scene == null:
 		print(
-			"Reject scene path is not assigned."
+			"Reject scene is not assigned."
 		)
 
 		black_layer.queue_free()
+
 		return
 
 	# Remove saved Chapter 3 position.
+	var reject_path: String = (
+		reject_scene.resource_path
+	)
+
 	if GameState.spawn_points.has(
-		reject_scene_path
+		reject_path
 	):
 		GameState.spawn_points.erase(
-			reject_scene_path
+			reject_path
 		)
 
-	# Return to Chapter 3 using a runtime path.
-	# This avoids a circular PackedScene dependency.
-	get_tree().change_scene_to_file(
-		reject_scene_path
+	# Return to Chapter 3.
+	get_tree().change_scene_to_packed(
+		reject_scene
 	)
 
 
