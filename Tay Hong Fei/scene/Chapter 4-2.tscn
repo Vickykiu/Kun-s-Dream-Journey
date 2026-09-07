@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://d0bmuta4afxhr" path="res://Lau Kah Kei/assets/image/charactor/kun_dialogue/kun_calm.png.png" id="12_8bxu5"]
 [ext_resource type="Texture2D" uid="uid://cd6ndr5cq17p" path="res://Tay Hong Fei/asset/character/Kunkun1.png" id="13_0kcjn"]
 [ext_resource type="Texture2D" uid="uid://b3rjxh2u1r0ce" path="res://Tay Hong Fei/asset/character/Kunkun1-smile.png" id="14_0kcjn"]
-[ext_resource type="PackedScene" uid="uid://dgvbsieke3aip" path="res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn" id="15_fy4hc"]
 [ext_resource type="Texture2D" uid="uid://3acjce6jrw2f" path="res://Tay Hong Fei/asset/character/kunkun disappear 1.png" id="15_t4aq6"]
 [ext_resource type="Texture2D" uid="uid://dpv6vudfge1k" path="res://Tay Hong Fei/asset/character/kunkun disappear 2.png" id="16_30gmv"]
 [ext_resource type="Texture2D" uid="uid://bvxt7wimdkxdi" path="res://Tay Hong Fei/asset/character/kunkun disappear 3.png" id="17_5h6e6"]
@@ -247,7 +246,7 @@ reject_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fgl5u")])
 disappear_frames = Array[Texture2D]([ExtResource("15_t4aq6"), ExtResource("16_30gmv"), ExtResource("17_5h6e6")])
 ending_image = ExtResource("4_d4syc")
 credits_scene = ExtResource("18_30gmv")
-reject_scene = ExtResource("15_fy4hc")
+reject_scene_path = "res://Lew Jia Jia/scenes/Chapter3_RoomB13.tscn"
 
 [node name="Sprite" type="Sprite2D" parent="Kunkun1" unique_id=139223958]
 scale = Vector2(0.047623858, 0.047623858)
