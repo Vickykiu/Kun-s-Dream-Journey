@@ -23,6 +23,9 @@ var previous_focus: Control
 func _ready() -> void:
 	add_to_group("chapter_dialogue")
 	overlay.hide()
+	# Dialogue owns its click sound; suppress the generic button beep/hover tone.
+	%DialogueNext.set_meta("sfx_silent", true)
+	%DialogueSkip.set_meta("sfx_silent", true)
 	# Each dialogue instance owns its loop setting. Menu/rhythm tracks are separate.
 	if dialogue_music.stream is AudioStreamMP3:
 		var dialogue_stream := dialogue_music.stream.duplicate() as AudioStreamMP3
@@ -46,6 +49,7 @@ func start(conversation: Array) -> void:
 	if exit_layer:
 		exit_layer.hide()
 	_show_page()
+	MusicManager.play_sfx(&"dialogue")
 	next_button.grab_focus()
 
 
@@ -82,12 +86,14 @@ func _input(event: InputEvent) -> void:
 func advance() -> void:
 	if not active:
 		return
+	# The same short click is used for mouse and keyboard reveal/next actions.
+	MusicManager.play_sfx(&"dialogue")
 	if text_label.visible_characters >= 0:
 		text_label.visible_characters = -1
 		return
 	page_index += 1
 	if page_index >= pages.size():
-		close()
+		close(false)
 	else:
 		_show_page()
 
@@ -105,12 +111,13 @@ func _show_page() -> void:
 	text_label.visible_characters = 0
 	page_label.text = "%02d / %02d" % [page_index + 1, pages.size()]
 	next_button.text = "CONTINUE" if page_index == pages.size() - 1 else "NEXT"
-	MusicManager.play_sfx(&"dialogue")
 
 
-func close() -> void:
+func close(play_click: bool = true) -> void:
 	if not active:
 		return
+	if play_click:
+		MusicManager.play_sfx(&"dialogue")
 	active = false
 	overlay.hide()
 	# Stop before emitting finished so audio never follows into the next scene.

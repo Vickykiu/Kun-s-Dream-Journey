@@ -3,6 +3,9 @@ extends Node
 ## Persistent music, SFX and volume settings. Music and SFX both feed Master.
 
 const MENU_MUSIC_PATH := "res://Kiu Chun Woon/assets/audio/menu_theme.mp3"
+const DIALOGUE_CLICK_PATH := "res://Kiu Chun Woon/assets/audio/dialogue_click.mp3"
+const HARD_MODE_WOW_PATH := "res://Kiu Chun Woon/assets/audio/hard_mode_wow.mp3"
+const SFX_GAIN_DB := {&"dialogue": -3.0, &"hard_mode_clear": 0.0}
 const SETTINGS_PATH := "user://audio_settings.cfg"
 const DEFAULT_MASTER_VOLUME := 1.0
 const DEFAULT_MUSIC_VOLUME := 0.78
@@ -12,6 +15,7 @@ var _player: AudioStreamPlayer
 var _fade_tween: Tween
 var _sfx_streams: Dictionary = {}
 var _sfx_players: Array[AudioStreamPlayer] = []
+var _hard_mode_clear_player: AudioStreamPlayer
 var _last_cue_at: Dictionary = {}
 var _next_sfx_player := 0
 
@@ -54,18 +58,24 @@ func play_sfx(cue: StringName) -> void:
 	if now - int(_last_cue_at.get(cue, -10000)) < minimum_gap:
 		return
 	_last_cue_at[cue] = now
-	var player := _sfx_players[_next_sfx_player]
-	_next_sfx_player = (_next_sfx_player + 1) % _sfx_players.size()
+	# Give the longer celebration its own voice so dialogue clicks cannot cut it off.
+	var player: AudioStreamPlayer
+	if cue == &"hard_mode_clear":
+		player = _hard_mode_clear_player
+	else:
+		player = _sfx_players[_next_sfx_player]
+		_next_sfx_player = (_next_sfx_player + 1) % _sfx_players.size()
 	player.stream = _sfx_streams[cue]
+	player.volume_db = float(SFX_GAIN_DB.get(cue, -10.0))
 	player.play()
 
 
 func _prepare_sfx() -> void:
-	# Original synthesized cues: no third-party audio/licence dependency.
+	# Existing synthesized UI/game cues. The supplied dialogue/wow recordings
+	# are loaded separately below and are always one-shot sounds.
 	var tones := {
 		&"ui_hover": [480.0, 580.0, 0.055],
 		&"ui_confirm": [600.0, 900.0, 0.12],
-		&"dialogue": [320.0, 400.0, 0.065],
 		&"perfect": [880.0, 1320.0, 0.105],
 		&"great": [660.0, 880.0, 0.09],
 		&"miss": [160.0, 90.0, 0.13],
@@ -77,6 +87,12 @@ func _prepare_sfx() -> void:
 	for cue in tones:
 		var tone: Array = tones[cue]
 		_sfx_streams[cue] = _make_tone(tone[0], tone[1], tone[2])
+	_load_recorded_sfx(&"dialogue", DIALOGUE_CLICK_PATH)
+	_load_recorded_sfx(&"hard_mode_clear", HARD_MODE_WOW_PATH)
+	_hard_mode_clear_player = AudioStreamPlayer.new()
+	_hard_mode_clear_player.name = "HardModeClearSFX"
+	_hard_mode_clear_player.bus = &"SFX"
+	add_child(_hard_mode_clear_player)
 	for index in range(6):
 		var player := AudioStreamPlayer.new()
 		player.name = "SFXPlayer%d" % index
@@ -84,6 +100,17 @@ func _prepare_sfx() -> void:
 		player.volume_db = -10.0
 		add_child(player)
 		_sfx_players.append(player)
+
+
+func _load_recorded_sfx(cue: StringName, path: String) -> void:
+	var recording := load(path) as AudioStreamMP3
+	if recording == null:
+		push_warning("Could not load sound effect: " + path)
+		return
+	# Do not change the imported resource's loop setting for other consumers.
+	var one_shot := recording.duplicate() as AudioStreamMP3
+	one_shot.loop = false
+	_sfx_streams[cue] = one_shot
 
 
 func _make_tone(start_hz: float, end_hz: float, duration: float) -> AudioStreamWAV:

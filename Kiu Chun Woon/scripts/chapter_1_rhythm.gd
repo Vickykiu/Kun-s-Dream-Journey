@@ -17,10 +17,6 @@ const REACTION_EMOTIONS := {
 	"TOO EARLY": ["worried", "TOO SOON"],
 	"MISS": ["sad", "DISAPPOINTED"],
 }
-const REACTION_SOUNDS := {
-	"PERFECT": &"perfect", "GREAT": &"great", "TOO EARLY": &"early", "MISS": &"miss",
-}
-
 const FALLBACK_SONG_DURATION := 38.0
 const NOTE_COUNT := 72  # Normal mode only; Hard Mode fills the full song length instead.
 const NOTE_TRAVEL_TIME := 1.8
@@ -93,6 +89,7 @@ var chart: Array[Dictionary] = []
 var next_spawn_index := 0
 var playing := false
 var countdown_active := false
+var result_sound_played := false
 var score := 0
 var combo := 0
 var best_combo := 0
@@ -239,6 +236,7 @@ func _apply_difficulty() -> void:
 func _reset_run() -> void:
 	playing = false
 	countdown_active = false
+	result_sound_played = false
 	conductor.stop_song()
 	next_spawn_index = 0
 	score = 0
@@ -458,8 +456,7 @@ func _pulse_background() -> void:
 
 
 func _show_judgement(message: String, color: Color) -> void:
-	if REACTION_SOUNDS.has(message):
-		MusicManager.play_sfx(REACTION_SOUNDS[message])
+	# Note feedback is visual only: no hit, miss, early, or great/perfect beeps.
 	_show_reaction(message)
 	if judgement_tween != null and judgement_tween.is_valid():
 		judgement_tween.kill()
@@ -600,7 +597,13 @@ func _show_results() -> void:
 	result_overlay.show()
 	reaction_emoji.hide()
 	reaction_mood.hide()
-	MusicManager.play_sfx(&"success" if passed else &"fail")
+	# Only a successful Hard Mode run earns the supplied wow sound, once per run.
+	if not result_sound_played:
+		result_sound_played = true
+		if passed and hard_mode:
+			MusicManager.play_sfx(&"hard_mode_clear")
+		else:
+			MusicManager.play_sfx(&"success" if passed else &"fail")
 
 	if passed:
 		if continue_button != null:
