@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bwmaa2w722hlo"
+path="res://.godot/imported/dialogue_click.mp3-ce799227c71198279879d76af35976b3.mp3str"
+
+[deps]
+
+source_file="res://Kiu Chun Woon/assets/audio/dialogue_click.mp3"
+dest_files=["res://.godot/imported/dialogue_click.mp3-ce799227c71198279879d76af35976b3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
