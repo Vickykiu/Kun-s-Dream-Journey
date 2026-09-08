@@ -142,6 +142,7 @@ region_rect = Rect2(303.10352, 608.67554, 135.54333, 179.99341)
 
 [node name="DoorOpenAudio" type="AudioStreamPlayer" parent="Door" unique_id=238704418]
 stream = ExtResource("10_re1ky")
+volume_db = 5.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1603764284]
 position = Vector2(46, 165)
