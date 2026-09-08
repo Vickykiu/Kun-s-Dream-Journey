@@ -85,6 +85,9 @@ static func reset_snap_progress() -> void:
 		false
 	]
 
+	_attached_block = null
+	_input_lock = false
+
 
 # ===== State =====
 

@@ -238,7 +238,6 @@ script = ExtResource("7_agad7")
 position = Vector2(408, 788)
 script = ExtResource("10_2wkyv")
 appear_audio = ExtResource("11_xmxbq")
-appear_audio_volume_db = -5.0
 kunkun_intro_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fy4hc")])
 mystery_speaker = "Kunkun?"
 mystery_intro_lines = Array[ExtResource("11_iqage")]([SubResource("Resource_fw405")])
@@ -278,4 +277,3 @@ text = "Press E to talk"
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1335049765]
 stream = ExtResource("24_4lioo")
-volume_db = -5.0

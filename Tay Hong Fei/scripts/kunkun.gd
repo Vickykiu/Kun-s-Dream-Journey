@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @export var appear_audio: AudioStream
 
-@export var appear_audio_volume_db: float = -8.0
+@export var appear_audio_volume_db: float = -5.0
 
 
 # ===== Interaction Settings =====
@@ -85,9 +85,9 @@ extends CharacterBody2D
 
 @export var ending_audio: AudioStream
 
-@export var ending_audio_volume_db: float = -10.0
+@export var ending_audio_volume_db: float = -5.0
 
-@export var ending_image_duration: float = 7.0
+@export var ending_hold_duration: float = 6.0
 
 @export var credits_scene: PackedScene
 
@@ -935,23 +935,13 @@ func show_ending_image() -> void:
 	await description_tween.finished
 
 
-	# ===== Remaining Time =====
+	# ===== Ending Hold =====
 
-	# 2 sec image
-	# + 1 sec title
-	# + 1 sec description.
-	var used_time: float = 4.0
-
-	var remaining_time: float = (
-		ending_image_duration
-		- used_time
-	)
-
-	# Keep full description visible.
-	if remaining_time > 0.0:
-		await get_tree().create_timer(
-			remaining_time
-		).timeout
+	# Keep the full ending visible
+	# before going to credits.
+	await get_tree().create_timer(
+		ending_hold_duration
+	).timeout
 
 
 # ===== Ending BGM =====
