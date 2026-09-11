@@ -18,7 +18,7 @@ const REACTION_EMOTIONS := {
 	"MISS": ["sad", "DISAPPOINTED"],
 }
 const FALLBACK_SONG_DURATION := 38.0
-const NOTE_COUNT := 72  # Normal mode only; Hard Mode fills the full song length instead.
+const NOTE_COUNT := 72  
 const NOTE_TRAVEL_TIME := 1.8
 const PERFECT_WINDOW := 0.10
 const GOOD_WINDOW := 0.21
@@ -168,10 +168,7 @@ func _get_active_note_count() -> int:
 	if not hard_mode:
 		return NOTE_COUNT
 
-	# Hard Mode's song can run much longer than the base chart's ~35s
-	# (72 notes at 128 BPM), so keep generating beats until they fill the
-	# whole track, leaving enough room at the end for the final note to be
-	# fully playable and judged before the song finishes.
+	# Hard Mode's song 
 	var cutoff := song_duration - (note_travel_time + miss_window)
 	var count := 0
 	while conductor.time_for_beat(count) < cutoff:
@@ -560,7 +557,7 @@ func _show_results() -> void:
 		evidence_label.text = "Teacher Mei feels disappointed once she sees the result.\n\"You must reach Grade C or higher.\"\nRETRY TRAINING TO CONTINUE."
 		evidence_label.add_theme_color_override("font_color", Color("#ff7777"))
 
-		# A failed attempt does not unlock Chapter 2.
+		#Failed does not unlock Chapter 2.
 
 		if continue_button != null:
 			continue_button.hide()
@@ -597,7 +594,7 @@ func _show_results() -> void:
 	result_overlay.show()
 	reaction_emoji.hide()
 	reaction_mood.hide()
-	# Only a successful Hard Mode run earns the supplied wow sound, once per run.
+	# Only a successful Hard Mode run wow sounds
 	if not result_sound_played:
 		result_sound_played = true
 		if passed and hard_mode:

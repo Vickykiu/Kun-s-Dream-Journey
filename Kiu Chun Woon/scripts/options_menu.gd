@@ -1,7 +1,4 @@
 extends Control
-
-## Independent Master, Music and SFX controls; saved on Back / Esc.
-
 const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
 
 @onready var options_card: PanelContainer = %OptionsCard

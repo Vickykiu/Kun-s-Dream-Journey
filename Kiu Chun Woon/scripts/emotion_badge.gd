@@ -1,7 +1,4 @@
 extends Control
-
-## A small, font-independent emoji. The portrait and text still communicate
-## the reaction when colour is difficult to distinguish.
 @export_enum("happy", "calm", "worried", "sad") var emotion: String = "calm":
 	set(value):
 		emotion = value

@@ -1,6 +1,6 @@
 extends Node
 
-## Persistent music, SFX and volume settings. Music and SFX both feed Master.
+##Music, SFX and volume settings
 
 const MENU_MUSIC_PATH := "res://Kiu Chun Woon/assets/audio/menu_theme.mp3"
 const DIALOGUE_CLICK_PATH := "res://Kiu Chun Woon/assets/audio/dialogue_click.mp3"
@@ -37,7 +37,6 @@ func _ready() -> void:
 
 	load_settings()
 	_prepare_sfx()
-	# Connect only controls belonging to this member's scenes.
 	get_tree().node_added.connect(_on_ui_node_added)
 
 
@@ -52,13 +51,13 @@ func get_sfx_volume() -> float:
 func play_sfx(cue: StringName) -> void:
 	if not _sfx_streams.has(cue) or _sfx_players.is_empty():
 		return
-	# Avoid a loud pile-up from rapid missed notes or dragging a slider.
+
 	var now := Time.get_ticks_msec()
 	var minimum_gap := 80 if cue != &"ui_confirm" else 140
 	if now - int(_last_cue_at.get(cue, -10000)) < minimum_gap:
 		return
 	_last_cue_at[cue] = now
-	# Give the longer celebration its own voice so dialogue clicks cannot cut it off.
+
 	var player: AudioStreamPlayer
 	if cue == &"hard_mode_clear":
 		player = _hard_mode_clear_player
@@ -71,8 +70,6 @@ func play_sfx(cue: StringName) -> void:
 
 
 func _prepare_sfx() -> void:
-	# Existing synthesized UI/game cues. The supplied dialogue/wow recordings
-	# are loaded separately below and are always one-shot sounds.
 	var tones := {
 		&"ui_hover": [480.0, 580.0, 0.055],
 		&"ui_confirm": [600.0, 900.0, 0.12],
@@ -107,7 +104,6 @@ func _load_recorded_sfx(cue: StringName, path: String) -> void:
 	if recording == null:
 		push_warning("Could not load sound effect: " + path)
 		return
-	# Do not change the imported resource's loop setting for other consumers.
 	var one_shot := recording.duplicate() as AudioStreamMP3
 	one_shot.loop = false
 	_sfx_streams[cue] = one_shot
@@ -159,7 +155,6 @@ func _on_button_hover(button: Button) -> void:
 
 
 func _on_button_focus(button: Button) -> void:
-	# Screen-entry grab_focus() is silent; user navigation gets feedback.
 	if (Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down")
 		or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
 		or Input.is_physical_key_pressed(KEY_TAB)):
@@ -233,7 +228,6 @@ func load_settings() -> void:
 		set_music_volume(
 			float(config.get_value("audio", "music_volume", DEFAULT_MUSIC_VOLUME))
 		)
-		# Older settings files do not have this key yet.
 		set_sfx_volume(float(config.get_value("audio", "sfx_volume", DEFAULT_SFX_VOLUME)))
 	else:
 		set_master_volume(DEFAULT_MASTER_VOLUME)

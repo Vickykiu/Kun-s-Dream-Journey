@@ -1,6 +1,5 @@
 extends Control
 
-## Chapter 1 introduction and navigation.
 const MAIN_MENU_SCENE := "res://Kiu Chun Woon/scenes/main_menu.tscn"
 const RHYTHM_SCENE := "res://Kiu Chun Woon/scenes/chapter_1_rhythm.tscn"
 const MEI := preload("res://Kiu Chun Woon/assets/images/reactions/Teacher_Mei_Normal.png")
@@ -28,7 +27,6 @@ func _on_main_menu_pressed() -> void:
 func _on_begin_pressed() -> void:
 	if chapter_dialogue.active:
 		return
-	# Each page carries its own expression and speaker, ready for editing.
 	chapter_dialogue.start([
 		{"speaker": "Teacher Mei", "portrait": MEI, "emotion": "happy", "mood": "Welcoming",
 			"text": "Welcome to Starlight Training Camp, Kunkun. Your first lesson begins in the practice room."},

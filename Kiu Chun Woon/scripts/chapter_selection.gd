@@ -1,7 +1,7 @@
 extends Control
 
 
-# ===== Scenes =====
+#Scenes
 
 const MAIN_MENU_SCENE := (
 	"res://Kiu Chun Woon/scenes/main_menu.tscn"
@@ -24,7 +24,7 @@ const CHAPTER_FOUR_SCENE := (
 )
 
 
-# ===== Nodes =====
+#Nodes 
 
 @onready var chapter_one_button: Button = (
 	$SafeMargin/Center/ChapterCard/Column/ChapterGrid/ChapterOneButton
@@ -55,7 +55,7 @@ const CHAPTER_FOUR_SCENE := (
 ]
 
 
-# ===== Initialization =====
+#Initialization
 
 func _ready() -> void:
 	MusicManager.play_menu_music()
@@ -74,7 +74,7 @@ func _ready() -> void:
 		)
 
 
-# ===== Button Focus =====
+#Button Focus
 
 func _on_button_mouse_entered(
 	button: Button
@@ -89,7 +89,7 @@ func _on_button_mouse_exited(
 		button.release_focus()
 
 
-# ===== Input =====
+#Input
 
 func _unhandled_input(
 	event: InputEvent
@@ -102,15 +102,14 @@ func _unhandled_input(
 		_return_to_main_menu()
 
 
-# ===== Chapter One =====
-
+#Chapter One
 func _on_chapter_one_pressed() -> void:
 	_open_chapter(
 		CHAPTER_ONE_SCENE
 	)
 
 
-# ===== Chapter Two =====
+#Chapter Two
 
 func _on_chapter_two_pressed() -> void:
 	_open_chapter(
@@ -118,7 +117,7 @@ func _on_chapter_two_pressed() -> void:
 	)
 
 
-# ===== Chapter Three =====
+#Chapter Three
 
 func _on_chapter_three_pressed() -> void:
 	_open_chapter(
@@ -126,7 +125,7 @@ func _on_chapter_three_pressed() -> void:
 	)
 
 
-# ===== Chapter Four =====
+#Chapter Four
 
 func _on_chapter_four_pressed() -> void:
 	# Reset Chapter 4 when opened directly from Chapter Selection.
@@ -137,7 +136,7 @@ func _on_chapter_four_pressed() -> void:
 	)
 
 
-# ===== Open Chapter =====
+#Open Chapter
 
 func _open_chapter(
 	scene_path: String
@@ -157,13 +156,13 @@ func _open_chapter(
 		)
 
 
-# ===== Back =====
+#Back button
 
 func _on_back_pressed() -> void:
 	_return_to_main_menu()
 
 
-# ===== Main Menu =====
+#Main Menu
 
 func _return_to_main_menu() -> void:
 	get_tree().change_scene_to_file(

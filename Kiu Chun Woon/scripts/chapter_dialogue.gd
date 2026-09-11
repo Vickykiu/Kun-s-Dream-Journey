@@ -23,10 +23,10 @@ var previous_focus: Control
 func _ready() -> void:
 	add_to_group("chapter_dialogue")
 	overlay.hide()
-	# Dialogue owns its click sound; suppress the generic button beep/hover tone.
+	# Dialogue click sound
 	%DialogueNext.set_meta("sfx_silent", true)
 	%DialogueSkip.set_meta("sfx_silent", true)
-	# Each dialogue instance owns its loop setting. Menu/rhythm tracks are separate.
+	# Each dialogue instance owns its loop setting
 	if dialogue_music.stream is AudioStreamMP3:
 		var dialogue_stream := dialogue_music.stream.duplicate() as AudioStreamMP3
 		dialogue_stream.loop = true
@@ -43,7 +43,6 @@ func start(conversation: Array) -> void:
 	previous_focus = get_viewport().gui_get_focus_owner()
 	active = true
 	overlay.show()
-	# The Music bus means existing Master and Music sliders control this track.
 	dialogue_music.play()
 	var exit_layer := get_node_or_null("/root/ChapterEscape")
 	if exit_layer:
@@ -70,13 +69,11 @@ func _input(event: InputEvent) -> void:
 		dialogue_viewport.set_input_as_handled()
 		return
 	if event.is_action_pressed("ui_cancel"):
-		# Consume input before finished can remove this scene from the tree.
 		dialogue_viewport.set_input_as_handled()
 		close()
 	elif event.is_action_pressed("interact") or event.is_action_pressed("ui_accept"):
-		# Advancing the final page can trigger that same scene transition.
 		dialogue_viewport.set_input_as_handled()
-		# Tab can focus Skip, and Enter should activate that visible choice.
+		# Tab can focus Skip
 		if dialogue_viewport.gui_get_focus_owner() == %DialogueSkip:
 			close()
 		else:
@@ -86,7 +83,6 @@ func _input(event: InputEvent) -> void:
 func advance() -> void:
 	if not active:
 		return
-	# The same short click is used for mouse and keyboard reveal/next actions.
 	MusicManager.play_sfx(&"dialogue")
 	if text_label.visible_characters >= 0:
 		text_label.visible_characters = -1
@@ -120,7 +116,6 @@ func close(play_click: bool = true) -> void:
 		MusicManager.play_sfx(&"dialogue")
 	active = false
 	overlay.hide()
-	# Stop before emitting finished so audio never follows into the next scene.
 	dialogue_music.stop()
 	_restore_exit_layer()
 	if is_instance_valid(previous_focus) and previous_focus.is_visible_in_tree():

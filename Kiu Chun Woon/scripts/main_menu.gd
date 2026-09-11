@@ -40,7 +40,6 @@ func _ready() -> void:
 
 
 func _configure_layout() -> void:
-	# Display the complete background picture.
 	_set_control_region(
 		background,
 		0.0,
