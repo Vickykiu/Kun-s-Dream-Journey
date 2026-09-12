@@ -135,13 +135,15 @@ offset_top = 384.0
 offset_right = 1248.0
 offset_bottom = 607.0
 
-[node name="CloseButton" type="Button" parent="." unique_id=829643081]
-offset_left = 1754.0
-offset_right = 1924.0
-offset_bottom = 145.0
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 100
-text = "X"
+[node name="CloseHint" type="Label" parent="." unique_id=9824683]
+offset_left = 761.0
+offset_top = 75.0
+offset_right = 1130.0
+offset_bottom = 144.0
+theme_override_colors/font_color = Color(1, 0.11764706, 0.07058824, 0.9882353)
+theme_override_font_sizes/font_size = 50
+text = "Press E to close"
+horizontal_alignment = 1
 
 [node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=1365546388]
 stream = ExtResource("8_syvvt")
@@ -154,4 +156,3 @@ stream = ExtResource("9_vuyas")
 [connection signal="pressed" from="MetronomeButton" to="." method="_on_metronome_button_pressed"]
 [connection signal="pressed" from="DrawerButton" to="." method="_on_drawer_button_pressed"]
 [connection signal="pressed" from="PliersButton" to="." method="_on_pliers_button_pressed"]
-[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

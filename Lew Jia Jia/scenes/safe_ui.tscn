@@ -166,13 +166,15 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_xerkm")
 label_settings = SubResource("LabelSettings_uqqp5")
 
-[node name="BtnExit" type="Button" parent="." unique_id=2081538683]
-offset_left = 1748.0
-offset_right = 1918.0
-offset_bottom = 143.0
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 100
-text = "X"
+[node name="CloseHint" type="Label" parent="." unique_id=374283543]
+offset_left = 795.0
+offset_top = 78.0
+offset_right = 1164.0
+offset_bottom = 147.0
+theme_override_colors/font_color = Color(1, 0.11764706, 0.07058824, 0.9882353)
+theme_override_font_sizes/font_size = 50
+text = "Press E to close"
+horizontal_alignment = 1
 
 [node name="BtnSound" type="AudioStreamPlayer" parent="." unique_id=1110132961]
 stream = ExtResource("3_xerkm")
@@ -224,6 +226,5 @@ stream = ExtResource("11_njwd4")
 [connection signal="pressed" from="Btn0" to="." method="_on_btn_0_pressed"]
 [connection signal="pressed" from="BtnClear" to="." method="_on_btn_clear_pressed"]
 [connection signal="pressed" from="BtnEnter" to="." method="_on_btn_enter_pressed"]
-[connection signal="pressed" from="BtnExit" to="." method="_on_btn_exit_pressed"]
 [connection signal="pressed" from="FolderBtn" to="." method="_on_folder_btn_pressed"]
 [connection signal="pressed" from="FileDetail/CloseFileBtn" to="." method="_on_btn_exit_pressed"]

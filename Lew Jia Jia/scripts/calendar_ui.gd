@@ -10,9 +10,7 @@ extends CanvasLayer
 		calendar_lines = DialogueLine.fill_blanks(value)
 
 
-@onready var close_button: Button = $CloseButton
 @onready var close_sound: AudioStreamPlayer = $CloseSound
-
 
 var is_closing: bool = false
 
@@ -31,15 +29,24 @@ func _ready() -> void:
 		)
 
 
-func _on_close_button_pressed() -> void:
-	if Dialogue.is_active():
+func _input(event: InputEvent) -> void:
+	if not event is InputEventKey:
 		return
 
-	if is_closing:
+	if event.keycode != KEY_E or not event.pressed or event.echo:
 		return
 
+	# 对话还在进行时，E 用来继续对话。
+	if Dialogue.is_active() or is_closing:
+		return
+
+	# 对话结束后，再按 E 关闭 Calendar。
+	get_viewport().set_input_as_handled()
+	close_ui()
+
+
+func close_ui() -> void:
 	is_closing = true
-	close_button.disabled = true
 
 	if close_sound.stream:
 		close_sound.play()

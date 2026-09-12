@@ -22,6 +22,8 @@ signal file_taken
 @onready var safe_bg: TextureRect = $TextureRect
 @onready var folder_btn: Button = $FolderBtn
 @onready var file_detail: Control = $FileDetail
+
+@onready var close_hint: Label = $CloseHint
 @onready var safe_open_sound: AudioStreamPlayer = $SafeOpenSound
 @onready var close_sound: AudioStreamPlayer = $CloseSound
 
@@ -30,8 +32,11 @@ const CORRECT_PASS: String = "31512"
 
 var current_input: String = ""
 var is_unlocked: bool = false
+var is_opening: bool = false
 var has_read_file: bool = false
 var death_list_taken: bool = false
+var can_use_e: bool = false
+var is_closing: bool = false
 
 
 func _ready() -> void:
@@ -42,11 +47,77 @@ func _ready() -> void:
 	folder_btn.visible = false
 	file_detail.visible = false
 
-	death_list_taken = GameState.has_item(
-		"death_list"
+	close_hint.visible = false
+	close_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	death_list_taken = GameState.has_item("death_list")
+	has_read_file = death_list_taken
+
+	# 避免打开 Safe UI 的那次 E 立即把它关闭。
+	await get_tree().process_frame
+	can_use_e = true
+
+
+# =========================
+# E hint and closing
+# =========================
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+
+	var show_hint: bool = (
+		can_use_e
+		and not is_closing
+		and not Dialogue.is_active()
 	)
 
-	has_read_file = death_list_taken
+	close_hint.visible = show_hint
+
+	if show_hint:
+		if file_detail.visible:
+			close_hint.text = "Press E to close file"
+		else:
+			close_hint.text = "Press E to close"
+
+
+func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
+
+	if not event is InputEventKey:
+		return
+
+	if event.keycode != KEY_E or not event.pressed or event.echo:
+		return
+
+	if (
+		not can_use_e
+		or is_closing
+		or is_opening
+		or Dialogue.is_active()
+	):
+		return
+
+	get_viewport().set_input_as_handled()
+
+	# First E closes the file; another E closes the Safe UI.
+	if file_detail.visible:
+		file_detail.visible = false
+	else:
+		close_ui()
+
+
+func close_ui() -> void:
+	is_closing = true
+	can_use_e = false
+	close_hint.visible = false
+
+	if close_sound.stream:
+		close_sound.play()
+		await close_sound.finished
+
+	queue_free()
 
 
 # =========================
@@ -118,7 +189,7 @@ func _on_btn_clear_pressed() -> void:
 # =========================
 
 func _on_btn_enter_pressed() -> void:
-	if is_unlocked:
+	if is_unlocked or is_opening:
 		return
 
 	if current_input == CORRECT_PASS:
@@ -130,6 +201,7 @@ func _on_btn_enter_pressed() -> void:
 func unlock_safe() -> void:
 	print("Password correct! Safe opened!")
 
+	is_opening = true
 	is_unlocked = true
 	current_input = ""
 	display.text = ""
@@ -140,31 +212,18 @@ func unlock_safe() -> void:
 
 	folder_btn.visible = true
 
-	if safe_open_sound.stream == null:
-		print("ERROR: SafeOpenSound has no audio file!")
-	else:
-		print(
-			"Playing safe sound: ",
-			safe_open_sound.stream
-		)
-
+	if safe_open_sound.stream:
 		safe_open_sound.play()
-
-		await get_tree().process_frame
-
-		print(
-			"Safe sound playing: ",
-			safe_open_sound.playing
-		)
-
 		await safe_open_sound.finished
+	else:
+		push_warning("SafeOpenSound has no audio file.")
 
+	is_opening = false
 	safe_opened.emit()
 
 
 func show_password_error() -> void:
 	print("Incorrect password!")
-
 	display.text = "ERROR"
 	current_input = ""
 
@@ -174,9 +233,18 @@ func show_password_error() -> void:
 # =========================
 
 func _on_folder_btn_pressed() -> void:
+	if is_closing or Dialogue.is_active():
+		return
+
 	file_detail.visible = true
 
+	# 避免用于关闭最后一句对白的 E 同时关闭文件。
+	can_use_e = false
+	close_hint.visible = false
+
 	if has_read_file:
+		await get_tree().process_frame
+		can_use_e = true
 		return
 
 	has_read_file = true
@@ -189,14 +257,10 @@ func _on_folder_btn_pressed() -> void:
 			portrait,
 			speaker_name
 		)
-
 		await Dialogue.finished
 
-	# Add the Death List as evidence.
 	if not GameState.has_item("death_list"):
-		GameState.add_item(
-			"death_list"
-		)
+		GameState.add_item("death_list")
 
 		death_list_taken = true
 		file_taken.emit()
@@ -204,27 +268,8 @@ func _on_folder_btn_pressed() -> void:
 		Dialogue.show_text(
 			"(Added to inventory: Death List)"
 		)
+		await Dialogue.finished
 
-
-func _on_close_file_btn_pressed() -> void:
-	if Dialogue.is_active():
-		return
-
-	file_detail.visible = false
-
-
-# =========================
-# Exit Safe UI
-# =========================
-
-func _on_btn_exit_pressed() -> void:
-	if Dialogue.is_active():
-		return
-
-	$BtnExit.disabled = true
-
-	if close_sound.stream:
-		close_sound.play()
-		await close_sound.finished
-
-	queue_free()
+	# 最后一次推进对白的 E 处理完后，才显示关闭提示。
+	await get_tree().process_frame
+	can_use_e = true

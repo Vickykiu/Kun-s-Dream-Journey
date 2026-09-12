@@ -54,3 +54,12 @@ autoplay = true
 
 [node name="AchievementSound" type="AudioStreamPlayer" parent="." unique_id=1321281161]
 stream = ExtResource("4_4e2bn")
+
+[node name="ContinueHint" type="Label" parent="." unique_id=621867031]
+offset_left = 721.0
+offset_top = 935.0
+offset_right = 1181.0
+offset_bottom = 1004.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9882353)
+theme_override_font_sizes/font_size = 50
+text = "Press E to continue"

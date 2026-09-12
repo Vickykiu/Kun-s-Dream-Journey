@@ -54,12 +54,15 @@ offset_bottom = 904.0
 theme_override_font_sizes/font_size = 60
 text = "Enter Vent"
 
-[node name="CloseButton" type="Button" parent="." unique_id=1512717357]
-offset_left = 1754.0
-offset_right = 1924.0
-offset_bottom = 145.0
-theme_override_font_sizes/font_size = 100
-text = "X"
+[node name="CloseHint" type="Label" parent="." unique_id=1708647242]
+offset_left = 799.0
+offset_top = 74.0
+offset_right = 1168.0
+offset_bottom = 143.0
+theme_override_colors/font_color = Color(1, 0.11764706, 0.07058824, 0.9882353)
+theme_override_font_sizes/font_size = 50
+text = "Press E to close"
+horizontal_alignment = 1
 
 [node name="EnterVentSound" type="AudioStreamPlayer" parent="." unique_id=1433085630]
 stream = ExtResource("5_1ljuh")
@@ -68,4 +71,3 @@ stream = ExtResource("5_1ljuh")
 stream = ExtResource("5_1ljuh")
 
 [connection signal="pressed" from="EnterVentButton" to="." method="_on_enter_vent_button_pressed"]
-[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
