@@ -5,7 +5,7 @@ extends Control
 
 @export var rows: int = 11
 @export var columns: int = 13
-@export var mine_count: int = 1
+@export var mine_count: int = 9
 @export var cell_scene: PackedScene
 
 @export var restart_delay: float = 0.8
