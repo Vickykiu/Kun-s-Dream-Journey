@@ -473,7 +473,8 @@ func _show_reaction(message: String) -> void:
 		reaction_emoji.hide()
 		reaction_mood.hide()
 		return
-	# Emoji + mood text make each portrait's reaction unambiguous.
+		
+	# Emoji + mood text make each portrait's reaction.
 	reaction_emoji.set("emotion", REACTION_EMOTIONS[message][0])
 	reaction_mood.text = "KUNKUN  /  " + str(REACTION_EMOTIONS[message][1])
 	reaction_emoji.show()
@@ -594,6 +595,7 @@ func _show_results() -> void:
 	result_overlay.show()
 	reaction_emoji.hide()
 	reaction_mood.hide()
+	
 	# Only a successful Hard Mode run wow sounds
 	if not result_sound_played:
 		result_sound_played = true
@@ -630,6 +632,7 @@ func _show_result_dialogue(passed: bool) -> void:
 
 
 func _on_result_dialogue_finished() -> void:
+	
 	# Restore the correct result action after the modal releases input.
 	if %ContinueButton.visible:
 		%ContinueButton.grab_focus()
