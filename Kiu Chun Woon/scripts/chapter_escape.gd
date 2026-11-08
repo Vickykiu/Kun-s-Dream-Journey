@@ -127,11 +127,16 @@ func _refresh_visibility() -> void:
 func _return_to_main_menu() -> void:
 	if _changing_scene:
 		return
+
 	_changing_scene = true
 	get_tree().paused = false
 	_escape_button.hide()
 
+	Audio.stop_music(0.0)
+	Audio.stop_layer(0.0)
+
 	var error := get_tree().change_scene_to_file(MAIN_MENU_SCENE)
+
 	if error != OK:
 		push_error("Unable to return to the main menu: " + str(error))
 		_changing_scene = false
